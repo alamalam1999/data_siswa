@@ -38,12 +38,12 @@ var KTCInterview = function () {
 
                 $(objResult).find('.interview_file_result').removeClass('d-none');
                 $(objResult).find('input[type="text"]').val(file_object.file_name);
-                $(objResult).find('a').attr('href', hostBaseUrl + file_object.file_path);
+                $(objResult).find('a').attr('href', "https://ppdb.sekolah-avicenna.sch.id/" + file_object.file_path);
 
 
                 $(objChecking).find('.interview_file_result').removeClass('d-none');
                 $(objChecking).find('input[type="text"]').val(file_object.file_name);
-                $(objChecking).find('a').attr('href', hostBaseUrl + file_object.file_path);
+                $(objChecking).find('a').attr('href', "https://ppdb.sekolah-avicenna.sch.id/" + file_object.file_path);
 
                 $(objButtonDeletes).click(function(){ 
                     $(objChecking).removeAttr("href");
@@ -83,7 +83,7 @@ var KTCInterview = function () {
                         $('input[name="' + targetControl + '"]').val(JSON.stringify(response.file));
                         $(objResult).find('.interview_file_result').removeClass('d-none');
                         $(objResult).find('input[type="text"]').val(response.file.file_name);
-                        $(objResult).find('a').attr('href', hostBaseUrl + response.file.file_path);                           
+                        $(objResult).find('a').attr('href', "https://ppdb.sekolah-avicenna.sch.id/" + response.file.file_path);                           
 
                     } else {
                         Swal.fire({

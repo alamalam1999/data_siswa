@@ -145,7 +145,9 @@ class PaymentTableController extends Controller
         INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
         ".implode(' ', $innerCondition)."
-        WHERE         
+        WHERE 
+        ppdb.document_status = 7
+        AND         
         ".implode(' AND ', $whereCondition).' 
         ORDER BY payment.created_at DESC';
 

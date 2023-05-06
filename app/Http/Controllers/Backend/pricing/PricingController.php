@@ -256,7 +256,14 @@ class PricingController extends Controller
 
         $pricings_wave2 = 12;
 
-        $reregistration = Register::all();
+        //$reregistration = Register::all();
+
+        $reregistration = Register::where('ppdb.document_status', 7)
+        ->join('ppdb', 'ppdb.id', '=', 'reregister.ppdb_id')   
+        ->select('reregister.*')
+        ->get();
+
+        debug($reregistration);
 
         $data = [
             'pricings' => $pricings,

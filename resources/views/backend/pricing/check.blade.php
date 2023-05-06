@@ -28,117 +28,73 @@
           <table id="myTable">
               <thead>
                  <tr>
-                      <th>No</th>
-                      <th>NO_FORMULIR</th>         
-                      <th>TAHUN_AJARAN</th>
-                      <th>TANGGAL_PENDAFTARAN</th>
-                      <th>STATUS_SISWA</th>
-                      <th>NAMA_LENGKAP</th>
-                      <th>JENIS_KELAMIN</th>
-                      <th>NISN</th>
-                      <th>KITAS</th>
-                      <th>TEMPAT_LAHIR</th>
-                      <th>TANGGAL_LAHIR</th>
-                      <th>AKTA_KELAHIRAN</th>
-                      <th>AGAMA</th>
-                      <th>KEWARGANEGARAAN</th>
-                      <th>NAMA_NEGARA</th>
-                      <th>BERKEBUTUHAN_KHUSUS</th>
-                      <th>BERKEBUTUHAN_KHUSUS_2</th>
-                      <th>ALAMAT_JALAN</th>
-                      <th>RT</th>
-                      <th>RW</th>
-                      <th>NAMA_DUSUN</th>
-                      <th>NAMA_KELURAHAN</th>
-                      <th>NAMA_KELURAHAN_2</th>
-                      <th>KECAMATAN</th>
-                      <th>KODE_POS</th>
-                      <th>TEMPAT_TINGGAL</th>
-                      <th>MODA_TRANSPORTASI</th>
-                      <th>NOMOR_KKS</th>
-                      <th>ANAK_KEBERAPA</th>
-                      <th>PENERIMA_KPS_PKH</th>
-                      <th>NO_KPH_PKH</th>
-                      <th>USULAN_DARI_SEKOLAH</th>
-                      <th>KIP</th>
-                      <th>NOMOR_KIP</th>
-                      <th>NAMA_KIP</th>
-                      <th>KARTU_KIP</th>
-                      <th>ALASAN_LAYAK_PIP</th>
-                      <th>BANK</th>
-                      <th>NO_REKENING</th>
-                      <th>REKENING_ATAS_NAMA</th>
-                      <th>NAMA_AYAH</th>
-                      <th>NIK_AYAH</th>
-                      <th>TAHUN_LAHIR_AYAH</th>
-                      <th>PENDIDIKAN_AYAH</th>
-                      <th>PEKERJAAN_AYAH</th>
-                      <th>PENGHASILAN_BULANAN_AYAH</th>
-                      <th>BERKEBUTUHAN_KHUSUS_AYAH</th>
-                      <th>NAMA_IBU</th>
-                      <th>NIK_IBU</th>
-                      <th>TAHUN_LAHIR_IBU</th>
-                      <th>PENDIDIKAN_IBU</th>
-                      <th>PEKERJAAN_IBU</th>
-                      <th>PENGHASILAN_BULANAN_IBU</th>
-                      <th>BERKEBUTUHAN_KHUSUS_IBU</th>
-                      <th>NAMA_WALI</th>
-                      <th>NIK_WALI</th>
-                      <th>TAHUN_LAHIR_WALI</th>
-                      <th>PENDIDIKAN_WALI</th>
-                      <th>PEKERJAAN_WALI</th>
-                      <th>PENGHASILAN_BULANAN_WALI</th>
-                      <th>TELEPON_RUMAH</th>
-                      <th>NOMOR_HP</th>
-                      <th>EMAIL</th>
-                      <th>JENIS_EKSTRAKULIKULER</th>
-                      <th>TINGGI_BADAN</th>
-                      <th>BERAT_BADAN</th>
-                      <th>JARAK_TEMPAT</th>
-                      <th>WAKTU_TEMPAT</th>
-                      <th>SAUDARA_KANDUNG</th>
-  
-                      <th>JURUSAN</th>
-                      <th>JENIS_PENDAFTARAN</th>
-                      <th>NIS</th>
-                      <th>TANGGAL_MASUK_SEKOLAH</th>
-                      <th>ASAL_SEKOLAH</th>
-                      <th>NOMOR_PESERTA_UJIAN</th>
-                      <th>NO_SERI_IJAZAH</th>
-                      <th>NO_SERI_SKHUN</th>
-                      <th>KELUAR_KARENA</th>                   
-                      <th>TANGGAL_KELUAR</th>
-                      <th>ALASAN</th>
-  
-                      <th>PERSETUJUAN</th>
-  
-                      <th>JENIS_1</th>
-                      <th>TINGKAT_1</th>
-                      <th>NAMA_PRESTASI_1</th>
-                      <th>TAHUN_1</th>
-                      <th>PENYELENGGARA_1</th>
-                      <th>JENIS_2</th>
-                      <th>TINGKAT_2</th>
-                      <th>NAMA_PRESTASI_2</th>
-                      <th>TAHUN_2</th>
-                      <th>PENYELENGGARA_2</th>
-                      <th>JENIS_3</th>
-                      <th>TINGKAT_3</th>
-                      <th>NAMA_PRESTASI_3</th>
-                      <th>TAHUN_3</th>
-                      <th>PENYELENGGARA_3</th>
-                      <th>JENIS_1_0</th>
-                      <th>KETERANGAN_1</th>
-                      <th>TAHUN_MULAI_1</th>
-                      <th>TAHUN_SELESAI_1</th>
-                      <th>JENIS_2_0</th>
-                      <th>KETERANGAN_2</th>
-                      <th>TAHUN_MULAI_2</th>
-                      <th>TAHUN_SELESAI_2</th>                 
-                      <th>JENIS_3_0</th>
-                      <th>KETERANGAN_3</th>
-                      <th>TAHUN_MULAI_3</th>
-                      <th>TAHUN_SELESAI_3</th>
+                    <th>No</th>
+                    <th>NAMA_LENGKAP</th>
+                    <th>NIPD</th> {{-- baru  --}}
+                    <th>JENIS_KELAMIN</th>
+                    <th>NISN</th>       
+                    <th>TEMPAT_LAHIR</th>
+                    <th>TANGGAL_LAHIR</th>
+                    <th>NIK</th> {{-- baru --}}
+                    <th>AGAMA</th>
+                    <th>ALAMAT_JALAN</th>
+                    <th>RT</th>
+                    <th>RW</th>
+                    <th>NAMA_DUSUN</th>
+                    <th>NAMA_KELURAHAN</th>
+                    <th>NAMA_KELURAHAN</th>
+                    <th>KECAMATAN</th>
+                    <th>KODE_POS</th>
+                    <th>TEMPAT_TINGGAL</th>
+                    <th>MODA_TRANSPORTASI</th>
+                    <th>TELEPON_RUMAH</th>
+                    <th>NOMOR_HP</th>
+                    <th>EMAIL</th>
+                    <th>NO_SERI_SKHUN</th>                   
+                    <th>PENERIMA_KPS_PKH</th>  
+                    <th>NO_KPS</th> {{-- baru --}}
+                    <th>NAMA_AYAH</th>
+                    <th>TAHUN_LAHIR_AYAH</th> 
+                    <th>PENDIDIKAN_AYAH</th> 
+                    <th>PEKERJAAN_AYAH</th> 
+                    <th>PENGHASILAN_BULANAN_AYAH</th> 
+                    <th>NIK_AYAH</th>
+                    <th>NAMA_IBU</th>
+                    <th>TAHUN_LAHIR_IBU</th>
+                    <th>PENDIDIKAN_IBU</th>
+                    <th>PEKERJAAN_IBU</th>
+                    <th>PENGHASILAN_BULANAN_IBU</th>  
+                    <th>NIK_IBU</th>
+                    <th>NAMA_WALI</th> 
+                    <th>TAHUN_LAHIR_WALI</th>
+                    <th>PENDIDIKAN_WALI</th>
+                    <th>PEKERJAAN_WALI</th>
+                    <th>PENGHASILAN_BULANAN_WALI</th>
+                    <th>NIK_WALI</th>
+                    <th>ROMBEL_SAAT_INI</th> {{-- baru --}}
+                    <th>NO_PESERTA_UN</th> {{-- baru --}}
+                    <th>NO_SERI_IJAZAH</th>
+                    <th>KIP</th> 
+                    <th>NOMOR_KIP</th>
+                    <th>NAMA_KIP</th>
+                    <th>NOMOR_KKS</th>
+                    <th>AKTA_KELAHIRAN</th> 
+                    <th>BANK</th>
+                    <th>NO_REKENING</th>
+                    <th>REKENING_ATAS_NAMA</th>   
+                    <th>ALASAN_LAYAK_PIP</th>            
+                    <th>BERKEBUTUHAN_KHUSUS</th> 
+                    <th>BERKEBUTUHAN_KHUSUS</th> 
+                    <th>ASAL_SEKOLAH</th>           
+                    <th>ANAK_KEBERAPA</th> 
+                    <th>LINTANG</th> {{-- baru --}}
+                    <th>BUJUR</th> {{--  baru --}}
+                    <th>NO_KK</th> {{-- baru --}}
+                    <th>BERAT_BADAN</th> 
+                    <th>TINGGI_BADAN</th>
+                    <th>LINGKAR_KEPALA</th> {{-- baru --}}
+                    <th>SAUDARA_KANDUNG</th>                                            
+                    <th>JARAK_TEMPAT</th>   
                  </tr>
               </thead>
               <tbody>
@@ -1341,121 +1297,73 @@
                             }
               ?>
                   <tr>
-                      <td>{{ $no++ }}</td>
-                      <td>{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}</td>
-                      <td>{{ ($data2 =='' && $data2 == null) ? '' : $data2[0] }}</td>
-                      <td>{{ ($data3 =='' && $data3 == null) ? '' : $data3[0] }}</td>
-                      <td>{{ ($data4 =='' && $data4 == null) ? '' : $data4[0] }}</td>
-                      <td>{{ ($data5 =='' && $data5 == null) ? '' : $data5[0] }}</td>
-                      <td>{{ ($data6 =='' && $data6 == null) ? '' : $data6[0] }}</td>
-                      <td>{{ ($data7 =='' && $data7 == null) ? '' : $data7[0] }}</td>
-                      <td>{{ ($data8 =='' && $data8 == null) ? '' : $data8[0] }}</td>
-                      <td>{{ ($data9 =='' && $data9 == null) ? '' : $data9[0] }}</td>
-                      <td>{{ ($data10 =='' && $data10 == null) ? '' : $data10[0] }}</td>
-                      <td>{{ ($data11 =='' && $data11 == null) ? '' : $data11[0] }}</td>
-                      <td>{{ ($data12 =='' && $data12 == null) ? '' : $data12[0] }}</td>
-                      <td>{{ ($data13 =='' && $data13 == null) ? '' : $data13[0] }}</td>
-                      <td>{{ ($data14 =='' && $data14 == null) ? '' : $data14[0] }}</td>
-                      <td>{{ ($data15 =='' && $data15 == null) ? '' : $data15[0] }}</td>
-                      <td>{{ ($data16 =='' && $data16 == null) ? '' : $data16[0] }}</td>
-                      <td>{{ ($data17 =='' && $data17 == null) ? '' : $data17[0] }}</td>
-                      <td>{{ ($data18 =='' && $data18 == null) ? '' : $data18[0] }}</td>
-                      <td>{{ ($data19 =='' && $data19 == null) ? '' : $data19[0] }}</td>
-                      <td>{{ ($data20 =='' && $data20 == null) ? '' : $data20[0] }}</td>
-                      <td>{{ ($data21 =='' && $data21 == null) ? '' : $data21[0] }}</td>
-                      <td>{{ ($data22 =='' && $data22 == null) ? '' : $data22[0] }}</td>
-                      <td>{{ ($data23 =='' && $data23 == null) ? '' : $data23[0] }}</td>
-                      <td>{{ ($data24 =='' && $data24 == null) ? '' : $data24[0] }}</td>
-                      <td>{{ ($data25 =='' && $data25 == null) ? '' : $data25[0] }}</td>
-                      <td>{{ ($data26 =='' && $data26 == null) ? '' : $data26[0] }}</td>
-                      <td>{{ ($data27 =='' && $data27 == null) ? '' : $data27[0] }}</td>
-                      <td>{{ ($data28 =='' && $data28 == null) ? '' : $data28[0] }}</td>
-                      <td>{{ ($data29 =='' && $data29 == null) ? '' : $data29[0] }}</td>
-                      <td>{{ ($data30 =='' && $data30 == null) ? '' : $data30[0] }}</td>
-                      <td>{{ ($data31 =='' && $data31 == null) ? '' : $data31[0] }}</td>
-                      <td>{{ ($data32 =='' && $data32 == null) ? '' : $data32[0] }}</td>
-                      <td>{{ ($data33 =='' && $data33 == null) ? '' : $data33[0] }}</td>
-                      <td>{{ ($data34 =='' && $data34 == null) ? '' : $data34[0] }}</td>
-                      <td>{{ ($data35 =='' && $data35 == null) ? '' : $data35[0] }}</td>
-                      <td>{{ ($data36 =='' && $data36 == null) ? '' : $data36[0] }}</td>
-                      <td>{{ ($data37 =='' && $data37 == null) ? '' : $data37[0] }}</td>
-                      <td>{{ ($data38 =='' && $data38 == null) ? '' : $data38[0] }}</td>
-                      <td>{{ ($data39 =='' && $data39 == null) ? '' : $data39[0] }}</td>
-                      <td>{{ ($data40 =='' && $data40 == null) ? '' : $data40[0] }}</td>
-                      <td>{{ ($data41 =='' && $data41 == null) ? '' : $data41[0] }}</td>
-                      <td>{{ ($data42 =='' && $data42 == null) ? '' : $data42[0] }}</td>          
-                      <td>{{ ($data43 =='' && $data43 == null) ? '' : $data43[0] }}</td>
-                      <td>{{ ($data44 =='' && $data44 == null) ? '' : $data44[0] }}</td>
-                      <td>{{ ($data45 =='' && $data45 == null) ? '' : $data45[0] }}</td>
-                      <td>{{ ($data46 =='' && $data46 == null) ? '' : $data46[0] }}</td>
-                      <td>{{ ($data47 =='' && $data47 == null) ? '' : $data47[0] }}</td>
-                      <td>{{ ($data48 =='' && $data48 == null) ? '' : $data48[0] }}</td>
-                      <td>{{ ($data49 =='' && $data49 == null) ? '' : $data49[0] }}</td>
-                      <td>{{ ($data50 =='' && $data50 == null) ? '' : $data50[0] }}</td>
-                      <td>{{ ($data51 =='' && $data51 == null) ? '' : $data51[0] }}</td>
-                      <td>{{ ($data52 =='' && $data52 == null) ? '' : $data52[0] }}</td>
-                      <td>{{ ($data53 =='' && $data53 == null) ? '' : $data53[0] }}</td>
-                      <td>{{ ($data54 =='' && $data54 == null) ? '' : $data54[0] }}</td>
-                      <td>{{ ($data55 =='' && $data55 == null) ? '' : $data55[0] }}</td>
-                      <td>{{ ($data56 =='' && $data56 == null) ? '' : $data56[0] }}</td>
-                      <td>{{ ($data57 =='' && $data57 == null) ? '' : $data57[0] }}</td>
-                      <td>{{ ($data58 =='' && $data58 == null) ? '' : $data58[0] }}</td>
-                      <td>{{ ($data59 =='' && $data59 == null) ? '' : $data59[0] }}</td>
-                      <td>{{ ($data60 =='' && $data60 == null) ? '' : $data60[0] }}</td>
-                      <td>{{ ($data61 =='' && $data61 == null) ? '' : $data61[0] }}</td>
-                      <td>{{ ($data62 =='' && $data62 == null) ? '' : $data62[0] }}</td>
-                      <td>{{ ($data63 =='' && $data63 == null) ? '' : $data63[0] }}</td>
-                      <td>{{ ($data64 =='' && $data64 == null) ? '' : $data64[0] }}</td>
-                      <td>{{ ($data65 =='' && $data65 == null) ? '' : $data65[0] }}</td>
-                      <td>{{ ($data66 =='' && $data66 == null) ? '' : $data66[0] }}</td>
-                      <td>{{ ($data67 =='' && $data67 == null) ? '' : $data67[0] }}</td>
-                      <td>{{ ($data68 =='' && $data68 == null) ? '' : $data68[0] }}</td>
-                      <td>{{ ($data69 =='' && $data69 == null) ? '' : $data69[0] }}</td>
-                      <td>{{ ($data70 =='' && $data70 == null) ? '' : $data70[0] }}</td>
-                      <td>{{ ($data71 =='' && $data71 == null) ? '' : $data71[0] }}</td>
-                      <td>{{ ($data72 =='' && $data72 == null) ? '' : $data72[0] }}</td>
-  
-                      <td>{{ ($data73 =='' && $data73 == null) ? '' : $data73[0] }}</td>
-                      <td>{{ ($data74 =='' && $data74 == null) ? '' : $data74[0] }}</td>
-                      <td>{{ ($data75 =='' && $data75 == null) ? '' : $data75[0] }}</td>
-                      <td>{{ ($data76 =='' && $data76 == null) ? '' : $data76[0] }}</td>
-                      <td>{{ ($data77 =='' && $data77 == null) ? '' : $data77[0] }}</td>
-                      <td>{{ ($data78 =='' && $data78 == null) ? '' : $data78[0] }}</td>
-  
-                      <td>{{ ($data79 =='' && $data79 == null) ? '' : $data79[0] }}</td>
-                      <td>{{ ($data80 =='' && $data80 == null) ? '' : $data80[0] }}</td>
-                      <td>{{ ($data81 =='' && $data81 == null) ? '' : $data81[0] }}</td>
-                      <td>{{ ($data82 =='' && $data82 == null) ? '' : $data82[0] }}</td>
-  
-                      <td>{{ ($data83 =='' && $data83 == null) ? '' : $data83[0] }}</td>
-                      <td>{{ ($data84 =='' && $data84 == null) ? '' : $data84[0] }}</td>
-                      <td>{{ ($data85 =='' && $data85 == null) ? '' : $data85[0] }}</td>
-                      <td>{{ ($data86 =='' && $data86 == null) ? '' : $data86[0] }}</td>
-                      <td>{{ ($data87 =='' && $data87 == null) ? '' : $data87[0] }}</td>
-                      <td>{{ ($data88 =='' && $data88 == null) ? '' : $data88[0] }}</td>
-  
-                      <td>{{ ($data89 =='' && $data89 == null) ? '' : $data89[0] }}</td>
-                      <td>{{ ($data90 =='' && $data90 == null) ? '' : $data90[0] }}</td>
-  
-                      <td>{{ ($data91 =='' && $data91 == null) ? '' : $data91[0] }}</td>
-                      <td>{{ ($data92 =='' && $data92 == null) ? '' : $data92[0] }}</td>
-                      <td>{{ ($data93 =='' && $data93 == null) ? '' : $data93[0] }}</td>
-                      <td>{{ ($data94 =='' && $data94 == null) ? '' : $data94[0] }}</td>
-                      <td>{{ ($data95 =='' && $data95 == null) ? '' : $data95[0] }}</td>
-                      <td>{{ ($data96 =='' && $data96 == null) ? '' : $data96[0] }}</td>
-  
-                      <td>{{ ($data97 =='' && $data97 == null) ? '' : $data97[0] }}</td>
-                      <td>{{ ($data98 =='' && $data98 == null) ? '' : $data98[0] }}</td>
-  
-                      <td>{{ ($data99 =='' && $data99 == null) ? '' : $data99[0] }}</td>
-                      <td>{{ ($data100 =='' && $data100 == null) ? '' : $data100[0] }}</td>
-                      <td>{{ ($data101 =='' && $data101 == null) ? '' : $data101[0] }}</td>
-                      <td>{{ ($data102 =='' && $data102 == null) ? '' : $data102[0] }}</td>
-                      <td>{{ ($data103 =='' && $data103 == null) ? '' : $data103[0] }}</td>
-                      <td>{{ ($data104 =='' && $data104 == null) ? '' : $data104[0] }}</td>
-                      <td>{{ ($data105 =='' && $data105 == null) ? '' : $data105[0] }}</td>
-                      <td>{{ ($data106 =='' && $data106 == null) ? '' : $data106[0] }}</td>
-                      <td>{{ ($data107 =='' && $data107 == null) ? '' : $data107[0] }}</td>
+                    <td>{{ $no++ }}</td>
+                    <td>{{ ($data5 =='' && $data5 == null) ? '' : $data5[0] }}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{ ($data6 =='' && $data6 == null) ? '' : $data6[0] }}</td>
+                    <td>{{ ($data7 =='' && $data7 == null) ? '' : $data7[0] }}</td>     
+                    <td>{{ ($data9 =='' && $data9 == null) ? '' : $data9[0] }}</td>
+                    <td>{{ ($data10 =='' && $data10 == null) ? '' : $data10[0] }}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{ ($data12 =='' && $data12 == null) ? '' : $data12[0] }}</td>
+                    <td>{{ ($data17 =='' && $data17 == null) ? '' : $data17[0] }}</td>
+                    <td>{{ ($data18 =='' && $data18 == null) ? '' : $data18[0] }}</td>
+                    <td>{{ ($data19 =='' && $data19 == null) ? '' : $data19[0] }}</td>
+                    <td>{{ ($data20 =='' && $data20 == null) ? '' : $data20[0] }}</td>
+                    <td>{{ ($data21 =='' && $data21 == null) ? '' : $data21[0] }}</td>
+                    <td>{{ ($data22 =='' && $data22 == null) ? '' : $data22[0] }}</td>
+                    <td>{{ ($data23 =='' && $data23 == null) ? '' : $data23[0] }}</td>
+                    <td>{{ ($data24 =='' && $data24 == null) ? '' : $data24[0] }}</td>
+                    <td>{{ ($data25 =='' && $data25 == null) ? '' : $data25[0] }}</td>
+                    <td>{{ ($data26 =='' && $data26 == null) ? '' : $data26[0] }}</td>
+                    <td>{{ ($data60 =='' && $data60 == null) ? '' : $data60[0] }}</td>
+                    <td>{{ ($data61 =='' && $data61 == null) ? '' : $data61[0] }}</td>
+                    <td>{{ ($data62 =='' && $data62 == null) ? '' : $data62[0] }}</td>
+                    <td>{{ ($data76 =='' && $data76 == null) ? '' : $data76[0] }}</td>                
+                    <td>{{ ($data29 =='' && $data29 == null) ? '' : $data29[0] }}</td>
+                    <td>{{-- baru --}}</td> 
+                    <td>{{ ($data40 =='' && $data40 == null) ? '' : $data40[0] }}</td>
+                    <td>{{ ($data42 =='' && $data42 == null) ? '' : $data42[0] }}</td>        
+                    <td>{{ ($data43 =='' && $data43 == null) ? '' : $data43[0] }}</td>
+                    <td>{{ ($data44 =='' && $data44 == null) ? '' : $data44[0] }}</td>
+                    <td>{{ ($data45 =='' && $data45 == null) ? '' : $data45[0] }}</td>
+                    <td>{{ ($data41 =='' && $data41 == null) ? '' : $data41[0] }}</td>
+                    <td>{{ ($data47 =='' && $data47 == null) ? '' : $data47[0] }}</td>
+                    <td>{{ ($data49 =='' && $data49 == null) ? '' : $data49[0] }}</td>
+                    <td>{{ ($data50 =='' && $data50 == null) ? '' : $data50[0] }}</td>
+                    <td>{{ ($data51 =='' && $data51 == null) ? '' : $data51[0] }}</td>
+                    <td>{{ ($data52 =='' && $data52 == null) ? '' : $data52[0] }}</td>
+                    <td>{{ ($data48 =='' && $data48 == null) ? '' : $data48[0] }}</td>
+                    <td>{{ ($data54 =='' && $data54 == null) ? '' : $data54[0] }}</td>
+                    <td>{{ ($data56 =='' && $data56 == null) ? '' : $data56[0] }}</td>
+                    <td>{{ ($data57 =='' && $data57 == null) ? '' : $data57[0] }}</td>
+                    <td>{{ ($data58 =='' && $data58 == null) ? '' : $data58[0] }}</td>
+                    <td>{{ ($data59 =='' && $data59 == null) ? '' : $data59[0] }}</td>
+                    <td>{{ ($data55 =='' && $data55 == null) ? '' : $data55[0] }}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{ ($data75 =='' && $data75 == null) ? '' : $data75[0] }}</td>
+                    <td>{{ ($data32 =='' && $data32 == null) ? '' : $data32[0] }}</td>
+                    <td>{{ ($data33 =='' && $data33 == null) ? '' : $data33[0] }}</td>
+                    <td>{{ ($data34 =='' && $data34 == null) ? '' : $data34[0] }}</td>
+                    <td>{{ ($data27 =='' && $data27 == null) ? '' : $data27[0] }}</td>
+                    <td>{{ ($data11 =='' && $data11 == null) ? '' : $data11[0] }}</td>
+                    <td>{{ ($data37 =='' && $data37 == null) ? '' : $data37[0] }}</td>
+                    <td>{{ ($data38 =='' && $data38 == null) ? '' : $data38[0] }}</td>
+                    <td>{{ ($data39 =='' && $data39 == null) ? '' : $data39[0] }}</td>
+                    <td>{{ ($data15 =='' && $data15 == null) ? '' : $data15[0] }}</td>
+                    <td>{{ ($data36 =='' && $data36 == null) ? '' : $data36[0] }}</td>
+                    <td>{{ ($data16 =='' && $data16 == null) ? '' : $data16[0] }}</td>
+                    <td>{{ ($data73 =='' && $data73 == null) ? '' : $data73[0] }}</td>                         
+                    <td>{{ ($data28 =='' && $data28 == null) ? '' : $data28[0] }}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{-- baru --}}</td>
+                    <td>{{ ($data65 =='' && $data65 == null) ? '' : $data65[0] }}</td>
+                    <td>{{ ($data64 =='' && $data64 == null) ? '' : $data64[0] }}</td>
+                    <td> {{-- baru --}}</td>
+                    <td>{{ ($data68 =='' && $data68 == null) ? '' : $data68[0] }}</td>
+                    <td>{{ ($data66 =='' && $data66 == null) ? '' : $data66[0] }}</td>
                   </tr>  
   
               @endforeach
