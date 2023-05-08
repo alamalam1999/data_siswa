@@ -164,7 +164,22 @@ a.box-school.checked-school {
 .ppdb-bg-status-completed:hover {
   color: #ffffff;
   border-color: #50cd89;
-  background-color: #50cd89;
+  background-color: #04B02A;
+}
+
+.ppdb-bg-status-not-have-class,
+.ppdb-bg-status-not-have-class:hover {
+  color: #ffffff;
+  border-color: #50cd89;
+  background-color: #FD1313;
+}
+
+.btn-light-custom,
+.btn-light-custom:hover {
+  color: #1203B8;
+  text-shadow: #1203B8;
+  border-color: #c0bbee;
+  background-color: #85B6FF;
 }
 
 /*

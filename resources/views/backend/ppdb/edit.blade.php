@@ -1036,7 +1036,215 @@
 {{-- START TAB 4 - DATA RIWAYAT --}}
 <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel">
     <div class="card border shadow-sm">
+      {{--  --}}
 
+        <div class="car border shadow-sm">
+          <div class="card-header bg-light"> 
+          <!--begin::Title-->
+          <h3 class="card-title align-items-start flex-column">
+              <span class="card-label fw-bolder text-dark">INFORMASI PENDAFTARAN</span>
+          </h3>
+          <!--end::Title-->
+          </div>
+        
+      
+        <div class="card-body">
+
+          <div class="w-100">
+
+        <!--begin::Input group-->
+        <div class="row fv-row mb-7 fv-plugins-icon-container">
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+          if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
+              $array= array_column($file_additional_satu, 'name_father');
+                if ($array != '' && $array != null) {
+                  $data1 = $array;
+                } else {
+                  $data1 = '';
+                }
+              }else {
+                $data1 = '';
+              }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">No. Registrasi</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+          if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
+              $array= array_column($file_additional_satu, 'name_mother');
+                if ($array != '' && $array != null) {
+                  $data1 = $array;
+                } else {
+                  $data1 = '';
+                }
+              }else {
+                $data1 = '';
+              }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">Gelombang Daftar</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+      </div>
+        <!--begin::Input group-->
+        <div class="row fv-row mb-7 fv-plugins-icon-container">
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+
+            if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
+              $array= array_column($file_additional_dua, 'name_work_father');
+              if ($array !='' && $array != null && !empty($array) && $array != '[]') {
+                if ($array != '' && $array != null) { $dataworkfather = $array;
+                } else { $dataworkfather = ''; }
+
+                if ($dataworkfather[0] == 1) { $dataworkfather = 'Badan Swasta';
+                } else if ($dataworkfather[0] == 2) { $dataworkfather = 'Badan Pemerintahan';
+                } else if ($dataworkfather[0] == 3) { $dataworkfather = 'Wirausaha';
+                } else if ($dataworkfather[0] == 4) { $dataworkfather = 'Pensiuanan';
+                } else if ($dataworkfather[0] == 5) { $dataworkfather = 'Tidak Bekerja'; } 
+              } else {
+                $dataworkfather = '';
+              }
+            } else {
+              $dataworkfather = '';
+            }
+
+              ?>
+              <label class="form-label fw-bolder text-muted fs-6">Tanggal Daftar</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($dataworkfather =='' && $dataworkfather == null) ? '' : $dataworkfather }}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+            if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
+              $array= array_column($file_additional_dua, 'name_work_mother');
+                if ($array != '' && $array != null) { $dataworkmother = $array;
+                } else { $dataworkmother = ''; }
+
+                if ($dataworkmother[0] == 1) { $dataworkmother = 'Badan Swasta';
+                } else if ($dataworkmother[0] == 2) { $dataworkmother = 'Badan Pemerintahan';
+                } else if ($dataworkmother[0] == 3) { $dataworkmother = 'Wirausaha';
+                } else if ($dataworkmother[0] == 4) { $dataworkmother = 'Pensiuanan';
+                } else if ($dataworkmother[0] == 5) { $dataworkmother = 'Ibu Rumah Tangga'; } 
+              } else {
+              $dataworkmother = '';
+            }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">Status Siswa</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($dataworkmother =='' && $dataworkmother == null) ? '' : $dataworkmother}}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="row fv-row mb-7 fv-plugins-icon-container">
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+          if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
+                $array= array_column($file_additional_tiga, 'place_work_father');
+                  if ($array != '' && $array != null) { $placeworkfather = $array; } 
+                  else { $placeworkfather = ''; }
+              }else {
+                $placeworkfather = '';
+              }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">Tujuan Sekolah</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($placeworkfather =='' && $placeworkfather == null) ? '' : $placeworkfather[0]}}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+            if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
+              $array= array_column($file_additional_tiga, 'place_work_mother');
+                if ($array != '' && $array != null) { $placeworkmother = $array; } 
+                else { $placeworkmother = ''; }
+
+              }else {
+                $placeworkmother = '';
+              }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">Jenjang & Kelas</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($placeworkmother =='' && $placeworkmother == null) ? '' : $placeworkmother[0]}}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="row fv-row mb-7 fv-plugins-icon-container">
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+            if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
+              $array= array_column($file_additional_empat, 'title_work_father');
+                if ($array != '' && $array != null) { $titleworkfather = $array;
+                } else { $titleworkfather = ''; }
+
+                if ($titleworkfather[0] == 1) { $titleworkfather = 'Staff (Tetap)';
+                } else if ($titleworkfather[0] == 2) { $titleworkfather = 'Dosen / Guru';
+                } else if ($titleworkfather[0] == 3) { $titleworkfather = 'Supervisor';
+                } else if ($titleworkfather[0] == 4) { $titleworkfather = 'Manager';
+                } else if ($titleworkfather[0] == 5) { $titleworkfather = 'Direksi'; 
+                } else if ($titleworkfather[0] == 6) { $titleworkfather = 'Pegawai Honorer'; 
+                } else if ($titleworkfather[0] == 7) { $titleworkfather = 'Pegawai Kontrak'; 
+                } else if ($titleworkfather[0] == 8) { $titleworkfather = 'Lainnya'; } 
+              }else {
+                $titleworkfather = '';
+              }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">Status Kesiswaan</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($titleworkfather =='' && $titleworkfather == null) ? '' : $titleworkfather}}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-xl-6">
+            <?php
+            if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
+              $array= array_column($file_additional_empat, 'title_work_mother');
+                if ($array != '' && $array != null) { $titleworkmother = $array;
+                } else { $titleworkmother = ''; }
+
+                if ($titleworkmother[0] == 1) { $titleworkmother = 'Staff (Tetap)';
+                } else if ($titleworkmother[0] == 2) { $titleworkmother = 'Dosen / Guru';
+                } else if ($titleworkmother[0] == 3) { $titleworkmother = 'Supervisor';
+                } else if ($titleworkmother[0] == 4) { $titleworkmother = 'Manager';
+                } else if ($titleworkmother[0] == 5) { $titleworkmother = 'Direksi'; 
+                } else if ($titleworkmother[0] == 6) { $titleworkmother = 'Pegawai Honorer'; 
+                } else if ($titleworkmother[0] == 7) { $titleworkmother = 'Pegawai Kontrak'; 
+                } else if ($titleworkmother[0] == 8) { $titleworkmother = 'Lainnya'; } 
+              }else {
+                $titleworkmother = '';
+              }
+            ?>
+              <label class="form-label fw-bolder text-muted fs-6">Asal Sekolah</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($titleworkmother =='' && $titleworkmother == null) ? '' : $titleworkmother}}" readonly autocomplete="off">
+              <div class="fv-plugins-message-container invalid-feedback"></div>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+</div>
+</div>
+
+</div>
+
+
+      {{-- test bawah --}}
       <div class="card-body">
           <div class="w-100">
               @if(!empty($payment_up_spp))
@@ -6128,379 +6336,6 @@
                   
                   
                                   </div>
-
-
-                                     
-                                        <div class="card rounded-0">
-                                            <div class="card-body">
-                                    
-                                                <div class="table-responsive mb-5">
-                                                    <table class="table table-rounded table-striped border gy-4 gs-4">
-                                                        <thead>
-                                                            <tr class="fw-semibold fs-4 bg-dark text-white border-bottom border-gray-200">
-                                                                <th>Deskripsi</th>
-                                                                <th>File</th>
-                                                                <th class="w-100px">Nilai</th>
-                                                                <th style="text-align: center;" class="w-150px">Keputusan</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if($ppdb->stage=="SD")
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">Tes Kesiapan Sekolah</div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($kesiapan_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
-                                                                              $result = $array;
-                                                                            } else {
-                                                                              $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref3">view</a>
-                                                                    </div>
-                                                                </td>
-
-                                                                <td>
-                                                                  <?php if (!empty($ppdb_interview->kesiapan_value)) { ?>
-                                                                    <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="{{ $ppdb_interview->kesiapan_value }}" readonly />
-                                                                 <?php } else { ?>
-                                                                  <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="Belum Ada" readonly />
-                                                                 <?php } ?>
-                                                                </td>
-                                                                <td id="academic_value_label">
-                                                                  <?php if (empty($ppdb_interview->kesiapan_result)) { ?>
-                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
-                                                                  <?php }else if ($ppdb_interview->kesiapan_result == 4) { ?>
-                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Siap Sekolah</span></div>
-                                                                  <?php }else if ($ppdb_interview->kesiapan_result == 5) { ?>
-                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->kesiapan_result == 6) {?>
-                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
-                                                                  <?php }?>
-                                                                </td>
-                                                            </tr>
-                                                            @endif
-                                    
-                                                            @if($ppdb->stage=="SMP" || $ppdb->stage=="SMA")
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                        Psikotes
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($psikotest_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
-                                                                              $result = $array;
-                                                                            } else {
-                                                                              $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref7">view</a>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                  <?php if(!empty($ppdb_interview->psikotest_value)){ ?>
-                                                                    <input name="psikotest_value_result" id="psikotest_value_result" type="number" class="form-control form-control-solid w-100px form-control-transparent" value="{{ $ppdb_interview->psikotest_value }}" readonly />
-                                                                
-                                                                <?php  } else { ?>
-                                                                  <input name="psikotest_value_result" id="psikotest_value_result" type="number" class="form-control form-control-solid w-100px form-control-transparent" value="Belum Ada" readonly />
-                                                                  <?php } ?>
-                                                                  </td>
-                                                                <td id="psikotest_value_label" class="mt-4 fw-bold fs-1">
-                                                                    <?php if (empty($ppdb_interview->psikotest_result)) { ?>
-                                                                      <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
-                                                                    <?php }else if ($ppdb_interview->psikotest_result == 1) { ?>
-                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
-                                                                    <?php }else if ($ppdb_interview->psikotest_result == 2) { ?>
-                                                                       <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
-                                                                    <?php }else if ($ppdb_interview->psikotest_result == 3) {?>
-                                                                     <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
-                                                                    <?php }?>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                        Tes Literasi & Numerasi
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($academic_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
-                                                                              $result = $array;
-                                                                            } else {
-                                                                              $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref8">view</a>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                  <?php if (!empty($ppdb_interview->academic_value)) { ?>
-                                                                    <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="{{ $ppdb_interview->academic_value }}" readonly />
-                                                                 <?php } else { ?>
-                                                                  <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="Belum Ada" readonly />
-                                                                 <?php } ?>
-                                                                </td>
-                                                                <td id="academic_value_label">
-                                                                  <?php if (empty($ppdb_interview->academic_result)) { ?>
-                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
-                                                                  <?php }else if ($ppdb_interview->academic_result == 1) { ?>
-                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->academic_result == 2) { ?>
-                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->academic_result == 3) {?>
-                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
-                                                                  <?php }?>
-                                                                </td>
-                                                            </tr>
-                                                            @endif
-                                    
-                                                            <tr>
-                                                                <td class="fs-5 fw-bold">Wawancara Orang Tua</td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($interview_parent_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
-                                                                              $result = $array;
-                                                                            } else {
-                                                                              $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref4 fs-6">view</a>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <input id="interview_parent" type="text" class="form-control form-control-solid w-150px form-control-transparent d-none" value="" readonly />
-                                                                </td>
-                                                                <td id="interview_parent_value_label">
-                                                                  <?php if (empty($ppdb_interview->interview_parent_result)) { ?>
-                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
-                                                                  <?php }else if ($ppdb_interview->interview_parent_result == 1) { ?>
-                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->interview_parent_result == 2) { ?>
-                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->interview_parent_result == 3) {?>
-                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
-                                                                  <?php }?>
-                                                                </td>
-                                                            </tr>
-                                                            @if($ppdb->stage=="SMP" || $ppdb->stage=="SMA")
-                                                            <tr>
-                                                                <td class="fs-5 fw-bold">Wawancara Siswa</td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($interview_student_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
-                                                                              $result = $array;
-                                                                            } else {
-                                                                              $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref6 fs-6">view</a>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <input id="interview_student_value_result" type="text" class="form-control form-control-solid w-150px form-control-transparent d-none" value="" readonly />
-                                                                </td>
-                                                                <td id="interview_student_value_label">
-                                                                  <?php if (empty($ppdb_interview->interview_student_result)) { ?>
-                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
-                                                                  <?php }else if ($ppdb_interview->interview_student_result == 1) { ?>
-                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->interview_student_result == 2) { ?>
-                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->interview_student_result == 3) {?>
-                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
-                                                                  <?php }?>
-                                                                </td>
-                                                            </tr>
-                                                            @endif
-                                                            @if($ppdb->stage=="KB" || $ppdb->stage=="TK" || $ppdb->stage=="SD")
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">Observasi Siswa</div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($observasi_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
-                                                                              $result = $array;
-                                                                            } else {
-                                                                              $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref5 fs-6">view</a>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                  <?php if (!empty($ppdb_interview->observasi_value)) { ?>
-                                                                    <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="{{ $ppdb_interview->observasi_value }}" readonly />
-                                                                 <?php } else { ?>
-                                                                  <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="Belum Ada" readonly />
-                                                                 <?php } ?>
-                                                                </td>
-                                                                <td id="academic_value_label">
-                                                                  <?php if (empty($ppdb_interview->observasi_result)) { ?>
-                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
-                                                                  <?php }else if ($ppdb_interview->observasi_result == 1) { ?>
-                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->observasi_result == 2) { ?>
-                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
-                                                                  <?php }else if ($ppdb_interview->observasi_result == 3) {?>
-                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
-                                                                  <?php }?>
-                                                                </td>
-                                                            </tr>
-                                                            @endif
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                      
-                                                <div class="border-top my-5 border border-secondary p-5 border-2 rounded bg-light">
-                                                    <div class="d-flex flex-stack mb-5">
-                                                        <div class="fs-5 fw-bolder form-label px-5">Berdasarkan hasil penilaian dari pihak perwakilan sekolah, maka dengan ini calon siswa tersebut
-                                                            dinyatakan :</div>
-                                                    </div>
-                                    
-                                                    <div class="mb-5 pb-5 px-5 row border-bottom">
-                                                        <div class="col-lg-7">
-                                                            <label for="school_recomendation_result_file_upload" class="form-label">Upload
-                                                                Surat
-                                                                Keterangan</label>
-                                                            <input class="form-control interview-file-upload-teacher interview-file-upload" type="file" name="school_recomendation_file_upload" id="school_recomendation_file_upload" data-target="school_recomendation_file">
-                                                            <input type="hidden" name="school_recomendation_file" id="school_recomendation_file" value="{{ $ppdb_interview->school_recomendation_file ?? ' ' }}" />
-                                    
-                                                            <div class="d-none interview_file_result">
-                                                                <div class="input-group mb-3">
-                                                                    <input type="text" class="form-control bg-light" value="nama file tersebut.jpg" readonly="">
-                                    
-                                                                    <button class="btn btn-danger btn-remove-file-teacher btn-remove-file {{ $is_enabled_form ? '':'d-none' }}" type="button">Delete</button>
-                                                                </div>
-                                                                <a href="#" target="_blank" class="ms-3">Download File</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                    
-                                                    <div class="mb-10 px-5">
-                                                        
-                                                        <!--begin::Radio group-->
-                                                        <div class="btn-group w-100" {{ $is_enabled_form ? 'data-kt-buttons=true data-kt-buttons-target=[data-kt-button]':''}}>
-                                                            <!--begin::Radio-->
-                                                            <?php
-                                                              if(empty($ppdb_interview->school_recomendation_result) )
-                                                              {
-                                                                ?>
-                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-success min-w-300px {{ !empty($ppdb_interview->school_recomendation_result) == 1 ? 'active':'' }}" data-kt-button="true">
-                                                                <!--begin::Input-->
-                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="1" checked disabled/>
-                                                                <!--end::Input-->
-                                                                Belum Ada Inputan
-                                                                </label>
-                                                            <?php
-                                                              }else if($ppdb_interview->school_recomendation_result == 1){ ?>
-                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-success min-w-300px {{ !empty($ppdb_interview->school_recomendation_result) == 1 ? 'active':'' }}" data-kt-button="true">
-                                                                <!--begin::Input-->
-                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="1" checked disabled />
-                                                                <!--end::Input-->
-                                                                Direkomendasikan
-                                                                </label>
-                                                             <?php  }else if($ppdb_interview->school_recomendation_result == 2){ ?>
-                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-danger min-w-300px {{ !empty($ppdb_interview->school_recomendation_result) == 2 ? 'active':'' }}" data-kt-button="true">
-                                                                <!--begin::Input-->
-                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="2" checked disabled />
-                                                                <!--end::Input-->
-                                                                Tidak direkomendasikan
-                                                                </label>
-                                                           <?php   }else if($ppdb_interview->school_recomendation_result == 3){ ?>
-                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-warning min-w-300px fs-6 {{ !empty($ppdb_interview->school_recomendation_result) == 3 ? 'active':'' }}" data-kt-button="true">
-                                                                <!--begin::Input-->
-                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="3" checked disabled />
-                                                                <!--end::Input-->
-                                                                Di pertimbangkan
-                                                                </label>
-                                                             <?php } ?>
-                                                            
-                                                        </div>
-                                                        <!--end::Radio group-->
-                                                    </div>
-                                    
-                                                    <div class="mb-5 ps-5">
-                                                        <label class="form-label">Note</label>
-                                                        <textarea name="school_recomendation_note" rows="5" class="textarea-teacher form-control" {{ $is_enabled_form ? '':'readonly' }}>{{ !empty($ppdb_interview->school_recomendation_note) }}</textarea>
-                                                    </div>
-                                    
-                                                </div>
-                  
-                                                @if(!empty($ppdb_interview->school_recomendation_result) > 0)
-                                                <div class="border-top my-5 border border-success p-5 border-2 rounded bg-light-success">
-                                                    <div class="fs-5 fw-bolder form-label px-5">Berikut ini adalah penilaian dan rekomendasi dari R&D YPAP :</div>
-                                    
-                                                    <div class="mb-10 px-5">
-                                                        <!--begin::Radio group-->
-                                                        <div class="btn-group w-100"  {{ $is_enabled_rnd ? 'data-kt-buttons=true data-kt-buttons-target=[data-kt-button]':''}}>
-                                                            <?php 
-                                                              if($ppdb_interview->interview_result == 1) { ?>
-                                                                <label class="btn bg-white btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success min-w-300px {{ $ppdb_interview->interview_result == 1 ? 'active':'' }}" data-kt-button="true">
-                                                                    <!--begin::Input-->
-                                                                    <input class="btn-check" type="radio" name="interview_result" value="1" {{ $ppdb_interview->interview_result == 1 ? 'checked':'' }} {{ $is_enabled_rnd ? 'disabled':''}} />
-                                                                    <!--end::Input-->
-                                                                    Lulus
-                                                                </label>
-                                                            <?php  } else if($ppdb_interview->interview_result == 2) { ?>
-                                                                <label class="btn bg-white btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-danger min-w-300px {{ $ppdb_interview->interview_result == 2 ? 'active':'' }}" data-kt-button="true">
-                                                                <!--begin::Input-->
-                                                                <input class="btn-check" type="radio" name="interview_result" value="2" {{ $ppdb_interview->interview_result == 2 ? 'checked':'' }} {{ $is_enabled_rnd ? 'disabled':''}}  />
-                                                                <!--end::Input-->
-                                                                Tidak Lulus
-                                                                </label>
-                                                            <?php  } ?>
-                                                        </div>
-                                                        <!--end::Radio group-->
-                                                    </div>
-                                    
-                                                    <div class="mb-5 pb-5 px-5 row border-bottom">
-                                                        <div class="col-lg-7">
-                                                            <label for="school_recomendation_result_file_upload" class="form-label">Upload
-                                                                Surat
-                                                                Keterangan</label>
-                                                            <input class="form-control interview-file-upload-rnd interview-file-upload" type="file" name="interview_result_file_upload" id="interview_result_file_upload" data-target="interview_result_file">
-                                                            <input type="hidden" name="interview_result_file" id="interview_result_file" value="{{ $ppdb_interview->interview_result_file }}" />
-                                    
-                                                            <div class="d-none interview_file_result">
-                                                                <div class="input-group mb-3">
-                                                                    <input type="text" class="form-control bg-light" value="nama file tersebut.jpg" readonly="">
-                                    
-                                                                    <button class="btn btn-danger btn-remove-file-rnd btn-remove-file {{ $is_enabled_rnd ? '':'d-none'}} " type="button">Delete</button>
-                                                                </div>
-                                                                <a href="#" target="_blank" class="ms-3">Download File</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                    
-                                                    <div class="mb-5 ps-5">
-                                                        <label class="form-label">Note</label>
-                                                        <textarea name="interview_result_note" rows="5" class="textarea-rnd form-control" {{ $is_enabled_rnd ? '':'readonly'}} >{{ $ppdb_interview->interview_result_note }}</textarea>
-                                                    </div>
-                                                </div>
-                                                                    
-                                                @endif
-                                    
-                                            </div>
-                                                                    
-                                        </div>
                                                              
                                     </div>
                                 </div>

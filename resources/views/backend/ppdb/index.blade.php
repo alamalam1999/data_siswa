@@ -207,11 +207,11 @@
                                 <!--begin::Table row-->
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-100px w-250px sorting">Registration No</th>
-                                    <th class="min-w-100px w-250px sorting">Nama Lengkap</th>
+                                    <th class="min-w-100px w-250px sorting">Nama Siswa</th>
                                     <th class="min-w-100px sorting">Sekolah</th>
                                     <th class="min-w-100px sorting">Kelas</th>
-                                    <th class="min-w-150px sorting">Status Siswa</th>
-                                    <th class="min-w-150px sorting">Diskon</th>
+                                    
+                                   
                                     <th class="min-w-200px sorting" style="width: 150px;">Status</th>
                                     <th class="text-end min-w-100px sorting_disabled w-100px" rowspan="1" colspan="1"
                                         aria-label="Actions" style="width: 141.766px;"></th>

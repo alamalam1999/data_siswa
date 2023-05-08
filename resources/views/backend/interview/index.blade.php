@@ -158,7 +158,7 @@
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-100px w-250px sorting" onclick="sortTable(0)">Registration No</th>
-                                <th class="min-w-100px w-250px sorting" onclick="sortTable(1)">Nama Lengkap</th>
+                                <th class="min-w-100px w-250px sorting" onclick="sortTable(1)">Nama Siswa</th>
                                 <th class="min-w-100px sorting" onclick="sortTable(2)">Sekolah</th>
                                 <th class="min-w-100px sorting" onclick="sortTable(3)">Kelas</th>
                                 <th class="min-w-150px mw-170px sorting" onclick="sortTable(4)">Status</th>
