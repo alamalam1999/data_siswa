@@ -1,23 +1,21 @@
-@extends('backend.layouts.app')
+<?php $__env->startSection('title', __('labels.backend.access.ppdb.management') . ' | ' . __('labels.backend.access.ppdb.edit')); ?>
 
-@section('title', __('labels.backend.access.ppdb.management') . ' | ' . __('labels.backend.access.ppdb.edit'))
+<?php $__env->startSection('breadcrumb-links'); ?>
 
-@section('breadcrumb-links')
+<?php $__env->stopSection(); ?>
 
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="row mb-4">
     <div class="col">
 
 
         <div class="card overflow-hidden h-xl-100 mb-10">
             <div class="card-header border-bottom-1">
-                <h3 class="card-title text-gray-800 fw-bold">Registration : {{ $ppdb->document_no }}</h3>
+                <h3 class="card-title text-gray-800 fw-bold">Registration : <?php echo e($ppdb->document_no); ?></h3>
 
                 <div class="card-toolbar">
                     <!--begin::Daterangepicker(defined in src/js/layout/app.js)-->
-                    <a href="{{ route('admin.ppdb.index') }}" class="btn btn-sm btn-light d-flex align-items-center px-4" data-kt-initialized="1">
+                    <a href="<?php echo e(route('admin.ppdb.index')); ?>" class="btn btn-sm btn-light d-flex align-items-center px-4" data-kt-initialized="1">
                         <span class="svg-icon svg-icon-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"></path>
@@ -107,14 +105,15 @@
 
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    {{ $user_account->name }}<br />
+                                    <?php echo e($user_account->name); ?><br />
                                 </h4>
 
                                 <p class="card-text">
                                     <small>
-                                        <i class="fas fa-envelope"></i> {{ $user_account->email }}<br />
-                                        <i class="fas fa-calendar-check"></i> @lang('strings.frontend.general.joined')
-                                        {{ timezone()->convertToLocal($user_account->created_at, 'F jS, Y') }}
+                                        <i class="fas fa-envelope"></i> <?php echo e($user_account->email); ?><br />
+                                        <i class="fas fa-calendar-check"></i> <?php echo app('translator')->get('strings.frontend.general.joined'); ?>
+                                        <?php echo e(timezone()->convertToLocal($user_account->created_at, 'F jS, Y')); ?>
+
                                     </small>
                                 </p>
 
@@ -124,7 +123,7 @@
                                     $wa_number = '62' . substr($wa_number, 1);
                                 }
                                 ?>
-                                <a href="https://wa.me/{{ $wa_number }}" target="_blank" class="btn btn-light-primary d-flex align-items-center me-5 me-xl-13">
+                                <a href="https://wa.me/<?php echo e($wa_number); ?>" target="_blank" class="btn btn-light-primary d-flex align-items-center me-5 me-xl-13">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px symbol-circle me-3">
                                         <i class="bi bi-whatsapp text-success fs-1"></i>
@@ -133,7 +132,7 @@
                                     <!--begin::Info-->
                                     <div class="m-0">
                                         <span class="fw-semibold d-block fs-8"> Whatsapp / Call</span>
-                                        <span class="fw-bold text-gray-800 text-hover-success fs-7">{{ $user_account->phone }}</span>
+                                        <span class="fw-bold text-gray-800 text-hover-success fs-7"><?php echo e($user_account->phone); ?></span>
                                     </div>
                                     <!--end::Info-->
                                 </a>
@@ -225,13 +224,13 @@
                         </div>
 
                 <div class="tab-content" id="myTabContent">
- {{-- START TAB 1 - PROFILE SISWA --}}
+ 
                             <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
                                 <div class="card border shadow-sm">
                                     <div class="card-header bg-light">
                                         <!--begin::Title-->
                                         <h3 class="card-title align-items-start flex-column">
-                                            <span class="card-label fw-bolder text-dark">BIODATA SISWA</span>
+                                            <span class="card-label fw-bolder text-dark">BIODATA SISWA</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
                                         </h3>
                                         <!--end::Title-->
                                     </div>
@@ -252,7 +251,7 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="fullname" value="{{ $ppdb->fullname }}" readonly>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="fullname" value="<?php echo e($ppdb->fullname); ?>" readonly>
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -270,7 +269,7 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="gender" value="{{ $ppdb->gender }}" readonly>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="gender" value="<?php echo e($ppdb->gender); ?>" readonly>
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -291,7 +290,7 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="place_of_birth" value="{{ $ppdb->place_of_birth }}" readonly />
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="place_of_birth" value="<?php echo e($ppdb->place_of_birth); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -309,7 +308,7 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="date_of_birth" value="{{ $ppdb->date_of_birth }}" readonly />
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="date_of_birth" value="<?php echo e($ppdb->date_of_birth); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -326,7 +325,7 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="religion" value="{{ $ppdb->religion }}" readonly />
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="religion" value="<?php echo e($ppdb->religion); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -343,7 +342,7 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="nationality" value="{{ $ppdb->nationality }}" readonly />
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="nationality" value="<?php echo e($ppdb->nationality); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -362,7 +361,7 @@
                                           <div class="row fv-row fv-plugins-icon-container">
                                               <!--begin::Col-->
                                               <div class="col-12">
-                                                  <textarea name="address" class="form-control form-control-transparent border-bottom" rows="5" required="required" readonly>{{ $ppdb->address }}</textarea>
+                                                  <textarea name="address" class="form-control form-control-transparent border-bottom" rows="5" required="required" readonly><?php echo e($ppdb->address); ?></textarea>
                                               </div>
                                               <!--end::Col-->
                                           </div>
@@ -381,7 +380,7 @@
                                         <div class="row fv-row">
                                             <!--begin::Col-->
                                             <div class="col-12">
-                                                <input type="text" class="form-control form-control-transparent border-bottom" name="home_phone" value="{{ $ppdb->home_phone }}" readonly />
+                                                <input type="text" class="form-control form-control-transparent border-bottom" name="home_phone" value="<?php echo e($ppdb->home_phone); ?>" readonly />
                                             </div>
                                             <!--end::Col-->
                                         </div>
@@ -404,47 +403,121 @@
                           <div class="row fv-row mb-10">
                             <!--begin::Col-->
                                <div class="col-xl-6">
-                                   <label class="form-label fw-bolder text-dark fs-6">NISN</label>
-                                   <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Masukan nomor NISN" name="first_name" autocomplete="off" />
+                                   <label class="form-label fw-bolder text-dark fs-6">Kelas Utama</label>
+                                   <input class="form-control form-control-lg form-control-solid" type="text" placeholder="metode selection dari master kelas" name="first_name" autocomplete="off" />
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                <div class="col-xl-6">
-                                    <label class="form-label fw-bolder text-dark fs-6">Kelas</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" />
+                                    <label class="form-label fw-bolder text-dark fs-6">Nama Kelas</label>
+                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="metode selection dari master kelas" name="last_name" autocomplete="off" />
                                </div>
                                <!--end::Col-->
                           </div>
 
                       <!--begin::Input group-->
-                           <div class="row fv-row">
+                           <div class="row fv-row mb-10">
                             <!--begin::Col-->
                               <div class="col-xl-6">
-                                  <label class="form-label fw-bolder text-dark fs-6">Nama Kepala Sekolah</label>
-                                  <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first_name" autocomplete="off" />
+                                  <label class="form-label fw-bolder text-dark fs-6">Unit</label>
+                                  <!--begin::Switch-->
+                            <div>
+                              <select id="" class="form-select form-select-solid">
+                              <option value="">Pilih Unit</option>
+                              <option value="">KB</option>
+                              <option value="">TK</option>
+                              <option value="">SD</option>
+                              <option value="">SMP</option>
+                              <option value="">SMA</option>
+                              </select>
+                            </div>
+                            <!--end::Switch-->
                               </div>
                              <!--end::Col-->
                              <!--begin::Col-->
                               <div class="col-xl-6">
-                                  <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
-                                  <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" />
+                                  <label class="form-label fw-bolder text-dark fs-6">Wilayah</label>
+                            <!--begin::Switch-->
+                            <div>
+                              <select id="" class="form-select form-select-solid">
+                              <option value="">Pilih Wilayah</option>
+                              <option value="">Jagakarsa</option>
+                              <option value="">Cinere</option>
+                              <option value="">Pamulang</option>
+                              </select>
+                            </div>
+                            <!--end::Switch-->
                               </div>
                               <!--end::Col-->
                            </div>
 
+                          <!--begin::Input group-->
+                          <div class="row fv-row mb-10">
+                          <!--begin::Col-->
+                          <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">Nama Kepala Sekolah</label>
+                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="first_name" autocomplete="off" />
+                          </div>
+                         <!--end::Col-->
+                         <!--begin::Col-->
+                         <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
+                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="last_name" autocomplete="off" />
+                         </div>
+                         <!--end::Col-->
+                         </div>
+
+                         <!--begin::Input group-->
+                         <div class="row fv-row mb-10">
+                          <!--begin::Col-->
+                          <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">NISN</label>
+                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Tuliskan Nomor NISN" name="first_name" autocomplete="off" />
+                          </div>
+                         <!--end::Col-->
+                         <!--begin::Col-->
+                         <div class="col-xl-6">
+                          <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
+                        <!--begin::Switch-->
+                        <div>
+                          <select id="" class="form-select form-select-solid">
+                              <option value="">Pilih Status</option>
+                              <option value="">Aktif</option>
+                              <option value="">Tidak Aktif</option>
+                              <option value="">Alumni</option>
+                          </select>
+                        </div>
+                        <!--end::Switch-->
+                         
+                        </div>
+                        <!--end::Col-->
+                   </div>
+
+                          <div class="container-flex justify-content-end">
+                            <div class="row">
                             <!--begin::Wrapper-->
-                              <div class="mt-8">
+                              <div class="col">
                                  <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
                                  <span class="indicator-label">Submit
-                                 <!--end: :Wrapper-->
                               </div>
+                            <!--end: :Wrapper-->
+
+                             <!--begin::Wrapper-->
+                             <div class="col-sm-10">
+                              <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="edit">
+                              <span class="indicator-label">Edit
+                           </div>
+                         <!--end: :Wrapper-->
+
+                            </div>
+                          </div>
                      </div>
 
                      <div class="mt-5">
                       <div class="card-header bg-light">
                         <!--begin::Title-->
                            <h3 class="card-title align-items-start flex-column">
-                             <span class="card-label fw-bolder text-dark">DATA PRESTASI (DIINPUT PADA SAAT PENDAFTARAN PPDB)</span>
+                             <span class="card-label fw-bolder text-dark">DATA PRESTASI</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
                            </h3>
                         <!--end::Title-->
                       </div>
@@ -464,11 +537,11 @@
                                   <?php
                                   $file_download = '#';
                                   ?>
-                                  @foreach($file_additional as $file)
+                                  <?php $__currentLoopData = $file_additional; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                   <tr>
-                                      <td>{{ $file->deskripsi }}</td>
-                                      <td>{{ $file->tingkat }}</td>
-                                      <td><a href="/{{ $file->file }}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                      <td><?php echo e($file->deskripsi); ?></td>
+                                      <td><?php echo e($file->tingkat); ?></td>
+                                      <td><a href="/<?php echo e($file->file); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                               <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                                               <span class="svg-icon svg-icon-3">
                                                   <i class="bi bi-cloud-arrow-down"></i>
@@ -476,123 +549,28 @@
                                               <!--end::Svg Icon-->
                                           </a></td>
                                   </tr>
-                                  @endforeach
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                               </tbody>
                           </table>
                       </div>
                     </div>
-{{-- PROFILE - Siswa --}}
 
-                                  
-                                    {{-- BEGIN :: Dokumen Pendukung --}}
-                                    <div class="card-header bg-light">
-                                        <!--begin::Title-->
-                                        <h3 class="card-title align-items-start flex-column">
-                                            <span class="card-label fw-bolder text-dark">Dokumen Pendukung</span>
-                                        </h3>
-                                        <!--end::Title-->
-                                    </div>
-
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                                                <thead>
-                                                    <tr class="fw-bolder fs-6 text-gray-800">
-                                                        <th>Nama File</th>
-                                                        <th class="w-50px">Uploaded</th>
-                                                        <th class="min-w-50px text-end"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($file_uploaded as $file)
-                                                    <?php
-                                                    $file_download = '#';
-                                                    ?>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block fs-6">{{ $file['label'] }}</a>
-                                                        </td>
-                                                        <td>
-                                                            <?php
-                                                            $is_uploaded = false;
-                                                            $file_download = '#';
-                                                            switch ($file['name']) {
-                                                                case 'family_card':
-                                                                    if ($ppdb->family_card != '') {
-                                                                        $is_uploaded = true;
-                                                                    }
-                                                                    $file_download = $ppdb->family_card;
-                                                                    break;
-
-                                                                case 'birth_certificate':
-                                                                    if ($ppdb->birth_certificate != '') {
-                                                                        $is_uploaded = true;
-                                                                    }
-                                                                    $file_download = $ppdb->birth_certificate;
-                                                                    break;
-
-                                                                case 'last_report':
-                                                                    if ($ppdb->last_report != '') {
-                                                                        $is_uploaded = true;
-                                                                    }
-                                                                    $file_download = $ppdb->last_report;
-                                                                    break;
-
-                                                                case 'academic_certificate':
-                                                                    if ($ppdb->academic_certificate != '') {
-                                                                        $is_uploaded = true;
-                                                                    }
-                                                                    $file_download = $ppdb->academic_certificate;
-                                                                    break;
-
-                                                                case 'kia_book':
-                                                                    if ($ppdb->kia_book != '') {
-                                                                        $is_uploaded = true;
-                                                                    }
-                                                                    $file_download = $ppdb->kia_book;
-                                                                    break;
-
-                                                                default:
-                                                                    break;
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-end flex-shrink-0">
-                                                                @if ($file_download != '#' && $file_download != null)
-                                                                <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $file_download }}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                                    <span class="svg-icon svg-icon-3">
-                                                                        <i class="bi bi-cloud-arrow-down"></i>
-                                                                    </span>
-                                                                    <!--end::Svg Icon-->
-                                                                </a>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    {{-- END :: Dokumen Pendukung Akhir --}}
 
                                 </div>
                             </div>
                           </div>
                         </div>
-{{-- END TAB 1 - PROFILE SISWA --}}
 
 
-{{-- START TAB 2 - DATA ORANGTUA --}}
+
+
                        <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel">
                               <div class="car border shadow-sm">
                                 <div class="card-header bg-light"> 
                                 <!--begin::Title-->
                                 <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder text-dark">INFORMASI ORANG TUA/WALI</span>
+                                    <span class="card-label fw-bolder text-dark">INFORMASI ORANG TUA/WALI</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
                                 </h3>
                                 <!--end::Title-->
                                 </div>
@@ -620,7 +598,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Nama
                                         ayah/Wali</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -640,7 +618,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Nama
                                         Ibu/Wali</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -672,7 +650,7 @@
                                     ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Nama
                                         Pekerjaan Ayah/Wali</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($dataworkfather =='' && $dataworkfather == null) ? '' : $dataworkfather }}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($dataworkfather =='' && $dataworkfather == null) ? '' : $dataworkfather); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -695,7 +673,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Nama
                                         Pekerjaan Ibu/Wali</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($dataworkmother =='' && $dataworkmother == null) ? '' : $dataworkmother}}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($dataworkmother =='' && $dataworkmother == null) ? '' : $dataworkmother); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -716,7 +694,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Tempat
                                         Pekerjaan Ayah/Wali</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($placeworkfather =='' && $placeworkfather == null) ? '' : $placeworkfather[0]}}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($placeworkfather =='' && $placeworkfather == null) ? '' : $placeworkfather[0]); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -734,7 +712,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Tempat
                                         Pekerjaan Ibu/Wali</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($placeworkmother =='' && $placeworkmother == null) ? '' : $placeworkmother[0]}}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($placeworkmother =='' && $placeworkmother == null) ? '' : $placeworkmother[0]); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -764,7 +742,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Title
                                         Pekerjaan Ayah</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($titleworkfather =='' && $titleworkfather == null) ? '' : $titleworkfather}}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($titleworkfather =='' && $titleworkfather == null) ? '' : $titleworkfather); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -790,7 +768,7 @@
                                   ?>
                                     <label class="form-label fw-bolder text-muted fs-6">Title
                                         Pekerjaan Ibu</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($titleworkmother =='' && $titleworkmother == null) ? '' : $titleworkmother}}" readonly autocomplete="off">
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($titleworkmother =='' && $titleworkmother == null) ? '' : $titleworkmother); ?>" readonly autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -813,7 +791,7 @@
                                       ?>
                                         <label class="form-label fw-bolder text-muted fs-6">penghasilan
                                           Tetap Ayah</label>
-                                      <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($gajiworkayah =='' && $gajiworkayah == null) ? '' : $gajiworkayah[0]}}" name="last_name" readonly>
+                                      <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($gajiworkayah =='' && $gajiworkayah == null) ? '' : $gajiworkayah[0]); ?>" name="last_name" readonly>
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                   </div>
                                   <div class="col">
@@ -840,7 +818,7 @@
                                     ?>
                                         <label class="form-label fw-bolder text-muted fs-6">Gaji Tidak
                                           Tetap Ayah</label>
-                                      <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($incomeworkayah =='' && $incomeworkayah == null) ? '' : $incomeworkayah}}" name="last_name" readonly>
+                                      <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($incomeworkayah =='' && $incomeworkayah == null) ? '' : $incomeworkayah); ?>" name="last_name" readonly>
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                   </div>
                                 </div>
@@ -862,7 +840,7 @@
                                       ?>
                                       <label class="form-label fw-bolder text-muted fs-6">penghasilan
                                         Tetap Ibu</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($gajiworkmother =='' && $gajiworkmother == null) ? '' : $gajiworkmother[0]}}" name="last_name" readonly>
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($gajiworkmother =='' && $gajiworkmother == null) ? '' : $gajiworkmother[0]); ?>" name="last_name" readonly>
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <div class="col">
@@ -890,7 +868,7 @@
                                   ?>
                                       <label class="form-label fw-bolder text-muted fs-6">Gaji Tidak
                                         Tetap Ibu</label>
-                                    <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($incomeworkmother =='' && $incomeworkmother == null) ? '' : $incomeworkmother}}" name="last_name" readonly>
+                                    <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($incomeworkmother =='' && $incomeworkmother == null) ? '' : $incomeworkmother); ?>" name="last_name" readonly>
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                               </div>
@@ -917,7 +895,7 @@
                                             }
                                     ?>
                                           <label class="form-label fw-bolder text-muted fs-6">Slip Gaji Ayah</label> 
-                                          <a href="/{{ ($slipworkfather =='' && $slipworkfather == null) ? '' : $slipworkfather[0]}}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                          <a href="/<?php echo e(($slipworkfather =='' && $slipworkfather == null) ? '' : $slipworkfather[0]); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                           <span class="svg-icon svg-icon-3">
                                               <i class="bi bi-cloud-arrow-down"></i>
                                           </span>
@@ -934,7 +912,7 @@
                                             } 
                                     ?>
                                           <label class="form-label fw-bolder text-muted fs-6">Slip Gaji Ibu</label> 
-                                              <a href="/{{ ($slipworkmother =='' && $slipworkmother == null) ? '' : $slipworkmother[0]}}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                              <a href="/<?php echo e(($slipworkmother =='' && $slipworkmother == null) ? '' : $slipworkmother[0]); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                               <span class="svg-icon svg-icon-3">
                                                   <i class="bi bi-cloud-arrow-down"></i>
                                               </span>
@@ -944,16 +922,17 @@
                             <div class="card-header bg-light">
                               <!--begin::Title-->
                               <h3 class="card-title align-items-start flex-column">
-                                  <span class="card-label fw-bolder">VERIFY STATUS PEKERJAAN (JIKA MEDCO GROUP)</span>
+                                  <span class="card-label fw-bolder">VERIFY STATUS PEKERJAAN (JIKA MEDCO GROUP)</span><span style="color:#5a595a">divalidasi pada saat pendaftaraan</span>
                               </h3>
                               <!--end::Title-->
                           </div>
                         
                           <div class="card-body">
                             <div class="row fv-row mb-10">
-                            <form action="{{ route('admin.ppdb.discount') }}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="id" value="{{ $ppdb->id }}" />
+                            <form action="<?php echo e(route('admin.ppdb.discount')); ?>" method="POST">
+                                <?php echo e(csrf_field()); ?>
+
+                                <input type="hidden" name="id" value="<?php echo e($ppdb->id); ?>" />
                                 <div class="w-100">
   
                                   <div class="row fv-row mb-7 fv-plugins-icon-container p-5 border">
@@ -970,7 +949,7 @@
                                     <div id="box-employee-medco" class="mt-10">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <label class="form-label fw-bold text-dark fs-6">Tempat Bekerja &amp; Nama Posisi</label>
-                                            <input name="medco_employee" value="{{ $ppdb->medco_employee }}" class="form-control form-control-lg form-control-solid" type="text" placeholder="Keterangan Pekerjaan" autocomplete="off" readonly>
+                                            <input name="medco_employee" value="<?php echo e($ppdb->medco_employee); ?>" class="form-control form-control-lg form-control-solid" type="text" placeholder="Keterangan Pekerjaan" autocomplete="off" readonly>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <div class="fv-row mb-2 fv-plugins-icon-container">
@@ -983,18 +962,18 @@
                                                 <div class="row fv-row fv-plugins-icon-container">
                                                     <!--begin::Col-->
                                                     <div class="col-12">
-                                                        @if(!empty($ppdb->medco_employee_file) && $ppdb->medco_employee_file != "")
+                                                        <?php if(!empty($ppdb->medco_employee_file) && $ppdb->medco_employee_file != ""): ?>
                                                         <!--begin::Image input-->
                                                         <div class="input-group mb-5">
-                                                            <input type="text" value="{{ $ppdb->medco_employee_file }}" class="form-control" value="nama file" readonly="">
-                                                            <a href="/{{ $ppdb->medco_employee_file }}" target="_blank" class="btn-remove-file input-group-text btn-danger">
+                                                            <input type="text" value="<?php echo e($ppdb->medco_employee_file); ?>" class="form-control" value="nama file" readonly="">
+                                                            <a href="/<?php echo e($ppdb->medco_employee_file); ?>" target="_blank" class="btn-remove-file input-group-text btn-danger">
                                                                 View
                                                             </a>
                                                         </div>
                                                         <!--end::Image input-->
-                                                        @else
+                                                        <?php else: ?>
                                                         <label class="required fs-6 fw-bolder form-label mb-2 text-dark">Tidak Ada</label>
-                                                        @endif
+                                                        <?php endif; ?>
                                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                                     </div>
                                                     <!--end::Col-->
@@ -1012,9 +991,9 @@
                                             <label class="required fs-6 fw-bold form-label mb-2">Pekerjaan di Medco Group sebagai</label>
                                             <select name="discount_code" class="form-select">
                                                 <option value="">Pilih</option>
-                                                @foreach($discount_groups as $item)
-                                                <option value="{{ $item->enum_value }}" {{ ($ppdb->ppdb_discount == $item->enum_value) ? "selected":"" }}>{{ $item->enum_label }}</option>
-                                                @endforeach
+                                                <?php $__currentLoopData = $discount_groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($item->enum_value); ?>" <?php echo e(($ppdb->ppdb_discount == $item->enum_value) ? "selected":""); ?>><?php echo e($item->enum_label); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
                                         <!--end::Col-->
@@ -1031,18 +1010,18 @@
                     
                   </div>
                 </div>
-{{--END TAB 2 - DATA ORANGTUA--}}
 
-{{-- START TAB 4 - DATA RIWAYAT --}}
+
+
 <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel">
     <div class="card border shadow-sm">
-      {{--  --}}
+      
 
         <div class="car border shadow-sm">
           <div class="card-header bg-light"> 
           <!--begin::Title-->
           <h3 class="card-title align-items-start flex-column">
-              <span class="card-label fw-bolder text-dark">INFORMASI PENDAFTARAN</span>
+              <span class="card-label fw-bolder text-dark">INFORMASI PENDAFTARAN</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
           </h3>
           <!--end::Title-->
           </div>
@@ -1068,8 +1047,8 @@
                 $data1 = '';
               }
             ?>
-              <label class="form-label fw-bolder text-muted fs-6">No. Registrasi</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}" readonly autocomplete="off">
+              <label class="form-label fw-bolder text-muted fs-6">No. Registrasi (Kode Siswa)</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1088,7 +1067,7 @@
               }
             ?>
               <label class="form-label fw-bolder text-muted fs-6">Gelombang Daftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1119,7 +1098,7 @@
 
               ?>
               <label class="form-label fw-bolder text-muted fs-6">Tanggal Daftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($dataworkfather =='' && $dataworkfather == null) ? '' : $dataworkfather }}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($dataworkfather =='' && $dataworkfather == null) ? '' : $dataworkfather); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1141,7 +1120,7 @@
             }
             ?>
               <label class="form-label fw-bolder text-muted fs-6">Status Siswa</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($dataworkmother =='' && $dataworkmother == null) ? '' : $dataworkmother}}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($dataworkmother =='' && $dataworkmother == null) ? '' : $dataworkmother); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1161,7 +1140,7 @@
               }
             ?>
               <label class="form-label fw-bolder text-muted fs-6">Tujuan Sekolah</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($placeworkfather =='' && $placeworkfather == null) ? '' : $placeworkfather[0]}}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($placeworkfather =='' && $placeworkfather == null) ? '' : $placeworkfather[0]); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1178,7 +1157,7 @@
               }
             ?>
               <label class="form-label fw-bolder text-muted fs-6">Jenjang & Kelas</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($placeworkmother =='' && $placeworkmother == null) ? '' : $placeworkmother[0]}}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($placeworkmother =='' && $placeworkmother == null) ? '' : $placeworkmother[0]); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1207,7 +1186,7 @@
               }
             ?>
               <label class="form-label fw-bolder text-muted fs-6">Status Kesiswaan</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($titleworkfather =='' && $titleworkfather == null) ? '' : $titleworkfather}}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($titleworkfather =='' && $titleworkfather == null) ? '' : $titleworkfather); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1232,7 +1211,7 @@
               }
             ?>
               <label class="form-label fw-bolder text-muted fs-6">Asal Sekolah</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="{{ ($titleworkmother =='' && $titleworkmother == null) ? '' : $titleworkmother}}" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($titleworkmother =='' && $titleworkmother == null) ? '' : $titleworkmother); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1243,11 +1222,405 @@
 
 </div>
 
+<div class="btndowntes card-header bg-light mb-6">
+  <!--begin::Title-->
+  <h3 class="card-title align-items-start flex-column mb-1">
+      <span class="card-label fw-bolder mb-1">HASIL TES SELEKSI MASUK SEKOLAH</span><span style="color:#5a595a">dinilai pada saat pendaftaraan</span>
+       </h3>
+       </h3>
+  <!--end::Title-->
+</div>
 
-      {{-- test bawah --}}
+<div class="informasites">
+
+<div class="card rounded-0">
+                                            <div class="card-body">
+                                    
+                                                <div class="table-responsive mb-5">
+                                                    <table class="table table-rounded table-striped border gy-4 gs-4">
+                                                        <thead>
+                                                            <tr class="fw-semibold fs-4 bg-dark text-white border-bottom border-gray-200">
+                                                                <th>Deskripsi</th>
+                                                                <th>File</th>
+                                                                <th class="w-100px">Nilai</th>
+                                                                <th style="text-align: center;" class="w-150px">Keputusan</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if($ppdb->stage=="SD")
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">Tes Kesiapan Sekolah</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                      <?php                                                              
+                                                                            $array= ($kesiapan_file->{'file_path'} ?? '');
+                                                                            if ($array != '' && $array != null) {
+                                                                              $result = $array;
+                                                                            } else {
+                                                                              $result = '';
+                                                                            }
+                                                                        ?>
+                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref3">view</a>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                  <?php if (!empty($ppdb_interview->kesiapan_value)) { ?>
+                                                                    <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="{{ $ppdb_interview->kesiapan_value }}" readonly />
+                                                                 <?php } else { ?>
+                                                                  <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="Belum Ada" readonly />
+                                                                 <?php } ?>
+                                                                </td>
+                                                                <td id="academic_value_label">
+                                                                  <?php if (empty($ppdb_interview->kesiapan_result)) { ?>
+                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
+                                                                  <?php }else if ($ppdb_interview->kesiapan_result == 4) { ?>
+                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Siap Sekolah</span></div>
+                                                                  <?php }else if ($ppdb_interview->kesiapan_result == 5) { ?>
+                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->kesiapan_result == 6) {?>
+                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
+                                                                  <?php }?>
+                                                                </td>
+                                                            </tr>
+                                                            @endif
+                                    
+                                                            @if($ppdb->stage=="SMP" || $ppdb->stage=="SMA")
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                        Psikotes
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                      <?php                                                              
+                                                                            $array= ($psikotest_file->{'file_path'} ?? '');
+                                                                            if ($array != '' && $array != null) {
+                                                                              $result = $array;
+                                                                            } else {
+                                                                              $result = '';
+                                                                            }
+                                                                        ?>
+                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref7">view</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                  <?php if(!empty($ppdb_interview->psikotest_value)){ ?>
+                                                                    <input name="psikotest_value_result" id="psikotest_value_result" type="number" class="form-control form-control-solid w-100px form-control-transparent" value="{{ $ppdb_interview->psikotest_value }}" readonly />
+                                                                
+                                                                <?php  } else { ?>
+                                                                  <input name="psikotest_value_result" id="psikotest_value_result" type="number" class="form-control form-control-solid w-100px form-control-transparent" value="Belum Ada" readonly />
+                                                                  <?php } ?>
+                                                                  </td>
+                                                                <td id="psikotest_value_label" class="mt-4 fw-bold fs-1">
+                                                                    <?php if (empty($ppdb_interview->psikotest_result)) { ?>
+                                                                      <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
+                                                                    <?php }else if ($ppdb_interview->psikotest_result == 1) { ?>
+                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
+                                                                    <?php }else if ($ppdb_interview->psikotest_result == 2) { ?>
+                                                                       <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
+                                                                    <?php }else if ($ppdb_interview->psikotest_result == 3) {?>
+                                                                     <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
+                                                                    <?php }?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                        Tes Literasi & Numerasi
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                      <?php                                                              
+                                                                            $array= ($academic_file->{'file_path'} ?? '');
+                                                                            if ($array != '' && $array != null) {
+                                                                              $result = $array;
+                                                                            } else {
+                                                                              $result = '';
+                                                                            }
+                                                                        ?>
+                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref8">view</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                  <?php if (!empty($ppdb_interview->academic_value)) { ?>
+                                                                    <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="{{ $ppdb_interview->academic_value }}" readonly />
+                                                                 <?php } else { ?>
+                                                                  <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="Belum Ada" readonly />
+                                                                 <?php } ?>
+                                                                </td>
+                                                                <td id="academic_value_label">
+                                                                  <?php if (empty($ppdb_interview->academic_result)) { ?>
+                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
+                                                                  <?php }else if ($ppdb_interview->academic_result == 1) { ?>
+                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->academic_result == 2) { ?>
+                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->academic_result == 3) {?>
+                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
+                                                                  <?php }?>
+                                                                </td>
+                                                            </tr>
+                                                            @endif
+                                    
+                                                            <tr>
+                                                                <td class="fs-5 fw-bold">Wawancara Orang Tua</td>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                      <?php                                                              
+                                                                            $array= ($interview_parent_file->{'file_path'} ?? '');
+                                                                            if ($array != '' && $array != null) {
+                                                                              $result = $array;
+                                                                            } else {
+                                                                              $result = '';
+                                                                            }
+                                                                        ?>
+                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref4 fs-6">view</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <input id="interview_parent" type="text" class="form-control form-control-solid w-150px form-control-transparent d-none" value="" readonly />
+                                                                </td>
+                                                                <td id="interview_parent_value_label">
+                                                                  <?php if (empty($ppdb_interview->interview_parent_result)) { ?>
+                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
+                                                                  <?php }else if ($ppdb_interview->interview_parent_result == 1) { ?>
+                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->interview_parent_result == 2) { ?>
+                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->interview_parent_result == 3) {?>
+                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
+                                                                  <?php }?>
+                                                                </td>
+                                                            </tr>
+                                                            @if($ppdb->stage=="SMP" || $ppdb->stage=="SMA")
+                                                            <tr>
+                                                                <td class="fs-5 fw-bold">Wawancara Siswa</td>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                      <?php                                                              
+                                                                            $array= ($interview_student_file->{'file_path'} ?? '');
+                                                                            if ($array != '' && $array != null) {
+                                                                              $result = $array;
+                                                                            } else {
+                                                                              $result = '';
+                                                                            }
+                                                                        ?>
+                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref6 fs-6">view</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <input id="interview_student_value_result" type="text" class="form-control form-control-solid w-150px form-control-transparent d-none" value="" readonly />
+                                                                </td>
+                                                                <td id="interview_student_value_label">
+                                                                  <?php if (empty($ppdb_interview->interview_student_result)) { ?>
+                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
+                                                                  <?php }else if ($ppdb_interview->interview_student_result == 1) { ?>
+                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->interview_student_result == 2) { ?>
+                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->interview_student_result == 3) {?>
+                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
+                                                                  <?php }?>
+                                                                </td>
+                                                            </tr>
+                                                            @endif
+                                                            @if($ppdb->stage=="KB" || $ppdb->stage=="TK" || $ppdb->stage=="SD")
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">Observasi Siswa</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="mt-4 fw-bold fs-5">
+                                                                      <?php                                                              
+                                                                            $array= ($observasi_file->{'file_path'} ?? '');
+                                                                            if ($array != '' && $array != null) {
+                                                                              $result = $array;
+                                                                            } else {
+                                                                              $result = '';
+                                                                            }
+                                                                        ?>
+                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref5 fs-6">view</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                  <?php if (!empty($ppdb_interview->observasi_value)) { ?>
+                                                                    <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="{{ $ppdb_interview->observasi_value }}" readonly />
+                                                                 <?php } else { ?>
+                                                                  <input name="academic_value_result" id="academic_value_result" type="number" class="form-control form-control-solid w-150px form-control-transparent" value="Belum Ada" readonly />
+                                                                 <?php } ?>
+                                                                </td>
+                                                                <td id="academic_value_label">
+                                                                  <?php if (empty($ppdb_interview->observasi_result)) { ?>
+                                                                    <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-info">Belum Ada</span></div>
+                                                                  <?php }else if ($ppdb_interview->observasi_result == 1) { ?>
+                                                                  <div style="text-align: center;"  class="mt-3 fw-bold fs-5"><span class="badge badge-success">Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->observasi_result == 2) { ?>
+                                                                     <div style="text-align: center;" class="mt-3 fw-bold fs-5"><span class="badge badge-danger">Tidak Direkomendasikan</span></div>
+                                                                  <?php }else if ($ppdb_interview->observasi_result == 3) {?>
+                                                                   <div class="mt-3 fw-bold fs-5"><span class="badge badge-warning">Dipertimbangkan dengan cacatan</span></div>
+                                                                  <?php }?>
+                                                                </td>
+                                                            </tr>
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                      
+                                                <div class="border-top my-5 border border-secondary p-5 border-2 rounded bg-light">
+                                                    <div class="d-flex flex-stack mb-5">
+                                                        <div class="fs-5 fw-bolder form-label px-5">Berdasarkan hasil penilaian dari pihak perwakilan sekolah, maka dengan ini calon siswa tersebut
+                                                            dinyatakan :</div>
+                                                    </div>
+                                    
+                                                    <div class="mb-5 pb-5 px-5 row border-bottom">
+                                                        <div class="col-lg-7">
+                                                            <label for="school_recomendation_result_file_upload" class="form-label">Upload
+                                                                Surat
+                                                                Keterangan</label>
+                                                            <input class="form-control interview-file-upload-teacher interview-file-upload" type="file" name="school_recomendation_file_upload" id="school_recomendation_file_upload" data-target="school_recomendation_file">
+                                                            <input type="hidden" name="school_recomendation_file" id="school_recomendation_file" value="{{ $ppdb_interview->school_recomendation_file ?? ' ' }}" />
+                                    
+                                                            <div class="d-none interview_file_result">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control bg-light" value="nama file tersebut.jpg" readonly="">
+                                    
+                                                                    <button class="btn btn-danger btn-remove-file-teacher btn-remove-file {{ $is_enabled_form ? '':'d-none' }}" type="button">Delete</button>
+                                                                </div>
+                                                                <a href="#" target="_blank" class="ms-3">Download File</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <div class="mb-10 px-5">
+                                                        
+                                                        <!--begin::Radio group-->
+                                                        <div class="btn-group w-100" {{ $is_enabled_form ? 'data-kt-buttons=true data-kt-buttons-target=[data-kt-button]':''}}>
+                                                            <!--begin::Radio-->
+                                                            <?php
+                                                              if(empty($ppdb_interview->school_recomendation_result) )
+                                                              {
+                                                                ?>
+                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-success min-w-300px {{ !empty($ppdb_interview->school_recomendation_result) == 1 ? 'active':'' }}" data-kt-button="true">
+                                                                <!--begin::Input-->
+                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="1" checked disabled/>
+                                                                <!--end::Input-->
+                                                                Belum Ada Inputan
+                                                                </label>
+                                                            <?php
+                                                              }else if($ppdb_interview->school_recomendation_result == 1){ ?>
+                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-success min-w-300px {{ !empty($ppdb_interview->school_recomendation_result) == 1 ? 'active':'' }}" data-kt-button="true">
+                                                                <!--begin::Input-->
+                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="1" checked disabled />
+                                                                <!--end::Input-->
+                                                                Direkomendasikan
+                                                                </label>
+                                                             <?php  }else if($ppdb_interview->school_recomendation_result == 2){ ?>
+                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-danger min-w-300px {{ !empty($ppdb_interview->school_recomendation_result) == 2 ? 'active':'' }}" data-kt-button="true">
+                                                                <!--begin::Input-->
+                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="2" checked disabled />
+                                                                <!--end::Input-->
+                                                                Tidak direkomendasikan
+                                                                </label>
+                                                           <?php   }else if($ppdb_interview->school_recomendation_result == 3){ ?>
+                                                                <label class="btn bg-white btn-outline-secondary text-gray-800 text-hover-white text-active-white btn-outline btn-active-warning min-w-300px fs-6 {{ !empty($ppdb_interview->school_recomendation_result) == 3 ? 'active':'' }}" data-kt-button="true">
+                                                                <!--begin::Input-->
+                                                                <input class="btn-check" type="radio" name="school_recomendation_result" value="3" checked disabled />
+                                                                <!--end::Input-->
+                                                                Di pertimbangkan
+                                                                </label>
+                                                             <?php } ?>
+                                                            
+                                                        </div>
+                                                        <!--end::Radio group-->
+                                                    </div>
+                                    
+                                                    <div class="mb-5 ps-5">
+                                                        <label class="form-label">Note</label>
+                                                        <textarea name="school_recomendation_note" rows="5" class="textarea-teacher form-control" {{ $is_enabled_form ? '':'readonly' }}>{{ !empty($ppdb_interview->school_recomendation_note) }}</textarea>
+                                                    </div>
+                                    
+                                                </div>
+                  
+                                                @if(!empty($ppdb_interview->school_recomendation_result) > 0)
+                                                <div class="border-top my-5 border border-success p-5 border-2 rounded bg-light-success">
+                                                    <div class="fs-5 fw-bolder form-label px-5">Berikut ini adalah penilaian dan rekomendasi dari R&D YPAP :</div>
+                                    
+                                                    <div class="mb-10 px-5">
+                                                        <!--begin::Radio group-->
+                                                        <div class="btn-group w-100"  {{ $is_enabled_rnd ? 'data-kt-buttons=true data-kt-buttons-target=[data-kt-button]':''}}>
+                                                            <?php 
+                                                              if($ppdb_interview->interview_result == 1) { ?>
+                                                                <label class="btn bg-white btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-success min-w-300px {{ $ppdb_interview->interview_result == 1 ? 'active':'' }}" data-kt-button="true">
+                                                                    <!--begin::Input-->
+                                                                    <input class="btn-check" type="radio" name="interview_result" value="1" {{ $ppdb_interview->interview_result == 1 ? 'checked':'' }} {{ $is_enabled_rnd ? 'disabled':''}} />
+                                                                    <!--end::Input-->
+                                                                    Lulus
+                                                                </label>
+                                                            <?php  } else if($ppdb_interview->interview_result == 2) { ?>
+                                                                <label class="btn bg-white btn-outline-secondary text-muted text-hover-white text-active-white btn-outline btn-active-danger min-w-300px {{ $ppdb_interview->interview_result == 2 ? 'active':'' }}" data-kt-button="true">
+                                                                <!--begin::Input-->
+                                                                <input class="btn-check" type="radio" name="interview_result" value="2" {{ $ppdb_interview->interview_result == 2 ? 'checked':'' }} {{ $is_enabled_rnd ? 'disabled':''}}  />
+                                                                <!--end::Input-->
+                                                                Tidak Lulus
+                                                                </label>
+                                                            <?php  } ?>
+                                                        </div>
+                                                        <!--end::Radio group-->
+                                                    </div>
+                                    
+                                                    <div class="mb-5 pb-5 px-5 row border-bottom">
+                                                        <div class="col-lg-7">
+                                                            <label for="school_recomendation_result_file_upload" class="form-label">Upload
+                                                                Surat
+                                                                Keterangan</label>
+                                                            <input class="form-control interview-file-upload-rnd interview-file-upload" type="file" name="interview_result_file_upload" id="interview_result_file_upload" data-target="interview_result_file">
+                                                            <input type="hidden" name="interview_result_file" id="interview_result_file" value="{{ $ppdb_interview->interview_result_file }}" />
+                                    
+                                                            <div class="d-none interview_file_result">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text" class="form-control bg-light" value="nama file tersebut.jpg" readonly="">
+                                    
+                                                                    <button class="btn btn-danger btn-remove-file-rnd btn-remove-file {{ $is_enabled_rnd ? '':'d-none'}} " type="button">Delete</button>
+                                                                </div>
+                                                                <a href="#" target="_blank" class="ms-3">Download File</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <div class="mb-5 ps-5">
+                                                        <label class="form-label">Note</label>
+                                                        <textarea name="interview_result_note" rows="5" class="textarea-rnd form-control" {{ $is_enabled_rnd ? '':'readonly'}} >{{ $ppdb_interview->interview_result_note }}</textarea>
+                                                    </div>
+                                                </div>
+                                                                    
+                                                @endif
+                                    
+                                            </div>
+                                                                    
+                                        </div>
+                                      </div>
+
+                                        {{-- tutup --}}
+
+      <div class="btndownupspp card-header bg-light mb-6">
+          <!--begin::Title-->
+          <h3 class="card-title align-items-start flex-column mb-1">
+              <span class="card-label fw-bolder mb-1">PEMBAYARAN AWAL UP & SPP</span><span style="color:#5a595a">dibayar pada saat pendaftaraan</span>
+               </h3>
+               </h3>
+          <!--end::Title-->
+      </div>
+
+      <div class="informasiupspp">
+      
       <div class="card-body">
           <div class="w-100">
-              @if(!empty($payment_up_spp))
+              <?php if(!empty($payment_up_spp)): ?>
               <div class="d-flex flex-column flex-xl-row">
 
                   <div class="flex-lg-row-fluid mb-5 mb-xl-0  me-xl-10">
@@ -1258,8 +1631,8 @@
                           <!--end::Wrapper-->
 
                           <div class="m-0">
-                              <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $payment_up_spp->image_confirmation }}" target="_blank">
-                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ $payment_up_spp->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                              <a href="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_up_spp->image_confirmation); ?>" target="_blank">
+                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_up_spp->image_confirmation); ?>" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
                               </a>
                           </div>
                       </div>
@@ -1290,15 +1663,17 @@
                           ?>
 
                           <div class="mb-3">
-                              <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal {{ $up }}
+                              <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal <?php echo e($up); ?>
+
                               </div>
-                              <div class="fw-bold fs-6 text-gray-800">@currency($fee_up->cost)</div>
+                              <div class="fw-bold fs-6 text-gray-800">Rp. <?php echo number_format($fee_up->cost,0,',','.'); ?></div>
                           </div>
 
                           <div class="mb-3">
-                              <div class="fw-semibold text-gray-600 fs-7">Uang SPP {{ $spp }}
+                              <div class="fw-semibold text-gray-600 fs-7">Uang SPP <?php echo e($spp); ?>
+
                               </div>
-                              <div class="fw-bold fs-6 text-gray-800">@currency($fee_spp->cost)</div>
+                              <div class="fw-bold fs-6 text-gray-800">Rp. <?php echo number_format($fee_spp->cost,0,',','.'); ?></div>
                           </div>
 
                           <h6 class="mt-10 mb-5 fw-bolder text-gray-800 text-hover-primary border-bottom py-3">
@@ -1312,22 +1687,22 @@
                           </div>
                           <div class="mb-3">
                               <div class="fw-semibold text-gray-600 fs-7">Bank</div>
-                              <div class="fw-bold text-gray-800 fs-6" id="payment_bank_code">{{ $payment_up_spp->bank_code }}</div>
+                              <div class="fw-bold text-gray-800 fs-6" id="payment_bank_code"><?php echo e($payment_up_spp->bank_code); ?></div>
                           </div>
 
                           <div class="mb-3">
                               <div class="fw-semibold text-gray-600 fs-7">Nomor Rekening
                               </div>
-                              <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center" id="payment_account_number">{{ $payment_up_spp->account_number }}</div>
+                              <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center" id="payment_account_number"><?php echo e($payment_up_spp->account_number); ?></div>
                           </div>
                           <div class="mb-3">
                               <div class="fw-semibold text-gray-600 fs-7">Atas Nama</div>
-                              <div class="fw-bold text-gray-800 fs-6" id="payment_bank_owner_name">{{ $payment_up_spp->bank_owner_name }}</div>
+                              <div class="fw-bold text-gray-800 fs-6" id="payment_bank_owner_name"><?php echo e($payment_up_spp->bank_owner_name); ?></div>
                           </div>
                           <div class="mb-3">
                               <div class="fw-bold text-gray-600 fs-2">Nominal Transfer
                               </div>
-                              <div class="fw-bolder text-gray-800 fs-1" id="payment_cost">@currency($payment_up_spp->cost)</div>
+                              <div class="fw-bolder text-gray-800 fs-1" id="payment_cost">Rp. <?php echo number_format($payment_up_spp->cost,0,',','.'); ?></div>
                           </div>
 
                       </div>
@@ -1336,18 +1711,30 @@
                   <!--end::Sidebar-->
 
               </div>
-              @else
+              <?php else: ?>
 
-              @endif
+              <?php endif; ?>
 
 
           </div>
       </div>
   </div>
+  </div>
+
+       <div class="btndownformulir card-header bg-light mb-6">
+          <!--begin::Title-->
+          <h3 class="card-title align-items-start flex-column mb-1">
+              <span class="card-label fw-bolder mb-1">PEMBAYARAN FORMULIR PPDB</span><span style="color:#5a595a">dibayar pada saat pendaftaraan</span>
+               </h3>
+               </h3>
+          <!--end::Title-->
+      </div>
+
+<div class="informasiformulir">
   <div class="card border shadow-sm">
     <div class="card-body">
         <div class="w-100">
-            @if(!empty($payment_formulir))
+            <?php if(!empty($payment_formulir)): ?>
             <div class="d-flex flex-column flex-xl-row">
 
                 <div class="flex-lg-row-fluid mb-5 mb-xl-0  me-xl-10">
@@ -1358,8 +1745,8 @@
                         <!--end::Wrapper-->
 
                         <div class="m-0">
-                            <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $payment_formulir->image_confirmation }}" target="_blank">
-                                <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ $payment_formulir->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                            <a href="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_formulir->image_confirmation); ?>" target="_blank">
+                                <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_formulir->image_confirmation); ?>" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
                             </a>
                         </div>
                     </div>
@@ -1380,7 +1767,7 @@
                             <div class="fw-semibold text-gray-600 fs-7">Biaya Formulir
                             </div>
                             <div class="fw-bold fs-6 text-gray-800" id="ppdb_school">
-                                {{ $school_stage[0] }}</div>   
+                                <?php echo e($school_stage[0]); ?></div>   
                         </div>
 
                         <h6 class="mt-10 mb-5 fw-bolder text-gray-800 text-hover-primary border-bottom py-3">
@@ -1394,22 +1781,22 @@
                         </div>
                         <div class="mb-3">
                             <div class="fw-semibold text-gray-600 fs-7">Bank</div>
-                            <div class="fw-bold text-gray-800 fs-6" id="payment_bank_code">{{ $payment_formulir->bank_code }}</div>
+                            <div class="fw-bold text-gray-800 fs-6" id="payment_bank_code"><?php echo e($payment_formulir->bank_code); ?></div>
                         </div>
 
                         <div class="mb-3">
                             <div class="fw-semibold text-gray-600 fs-7">Nomor Rekening
                             </div>
-                            <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center" id="payment_account_number">{{ $payment_formulir->account_number }}</div>
+                            <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center" id="payment_account_number"><?php echo e($payment_formulir->account_number); ?></div>
                         </div>
                         <div class="mb-3">
                             <div class="fw-semibold text-gray-600 fs-7">Atas Nama</div>
-                            <div class="fw-bold text-gray-800 fs-6" id="payment_bank_owner_name">{{ $payment_formulir->bank_owner_name }}</div>
+                            <div class="fw-bold text-gray-800 fs-6" id="payment_bank_owner_name"><?php echo e($payment_formulir->bank_owner_name); ?></div>
                         </div>
                         <div class="mb-3">
                             <div class="fw-bold text-gray-600 fs-2">Nominal Transfer
                             </div>
-                            <div class="fw-bolder text-gray-800 fs-1" id="payment_cost">@currency($payment_formulir->cost)</div>
+                            <div class="fw-bolder text-gray-800 fs-1" id="payment_cost">Rp. <?php echo number_format($payment_formulir->cost,0,',','.'); ?></div>
                         </div>
 
                     </div>
@@ -1417,24 +1804,25 @@
                 </div>
 
             </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
   </div>
 </div>
-
-{{-- END TAB 4 - DATA RIWAYAT --}}
-
-{{--  --}}
+</div>
 
 
-{{-- START TAB 3 - DOKUMEN PEMBERKASAN  --}}
+
+
+
+
+
                             <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel">
                                 <div class="card border shadow-sm">
                                   <div class="card-header bg-light"> 
                                     <!--begin::Title-->
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bolder text-dark">DOKUMEN KENEGARAAN</span>
+                                        <span class="card-label fw-bolder text-dark">DOKUMEN KENEGARAAN</span><span style="color:#5a595a">diunggah pada saat pendaftaraan</span>
                                     </h3>
                                     <!--end::Title-->
                                     </div>
@@ -1449,13 +1837,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($file_uploaded as $file)
+                                                <?php $__currentLoopData = $file_uploaded; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php
                                                 $file_download = '#';
                                                 ?>
                                                 <tr>
                                                     <td>
-                                                        <a href="#" class="text-dark fw-bolder text-hover-primary d-block fs-6">{{ $file['label'] }}</a>
+                                                        <a href="#" class="text-dark fw-bolder text-hover-primary d-block fs-6"><?php echo e($file['label']); ?></a>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -1504,19 +1892,19 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex justify-content-end flex-shrink-0">
-                                                            @if ($file_download != '#' && $file_download != null)
-                                                            <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $file_download }}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                            <?php if($file_download != '#' && $file_download != null): ?>
+                                                            <a href="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($file_download); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <i class="bi bi-cloud-arrow-down"></i>
                                                                 </span>
                                                                 <!--end::Svg Icon-->
                                                             </a>
-                                                            @endif
+                                                            <?php endif; ?>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -1544,7 +1932,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">No Formulir</label>
-                                      <input name="data1" type="text" class="form-control" id="noformulir" placeholder="Masukkan No Formulir" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}">
+                                      <input name="data1" type="text" class="form-control" id="noformulir" placeholder="Masukkan No Formulir" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>">
                                     </div>
                     
                                     <div class="form-group mb-4">
@@ -1557,7 +1945,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Tahun Ajaran</label>
-                                      <input name="data2" type="text" class="form-control" id="tahunajaran" placeholder="Tahun Ajaran" value="{{ ($data2 =='' && $data2 == null) ? '' : $data2[0] }}">
+                                      <input name="data2" type="text" class="form-control" id="tahunajaran" placeholder="Tahun Ajaran" value="<?php echo e(($data2 =='' && $data2 == null) ? '' : $data2[0]); ?>">
                                     </div>
                     
                                     <div class="form-group mb-4">
@@ -1570,7 +1958,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Tanggal Pendaftaran</label>
-                                      <input name="data3" type="date" class="form-control" id="tanggalpendaftaran" placeholder="Tanngal Pendaftaran" value="{{ ($data3 =='' && $data3 == null) ? '' : $data3[0] }}">
+                                      <input name="data3" type="date" class="form-control" id="tanggalpendaftaran" placeholder="Tanngal Pendaftaran" value="<?php echo e(($data3 =='' && $data3 == null) ? '' : $data3[0]); ?>">
                                     </div>
                     
                                     <div class="form-group mb-4">
@@ -1592,7 +1980,7 @@
                                       ?>
                                       <label for="exampleFormControlInput1">Status Siswa</label>
                                       <select name="data4" id="statussiswa" class="form-control">
-                                        <option value="{{ ($data4 =='' && $data4 == null) ? '' : $data4[0] }}">{{ ($data4 =='' && $data4 == null) ? 'Pilih' : $data4[0] }}</option>
+                                        <option value="<?php echo e(($data4 =='' && $data4 == null) ? '' : $data4[0]); ?>"><?php echo e(($data4 =='' && $data4 == null) ? 'Pilih' : $data4[0]); ?></option>
                                       </select>
                                     </div>
                     
@@ -1608,7 +1996,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Nama Lengkap</label>
-                                      <input name="data5" type="text" class="form-control" id="namalengkap" placeholder="Masukkan Lengkap" value="{{ ($data5 =='' && $data5 == null) ? '' : $data5[0] }}">
+                                      <input name="data5" type="text" class="form-control" id="namalengkap" placeholder="Masukkan Lengkap" value="<?php echo e(($data5 =='' && $data5 == null) ? '' : $data5[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nama peserta didik sesuai dokumen resmi yang berlaku (Akta atau Ijazah sebelumnya ). Hanya bisa diubah melalui <a href="https://vervalpd.data.kemdikbud.go.id">vervalpd.data.kemdikbud.go.id</a></p>
                                     </div>
                     
@@ -1631,7 +2019,7 @@
                                       ?>
                                       <label for="exampleFormControlInput1">Jenis Kelamin</label>
                                       <select name="data6" id="statussiswa" class="form-control">
-                                        <option value="{{ ($data6 =='' && $data6 == null) ? '' : $data6[0] }}">{{ ($data6 =='' && $data6 == null) ? 'Pilih' : $data6[0] }}</option>
+                                        <option value="<?php echo e(($data6 =='' && $data6 == null) ? '' : $data6[0]); ?>"><?php echo e(($data6 =='' && $data6 == null) ? 'Pilih' : $data6[0]); ?></option>
                                       </select>
                                     </div>
                     
@@ -1645,7 +2033,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Nisn</label>
-                                      <input name="data7" type="text" class="form-control" id="nisn" placeholder="Masukkan Nisn" value="{{ ($data7 =='' && $data7 == null) ? '' : $data7[0] }}">
+                                      <input name="data7" type="text" class="form-control" id="nisn" placeholder="Masukkan Nisn" value="<?php echo e(($data7 =='' && $data7 == null) ? '' : $data7[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nomor Induk Siswa Nasional peserta didik (jika memiliki), jika belum memiliki, maka wajib dikosongkan. NISN memiliki format 10 digit angka. contoh: 0009321234  Untuk memeriksa NISN, dapat mengunjungi laman <a href="http://nisn.data.kemdikbud.go.id">http:// nisn.data.kemdikbud.go.id</a></p>
                                     </div>
                     
@@ -1659,7 +2047,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Nik / No.KITAS (Untuk WNA)</label>
-                                      <input name="data8" type="text" class="form-control" id="nik" placeholder="Masukkan Nik / Kitas" value="{{ ($data8 =='' && $data8 == null) ? '' : $data8[0] }}">
+                                      <input name="data8" type="text" class="form-control" id="nik" placeholder="Masukkan Nik / Kitas" value="<?php echo e(($data8 =='' && $data8 == null) ? '' : $data8[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga, Kartu identitas Anak, atau KTP (jika sudah Memiliki) bagi WNI. NIK memiliki format angka 16 digit angka. Contoh:6112090906021104
                                        <br> Pastikan NIK tidak tertukar dengan No. Kartu Keluarga , Karena keduanya memiliki format yang sama. Bagi WNA, diisi dengan nomor Kartu Izin TInggak Terbatas (KITAS)</p>
                                     </div>
@@ -1675,7 +2063,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Tempat Lahir</label>
-                                      <input name="data9" type="text" class="form-control" id="tempatlahir" placeholder="Masukkan Tempat Lahir" value="{{ ($data9 =='' && $data9 == null) ? '' : $data9[0] }}">
+                                      <input name="data9" type="text" class="form-control" id="tempatlahir" placeholder="Masukkan Tempat Lahir" value="<?php echo e(($data9 =='' && $data9 == null) ? '' : $data9[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Tempat lahir peserta didik sesuai dokumen resmi yang berlaku</p>
                                     </div>
                     
@@ -1689,7 +2077,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Tanggal Lahir</label>
-                                      <input name="data10" type="date" class="form-control" id="tanggallahir" placeholder="Tanngal Lahir" value="{{ ($data10 =='' && $data10 == null) ? '' : $data10[0] }}">
+                                      <input name="data10" type="date" class="form-control" id="tanggallahir" placeholder="Tanngal Lahir" value="<?php echo e(($data10 =='' && $data10 == null) ? '' : $data10[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Tanggal lahir peserta didik sesuai dokumen resmi yang berlaku, Hanya bisa diubah melalui <a href="http://vervalpd.data.kemdikbud.go.id">http://vervalpd.data.kemdikbud.go.id</a> </p>
                                     </div>
                     
@@ -1703,7 +2091,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">No Registrasi Akta Kelahiran</label>
-                                      <input name="data11" type="text" class="form-control" id="noregistrasiaktakelahiran" placeholder="No Registrasi Akta Kelahiran" value="{{ ($data11 =='' && $data11 == null) ? '' : $data11[0] }}">
+                                      <input name="data11" type="text" class="form-control" id="noregistrasiaktakelahiran" placeholder="No Registrasi Akta Kelahiran" value="<?php echo e(($data11 =='' && $data11 == null) ? '' : $data11[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nomor Registrasi Akta Kelahiran. Nomor registrasi yang dimaksud umumnya tercantum pada bagian tengah atas lembar kutipan akta kelahiran</p>
                                     </div>
                     
@@ -1738,7 +2126,7 @@
                                       ?>
                                       <label for="exampleFormControlInput1">Agama & Kepercayaan</label>
                                       <select name="data12" id="agamadankepercayaan" class="form-control">
-                                        <option value="{{ ($data12 =='' && $data12 == null) ? '' : $data12[0] }}">{{ ($data12 =='' && $data12 == null) ? 'Pilih' : $data12[0] }}</option>
+                                        <option value="<?php echo e(($data12 =='' && $data12 == null) ? '' : $data12[0]); ?>"><?php echo e(($data12 =='' && $data12 == null) ? 'Pilih' : $data12[0]); ?></option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Agama atau kepercayaan yang dianut oleh peserta didik. apabila peserta didik adalah penghayat kepercayaan (misanya pada daerah tertentu yang masih memiliki penganut kepercayaan), dapat memilih opsi Kepercayaan kpd Tuhan YME</a> </p>
                                     </div>
@@ -1762,7 +2150,7 @@
                                       ?>
                                       <label for="exampleFormControlInput1">Kewarganegaraan</label>
                                       <select name="data13" id="agamadankepercayaan" class="form-control">
-                                        <option value="{{ ($data13 =='' && $data13 == null) ? '' : $data13[0] }}">{{ ($data13 =='' && $data13 == null) ? 'Pilih' : $data13[0] }}</option>
+                                        <option value="<?php echo e(($data13 =='' && $data13 == null) ? '' : $data13[0]); ?>"><?php echo e(($data13 =='' && $data13 == null) ? 'Pilih' : $data13[0]); ?></option>
                                       </select>
                                     </div>
                                     <div class="form-group mb-4">
@@ -1775,7 +2163,7 @@
                                           }
                                       ?>
                                       <label for="" >Nama Negara</label>
-                                      <input name="data14" type="text" class="form-control" placeholder="Masukkan Nama Negara" value="{{ ($data14 =='' && $data14 == null) ? '' : $data14[0] }}">
+                                      <input name="data14" type="text" class="form-control" placeholder="Masukkan Nama Negara" value="<?php echo e(($data14 =='' && $data14 == null) ? '' : $data14[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Kewarganegaraan peserta didik </p>
                                     </div>
                     
@@ -1832,7 +2220,7 @@
                                       <div class="row">
                                         <div class="col-sm">
                                           <select name="data15" id="berkebutuhankhusus1" class="form-control">
-                                            <option value="{{ ($data15 =='' && $data15 == null) ? '' : $data15[0] }}">{{ ($data15 =='' && $data15 == null) ? 'Pilih' : $data15[0] }}</option>
+                                            <option value="<?php echo e(($data15 =='' && $data15 == null) ? '' : $data15[0]); ?>"><?php echo e(($data15 =='' && $data15 == null) ? 'Pilih' : $data15[0]); ?></option>
                                           </select>
                                         </div>
                                         <?php
@@ -1884,7 +2272,7 @@
                                           ?>
                                         <div class="col-sm">
                                           <select name="data16" id="berkebutuhankhusus2" class="form-control">
-                                            <option value="{{ ($data16 =='' && $data16 == null) ? '' : $data16[0] }}">{{ ($data16 =='' && $data16 == null) ? 'Pilih' : $data16[0] }}</option>
+                                            <option value="<?php echo e(($data16 =='' && $data16 == null) ? '' : $data16[0]); ?>"><?php echo e(($data16 =='' && $data16 == null) ? 'Pilih' : $data16[0]); ?></option>
                                           </select>
                                         </div>
                                       </div>
@@ -1905,7 +2293,7 @@
                                         }
                                     ?>
                                       <label for="exampleFormControlInput1">Alamat Jalan</label>
-                                      <textarea name="data17" class="form-control" id="alamatjalan" placeholder="Masukkan Alamat Jalan" rows="3">{{ ($data17 =='' && $data17 == null) ? '' : $data17[0] }}</textarea>
+                                      <textarea name="data17" class="form-control" id="alamatjalan" placeholder="Masukkan Alamat Jalan" rows="3"><?php echo e(($data17 =='' && $data17 == null) ? '' : $data17[0]); ?></textarea>
                                       <p style="color: #c003ff" class="fs-8">Jalur tempat tinggal peserta didik, terdiri atas gang, kompleks, blok, nomor rumah , dan sebagainya selain informasi yang diminta oleh kolom-kolom yang lain pada bagian ini, sebagai contoh ,peserta didik tinggal di sebuah kompleks perumahan griya adam yang berada pada jalan kemanggisan, dengan nomor rumah 4-c, di lingkungan rt 005 dan rw 011, dusun cempaka,desa salatiga, maka dapat di isi dengan jl.kemanggisan,komp. Griya Adam No 4-c</p>
                                     </div>
               
@@ -1922,7 +2310,7 @@
                                                 }
                                             ?>
                                           <label for="exampleFormControlInput1">RT</label>
-                                          <input name="data18" type="text" class="form-control" id="rt" placeholder="Masukkan No Rt" value="{{ ($data18 =='' && $data18 == null) ? '' : $data18[0] }}">
+                                          <input name="data18" type="text" class="form-control" id="rt" placeholder="Masukkan No Rt" value="<?php echo e(($data18 =='' && $data18 == null) ? '' : $data18[0]); ?>">
                                         </div>
                                         <div class="col-sm">
                                           <?php
@@ -1934,7 +2322,7 @@
                                                 }
                                             ?>
                                           <label for="exampleFormControlInput1">Rw</label>
-                                          <input name="data19" type="text" class="form-control" id="rw" placeholder="Masukkan No Rw" value="{{ ($data19 =='' && $data19 == null) ? '' : $data19[0] }}">
+                                          <input name="data19" type="text" class="form-control" id="rw" placeholder="Masukkan No Rw" value="<?php echo e(($data19 =='' && $data19 == null) ? '' : $data19[0]); ?>">
                                         </div>
                                       </div>
                                       <p style="color: #c003ff" class="fs-8">Nomor RT dan Nomor Rw tempat tinggal peserta didik saat ini, Dari contoh di atas ,misalnya dapat di isi angka 5 dan rw angka 11</p>
@@ -1950,7 +2338,7 @@
                                                 }
                                             ?>
                                       <label for="">Nama Dusun</label>
-                                      <input name="data20" type="text" class="form-control" id="namadusun" placeholder="Masukkan nama dusun" value="{{ ($data20 =='' && $data20 == null) ? '' : $data20[0] }}">
+                                      <input name="data20" type="text" class="form-control" id="namadusun" placeholder="Masukkan nama dusun" value="<?php echo e(($data20 =='' && $data20 == null) ? '' : $data20[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nama dusun tempat tinggal peserta didik saat ini,dari contoh diatas ,misalnya dapat diisi dengan Campaka</p>
                                     </div>
               
@@ -1964,7 +2352,7 @@
                                                 }
                                             ?>
                                       <label for="">Nama Kelurahan / Desa</label>
-                                      <input name="data21" type="text" class="form-control" id="namakelurahandesa" placeholder="Masukkan nama Kelurahan atau desa" value="{{ ($data21 =='' && $data21 == null) ? '' : $data21[0] }}">
+                                      <input name="data21" type="text" class="form-control" id="namakelurahandesa" placeholder="Masukkan nama Kelurahan atau desa" value="<?php echo e(($data21 =='' && $data21 == null) ? '' : $data21[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nama desa atau kelurahan tempat tinggal peserta saat ini, Dari contoh diatas, dapat di isi dengan Bayongbong</p>
                                     </div>
               
@@ -1978,7 +2366,7 @@
                                                 }
                                             ?>
                                       <label for="">Nama Kelurahan / Desa</label>
-                                      <input name="data22" type="text" class="form-control" id="namakelurahandesa" placeholder="Masukkan nama Kelurahan atau desa" value="{{ ($data22 =='' && $data22 == null) ? '' : $data22[0] }}">
+                                      <input name="data22" type="text" class="form-control" id="namakelurahandesa" placeholder="Masukkan nama Kelurahan atau desa" value="<?php echo e(($data22 =='' && $data22 == null) ? '' : $data22[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nama desa atau kelurahan tempat tinggal peserta saat ini, Dari contoh diatas, dapat di isi dengan Bayongbong</p>
                                     </div>
               
@@ -1992,7 +2380,7 @@
                                                 }
                                             ?>
                                       <label for="">Kecamatan</label>
-                                      <input name="data23" type="text" class="form-control" id="kecamatan" placeholder="Masukkan nama Kecamatan" value="{{ ($data23 =='' && $data23 == null) ? '' : $data23[0] }}">
+                                      <input name="data23" type="text" class="form-control" id="kecamatan" placeholder="Masukkan nama Kecamatan" value="<?php echo e(($data23 =='' && $data23 == null) ? '' : $data23[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Kecamatan tempat tinggal peserta didik saat ini</p>
                                     </div>
               
@@ -2006,7 +2394,7 @@
                                                 }
                                             ?>
                                       <label for="">Kode Pos</label>
-                                      <input name="data24" type="text" class="form-control" id="kodepos" placeholder="Masukkan Kode Pos" value="{{ ($data24 =='' && $data24 == null) ? '' : $data24[0] }}">
+                                      <input name="data24" type="text" class="form-control" id="kodepos" placeholder="Masukkan Kode Pos" value="<?php echo e(($data24 =='' && $data24 == null) ? '' : $data24[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Kode Pos tempat tinggal saat ini</p>
                                     </div>
               
@@ -2039,7 +2427,7 @@
                                             ?>
                                       <label for="">Tempat Tinggal</label>
                                       <select name="data25" id="tempattinggal" class="form-control">
-                                        <option value="{{ ($data25 =='' && $data25 == null) ? '' : $data25[0] }}">{{ ($data25 =='' && $data25 == null) ? 'pilih' : $data25[0] }}</option>
+                                        <option value="<?php echo e(($data25 =='' && $data25 == null) ? '' : $data25[0]); ?>"><?php echo e(($data25 =='' && $data25 == null) ? 'pilih' : $data25[0]); ?></option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Kepemilikan tempat tinggal peserta didik saat ini(yang telah di isi pada kolom-kolom sebelumnya diatas)</p>
                                     </div>
@@ -2075,7 +2463,7 @@
                                             ?>
                                       <label for="">Moda Transportasi</label>
                                       <select name="data26" id="modatransportasi" class="form-control">
-                                        <option value="{{ ($data26 =='' && $data26 == null) ? '' : $data26[0] }}">{{ ($data26 =='' && $data26 == null) ? 'pilih' : $data26[0] }}</option>
+                                        <option value="<?php echo e(($data26 =='' && $data26 == null) ? '' : $data26[0]); ?>"><?php echo e(($data26 =='' && $data26 == null) ? 'pilih' : $data26[0]); ?></option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Jenis transportasi utama atau yang paling sering digunakan peserta didik untuk berangkat ke sekolah</p>
                                     </div>
@@ -2090,7 +2478,7 @@
                                                 }
                                             ?>
                                       <label for="">Nomor KKS (Kamu Keluarga Sejahtera)</label>
-                                      <input name="data27" type="text" id="nomorkks" class="form-control" placeholder="Masukkan Nomor KKS" value="{{ ($data27 =='' && $data27 == null) ? '' : $data27[0] }}">
+                                      <input name="data27" type="text" id="nomorkks" class="form-control" placeholder="Masukkan Nomor KKS" value="<?php echo e(($data27 =='' && $data27 == null) ? '' : $data27[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nomor Kartu Keluarga Sejahtera (Jika Memiliki) Nomor yang dimaksud adalah 6 digit kode yang tertera pada sisi belakang kiri atas kartu (di bawah lambang Garuda Pancasila)</p>
                                       <p style="color: #c003ff" class="fs-8">Peserta didik dinyatakan sebagai anggota KKS apabila tercantum di dalam kartu keluarga dengan kepala keluarga pemegang KKS. Sebagai contoh,peserta didik tercantum pada KK dengan keluarganya adalah kakek ,Apabila kakek peserta didik tersebut pemegang KKS,maka nomor KKS milik kakek peserta didik yang bersangkutan dapat di isikan pada kolom ini</p>
                                     </div>
@@ -2105,7 +2493,7 @@
                                                 }
                                             ?>
                                       <label for="">Anak Keberapa</label>
-                                      <input name="data28" type="text" id="anakkeberapa" class="form-control" placeholder="Masukkan sesuai dengan Kartu Keluarga" value="{{ ($data28 =='' && $data28 == null) ? '' : $data28[0] }}">
+                                      <input name="data28" type="text" id="anakkeberapa" class="form-control" placeholder="Masukkan sesuai dengan Kartu Keluarga" value="<?php echo e(($data28 =='' && $data28 == null) ? '' : $data28[0]); ?>">
                                     </div>
               
                                     <div class="form-group mb-4">
@@ -2127,7 +2515,7 @@
                                         ?>
                                        <label for="">Penerima KPS/PKH</label>
                                        <select name="data29" id="penerimakpspkh" class="form-control">
-                                        <option value="{{ ($data29 =='' && $data29 == null) ? '' : $data29[0] }}">{{ ($data29 =='' && $data29 == null) ? 'Pilih' : $data29[0] }}</option>
+                                        <option value="<?php echo e(($data29 =='' && $data29 == null) ? '' : $data29[0]); ?>"><?php echo e(($data29 =='' && $data29 == null) ? 'Pilih' : $data29[0]); ?></option>
                                        </select>
                                        <p style="color: #c003ff" class="fs-8">Status peserta didik sebagai penerima manfaat KPS (Kartu Perlindungan Sosial)/PKH(Program Keluarga Harapan).
                                         Peserta didik dinyatakan sebagai penerima KPS/PKH apabila tercantum di dalam kartu keluarga dengan kepala keluarga pemegang KPS/PKH Sebagai
@@ -2150,7 +2538,7 @@
                                                     }
                                                 ?>
                                         <label for="">No. KPH/PKH (apabila penerima)</label>
-                                        <input name="data30" type="text" id="nokphpkh" class="form-control" placeholder="Masukkan Nomor KPH/PKH (apabila penerima)" value="{{ ($data30 =='' && $data30 == null) ? '' : $data30[0] }}">
+                                        <input name="data30" type="text" id="nokphpkh" class="form-control" placeholder="Masukkan Nomor KPH/PKH (apabila penerima)" value="<?php echo e(($data30 =='' && $data30 == null) ? '' : $data30[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nomor KPS atau PKH yang masih berlaku jika sebelumnya dipilih sebagai penerima KPS/PKH </p>
                                       </div>
                       
@@ -2175,7 +2563,7 @@
                                           <div class="col-sm">
                                             <label for="">Usulan dari Sekolah (layak PIP)</label>
                                             <select name="data31" id="penerimakpspkh" class="form-control">
-                                            <option value="{{ ($data31 =='' && $data31 == null) ? '' : $data31[0] }}">{{ ($data31 =='' && $data31 == null) ? 'Pilih' : $data31[0] }}</option>
+                                            <option value="<?php echo e(($data31 =='' && $data31 == null) ? '' : $data31[0]); ?>"><?php echo e(($data31 =='' && $data31 == null) ? 'Pilih' : $data31[0]); ?></option>
                                             </select>
                                             <p style="color: #c003ff" class="fs-8">Pilih Ya apabila peserta didik layak diajukan sebagai penerima manfaat Program Indonesia Pintar .Pilih tidak jika tidak memenuhi kriteria Opsi ini khusus bagi peserta didik yang tidak memiliki KIP.Peserta didik yang memiliki KIP silahkan pilih Tidak</p>
                                           </div>
@@ -2198,7 +2586,7 @@
                                               ?>
                                             <label for="">Penerima KIP (Kartu Indonesia Pintar)</label>
                                             <select name="data32" id="penerimakip" class="form-control">
-                                            <option value="{{ ($data32 =='' && $data32 == null) ? '' : $data32[0] }}">{{ ($data32 =='' && $data32 == null) ? 'Pilih' : $data32[0] }}</option>
+                                            <option value="<?php echo e(($data32 =='' && $data32 == null) ? '' : $data32[0]); ?>"><?php echo e(($data32 =='' && $data32 == null) ? 'Pilih' : $data32[0]); ?></option>
                                             </select>
                                             <p style="color: #c003ff" class="fs-8">Pilih Ya apabila peserta didik memiliki Kartu Indonesia Pintar (KIP) .Pilih Tidak jika tidak memiliki</p>
                                           </div>
@@ -2215,7 +2603,7 @@
                                                   }
                                               ?>
                                         <label for="">Nomor KIP</label>
-                                        <input name="data33" type="text" id="nomorkip" class="form-control" placeholder="Masukkan Nomor KIP" value="{{ ($data33 =='' && $data33 == null) ? '' : $data33[0] }}">
+                                        <input name="data33" type="text" id="nomorkip" class="form-control" placeholder="Masukkan Nomor KIP" value="<?php echo e(($data33 =='' && $data33 == null) ? '' : $data33[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nomor Kip milik peserta didik apabila sebelumnya telah dipilih sebagai penerima KIP,Nomor yang dimaksud adalah 6 digit kode yang tertera pada sisi belakang kanan atas kartu (di bawah lambang toga) </p>
                                       </div>
                       
@@ -2229,7 +2617,7 @@
                                                   }
                                               ?>
                                         <label for="">Nama tertera pada KIP</label>
-                                        <input name="data34" type="text" id="namakip" class="form-control" placeholder="Masukkan Nama KIP" value="{{ ($data34 =='' && $data34 == null) ? '' : $data34[0] }}">
+                                        <input name="data34" type="text" id="namakip" class="form-control" placeholder="Masukkan Nama KIP" value="<?php echo e(($data34 =='' && $data34 == null) ? '' : $data34[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8"> Nama Yang tertera pada KIP milik peserta didik</p>
                                       </div>
                       
@@ -2253,7 +2641,7 @@
                                               ?>
                                         <label for="">Terima fisik Kartu (KIP)</label>
                                         <select name="data35" id="terimakip" class="form-control">
-                                        <option value="{{ ($data35 =='' && $data35 == null) ? '' : $data35[0] }}">{{ ($data35 =='' && $data35 == null) ? 'Pilih' : $data35[0] }}</option>
+                                        <option value="<?php echo e(($data35 =='' && $data35 == null) ? '' : $data35[0]); ?>"><?php echo e(($data35 =='' && $data35 == null) ? 'Pilih' : $data35[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Status bahwa peserta didik sudah menerima atau belum menerima Kartu Indonesia Pintar secara fisik</p>
                                       </div>
@@ -2292,7 +2680,7 @@
                                               ?>
                                         <label for="">Alasan layak PIP</label>
                                         <select name="data36" id="layakpip" class="form-control">
-                                          <option value="{{ ($data36 =='' && $data36 == null) ? '' : $data36[0] }}">{{ ($data36 =='' && $data36 == null) ? 'Pilih' : $data36[0] }}</option>
+                                          <option value="<?php echo e(($data36 =='' && $data36 == null) ? '' : $data36[0]); ?>"><?php echo e(($data36 =='' && $data36 == null) ? 'Pilih' : $data36[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Alasan utama peserta didik jika layak menerima mamfaat PIP. kolom ini akan muncul apabila dipilih Ya untuk mengisi kolom Usulan dari Sekolah (Layak PIP)</p>
                                       </div>
@@ -2307,7 +2695,7 @@
                                             }
                                         ?>
                                         <label for="">Bank (diisi oleh pusat)</label>
-                                        <input name="data37" type="text" id="bank" class="form-control" placeholder="Diisi oleh Pusat" value="{{ ($data37 =='' && $data37 == null) ? '' : $data37[0] }}">
+                                        <input name="data37" type="text" id="bank" class="form-control" placeholder="Diisi oleh Pusat" value="<?php echo e(($data37 =='' && $data37 == null) ? '' : $data37[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8"></p>
                                       </div>
                       
@@ -2321,7 +2709,7 @@
                                             }
                                         ?>
                                         <label for="">No Rekening (diisi oleh pusat)</label>
-                                        <input name="data38" type="text" id="norekening" class="form-control" placeholder="Diisi oleh Pusat" value="{{ ($data38 =='' && $data38 == null) ? '' : $data38[0] }}">
+                                        <input name="data38" type="text" id="norekening" class="form-control" placeholder="Diisi oleh Pusat" value="<?php echo e(($data38 =='' && $data38 == null) ? '' : $data38[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8"></p>
                                       </div>
                       
@@ -2335,7 +2723,7 @@
                                             }
                                         ?>
                                         <label for="">Rekening atas nama (diisi oleh pusat)</label>
-                                        <input name="data39" type="text" id="rekatasnama" class="form-control" placeholder="Diisi oleh Pusat" value="{{ ($data39 =='' && $data39 == null) ? '' : $data39[0] }}">
+                                        <input name="data39" type="text" id="rekatasnama" class="form-control" placeholder="Diisi oleh Pusat" value="<?php echo e(($data39 =='' && $data39 == null) ? '' : $data39[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Untuk menampilkan data bank terkait penyaluran manfaat PIP (Program Indonesia Pintar) .Data pada bagian ini di isi oleh Kemendikbud</p>
                                       </div>
                   
@@ -2357,7 +2745,7 @@
                                               }
                                           ?>
                                           <label for="">Nama Ayah Kandung</label>
-                                          <input name="data40" type="text" id="namaayah" class="form-control" placeholder="Masukkan Nama Ayah" value="{{ ($data40 =='' && $data40 == null) ? '' : $data40[0] }}">
+                                          <input name="data40" type="text" id="namaayah" class="form-control" placeholder="Masukkan Nama Ayah" value="<?php echo e(($data40 =='' && $data40 == null) ? '' : $data40[0]); ?>">
                                           <p style="color: #c003ff" class="fs-8">Nama Ayah kandung peserta didik sesuai dokumen resmi yang berlaku.Hindari penggunaan gelar Akademik atau sosial (seperti Alm.Dr.Drs.S.pd.)</p>
                                         </div>
                       
@@ -2371,7 +2759,7 @@
                                               }
                                           ?>
                                           <label for="">NIK Ayah</label>
-                                          <input name="data41" type="text" id="nikayah" class="form-control" placeholder="Masukkan NIK Ayah" value="{{ ($data41 =='' && $data41 == null) ? '' : $data41[0] }}">
+                                          <input name="data41" type="text" id="nikayah" class="form-control" placeholder="Masukkan NIK Ayah" value="<?php echo e(($data41 =='' && $data41 == null) ? '' : $data41[0]); ?>">
                                           <p style="color: #c003ff" class="fs-8">Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP ayah kandung peserta didik</p>
                                         </div>
                       
@@ -2385,7 +2773,7 @@
                                               }
                                           ?>
                                           <label for="">Tahun Lahir</label>
-                                          <input name="data42" type="text" id="tahunlahir" class="form-control" placeholder="Masukkan Tahun Lahir" value="{{ ($data42 =='' && $data42 == null) ? '' : $data42[0] }}">
+                                          <input name="data42" type="text" id="tahunlahir" class="form-control" placeholder="Masukkan Tahun Lahir" value="<?php echo e(($data42 =='' && $data42 == null) ? '' : $data42[0]); ?>">
                                           <p style="color: #c003ff" class="fs-8">Tahun lahir ayah kandung peserta didik</p>
                                         </div>
                       
@@ -2428,7 +2816,7 @@
                                           ?>
                                           <label for="">Pendidikan</label>
                                           <select name="data43" id="pendidikanayah" class="form-control">
-                                            <option value="{{ ($data43 =='' && $data43 == null) ? '' : $data43[0] }}">{{ ($data43 =='' && $data43 == null) ? 'Pilih' : $data43[0] }}</option>
+                                            <option value="<?php echo e(($data43 =='' && $data43 == null) ? '' : $data43[0]); ?>"><?php echo e(($data43 =='' && $data43 == null) ? 'Pilih' : $data43[0]); ?></option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Pendidikan terakhir ayah kandung peserta didik</p>
                                         </div>
@@ -2476,7 +2864,7 @@
                                           ?>
                                           <label for="">Pekerjaan</label>
                                           <select name="data44" id="pekerjaanayah" class="form-control">
-                                            <option value="{{ ($data44 =='' && $data44 == null) ? '' : $data44[0] }}">{{ ($data44 =='' && $data44 == null) ? 'Pilih' : $data44[0] }}</option>
+                                            <option value="<?php echo e(($data44 =='' && $data44 == null) ? '' : $data44[0]); ?>"><?php echo e(($data44 =='' && $data44 == null) ? 'Pilih' : $data44[0]); ?></option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Pekerjaan utama ayah kandung peserta didik, Pilih Meninggal Dunia apabila didik telah meninggal dunia</p>
                                         </div>
@@ -2504,7 +2892,7 @@
                                           ?>
                                           <label for="">Penghasilan bulanan</label>
                                           <select name="data45" id="penghasilanayah" class="form-control">
-                                            <option value="{{ ($data45 =='' && $data45 == null) ? '' : $data45[0] }}">{{ ($data45 =='' && $data45 == null) ? 'Pilih' : $data45[0] }}</option>
+                                            <option value="<?php echo e(($data45 =='' && $data45 == null) ? '' : $data45[0]); ?>"><?php echo e(($data45 =='' && $data45 == null) ? 'Pilih' : $data45[0]); ?></option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Rentang penghasilan ayah kandung peserta didik, Kosongkan kolom ini apabila ayah kandung peserta didik telah meninggal</p>
                                         </div>
@@ -2560,7 +2948,7 @@
                                           ?>
                                           <label for="">Berkebutuhan Khusus</label>
                                           <select name="data46" id="berkebutuhankhusus3" class="form-control">
-                                            <option value="{{ ($data46 =='' && $data46 == null) ? '' : $data46[0] }}">{{ ($data46 =='' && $data46 == null) ? 'Pilih' : $data46[0] }}</option>
+                                            <option value="<?php echo e(($data46 =='' && $data46 == null) ? '' : $data46[0]); ?>"><?php echo e(($data46 =='' && $data46 == null) ? 'Pilih' : $data46[0]); ?></option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Kebutuhan khusus yang disandang oleh ayah peserta didik . Dapat dipilih lebih dari satu</p>
                                         </div>
@@ -2584,7 +2972,7 @@
                                               }
                                           ?>
                                         <label for="">Nama Ibu Kandung</label>
-                                        <input name="data47" type="text" id="namaibu" class="form-control" placeholder="Masukkan Nama Ibu" value="{{ ($data47 =='' && $data47 == null) ? '' : $data47[0] }}">
+                                        <input name="data47" type="text" id="namaibu" class="form-control" placeholder="Masukkan Nama Ibu" value="<?php echo e(($data47 =='' && $data47 == null) ? '' : $data47[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nama Ibu kandung peserta didik sesuai dokumen resmi yang berlaku.Hindari penggunaan gelar Akademik atau sosial (seperti Alm.Dr.Drs.S.pd.)</p>
                                       </div>
                       
@@ -2598,7 +2986,7 @@
                                               }
                                           ?>
                                         <label for="">NIK Ibu</label>
-                                        <input name="data48" type="text" id="nikibu" class="form-control" placeholder="Masukkan NIK Ibu" value="{{ ($data48 =='' && $data48 == null) ? '' : $data48[0] }}">
+                                        <input name="data48" type="text" id="nikibu" class="form-control" placeholder="Masukkan NIK Ibu" value="<?php echo e(($data48 =='' && $data48 == null) ? '' : $data48[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP ibu kandung peserta didik</p>
                                       </div>
                       
@@ -2612,7 +3000,7 @@
                                         }
                                     ?>
                                         <label for="">Tahun Lahir</label>
-                                        <input name="data49" type="text" id="tahunlahiribu" class="form-control" placeholder="Masukkan Tahun Lahir" value="{{ ($data49 =='' && $data49 == null) ? '' : $data49[0] }}">
+                                        <input name="data49" type="text" id="tahunlahiribu" class="form-control" placeholder="Masukkan Tahun Lahir" value="<?php echo e(($data49 =='' && $data49 == null) ? '' : $data49[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Tahun lahir ibu kandung peserta didik</p>
                                       </div>
                       
@@ -2655,7 +3043,7 @@
                                         ?>
                                         <label for="">Pendidikan</label>
                                         <select name="data50" id="pendidikanibu" class="form-control">
-                                          <option value="{{ ($data50 =='' && $data50 == null) ? '' : $data50[0] }}">{{ ($data50 =='' && $data50 == null) ? 'Pilih' : $data50[0] }}</option>
+                                          <option value="<?php echo e(($data50 =='' && $data50 == null) ? '' : $data50[0]); ?>"><?php echo e(($data50 =='' && $data50 == null) ? 'Pilih' : $data50[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Pendidikan terakhir ibu kandung peserta didik</p>
                                       </div>
@@ -2703,7 +3091,7 @@
                                             ?>
                                         <label for="">Pekerjaan</label>
                                         <select name="data51" id="pekerjaanibu" class="form-control" >
-                                          <option value="{{ ($data51 =='' && $data51 == null) ? '' : $data51[0] }}">{{ ($data51 =='' && $data51 == null) ? 'Pilih' : $data51[0] }}</option>
+                                          <option value="<?php echo e(($data51 =='' && $data51 == null) ? '' : $data51[0]); ?>"><?php echo e(($data51 =='' && $data51 == null) ? 'Pilih' : $data51[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Pekerjaan utama ibu kandung peserta didik, Pilih Meninggal Dunia apabila didik telah meninggal dunia</p>
                                       </div>
@@ -2731,7 +3119,7 @@
                                             ?>
                                         <label for="">Penghasilan bulanan</label>
                                         <select name="data52" id="penghasilanibu" class="form-control">
-                                          <option value="{{ ($data52 =='' && $data52 == null) ? '' : $data52[0] }}">{{ ($data52 =='' && $data52 == null) ? 'Pilih' : $data52[0] }}</option>
+                                          <option value="<?php echo e(($data52 =='' && $data52 == null) ? '' : $data52[0]); ?>"><?php echo e(($data52 =='' && $data52 == null) ? 'Pilih' : $data52[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Rentang penghasilan ibu kandung peserta didik, Kosongkan kolom ini apabila ibu kandung peserta didik telah meninggal</p>
                                       </div>
@@ -2787,7 +3175,7 @@
                                             ?>
                                         <label for="">Berkebutuhan Khusus</label>
                                         <select name="data53" id="berkebutuhankhusus4" class="form-control">
-                                          <option value="{{ ($data53 =='' && $data53 == null) ? '' : $data53[0] }}">{{ ($data53 =='' && $data53 == null) ? 'Pilih' : $data53[0] }}</option>
+                                          <option value="<?php echo e(($data53 =='' && $data53 == null) ? '' : $data53[0]); ?>"><?php echo e(($data53 =='' && $data53 == null) ? 'Pilih' : $data53[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Kebutuhan khusus yang disandang oleh ibu peserta didik . Dapat dipilih lebih dari satu</p>
                                       </div>
@@ -2809,7 +3197,7 @@
                                               }
                                           ?>
                                     <label for="">Nama Wali</label>
-                                    <input name="data54" type="text" id="namawali" class="form-control" placeholder="Masukkan Nama wali" value="{{ ($data54 =='' && $data54 == null) ? '' : $data54[0] }}">
+                                    <input name="data54" type="text" id="namawali" class="form-control" placeholder="Masukkan Nama wali" value="<?php echo e(($data54 =='' && $data54 == null) ? '' : $data54[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Nama Wali peserta didik sesuai dokumen resmi yang berlaku.Hindari penggunaan gelar Akademik atau sosial (seperti Alm.Dr.Drs.S.pd.)</p>
                                   </div>
                     
@@ -2823,7 +3211,7 @@
                                           }
                                     ?>
                                     <label for="">NIK Wali</label>
-                                    <input name="data55" type="text" id="nikwali" class="form-control" placeholder="Masukkan NIK Wali" value="{{ ($data55 =='' && $data55 == null) ? '' : $data55[0] }}">
+                                    <input name="data55" type="text" id="nikwali" class="form-control" placeholder="Masukkan NIK Wali" value="<?php echo e(($data55 =='' && $data55 == null) ? '' : $data55[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP Wali peserta didik</p>
                                   </div>
                     
@@ -2837,7 +3225,7 @@
                                           }
                                     ?>
                                     <label for="">Tahun Lahir</label>
-                                    <input name="data56" type="text" id="tahunlahiribu" class="form-control" placeholder="Masukkan Tahun Lahir" value="{{ ($data56 =='' && $data56 == null) ? '' : $data56[0] }}">
+                                    <input name="data56" type="text" id="tahunlahiribu" class="form-control" placeholder="Masukkan Tahun Lahir" value="<?php echo e(($data56 =='' && $data56 == null) ? '' : $data56[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Tahun lahir wali peserta didik</p>
                                   </div>
                     
@@ -2880,7 +3268,7 @@
                                     ?>
                                     <label for="">Pendidikan</label>
                                     <select name="data57" id="pendidikanwali" class="form-control" >
-                                      <option value="{{ ($data57 =='' && $data57 == null) ? '' : $data57[0] }}">{{ ($data57 =='' && $data57 == null) ? 'Pilih' : $data57[0] }}</option>
+                                      <option value="<?php echo e(($data57 =='' && $data57 == null) ? '' : $data57[0]); ?>"><?php echo e(($data57 =='' && $data57 == null) ? 'Pilih' : $data57[0]); ?></option>
                                     </select>
                                     <p style="color: #c003ff" class="fs-8">Pendidikan terakhir wali peserta didik</p>
                                   </div>
@@ -2928,7 +3316,7 @@
                                     ?>
                                     <label for="">Pekerjaan</label>
                                     <select name="data58" id="pekerjaanwali" class="form-control">
-                                      <option value="{{ ($data58 =='' && $data58 == null) ? '' : $data58[0] }}">{{ ($data58 =='' && $data58 == null) ? 'Pilih' : $data58[0] }}</option>
+                                      <option value="<?php echo e(($data58 =='' && $data58 == null) ? '' : $data58[0]); ?>"><?php echo e(($data58 =='' && $data58 == null) ? 'Pilih' : $data58[0]); ?></option>
                                     </select>
                                     <p style="color: #c003ff" class="fs-8">Pekerjaan utama wali kandung peserta didik, Pilih Meninggal Dunia apabila didik telah meninggal dunia</p>
                                   </div>
@@ -2956,7 +3344,7 @@
                                     ?>
                                     <label for="">Penghasilan bulanan</label>
                                     <select name="data59" id="penghasilanwali" class="form-control">
-                                      <option value="{{ ($data59 =='' && $data59 == null) ? '' : $data59[0] }}">{{ ($data59 =='' && $data59 == null) ? 'Pilih' : $data59[0] }}</option>
+                                      <option value="<?php echo e(($data59 =='' && $data59 == null) ? '' : $data59[0]); ?>"><?php echo e(($data59 =='' && $data59 == null) ? 'Pilih' : $data59[0]); ?></option>
                                     </select>
                                     <p style="color: #c003ff" class="fs-8">Rentang penghasilan wali kandung peserta didik, Kosongkan kolom ini apabila wali kandung peserta didik telah meninggal</p>
                                   </div>
@@ -2973,7 +3361,7 @@
                                           }
                                     ?>
                                       <label for="">Nomor Telepon Rumah</label>
-                                      <input name="data60" type="text" id="nomortelepon" class="form-control" placeholder="Masukkan Nomor Telepon Rumah" value="{{ ($data60 =='' && $data60 == null) ? '' : $data60[0] }}">
+                                      <input name="data60" type="text" id="nomortelepon" class="form-control" placeholder="Masukkan Nomor Telepon Rumah" value="<?php echo e(($data60 =='' && $data60 == null) ? '' : $data60[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Di isi nomor telepon peserta didik yang dapat dihubungi (milik pribadi , orang tua, atau wali) dangan format (kode area)-(nomor telepon) contoh: 021-775577</p>
                                   </div>
                     
@@ -2987,7 +3375,7 @@
                                           }
                                     ?>
                                     <label for="">Nomor HP</label>
-                                    <input name="data61" type="text" id="nomorhandphone" class="form-control" placeholder="Masukkan Nomor Handphone" value="{{ ($data61 =='' && $data61 == null) ? '' : $data61[0] }}">
+                                    <input name="data61" type="text" id="nomorhandphone" class="form-control" placeholder="Masukkan Nomor Handphone" value="<?php echo e(($data61 =='' && $data61 == null) ? '' : $data61[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Di isi nomor telepon seluler (ponsel) peserta didik yang dapat dihubungi (milik pribadi, orang tua, atau wali)</p>
                                   </div>
                     
@@ -3001,7 +3389,7 @@
                                           }
                                     ?>
                                     <label for="">Email</label>
-                                    <input name="data62" type="text" id="email" class="form-control" placeholder="Masukkan Email" value="{{ ($data62 =='' && $data62 == null) ? '' : $data62[0] }}">
+                                    <input name="data62" type="text" id="email" class="form-control" placeholder="Masukkan Email" value="<?php echo e(($data62 =='' && $data62 == null) ? '' : $data62[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Di isi alamat surat elektronik (surel) peserta didik yang dapat dihubungi (milik pribadi, orang tua, atau wali)</p>
                                   </div>
                     
@@ -3052,7 +3440,7 @@
                                     ?>
                                     <label for="">Jenis Ekstrakulikuler</label>
                                     <select name="data63" id="ekstrakulikuler" class="form-control">
-                                      <option value="{{ ($data63 =='' && $data63 == null) ? '' : $data63[0] }}">{{ ($data63 =='' && $data63 == null) ? 'Pilih' : $data63[0] }}</option>
+                                      <option value="<?php echo e(($data63 =='' && $data63 == null) ? '' : $data63[0]); ?>"><?php echo e(($data63 =='' && $data63 == null) ? 'Pilih' : $data63[0]); ?></option>
                                     </select>
                                   </div>
                     
@@ -3075,7 +3463,7 @@
                                           }
                                     ?>
                                     <label for="">Tinggi Badan</label>
-                                    <input name="data64" type="text" id="tinggibadan" class="form-control" placeholder="Masukkan Tinggi Badan" value="{{ ($data64 =='' && $data64 == null) ? '' : $data64[0] }}">
+                                    <input name="data64" type="text" id="tinggibadan" class="form-control" placeholder="Masukkan Tinggi Badan" value="<?php echo e(($data64 =='' && $data64 == null) ? '' : $data64[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Tinggi badan peserta didik dalam satuan centimeter</p>
                                   </div>
                     
@@ -3089,7 +3477,7 @@
                                           }
                                     ?>
                                     <label for="">Berat Badan</label>
-                                    <input name="data65" type="text" id="beratbadan" class="form-control" placeholder="Masukkan Berat Badan" value="{{ ($data65 =='' && $data65 == null) ? '' : $data65[0] }}">
+                                    <input name="data65" type="text" id="beratbadan" class="form-control" placeholder="Masukkan Berat Badan" value="<?php echo e(($data65 =='' && $data65 == null) ? '' : $data65[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Berat badan peserta didik dalam satuan kg</p>
                                   </div>
                     
@@ -3103,15 +3491,11 @@
                                             }
                                       ?>
                                     <label for="">Jarak Tempat</label>
-                                    <input name="data66" type="text" id="jaraktempat" class="form-control" placeholder="Masukkan jarak tempat" value="{{ ($data66 =='' && $data66 == null) ? '' : $data66[0] }}">
+                                    <input name="data66" type="text" id="jaraktempat" class="form-control" placeholder="Masukkan jarak tempat" value="<?php echo e(($data66 =='' && $data66 == null) ? '' : $data66[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Jarak rumah peserta didik</p>
                                   </div>
                     
-                                  {{-- <div class="form-group mb-4">
-                                    <label for="">Sebutkan (dalam Km)</label>
-                                    <input name="jaraktempat" type="text" id="jaraktempat" class="form-control" placeholder="Masukkan jarak tempat">
-                                    <p style="color: #c003ff" class="fs-8">Jarak rumah peserta didik</p>
-                                  </div> --}}
+                                  
                     
                                   <div class="form-group mb-4">
                                     <?php
@@ -3123,7 +3507,7 @@
                                               }
                                         ?>
                                     <label for="">Waktu Tempuh ke Sekolah</label>
-                                    <input name="data67" type="text" id="waktutempuh" class="form-control" placeholder="Masukkan waktu Tempat" value="{{ ($data67 =='' && $data67 == null) ? '' : $data67[0] }}">
+                                    <input name="data67" type="text" id="waktutempuh" class="form-control" placeholder="Masukkan waktu Tempat" value="<?php echo e(($data67 =='' && $data67 == null) ? '' : $data67[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Lama waktu peserta didik ke sekolah Kolom kanan adalah menit,Misalnya peserta didik memerlukan waktu tempuh 1 jam 15 menit, maka tambahkan angkat menit 15 dibelakang 1 sesudah : (1:15) ,Apabila memerlukan waktu 25 menit, maka tambahkan dibelakang 25 , maka kotak akan berisi (1:25)</p>
                                   </div>
                     
@@ -3137,7 +3521,7 @@
                                           }
                                     ?>
                                     <label for="">Jumlah Saudara Kandung</label>
-                                    <input name="data68" type="text" id="saudarakandung" class="form-control" placeholder="Masukkan jumlah Saudara Kandung" value="{{ ($data68 =='' && $data68 == null) ? '' : $data68[0] }}">
+                                    <input name="data68" type="text" id="saudarakandung" class="form-control" placeholder="Masukkan jumlah Saudara Kandung" value="<?php echo e(($data68 =='' && $data68 == null) ? '' : $data68[0]); ?>">
                                     <p style="color: #c003ff" class="fs-8">Jumlah saudara yang dimiliki peserta didik. jumlah saudara kandung dihitung tanpa menyertakan peserta didik , dangan rumus jumlah kakak ditambah jumlah adik, isikan 0 apabila anak tunggal</p>
                                   </div>
                     
@@ -3166,7 +3550,7 @@
                                         </div>
                                     </div>
                     
-                                      {{-- column 1 --}}
+                                      
                                     <div class="row">
                                         <div class="col-sm">
                                           <?php
@@ -3191,7 +3575,7 @@
                                               }
                                           ?>
                                           <select name="data81" id="tingkat" class="form-control">
-                                            <option value="{{ ($data81 =='' && $data81 == null) ? '' : $data81[0] }}">{{ ($data81 =='' && $data81 == null) ? 'Pilih' : $data81[0] }}</option>
+                                            <option value="<?php echo e(($data81 =='' && $data81 == null) ? '' : $data81[0]); ?>"><?php echo e(($data81 =='' && $data81 == null) ? 'Pilih' : $data81[0]); ?></option>
                                           </select>
                                         </div>
                                         <div class="col-sm">
@@ -3220,7 +3604,7 @@
                                               }
                                           ?>
                                           <select name="data82" id="namaprestasi" class="form-control">
-                                            <option value="{{ ($data82 =='' && $data82 == null) ? '' : $data82[0] }}">{{ ($data82 =='' && $data82 == null) ? 'Pilih' : $data82[0] }}</option>
+                                            <option value="<?php echo e(($data82 =='' && $data82 == null) ? '' : $data82[0]); ?>"><?php echo e(($data82 =='' && $data82 == null) ? 'Pilih' : $data82[0]); ?></option>
                                           </select>
                                         </div>
                                         <div class="col-sm">
@@ -3232,7 +3616,7 @@
                                                   $data83 = '';
                                                 }
                                             ?>
-                                          <input name="data83" class="form-control" type="text" value="{{ ($data83 =='' && $data83 == null) ? '' : $data83[0] }}">
+                                          <input name="data83" class="form-control" type="text" value="<?php echo e(($data83 =='' && $data83 == null) ? '' : $data83[0]); ?>">
                                         </div>
                                         <div class="col-sm">
                                           <?php
@@ -3243,7 +3627,7 @@
                                                   $data84 = '';
                                                 }
                                             ?>
-                                          <input name="data84" class="form-control" type="text" value="{{ ($data84 =='' && $data84 == null) ? '' : $data84[0] }}">
+                                          <input name="data84" class="form-control" type="text" value="<?php echo e(($data84 =='' && $data84 == null) ? '' : $data84[0]); ?>">
                                         </div>
                                         <div class="col-sm">
                                           <?php
@@ -3254,12 +3638,12 @@
                                                 $data85 = '';
                                               }
                                           ?>
-                                          <input name="data85" class="form-control" type="text" value="{{ ($data85 =='' && $data85 == null) ? '' : $data85[0] }}">
+                                          <input name="data85" class="form-control" type="text" value="<?php echo e(($data85 =='' && $data85 == null) ? '' : $data85[0]); ?>">
                                         </div>
                                     </div>
-                                    {{-- end column 1 --}}
+                                    
                     
-                                    {{-- column 2 --}}
+                                    
                                     <div class="row">
                                       <div class="col-sm">
                                         <?php
@@ -3283,7 +3667,7 @@
                                               }
                                             ?>
                                         <select name="data86" id="tingkat" class="form-control">
-                                          <option value="{{ ($data86 =='' && $data86 == null) ? '' : $data86[0] }}">{{ ($data86 =='' && $data86 == null) ? 'Pilih' : $data86[0] }}</option>
+                                          <option value="<?php echo e(($data86 =='' && $data86 == null) ? '' : $data86[0]); ?>"><?php echo e(($data86 =='' && $data86 == null) ? 'Pilih' : $data86[0]); ?></option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -3312,7 +3696,7 @@
                                             }
                                         ?>
                                         <select name="data87" id="namaprestasi" class="form-control">
-                                          <option value="{{ ($data87 =='' && $data87 == null) ? '' : $data87[0] }}">{{ ($data87 =='' && $data87 == null) ? 'Pilih' : $data87[0] }}</option>
+                                          <option value="<?php echo e(($data87 =='' && $data87 == null) ? '' : $data87[0]); ?>"><?php echo e(($data87 =='' && $data87 == null) ? 'Pilih' : $data87[0]); ?></option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -3324,7 +3708,7 @@
                                               $data88 = '';
                                             }
                                         ?>
-                                        <input name="data88" class="form-control" type="text" value="{{ ($data88 =='' && $data88 == null) ? '' : $data88[0] }}">
+                                        <input name="data88" class="form-control" type="text" value="<?php echo e(($data88 =='' && $data88 == null) ? '' : $data88[0]); ?>">
                                       </div>
                                       <div class="col-sm">
                                         <?php
@@ -3335,7 +3719,7 @@
                                               $data89 = '';
                                             }
                                         ?>
-                                        <input name="data89" class="form-control" type="text" value="{{ ($data89 =='' && $data89 == null) ? '' : $data89[0] }}">
+                                        <input name="data89" class="form-control" type="text" value="<?php echo e(($data89 =='' && $data89 == null) ? '' : $data89[0]); ?>">
                                       </div>
                                       <div class="col-sm">
                                         <?php
@@ -3346,12 +3730,12 @@
                                               $data90 = '';
                                             }
                                         ?>
-                                        <input name="data90" class="form-control" type="text" value="{{ ($data90 =='' && $data90 == null) ? '' : $data90[0] }}">
+                                        <input name="data90" class="form-control" type="text" value="<?php echo e(($data90 =='' && $data90 == null) ? '' : $data90[0]); ?>">
                                       </div>
                                   </div>
-                                  {{-- end column 2 --}}
+                                  
                     
-                                  {{-- column 3 --}}
+                                  
                                   <div class="row">
                                     <div class="col-sm">
                                       <?php
@@ -3376,7 +3760,7 @@
                                             
                                         ?>
                                       <select name="data91" id="tingkat" class="form-control" >
-                                        <option value="{{ ($data91 =='' && $data91 == null) ? '' : $data91[0] }}">{{ ($data91 =='' && $data91 == null) ? 'Pilih' : $data91[0] }}</option>
+                                        <option value="<?php echo e(($data91 =='' && $data91 == null) ? '' : $data91[0]); ?>"><?php echo e(($data91 =='' && $data91 == null) ? 'Pilih' : $data91[0]); ?></option>
                                       </select>
                                     </div>
                                     <div class="col-sm">
@@ -3405,7 +3789,7 @@
                                             }
                                         ?>
                                       <select name="data92" id="namaprestasi" class="form-control">
-                                        <option value="{{ ($data92 =='' && $data92 == null) ? '' : $data92[0] }}">{{ ($data92 =='' && $data92 == null) ? 'Pilih' : $data92[0] }}</option>
+                                        <option value="<?php echo e(($data92 =='' && $data92 == null) ? '' : $data92[0]); ?>"><?php echo e(($data92 =='' && $data92 == null) ? 'Pilih' : $data92[0]); ?></option>
                                       </select>
                                     </div>
                                     <div class="col-sm">
@@ -3417,7 +3801,7 @@
                                               $data93 = '';
                                             }
                                         ?>
-                                      <input name="data93" class="form-control" type="text" value="{{ ($data93 =='' && $data93 == null) ? '' : $data93[0] }}">
+                                      <input name="data93" class="form-control" type="text" value="<?php echo e(($data93 =='' && $data93 == null) ? '' : $data93[0]); ?>">
                                     </div>
                                     <div class="col-sm">
                                       <?php
@@ -3428,7 +3812,7 @@
                                               $data94 = '';
                                             }
                                         ?>
-                                      <input name="data94" class="form-control" type="text" value="{{ ($data94 =='' && $data94 == null) ? '' : $data94[0] }}">
+                                      <input name="data94" class="form-control" type="text" value="<?php echo e(($data94 =='' && $data94 == null) ? '' : $data94[0]); ?>">
                                     </div>
                                     <div class="col-sm">
                                       <?php
@@ -3439,10 +3823,10 @@
                                               $data95 = '';
                                             }
                                         ?>
-                                      <input name="data95" class="form-control" type="text" value="{{ ($data95 =='' && $data95 == null) ? '' : $data95[0] }}">
+                                      <input name="data95" class="form-control" type="text" value="<?php echo e(($data95 =='' && $data95 == null) ? '' : $data95[0]); ?>">
                                     </div>
                                   </div>
-                                  {{-- end column 3 --}}
+                                  
                     
                     
                                     <div class="mb-4 mt-4">
@@ -3497,7 +3881,7 @@
                                             }
                                         ?>
                                           <select name="data96" id="tingkat" class="form-control">
-                                            <option value="{{ ($data96 =='' && $data96 == null) ? '' : $data96[0] }}">{{ ($data96 =='' && $data96 == null) ? 'Pilih' : $data96[0] }}</option>
+                                            <option value="<?php echo e(($data96 =='' && $data96 == null) ? '' : $data96[0]); ?>"><?php echo e(($data96 =='' && $data96 == null) ? 'Pilih' : $data96[0]); ?></option>
                                           </select>
                                         </div>
                                         <div class="col-sm">
@@ -3509,7 +3893,7 @@
                                               $data97 = '';
                                             }
                                         ?>
-                                          <input name="data97" class="form-control" type="text" value="{{ ($data97 =='' && $data97 == null) ? '' : $data97[0] }}">
+                                          <input name="data97" class="form-control" type="text" value="<?php echo e(($data97 =='' && $data97 == null) ? '' : $data97[0]); ?>">
                                         </div>
                                         <div class="col-sm">
                                           <?php
@@ -3520,7 +3904,7 @@
                                                 $data98 = '';
                                               }
                                           ?>
-                                          <input name="data98" class="form-control" type="text" value="{{ ($data98 =='' && $data98 == null) ? '' : $data98[0] }}">
+                                          <input name="data98" class="form-control" type="text" value="<?php echo e(($data98 =='' && $data98 == null) ? '' : $data98[0]); ?>">
                                         </div>
                                         <div class="col-sm">
                                           <?php
@@ -3531,7 +3915,7 @@
                                                 $data99 = '';
                                               }
                                           ?>
-                                          <input name="data99" class="form-control" type="text" value="{{ ($data98 =='' && $data98 == null) ? '' : $data98[0] }}">
+                                          <input name="data99" class="form-control" type="text" value="<?php echo e(($data98 =='' && $data98 == null) ? '' : $data98[0]); ?>">
                                         </div>
                     
                                     </div>
@@ -3560,7 +3944,7 @@
                                               }
                                           ?>
                                         <select name="data100" id="tingkat" class="form-control" >
-                                          <option value="{{ ($data100 =='' && $data100 == null) ? '' : $data100[0] }}">{{ ($data100 =='' && $data100 == null) ? 'Pilih' : $data100[0] }}</option>
+                                          <option value="<?php echo e(($data100 =='' && $data100 == null) ? '' : $data100[0]); ?>"><?php echo e(($data100 =='' && $data100 == null) ? 'Pilih' : $data100[0]); ?></option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -3572,7 +3956,7 @@
                                                 $data101 = '';
                                               }
                                           ?>
-                                        <input name="data101" class="form-control" type="text" value="{{ ($data101 =='' && $data101 == null) ? '' : $data101[0] }}">
+                                        <input name="data101" class="form-control" type="text" value="<?php echo e(($data101 =='' && $data101 == null) ? '' : $data101[0]); ?>">
                                       </div>
                                       <div class="col-sm">
                                         <?php
@@ -3583,7 +3967,7 @@
                                                 $data102 = '';
                                               }
                                           ?>
-                                        <input name="data102" class="form-control" type="text" value="{{ ($data102 =='' && $data102 == null) ? '' : $data102[0] }}">
+                                        <input name="data102" class="form-control" type="text" value="<?php echo e(($data102 =='' && $data102 == null) ? '' : $data102[0]); ?>">
                                       </div>
                                       <div class="col-sm">
                                         <?php
@@ -3594,7 +3978,7 @@
                                               $data103 = '';
                                             }
                                         ?>
-                                        <input name="data103" class="form-control" type="text" value="{{ ($data103 =='' && $data103 == null) ? '' : $data103[0] }}">
+                                        <input name="data103" class="form-control" type="text" value="<?php echo e(($data103 =='' && $data103 == null) ? '' : $data103[0]); ?>">
                                       </div>
                     
                                     </div>
@@ -3623,7 +4007,7 @@
                                             }
                                         ?>
                                         <select name="data104" id="tingkat" class="form-control" >
-                                          <option value="{{ ($data104 =='' && $data104 == null) ? '' : $data104[0] }}">{{ ($data104 =='' && $data104 == null) ? 'Pilih' : $data104[0] }}</option>
+                                          <option value="<?php echo e(($data104 =='' && $data104 == null) ? '' : $data104[0]); ?>"><?php echo e(($data104 =='' && $data104 == null) ? 'Pilih' : $data104[0]); ?></option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -3635,7 +4019,7 @@
                                               $data105 = '';
                                             }
                                         ?>
-                                        <input name="data105" class="form-control" type="text" value="{{ ($data105 =='' && $data105 == null) ? '' : $data105[0] }}">
+                                        <input name="data105" class="form-control" type="text" value="<?php echo e(($data105 =='' && $data105 == null) ? '' : $data105[0]); ?>">
                                       </div>
                                       <div class="col-sm">
                                         <?php
@@ -3646,7 +4030,7 @@
                                               $data106 = '';
                                             }
                                         ?>
-                                        <input name="data106" class="form-control" type="text" value="{{ ($data106 =='' && $data106 == null) ? '' : $data106[0] }}">
+                                        <input name="data106" class="form-control" type="text" value="<?php echo e(($data106 =='' && $data106 == null) ? '' : $data106[0]); ?>">
                                       </div>
                                       <div class="col-sm">
                                         <?php
@@ -3657,7 +4041,7 @@
                                               $data107 = '';
                                             }
                                         ?>
-                                        <input name="data107" class="form-control" type="text" value="{{ ($data107 =='' && $data107 == null) ? '' : $data107[0] }}">
+                                        <input name="data107" class="form-control" type="text" value="<?php echo e(($data107 =='' && $data107 == null) ? '' : $data107[0]); ?>">
                                       </div>
                     
                                     </div>
@@ -3689,7 +4073,7 @@
                                             }
                                       ?>
                                       <label for="">Jurusan</label>
-                                      <input name="data69" type="text" class="form-control" value="{{ ($data69 =='' && $data69 == null) ? '' : $data69[0] }}">
+                                      <input name="data69" type="text" class="form-control" value="<?php echo e(($data69 =='' && $data69 == null) ? '' : $data69[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Jurusan yang dipilih oleh peserta didik saat diterima disekolah ini (khusus SMK)</p>
                                     </div>
                       
@@ -3714,7 +4098,7 @@
                                             }
                                       ?>
                                       <select name="data70" id="jenispendaftaran" class="form-control">
-                                        <option value="{{ ($data70 =='' && $data70 == null) ? '' : $data70[0] }}">{{ ($data70 =='' && $data70 == null) ? 'Pilih' : $data70[0] }}</option>
+                                        <option value="<?php echo e(($data70 =='' && $data70 == null) ? '' : $data70[0]); ?>"><?php echo e(($data70 =='' && $data70 == null) ? 'Pilih' : $data70[0]); ?></option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Status peserta pendidik saat pertama kali diterima di sekolah ini.</p>
                                     </div>
@@ -3729,7 +4113,7 @@
                                             }
                                       ?>
                                       <label for="">NIS</label>
-                                      <input name="data71" type="text" class="form-control" value="{{ ($data71 =='' && $data71 == null) ? '' : $data71[0] }}">
+                                      <input name="data71" type="text" class="form-control" value="<?php echo e(($data71 =='' && $data71 == null) ? '' : $data71[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nomor induk peserta Pendidik sesuai yang tercantum pada buku induk</p>
                                     </div>
                       
@@ -3743,7 +4127,7 @@
                                             }
                                       ?>
                                       <label for="">Tanggal Masuk Sekolah</label>
-                                      <input name="data72" type="date" class="form-control" value="{{ ($data72 =='' && $data72 == null) ? '' : $data72[0] }}">
+                                      <input name="data72" type="date" class="form-control" value="<?php echo e(($data72 =='' && $data72 == null) ? '' : $data72[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Tanggal pertama kali peserta didik diterima di sekolah ini, jika siswa baru,maka isikan tanggal awal tahun pelajaran saat peserta didik masuk. jika siswa mutasi/pindahan, maka isikan tanggal sesuai tanggal diterimanya peserta didik di sekolah ini atau tanggal yang tercantum pada lembar mutasi masuk yang umumnya terdapat di bagian akhir buku rapor</p>
                                     </div>
                       
@@ -3757,7 +4141,7 @@
                                             }
                                       ?>
                                       <label for="">Asal Sekolah</label>
-                                      <input name="data73" type="text" class="form-control" value="{{ ($data73 =='' && $data73 == null) ? '' : $data73[0] }}">
+                                      <input name="data73" type="text" class="form-control" value="<?php echo e(($data73 =='' && $data73 == null) ? '' : $data73[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Nama Sekolah peserta didik  sebelumnya .untuk peserta didik baru .isikan nama sekolah pada jenjang sebelumnya ,Sedangkan bagi peserta didik mutasi /pindahan diisi dengan nama sekolah sebelumnya pindah sekolah saat ini.</p>
                                     </div>
                       
@@ -3771,7 +4155,7 @@
                                             }
                                       ?>
                                       <label for="">Nomor Peserta Ujian</label>
-                                      <input name="data74" type="text" class="form-control" value="{{ ($data74 =='' && $data74 == null) ? '' : $data74[0] }}">
+                                      <input name="data74" type="text" class="form-control" value="<?php echo e(($data74 =='' && $data74 == null) ? '' : $data74[0]); ?>">
                                       <p style="color: #000000" class="fs-8"><em>* Nomor peserta Ujian adalah 20 digit yang tertera dalam SKHU (Format baku 2-12-02-01-001-002-7), diisi bagi peserta didik jenjang Sebelumnya</em> </p>
                                       <p style="color: #c003ff" class="fs-8">Nomor peserta ujian saat peserta didik masih jenjang sebelumnya .Formatnya adalah x-xx-xx-xx-xxx-xxx-x (20 digit). Untuk peserta didik WNA ,diisi dengan luar Negeri.</p>
                                     </div>
@@ -3786,7 +4170,7 @@
                                             }
                                       ?>
                                       <label for="">No. Seri Ijazah</label>
-                                      <input name="data75" type="text" class="form-control" value="{{ ($data75 =='' && $data75 == null) ? '' : $data75[0] }}">
+                                      <input name="data75" type="text" class="form-control" value="<?php echo e(($data75 =='' && $data75 == null) ? '' : $data75[0]); ?>">
                                       <p style="color: #000000" class="fs-8"><em>Diisi 16 digit yang tertera di ijazah - diisi sesuai dengan ijazah jenjang sebelumnya</em> </p>
                                       <p style="color: #c003ff" class="fs-8">Nomor seri ijazah peserta didik pada jenjang sebelumnya</p>
                                     </div>
@@ -3801,7 +4185,7 @@
                                             }
                                       ?>
                                       <label for="">No. Seri SKHUN</label>
-                                      <input name="data76" type="text" class="form-control" value="{{ ($data76 =='' && $data76 == null) ? '' : $data76[0] }}">
+                                      <input name="data76" type="text" class="form-control" value="<?php echo e(($data76 =='' && $data76 == null) ? '' : $data76[0]); ?>">
                                       <p style="color: #000000" class="fs-8"><em>Diisi 16 digit yang tertera di SKHUN/SHUN - diisi sesuai dengan ijazah jenjang sebelumnya</em> </p>
                                       <p style="color: #c003ff" class="fs-8">Nomor seri SKHUN/SHUN peserta didik pada jenjang sebelumnya (jika memiliki)</p>
                                     </div>
@@ -3839,7 +4223,7 @@
                                         ?>
                                       <label for="">Keluar Karena</label>
                                       <select name="data77" id="keluarkarena" class="form-control">
-                                        <option value="{{ ($data77 =='' && $data77 == null) ? '' : $data77[0] }}">{{ ($data77 =='' && $data77 == null) ? 'Pilih' : $data77[0] }}</option>
+                                        <option value="<?php echo e(($data77 =='' && $data77 == null) ? '' : $data77[0]); ?>"><?php echo e(($data77 =='' && $data77 == null) ? 'Pilih' : $data77[0]); ?></option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Alasan utama peserta peserta didik keluar dari sekolah. Pilih Lulus apabila peserta didik telah lulus dari sekolah ,pilih Mengundurkan diri apabila peserta didik keluar sekolah karena mengundurkan diri dengan catatan (dibuktikan adanya surat pengunduran diri), pilih Putus sekolah apabila peserta didik meninggalkan sekolah tanpa keterangan yang jelas</p>
                                     </div>
@@ -3854,7 +4238,7 @@
                                               }
                                         ?>
                                       <label for="">Tanggal Keluar</label>
-                                      <input name="data78" type="date" class="form-control" value="{{ ($data78 =='' && $data78 == null) ? '' : $data78[0] }}">
+                                      <input name="data78" type="date" class="form-control" value="<?php echo e(($data78 =='' && $data78 == null) ? '' : $data78[0]); ?>">
                                       <p style="color: #c003ff" class="fs-8">Tanggal saat peserta didik diketahui / tercatat keluar dari sekolah</p>
                                     </div>
                       
@@ -3868,7 +4252,7 @@
                                               }
                                         ?>
                                       <label for="">Alasan</label>
-                                      <textarea name="data79" id="alasan" cols="30" rows="2" class="form-control">{{ ($data79 =='' && $data79 == null) ? '' : $data79[0] }}</textarea>
+                                      <textarea name="data79" id="alasan" cols="30" rows="2" class="form-control"><?php echo e(($data79 =='' && $data79 == null) ? '' : $data79[0]); ?></textarea>
                                       <p style="color: #c003ff" class="fs-8">Alasan khusus yang melatar belakangi peserta didik keluar dari sekolah</p>
                                     </div>
                       
@@ -3884,7 +4268,7 @@
                                         <div class="row">
                                           <div class="col-sm">
                                             <div class="mb-2 mt-6" style="text-align:center">
-                                              <input name="data80" type="checkbox" class="finalcheck custom-control-input" id="customSwitch1" {{ ($data80 =='' && $data80 == null) ? '' : 'checked' }}>
+                                              <input name="data80" type="checkbox" class="finalcheck custom-control-input" id="customSwitch1" <?php echo e(($data80 =='' && $data80 == null) ? '' : 'checked'); ?>>
                                             </div>
                                           </div>
                                           <div class="col-sm-11">
@@ -3903,7 +4287,7 @@
                                   <div></div>
 
                                   <div class="btndowncheck1">
-                                  {{-- down 1 --}}
+                                  
                                   <div class="down1">
                                     <div style="color:rgb(255, 255, 255); background-color: #caaf35; text-align:center;" class="mb-4 mt-3">FORMULIR PESERTA DIDIK
                                     </div>
@@ -3918,7 +4302,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">No Formulir</label>
-                                        <input name="data1" type="text" class="form-control" id="noformulir" placeholder="Masukkan No Formulir" value="{{ ($data1 =='' && $data1 == null) ? '' : $data1[0] }}">
+                                        <input name="data1" type="text" class="form-control" id="noformulir" placeholder="Masukkan No Formulir" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>">
                                       </div>
                       
                                       <div class="form-group mb-4">
@@ -3931,7 +4315,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Tahun Ajaran</label>
-                                        <input name="data2" type="text" class="form-control" id="tahunajaran" placeholder="Tahun Ajaran" value="{{ ($data2 =='' && $data2 == null) ? '' : $data2[0] }}">
+                                        <input name="data2" type="text" class="form-control" id="tahunajaran" placeholder="Tahun Ajaran" value="<?php echo e(($data2 =='' && $data2 == null) ? '' : $data2[0]); ?>">
                                       </div>
                       
                                       <div class="form-group mb-4">
@@ -3944,7 +4328,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Tanggal Pendaftaran</label>
-                                        <input name="data3" type="date" class="form-control" id="tanggalpendaftaran" placeholder="Tanngal Pendaftaran" value="{{ ($data3 =='' && $data3 == null) ? '' : $data3[0] }}">
+                                        <input name="data3" type="date" class="form-control" id="tanggalpendaftaran" placeholder="Tanngal Pendaftaran" value="<?php echo e(($data3 =='' && $data3 == null) ? '' : $data3[0]); ?>">
                                       </div>
                       
                                       <div class="form-group mb-4">
@@ -3966,7 +4350,7 @@
                                         ?>
                                         <label for="exampleFormControlInput1">Status Siswa</label>
                                         <select name="data4" id="statussiswa" class="form-control">
-                                          <option value="{{ ($data4 =='' && $data4 == null) ? '' : $data4[0] }}">{{ ($data4 =='' && $data4 == null) ? 'Pilih' : $data4[0] }}</option>
+                                          <option value="<?php echo e(($data4 =='' && $data4 == null) ? '' : $data4[0]); ?>"><?php echo e(($data4 =='' && $data4 == null) ? 'Pilih' : $data4[0]); ?></option>
                                         </select>
                                       </div>
                       
@@ -3982,7 +4366,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Nama Lengkap</label>
-                                        <input name="data5" type="text" class="form-control" id="namalengkap" placeholder="Masukkan Lengkap" value="{{ ($data5 =='' && $data5 == null) ? '' : $data5[0] }}">
+                                        <input name="data5" type="text" class="form-control" id="namalengkap" placeholder="Masukkan Lengkap" value="<?php echo e(($data5 =='' && $data5 == null) ? '' : $data5[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nama peserta didik sesuai dokumen resmi yang berlaku (Akta atau Ijazah sebelumnya ). Hanya bisa diubah melalui <a href="https://vervalpd.data.kemdikbud.go.id">vervalpd.data.kemdikbud.go.id</a></p>
                                       </div>
                       
@@ -4005,7 +4389,7 @@
                                         ?>
                                         <label for="exampleFormControlInput1">Jenis Kelamin</label>
                                         <select name="data6" id="statussiswa" class="form-control">
-                                          <option value="{{ ($data6 =='' && $data6 == null) ? '' : $data6[0] }}">{{ ($data6 =='' && $data6 == null) ? 'Pilih' : $data6[0] }}</option>
+                                          <option value="<?php echo e(($data6 =='' && $data6 == null) ? '' : $data6[0]); ?>"><?php echo e(($data6 =='' && $data6 == null) ? 'Pilih' : $data6[0]); ?></option>
                                         </select>
                                       </div>
                       
@@ -4019,7 +4403,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Nisn</label>
-                                        <input name="data7" type="text" class="form-control" id="nisn" placeholder="Masukkan Nisn" value="{{ ($data7 =='' && $data7 == null) ? '' : $data7[0] }}">
+                                        <input name="data7" type="text" class="form-control" id="nisn" placeholder="Masukkan Nisn" value="<?php echo e(($data7 =='' && $data7 == null) ? '' : $data7[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nomor Induk Siswa Nasional peserta didik (jika memiliki), jika belum memiliki, maka wajib dikosongkan. NISN memiliki format 10 digit angka. contoh: 0009321234  Untuk memeriksa NISN, dapat mengunjungi laman <a href="http://nisn.data.kemdikbud.go.id">http:// nisn.data.kemdikbud.go.id</a></p>
                                       </div>
                       
@@ -4033,7 +4417,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Nik / No.KITAS (Untuk WNA)</label>
-                                        <input name="data8" type="text" class="form-control" id="nik" placeholder="Masukkan Nik / Kitas" value="{{ ($data8 =='' && $data8 == null) ? '' : $data8[0] }}">
+                                        <input name="data8" type="text" class="form-control" id="nik" placeholder="Masukkan Nik / Kitas" value="<?php echo e(($data8 =='' && $data8 == null) ? '' : $data8[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga, Kartu identitas Anak, atau KTP (jika sudah Memiliki) bagi WNI. NIK memiliki format angka 16 digit angka. Contoh:6112090906021104
                                          <br> Pastikan NIK tidak tertukar dengan No. Kartu Keluarga , Karena keduanya memiliki format yang sama. Bagi WNA, diisi dengan nomor Kartu Izin TInggak Terbatas (KITAS)</p>
                                       </div>
@@ -4049,7 +4433,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Tempat Lahir</label>
-                                        <input name="data9" type="text" class="form-control" id="tempatlahir" placeholder="Masukkan Tempat Lahir" value="{{ ($data9 =='' && $data9 == null) ? '' : $data9[0] }}">
+                                        <input name="data9" type="text" class="form-control" id="tempatlahir" placeholder="Masukkan Tempat Lahir" value="<?php echo e(($data9 =='' && $data9 == null) ? '' : $data9[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Tempat lahir peserta didik sesuai dokumen resmi yang berlaku</p>
                                       </div>
                       
@@ -4063,7 +4447,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">Tanggal Lahir</label>
-                                        <input name="data10" type="date" class="form-control" id="tanggallahir" placeholder="Tanngal Lahir" value="{{ ($data10 =='' && $data10 == null) ? '' : $data10[0] }}">
+                                        <input name="data10" type="date" class="form-control" id="tanggallahir" placeholder="Tanngal Lahir" value="<?php echo e(($data10 =='' && $data10 == null) ? '' : $data10[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Tanggal lahir peserta didik sesuai dokumen resmi yang berlaku, Hanya bisa diubah melalui <a href="http://vervalpd.data.kemdikbud.go.id">http://vervalpd.data.kemdikbud.go.id</a> </p>
                                       </div>
                       
@@ -4077,7 +4461,7 @@
                                             }
                                         ?>
                                         <label for="exampleFormControlInput1">No Registrasi Akta Kelahiran</label>
-                                        <input name="data11" type="text" class="form-control" id="noregistrasiaktakelahiran" placeholder="No Registrasi Akta Kelahiran" value="{{ ($data11 =='' && $data11 == null) ? '' : $data11[0] }}">
+                                        <input name="data11" type="text" class="form-control" id="noregistrasiaktakelahiran" placeholder="No Registrasi Akta Kelahiran" value="<?php echo e(($data11 =='' && $data11 == null) ? '' : $data11[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Nomor Registrasi Akta Kelahiran. Nomor registrasi yang dimaksud umumnya tercantum pada bagian tengah atas lembar kutipan akta kelahiran</p>
                                       </div>
                       
@@ -4112,7 +4496,7 @@
                                         ?>
                                         <label for="exampleFormControlInput1">Agama & Kepercayaan</label>
                                         <select name="data12" id="agamadankepercayaan" class="form-control">
-                                          <option value="{{ ($data12 =='' && $data12 == null) ? '' : $data12[0] }}">{{ ($data12 =='' && $data12 == null) ? 'Pilih' : $data12[0] }}</option>
+                                          <option value="<?php echo e(($data12 =='' && $data12 == null) ? '' : $data12[0]); ?>"><?php echo e(($data12 =='' && $data12 == null) ? 'Pilih' : $data12[0]); ?></option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Agama atau kepercayaan yang dianut oleh peserta didik. apabila peserta didik adalah penghayat kepercayaan (misanya pada daerah tertentu yang masih memiliki penganut kepercayaan), dapat memilih opsi Kepercayaan kpd Tuhan YME</a> </p>
                                       </div>
@@ -4136,7 +4520,7 @@
                                         ?>
                                         <label for="exampleFormControlInput1">Kewarganegaraan</label>
                                         <select name="data13" id="agamadankepercayaan" class="form-control">
-                                          <option value="{{ ($data13 =='' && $data13 == null) ? '' : $data13[0] }}">{{ ($data13 =='' && $data13 == null) ? 'Pilih' : $data13[0] }}</option>
+                                          <option value="<?php echo e(($data13 =='' && $data13 == null) ? '' : $data13[0]); ?>"><?php echo e(($data13 =='' && $data13 == null) ? 'Pilih' : $data13[0]); ?></option>
                                         </select>
                                       </div>
                                       <div class="form-group mb-4">
@@ -4149,7 +4533,7 @@
                                             }
                                         ?>
                                         <label for="" >Nama Negara</label>
-                                        <input name="data14" type="text" class="form-control" placeholder="Masukkan Nama Negara" value="{{ ($data14 =='' && $data14 == null) ? '' : $data14[0] }}">
+                                        <input name="data14" type="text" class="form-control" placeholder="Masukkan Nama Negara" value="<?php echo e(($data14 =='' && $data14 == null) ? '' : $data14[0]); ?>">
                                         <p style="color: #c003ff" class="fs-8">Kewarganegaraan peserta didik </p>
                                       </div>
                       
@@ -4206,7 +4590,7 @@
                                         <div class="row">
                                           <div class="col-sm">
                                             <select name="data15" id="berkebutuhankhusus1" class="form-control">
-                                              <option value="{{ ($data15 =='' && $data15 == null) ? '' : $data15[0] }}">{{ ($data15 =='' && $data15 == null) ? 'Pilih' : $data15[0] }}</option>
+                                              <option value="<?php echo e(($data15 =='' && $data15 == null) ? '' : $data15[0]); ?>"><?php echo e(($data15 =='' && $data15 == null) ? 'Pilih' : $data15[0]); ?></option>
                                             </select>
                                           </div>
                                           <?php
@@ -4258,14 +4642,14 @@
                                             ?>
                                           <div class="col-sm">
                                             <select name="data16" id="berkebutuhankhusus2" class="form-control">
-                                              <option value="{{ ($data16 =='' && $data16 == null) ? '' : $data16[0] }}">{{ ($data16 =='' && $data16 == null) ? 'Pilih' : $data16[0] }}</option>
+                                              <option value="<?php echo e(($data16 =='' && $data16 == null) ? '' : $data16[0]); ?>"><?php echo e(($data16 =='' && $data16 == null) ? 'Pilih' : $data16[0]); ?></option>
                                             </select>
                                           </div>
                                         </div>
                                         <p style="color: #c003ff" class="fs-8">Kebutuhan khusus yang disandang oleh peserta didik, Dapat dipilih lebih dari satu</p>
                                       </div>
                                     </div>
-                                  {{-- down 1 end --}}
+                                  
                                   </div>
 
 
@@ -4290,7 +4674,7 @@
                                           $result = '';
                                         }
                                     ?>
-                                      <input name="nameparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{ ($result =='' && $result == null) ? '' : $result[0] }}">
+                                      <input name="nameparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>">
                                     </div>
                     
                                     <div class="form-group mb-4">
@@ -4303,7 +4687,7 @@
                                           $result = '';
                                         }
                                     ?>
-                                        <input name="addressparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{ ($result =='' && $result == null) ? '' : $result[0] }}">
+                                        <input name="addressparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>">
                                     </div>
                     
                                     <div class="bg-white rounded-3 form-group mb-4">
@@ -4319,7 +4703,7 @@
                                           $result = '';
                                         }
                                     ?>
-                                        <input name="firstpayment" class="checkbox1 form-check-input" type="checkbox" value="Lunas" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="firstpayment" class="checkbox1 form-check-input" type="checkbox" value="Lunas" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                           Lunas
                                         </label>
@@ -4333,7 +4717,7 @@
                                           $result = '';
                                         }
                                     ?>
-                                        <input name="firstpayment2" class="checkbox2 form-check-input" type="checkbox" value="cicilan" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="firstpayment2" class="checkbox2 form-check-input" type="checkbox" value="cicilan" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Cicilan
                                         </label>
@@ -4353,7 +4737,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datasatu" name="datasatu" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }} >
+                                          <input id="datasatu" name="datasatu" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?> >
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4374,7 +4758,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datadua" name="datadua" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }} >
+                                          <input id="datadua" name="datadua" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?> >
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4394,7 +4778,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datatiga" name="datatiga" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input id="datatiga" name="datatiga" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4402,7 +4786,7 @@
                                     </div>
                     
                     
-                                    @if($ppdb->stage == 'SD' || $ppdb->stage == 'SMP' || $ppdb->stage == 'SMA')
+                                    <?php if($ppdb->stage == 'SD' || $ppdb->stage == 'SMP' || $ppdb->stage == 'SMA'): ?>
                                     <div class="bg-white rounded-3 form-group mb-4">
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1"> <strong>4 .</strong> Jika Putra-putri kami diterima di Sekolah Negeri dan Kami membayar lunas UP, maka UP kami hanya dikembalikan sebesar 50%</label>
@@ -4416,7 +4800,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="dataempat" name="dataempat" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input id="dataempat" name="dataempat" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4436,7 +4820,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datalima" name="datalima" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input id="datalima" name="datalima" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4456,7 +4840,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="dataenam" name="dataenam" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input id="dataenam" name="dataenam" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4476,7 +4860,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datatujuh" name="datatujuh" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input id="datatujuh" name="datatujuh" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4496,7 +4880,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datadelapan" name="datadelapan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input id="datadelapan" name="datadelapan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4516,7 +4900,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datasembilan" name="datasembilan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input id="datasembilan" name="datasembilan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4536,15 +4920,15 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datasepuluh" class="form-check-input" type="checkbox" value="Saya menyetujui seluruh pernyataan saya di atas" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datasepuluh" class="form-check-input" type="checkbox" value="Saya menyetujui seluruh pernyataan saya di atas" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Saya menyetujui seluruh pernyataan saya di atas
                                           </label>
                                         </div>
                                     </div>
-                                    @endif
+                                    <?php endif; ?>
                     
-                                    @if($ppdb->stage == 'TK' || $ppdb->stage == 'KB')
+                                    <?php if($ppdb->stage == 'TK' || $ppdb->stage == 'KB'): ?>
                                     <div class="bg-white rounded-3 form-group mb-4">
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1"> <strong>4 .</strong>Jika kami masih memiliki tunggakan cicilan UP sampai dengan bulan Mei 2023 ,maka kami bersedia dianggap mengundurkan diri dari Sekolah Avicenna</label>
@@ -4558,7 +4942,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="dataempat" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataempat" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4578,7 +4962,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datalima" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datalima" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4597,7 +4981,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="dataenam" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataenam" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4617,7 +5001,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datatujuh" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datatujuh" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4637,7 +5021,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datadelapan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datadelapan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4657,7 +5041,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datasembilan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datasembilan" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4677,7 +5061,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datasepuluh" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datasepuluh" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4697,7 +5081,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="datasebelas" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="datasebelas" class="form-check-input" type="checkbox" value="Setuju" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Setuju
                                           </label>
@@ -4717,13 +5101,13 @@
                                             $result = '';
                                           }
                                       ?>
-                                          <input name="dataduabelas" class="form-check-input" type="checkbox" value="Saya memahami dan menyetujui seluruh pernyataan di atas" id="defaultCheck1" {{ ($result == '' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataduabelas" class="form-check-input" type="checkbox" value="Saya memahami dan menyetujui seluruh pernyataan di atas" id="defaultCheck1" <?php echo e(($result == '' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Saya memahami dan menyetujui seluruh pernyataan di atas
                                           </label>
                                         </div>
                                     </div>
-                                    @endif                         
+                                    <?php endif; ?>                         
 
                                   </div>
                                   
@@ -4747,7 +5131,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                      <input name="nameparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{ ($result =='' && $result == null) ? '' : $result[0] }}">
+                                      <input name="nameparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>">
                                     </div>
                   
                                     <div class="form-group mb-4">
@@ -4760,7 +5144,7 @@
                                           }
                                       ?>
                                         <label for="exampleFormControlInput1">Nama Calon Murid</label>
-                                        <input name="data13" type="text" class="form-control" id="exampleFormControlInput1" value="{{  !empty($result[0]) ? $result[0] : $result }}" placeholder="Jawaban Anda" required>
+                                        <input name="data13" type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo e(!empty($result[0]) ? $result[0] : $result); ?>" placeholder="Jawaban Anda" required>
                                     </div>
                   
                                     <div class="bg-white rounded-3 form-group mb-4">
@@ -4776,9 +5160,9 @@
                                                   $result = '';
                                                 }
                                                 ?>
-                                            @if($ppdb->stage == "SD")
+                                            <?php if($ppdb->stage == "SD"): ?>
                                             <select name="data14" id="">
-                                              <option value="{{ !empty($result[0]) ? $result[0] :  $result  }}">{{ !empty($result[0]) ? $result[0] : 'Pilih' }}</option>
+                                              <option value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>"><?php echo e(!empty($result[0]) ? $result[0] : 'Pilih'); ?></option>
                                               <option value="1">1</option>
                                               <option value="2">2</option>
                                               <option value="3">3</option>
@@ -4786,25 +5170,25 @@
                                               <option value="5">5</option>
                                               <option value="6">6</option>
                                             </select>
-                                            @endif
+                                            <?php endif; ?>
                   
                   
-                                            @if($ppdb->stage == "TK" || $ppdb->stage == "KB")
+                                            <?php if($ppdb->stage == "TK" || $ppdb->stage == "KB"): ?>
                                             <select name="data14" id="">
-                                              <option value="{{ !empty($result[0]) ? $result[0] :  $result  }}">{{ !empty($result[0]) ? $result[0] : 'Pilih' }}</option>
-                                              <option value="{{ $ppdb->stage == "KB" ? 'KB-A' : 'TK-A' }}">{{ $ppdb->stage == "KB" ? 'KB-A' : 'TK-A' }}</option>
-                                              <option value="{{ $ppdb->stage == "KB" ? 'KB-B' : 'TK-B' }}">{{ $ppdb->stage == "KB" ? 'KB-B' : 'TK-B' }}</option>
+                                              <option value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>"><?php echo e(!empty($result[0]) ? $result[0] : 'Pilih'); ?></option>
+                                              <option value="<?php echo e($ppdb->stage == "KB" ? 'KB-A' : 'TK-A'); ?>"><?php echo e($ppdb->stage == "KB" ? 'KB-A' : 'TK-A'); ?></option>
+                                              <option value="<?php echo e($ppdb->stage == "KB" ? 'KB-B' : 'TK-B'); ?>"><?php echo e($ppdb->stage == "KB" ? 'KB-B' : 'TK-B'); ?></option>
                                             </select>
-                                            @endif
+                                            <?php endif; ?>
                   
-                                            @if($ppdb->stage == "SMP" || $ppdb->stage == "SMA")
+                                            <?php if($ppdb->stage == "SMP" || $ppdb->stage == "SMA"): ?>
                                             <select name="data14" id="">
-                                              <option value="{{  !empty($result[0]) ? $result[0] :  $result  }}">{{ !empty($result[0]) ? $result[0] : 'Pilih' }}</option>
+                                              <option value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>"><?php echo e(!empty($result[0]) ? $result[0] : 'Pilih'); ?></option>
                                               <option value="1">1</option>
                                               <option value="2">2</option>
                                               <option value="3">3</option>
                                             </select>
-                                            @endif
+                                            <?php endif; ?>
                                       </div>
                                     </div>
                   
@@ -4821,7 +5205,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input id="datadua" name="data15" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }} >
+                                          <input id="datadua" name="data15" class="form-check-input" type="checkbox" value="setuju" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?> >
                                           <label class="form-check-label" for="defaultCheck1">
                                             Ya saya Setuju
                                           </label>
@@ -4849,7 +5233,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Nama Lengkap Peserta Didik</label>
-                                      <input name="data16" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}" required>
+                                      <input name="data16" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>" required>
                                     </div>
             
             
@@ -4867,7 +5251,7 @@
                                           $result = '';
                                         }
                                     ?>
-                                        <input name="data17" class="checkboxsex1 form-check-input" type="checkbox" value="Laki-laki" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data17" class="checkboxsex1 form-check-input" type="checkbox" value="Laki-laki" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                           Laki-laki
                                         </label>
@@ -4881,7 +5265,7 @@
                                           $result = '';
                                         }
                                     ?>
-                                        <input name="data18" class="checkboxsex2 form-check-input" type="checkbox" value="Perempuan" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data18" class="checkboxsex2 form-check-input" type="checkbox" value="Perempuan" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Perempuan
                                         </label>
@@ -4898,7 +5282,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Tempat Lahir</label>
-                                      <input name="data19" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                      <input name="data19" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                     </div>
             
                                     <div class="form-group mb-4">
@@ -4911,7 +5295,7 @@
                                           }
                                       ?>
                                       <label for="exampleFormControlInput1">Tanggal Lahir</label>
-                                      <input name="data20" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}" required>
+                                      <input name="data20" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>" required>
                                     </div>
             
                                     <div class="form-group mb-4">
@@ -4924,7 +5308,7 @@
                                           }
                                        ?>
                                       <label for="exampleFormControlInput1">Berat Badan (kg)</label>
-                                      <input name="data21" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                      <input name="data21" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                     </div>
             
                                   <div class="form-group mb-4">
@@ -4937,7 +5321,7 @@
                                           }
                                        ?>
                                     <label for="exampleFormControlInput1">Tinggi Badan (cm)</label>
-                                    <input name="data22" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                    <input name="data22" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                   </div>
             
                                   <div class="form-group mb-4">
@@ -4950,10 +5334,10 @@
                                     }
                                  ?>
                                     <label for="exampleFormControlInput1">Golongan Darah</label>
-                                    <input name="data23" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                    <input name="data23" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                   </div>
             
-                                  {{-- RIWAYAT IMUNISASI --}}
+                                  
                                   <div class="bg-white rounded-3 form-group mb-4">
                                     <label class="form-label fs-6 fw-bolder text-dark">Riwayat Imunisasi (Khusus TK, KB dan SD)</label>
                                     <div class="mb-3">
@@ -4968,7 +5352,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                      <input name="data24" class=" form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="data24" class=" form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck1">
                                         Memiliki catatan imunisasi
                                       </label>
@@ -4982,7 +5366,7 @@
                                               $result = '';
                                             }
                                       ?>
-                                      <input name="data25" class=" form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="data25" class=" form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck2">
                                         Saat bayi mendapatkan imunisasi
                                       </label>
@@ -4996,18 +5380,18 @@
                                               $result = '';
                                             }
                                       ?>
-                                      <input name="data26" class=" form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="data26" class=" form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck2">
                                         imunisasi lengkap
                                       </label>
                                     </div>
                                   </div>
-                                  {{--  --}}
+                                  
             
                                   <div class="fv-row mb-10 has-feedback">
                                     <label class="form-label fs-6 fw-bolder text-dark">sertifikat Imunisasi</label>
             
-                                    {{-- <input type="file" name="photo" class="form-control" id="exampleInputFile" required> --}}
+                                    
                                     <?php
                                           $array= array_column($medco_employee_file, 'gambar');
                                           if ($array != '' && $array != null) {
@@ -5016,15 +5400,13 @@
                                               $result = '';
                                           }
                                       ?>
-                                      {{-- <a href="">Check File</a> --}}
+                                      
 
-                                      <a href="{{ ($result =='' && $result == null) ? '' : $result[0] }}" target="_blank" class="linkhref ms-3">Download File</a>
-                                    {{-- <span>Your File</span> <input type="text" class="form-control" name="photo" value="{{ $reregistration->medco_employee_file }}" />
-                                       <input type="hidden" name="photo" class="form-control" id="exampleInputFile" value="{{ $reregistration->medco_employee_file }}">
-                                       <a href="{{ 'http://127.0.0.1:8000/'.$reregistration->medco_employee_file }}" rel="noopener noreferrer" target="_blank" >Check File</a> --}}
+                                      <a href="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>" target="_blank" class="linkhref ms-3">Download File</a>
+                                    
                                   </div>          
             
-                                  {{-- RIWAYAT VAKSIN --}}
+                                  
                                   <div class="bg-white rounded-3 form-group mb-4">
                                     <label class="form-label fs-6 fw-bolder text-dark">Riwayat Vaksin</label>
                                     <div class="mb-3">
@@ -5039,7 +5421,7 @@
                                             $result = '';
                                           }
                                       ?>
-                                      <input name="datavaksin24" class=" form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="datavaksin24" class=" form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck1">
                                         booster 1
                                       </label>
@@ -5053,7 +5435,7 @@
                                               $result = '';
                                             }
                                       ?>
-                                      <input name="datavaksin25" class=" form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="datavaksin25" class=" form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck2">
                                         booster 2
                                       </label>
@@ -5067,7 +5449,7 @@
                                               $result = '';
                                             }
                                       ?>
-                                      <input name="datavaksin26" class=" form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="datavaksin26" class=" form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck2">
                                         booster 3
                                       </label>
@@ -5081,18 +5463,18 @@
                                               $result = '';
                                             }
                                       ?>
-                                      <input name="datavaksin27" class=" form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                      <input name="datavaksin27" class=" form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                       <label class="form-check-label" for="defaultCheck2">
                                         belum vaksin
                                       </label>
                                     </div>
                                   </div>
-                                  {{--  --}}
+                                  
             
                                   <div class="fv-row mb-10 has-feedback">
                                     <label class="form-label fs-6 fw-bolder text-dark">sertifikat Vaksin</label>
             
-                                    {{-- <input type="file" name="vaksinphoto" class="form-control" id="exampleInputFile" required> --}}
+                                    
                                     <?php
                                     $array= array_column($medco_employee_file, 'gambarvaksin');
                                     if ($array != '' && $array != null) {
@@ -5101,15 +5483,13 @@
                                         $result = '';
                                     }
                                 ?>
-                                <a href="{{ ($result =='' && $result == null) ? '' : $result[0] }}" class="linkhref2">Check File</a>
-                                    {{-- <span>Your File</span> <input type="text" class="form-control" name="photo" value="{{ $reregistration->medco_employee_file }}" />
-                                       <input type="hidden" name="photo" class="form-control" id="exampleInputFile" value="{{ $reregistration->medco_employee_file }}">
-                                       <a href="{{ 'http://127.0.0.1:8000/'.$reregistration->medco_employee_file }}" rel="noopener noreferrer" target="_blank" >Check File</a> --}}
+                                <a href="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>" class="linkhref2">Check File</a>
+                                    
                                   </div>
-                                      {{--  --}}
+                                      
                                       <div class="form-group mb-4">
                                         <label for="exampleFormControlInput1">Catatan riwayat kesehatan anak dalam kendungan anak untuk melihat adanya kelainan kogenital untuk penyakit bawaan pada anak terutama yang harus diwaspadai atau butuh pengawasan khusus</label>
-                                        {{-- <input name="addressparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" > --}}
+                                        
                                       </div>
                                       <div class="bg-white rounded-3 form-group mb-4">
                                         <div class="mb-3">
@@ -5124,7 +5504,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input name="data27" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data27" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Ada Gangguan dan Kelainan
                                           </label>
@@ -5138,7 +5518,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data28" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data28" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Tidak Ada Gangguan dan Kelainan
                                           </label>
@@ -5152,7 +5532,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data29" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data29" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Berbahaya
                                           </label>
@@ -5167,7 +5547,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data30" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data30" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Tidak Berbahaya
                                           </label>
@@ -5182,15 +5562,15 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data31" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data31" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Yang Lain
                                           </label>
                                         </div>
                                       </div>
-                                      {{--  --}}
+                                      
             
-                                            {{--  --}}
+                                            
                                       <div class="bg-white rounded-3 form-group mb-4">
                                         <div class="mb-3">
                                               <label for="exampleFormControlSelect1">Bagaimana gambaran Waktu Kelahiran anak dan kondisi anak ketika dilahirkan? (Boleh dijawab lebih dari satu)</label>
@@ -5204,7 +5584,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input name="data32" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data32" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Normal, tidak ada gangguan
                                           </label>
@@ -5218,7 +5598,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data33" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data33" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Ada komplikasi ketika melahirkan
                                           </label>
@@ -5232,7 +5612,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data34" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data34" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Normal tidak ada cacat bawaan
                                           </label>
@@ -5247,21 +5627,21 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data35" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data35" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Ada Cacat bawaan
                                           </label>
                                         </div>
                                       </div>
-                                      {{--  --}}
+                                      
 
-                                        {{--  --}}                   
+                                                           
                                         <div class="bg-white rounded-3 form-group mb-4">
                                           <div style="text-align: center;" class="mb-3">
                                                 <label for="exampleFormControlSelect1 "><strong>Bagaimana gambaran Pertumbuhan anak pada 12 bulan pertama</strong></label>
                                           </div>
             
-                                          {{-- MIRING --}}
+                                          
                                           <div class="container">
                                             <div class="row">
                                               <div class="col-sm">
@@ -5277,7 +5657,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data36" class="checkboxnormalon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data36" class="checkboxnormalon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck1">
                                                     Normal
                                                   </label>
@@ -5294,7 +5674,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data37" class="checkboxnormaloff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data37" class="checkboxnormaloff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck2">
                                                     Terlambat
                                                   </label>
@@ -5302,9 +5682,9 @@
                                               </div>
                                             </div>
                                           </div>
-                                          {{-- end MIRING --}}
+                                          
             
-                                          {{-- Tenkurap --}}
+                                          
                                           <div class="container">
                                             <div class="row">
                                               <div class="col-sm">
@@ -5320,7 +5700,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data38" class="checkboxtengkurapon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data38" class="checkboxtengkurapon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck1">
                                                     Normal
                                                   </label>
@@ -5337,7 +5717,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data39" class="checkboxtengkurapoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data39" class="checkboxtengkurapoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck2">
                                                     Terlambat
                                                   </label>
@@ -5345,9 +5725,9 @@
                                               </div>
                                             </div>
                                           </div>
-                                          {{-- end Tengkurap --}}
+                                          
             
-                                          {{-- Merangkak --}}
+                                          
             
                                           <div class="container">
                                             <div class="row">
@@ -5364,7 +5744,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data40" class="checkboxmerangkakon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data40" class="checkboxmerangkakon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck1">
                                                     Normal
                                                   </label>
@@ -5381,7 +5761,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data41" class="checkboxmerangkakoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data41" class="checkboxmerangkakoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck2">
                                                     Terlambat
                                                   </label>
@@ -5390,9 +5770,9 @@
                                             </div>
                                           </div>
             
-                                          {{-- end Merangkak --}}
+                                          
             
-                                          {{-- Duduk --}}
+                                          
             
                                           <div class="container">
                                             <div class="row">
@@ -5409,7 +5789,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data42" class="checkboxdudukon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data42" class="checkboxdudukon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck1">
                                                     Normal
                                                   </label>
@@ -5426,7 +5806,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data43" class="checkboxdudukoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data43" class="checkboxdudukoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck2">
                                                     Terlambat
                                                   </label>
@@ -5435,9 +5815,9 @@
                                             </div>
                                           </div>
             
-                                          {{-- end Duduk --}}
+                                          
             
-                                          {{-- Kemampuan Bicara dan Bahasa --}}
+                                          
             
                                           <div class="container">
                                             <div class="row">
@@ -5454,7 +5834,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data44" class="checkboxspeakon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data44" class="checkboxspeakon form-check-input" type="checkbox" value="Normal" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck1">
                                                     Normal
                                                   </label>
@@ -5471,7 +5851,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data45" class="checkboxspeakoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data45" class="checkboxspeakoff form-check-input" type="checkbox" value="Terlambat" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck2">
                                                     Terlambat
                                                   </label>
@@ -5480,10 +5860,10 @@
                                             </div>
                                           </div>
             
-                                          {{-- end Kemampuan bicara dan Bahasa --}}                   
+                                                             
             
                                         </div>
-                                        {{--  --}}
+                                        
                                
                                           <div class="bg-white rounded-3 form-group mb-4">
                                                   <div class="mb-3">
@@ -5493,7 +5873,7 @@
                                                       <label for="exampleFormControlSelect1"> Apakah ada cacat fisik</label>
                                                   </div>
             
-                                              {{--  --}}
+                                              
             
                                                 <div class="form-check mb-2">
                                                   <?php
@@ -5504,7 +5884,7 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data46" class="checkboxfisik1 form-check-input" type="checkbox" value="Ada" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data46" class="checkboxfisik1 form-check-input" type="checkbox" value="Ada" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck1">
                                                     Ada
                                                   </label>
@@ -5519,17 +5899,17 @@
                                                     $result = '';
                                                   }
                                               ?>
-                                                  <input name="data47" class="checkboxfisik2 form-check-input" type="checkbox" value="Tidak Ada" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                                  <input name="data47" class="checkboxfisik2 form-check-input" type="checkbox" value="Tidak Ada" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                                   <label class="form-check-label" for="defaultCheck2">
                                                     Tidak Ada
                                                   </label>
                                                 </div>
             
-                                                {{--  --}}
+                                                
             
                                           </div>                  
             
-                                      {{--  --}}
+                                      
             
                                     <div class="bg-white rounded-3 form-group mb-4">
                                       <div class="mb-3">
@@ -5544,7 +5924,7 @@
                                               $result = '';
                                             }
                                         ?>
-                                        <input name="data48" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data48" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                          Ya , Pernah
                                         </label>
@@ -5558,7 +5938,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data49" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data49" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Tidak Pernah
                                         </label>
@@ -5572,7 +5952,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data50" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data50" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                          Ya, Punya Riwayat kejang demam (tiap demam pasti kejang)
                                         </label>
@@ -5587,15 +5967,15 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data51" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data51" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Tidak ada riwayat kejang demam
                                         </label>
                                       </div>
                                     </div>
-                                    {{--  --}}
+                                    
             
-                                  {{--  --}}
+                                  
             
                                   <div class="form-group mb-4">
                                     <?php
@@ -5607,12 +5987,12 @@
                                           }
                                        ?>
                                     <label for="exampleFormControlInput1"> apakah memiliki riwayat penyakit yang di derita ? penyakit apa,pada usia berapa ketika mengalami sakit ? lama sakitnya ? apakah masih menjalani medikasi sampai saat ini ? , apakah penyakit ini kambuhan?</label>
-                                    <input name="data52" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                    <input name="data52" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                   </div>
             
-                                  {{--  --}}
+                                  
             
-                              {{--  --}}
+                              
             
                               <div class="form-group mb-4">
                                 <?php
@@ -5624,11 +6004,11 @@
                                       }
                                    ?>
                                 <label for="exampleFormControlInput1"> apakah pernah dirawat di rumah sakit? karena sakit apa ? tahun berapa ?</label>
-                                <input name="data53" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                <input name="data53" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                               </div>
-                              {{--  --}}
+                              
             
-                                    {{--  --}}
+                                    
             
                                     <div class="form-group mb-4">
                                       <?php
@@ -5640,10 +6020,10 @@
                                             }
                                          ?>
                                       <label for="exampleFormControlInput1"> catatan lain jika ada</label>
-                                      <input name="data54" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                      <input name="data54" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                     </div>
             
-                                    {{--  --}}                     
+                                                         
             
                             </div>
       
@@ -5657,7 +6037,7 @@
                                    </div>
 
                                    <div class="informasi5">
-                                    {{--  --}}
+                                    
                                     <div class="form-group mb-4">
                                       <?php
                                             $array= array_column($file_additionalsatu, 'data55');
@@ -5668,16 +6048,16 @@
                                             }
                                          ?>
                                       <label for="exampleFormControlInput1">Sekolah Asal</label>
-                                      <input name="data55" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                      <input name="data55" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                     </div>
-                                    {{--  --}}
+                                    
                   
                                     <div class="form-group mb-4">
                                       <label for="exampleFormControlInput1">Saya Mengetahui sekolah Avicenna melalui ?</label>
-                                      {{-- <input name="addressparent" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" > --}}
+                                      
                                     </div>
                   
-                                    {{--  --}}
+                                    
                   
                                     <div class="bg-white rounded-3 form-group mb-4">
                                       <div class="mb-3">
@@ -5704,7 +6084,7 @@
                                                 ?>
                   
                                             <select name="data56" id="">
-                                              <option value="{{ $brand }}">{{ $brand }}</option>
+                                              <option value="<?php echo e($brand); ?>"><?php echo e($brand); ?></option>
                                             </select>
                   
                                       </div>
@@ -5733,7 +6113,7 @@
                                                 ?>
                   
                                             <select name="data57" id="">
-                                              <option value="{{ $kegiatan_sekolah  }}">{{ $kegiatan_sekolah }}</option>
+                                              <option value="<?php echo e($kegiatan_sekolah); ?>"><?php echo e($kegiatan_sekolah); ?></option>
                                             </select>
                   
                                       </div>
@@ -5764,7 +6144,7 @@
                                                 ?>
                   
                                             <select name="data58" id="">
-                                              <option value="{{ $media_cetak  }}">{{ $media_cetak }}</option>
+                                              <option value="<?php echo e($media_cetak); ?>"><?php echo e($media_cetak); ?></option>
                                             </select>
                   
                                       </div>
@@ -5795,7 +6175,7 @@
                                                 ?>
                   
                                             <select name="data59" id="">
-                                              <option value="{{ $media_elektronik  }}">{{ $media_elektronik }}</option>
+                                              <option value="<?php echo e($media_elektronik); ?>"><?php echo e($media_elektronik); ?></option>
                                             </select>
                   
                                       </div>
@@ -5829,7 +6209,7 @@
                                                 ?>
                   
                                             <select name="data60" id="">
-                                              <option value="{{ $media_sosial  }}">{{ $media_sosial }}</option>
+                                              <option value="<?php echo e($media_sosial); ?>"><?php echo e($media_sosial); ?></option>
                                             </select>
                   
                                       </div>
@@ -5850,7 +6230,7 @@
                                                 ?>
                   
                                             <select name="data61" id="">
-                                              <option value="{{ $internet  }}">{{ $internet }}</option>
+                                              <option value="<?php echo e($internet); ?>"><?php echo e($internet); ?></option>
                                               <option value="1">Website</option>
                                               <option value="2">Google</option>
                                               <option value="3">Forum</option>
@@ -5860,9 +6240,9 @@
                                       </div>
                                     </div>
                   
-                                    {{--  --}}
+                                    
                   
-                                     {{--  --}}
+                                     
                                      <div class="bg-white rounded-3 form-group mb-4">
                                       <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Hal Membuat saya memilih sekolah Avicenna ?</label>
@@ -5876,7 +6256,7 @@
                                               $result = '';
                                             }
                                         ?>
-                                        <input name="data62" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data62" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                           Program Sekolah
                                         </label>
@@ -5890,7 +6270,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data63" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data63" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Fasilitas % pelayanan
                                         </label>
@@ -5904,7 +6284,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data64" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data64" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Jarak
                                         </label>
@@ -5919,15 +6299,15 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data65" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data65" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Uang Sekolah Terjangkau
                                         </label>
                                       </div>
                                     </div>
-                                    {{--  --}}
+                                    
                   
-                                      {{--  --}}
+                                      
                                       <div class="bg-white rounded-3 form-group mb-4">
                                         <div class="mb-3">
                                               <label for="exampleFormControlSelect1">Alasan memilih program Sekolah ?</label>
@@ -5941,7 +6321,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input name="dataschool62" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataschool62" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             Memiliki Program Habits  7 "Leader in Me"
                                           </label>
@@ -5955,7 +6335,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="dataschool63" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataschool63" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Prestasi Sekolah
                                           </label>
@@ -5969,7 +6349,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="dataschool64" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataschool64" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                            Ekstrakulikuler
                                           </label>
@@ -5984,16 +6364,16 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="dataschool65" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="dataschool65" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             Tidak Memilih Program
                                           </label>
                                         </div>
                                       </div>
-                                      {{--  --}}
+                                      
                   
                   
-                                    {{--  --}}
+                                    
                                     <div class="bg-white rounded-3 form-group mb-4">
                                       <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Alasan memilih "Fasilitas dan Pelayanan" ?</label>
@@ -6007,7 +6387,7 @@
                                               $result = '';
                                             }
                                         ?>
-                                        <input name="data66" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data66" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                           Fasilitas Sekolah lengkap
                                         </label>
@@ -6021,7 +6401,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data67" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data67" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Kebersihan Gedung Sekolah
                                         </label>
@@ -6035,7 +6415,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data68" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data68" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                          Pelayanan baik penyampaian informasi cukup jelas
                                         </label>
@@ -6050,7 +6430,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data69" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data69" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Tenaga pendidik yang Berkompeten & Profesional
                                         </label>
@@ -6065,16 +6445,16 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data70" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data70" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Tidak Memilih Fasilitas & Pelayanan
                                         </label>
                                       </div>
                                     </div>
-                                    {{--  --}}
+                                    
                   
                   
-                                       {{--  --}}
+                                       
                                        <div class="bg-white rounded-3 form-group mb-4">
                                         <div class="mb-3">
                                               <label for="exampleFormControlSelect1">Alasan memilih Jarak ?</label>
@@ -6088,7 +6468,7 @@
                                                 $result = '';
                                               }
                                           ?>
-                                          <input name="data71" class="form-check-input" type="checkbox" value="1" id="defaultdata71" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data71" class="form-check-input" type="checkbox" value="1" id="defaultdata71" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck1">
                                             < 1Km dari tempat tinggal
                                           </label>
@@ -6102,7 +6482,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data72" class="form-check-input" type="checkbox" value="2" id="defaultdata72" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data72" class="form-check-input" type="checkbox" value="2" id="defaultdata72" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck2">
                                             1 - 5 Km dari tempat tinggal
                                           </label>
@@ -6116,7 +6496,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data73" class="form-check-input" type="checkbox" value="3" id="defaultdata73" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data73" class="form-check-input" type="checkbox" value="3" id="defaultdata73" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck3">
                                            6 - 10 Km dari tempat Tinggal
                                           </label>
@@ -6131,7 +6511,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data74" class="form-check-input" type="checkbox" value="4" id="defaultdata74" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data74" class="form-check-input" type="checkbox" value="4" id="defaultdata74" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck4">
                                             11 - 20 Km dan tempat tinggal
                                           </label>
@@ -6146,7 +6526,7 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data75" class="form-check-input" type="checkbox" value="5" id="defaultdata75" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data75" class="form-check-input" type="checkbox" value="5" id="defaultdata75" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck5">
                                             21 - 30 Km dari tempat tinggal
                                           </label>
@@ -6162,15 +6542,15 @@
                                                   $result = '';
                                                 }
                                           ?>
-                                          <input name="data76" class="form-check-input" type="checkbox" value="6" id="defaultdata76" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                          <input name="data76" class="form-check-input" type="checkbox" value="6" id="defaultdata76" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                           <label class="form-check-label" for="defaultCheck6">
                                             Tidak memilih 'Jarak'
                                           </label>
                                         </div>
                                       </div>
-                                      {{--  --}}
+                                      
                   
-                                    {{--  --}}
+                                    
                                     <div class="bg-white rounded-3 form-group mb-4">
                                       <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Alasan memilih uang Sekolah Terjangkau ?</label>
@@ -6184,7 +6564,7 @@
                                               $result = '';
                                             }
                                         ?>
-                                        <input name="data77" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data77" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                           Uang Pangkal
                                         </label>
@@ -6198,7 +6578,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data78" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data78" class="form-check-input" type="checkbox" value="2" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           SPP
                                         </label>
@@ -6212,7 +6592,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data79" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data79" class="form-check-input" type="checkbox" value="3" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                         Tanda Adanya biaya Tambahan
                                         </label>
@@ -6227,15 +6607,15 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data80" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data80" class="form-check-input" type="checkbox" value="4" id="defaultCheck2" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Tidak Memiliki Uang Sekolah Terjangkau
                                         </label>
                                       </div>
                                     </div>
-                                    {{--  --}}
+                                    
                   
-                                    {{--  --}}
+                                    
                                     <div class="bg-white rounded-3 form-group mb-4">
                                       <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Bagaimana Prosedur penerima PPDB sekolah Avicenna ?</label>
@@ -6249,7 +6629,7 @@
                                               $result = '';
                                             }
                                         ?>
-                                        <input name="data81" class="form-check-input" type="checkbox" value="1" id="defaultdata81" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data81" class="form-check-input" type="checkbox" value="1" id="defaultdata81" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck1">
                                           Sederhana dan Mudah
                                         </label>
@@ -6263,7 +6643,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data82" class="form-check-input" type="checkbox" value="2" id="defaultdata82" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data82" class="form-check-input" type="checkbox" value="2" id="defaultdata82" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                           Standar seperti disekolah lain
                                         </label>
@@ -6277,7 +6657,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data83" class="form-check-input" type="checkbox" value="3" id="defaultdata83" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data83" class="form-check-input" type="checkbox" value="3" id="defaultdata83" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck2">
                                         Berbelit belit dan perlu disederhanakan
                                         </label>
@@ -6292,7 +6672,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data84" class="form-check-input" type="checkbox" value="4" id="defaultdata84" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data84" class="form-check-input" type="checkbox" value="4" id="defaultdata84" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck3">
                                           Tidak Memiliki Uang Sekolah Terjangkau
                                         </label>
@@ -6307,7 +6687,7 @@
                                                 $result = '';
                                               }
                                         ?>
-                                        <input name="data85" class="form-check-input" type="checkbox" value="5" id="defaultdata85" {{ ($result =='' && $result == null) ? '' : 'checked' }}>
+                                        <input name="data85" class="form-check-input" type="checkbox" value="5" id="defaultdata85" <?php echo e(($result =='' && $result == null) ? '' : 'checked'); ?>>
                                         <label class="form-check-label" for="defaultCheck4">
                                           Merepotkan
                                         </label>
@@ -6315,7 +6695,7 @@
                                     </div>
                   
                   
-                                      {{--  --}}
+                                      
                                       <div class="form-group mb-4">
                                         <?php
                                               $array= array_column($file_additionalsatu, 'data86');
@@ -6326,9 +6706,9 @@
                                               }
                                            ?>
                                         <label for="exampleFormControlInput1">Pendapat Saya</label>
-                                        <input name="data86" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="{{  !empty($result[0]) ? $result[0] :  $result  }}">
+                                        <input name="data86" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jawaban Anda" value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>">
                                       </div>
-                                      {{--  --}}
+                                      
                   
                   
                            
@@ -6353,11 +6733,11 @@
 
     </div><!-- row -->
 </div><!-- row -->
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
-@push('after-scripts')
+<?php $__env->startPush('after-scripts'); ?>
 <script>
 
 $(document).ready(function() {
@@ -6417,6 +6797,12 @@ $('.register9').hide();
 $('.btndowncheck1').hide();
 $('.formulircheck1').hide();
 $('.formulircheckisi').hide();
+$('.informasites').hide();
+$('.informasiupspp').hide();
+$('.informasiformulir').hide();
+
+
+
 
 
 $('.btndown1').click( function() {
@@ -6496,6 +6882,19 @@ $('.btndown4').click( function() {
 $('.btndown5').click( function() {
   $('.informasi5').toggle();
 })
+
+$('.btndowntes').click( function() {
+  $('.informasites').toggle();
+})
+
+$('.btndownupspp').click( function() {
+  $('.informasiupspp').toggle();
+})
+
+$('.btndownformulir').click( function() {
+  $('.informasiformulir').toggle();
+})
+
 
 
 
@@ -6788,3 +7187,5 @@ $('.tab-pane-reregister').hide();
 
 @endpush
 
+
+<?php echo $__env->make('backend.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ppdb\resources\views/backend/ppdb/edit.blade.php ENDPATH**/ ?>

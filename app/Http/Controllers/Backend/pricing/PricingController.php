@@ -19,6 +19,7 @@ use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
 use App\Imports\DataImport;
+use App\Models\MasterKelas;
 
 class PricingController extends Controller
 {
@@ -73,6 +74,75 @@ class PricingController extends Controller
         return new ViewResponse('backend.pricing.indexwave2', $data);
     }
 
+
+    public function master() {
+
+         $master = MasterKelas::all();
+
+        $data = [
+            'master' => $master
+        ];
+        return new ViewResponse('backend.pricing.master', $data);
+    }
+
+    public function masterstore() {
+
+        $master = "storedush";
+        $data = [
+            'master' => $master
+        ];
+        return new ViewResponse('backend.pricing.masterstore', $data);
+    }
+
+    public function masterinsert(Request $request) {
+
+        $masterinsert = new MasterKelas;
+
+        $masterinsert->kategori = $request->kategori_kelas;
+        $masterinsert->kelas = $request->nama_kelas;
+        $masterinsert->unit = $request->unit;
+        $masterinsert->sekolah = $request->sekolah;
+        $masterinsert->kepala_sekolah = $request->kepala_sekolah;
+        $masterinsert->wali_kelas = $request->wali_kelas;
+
+        $masterinsert ->save();
+
+        return redirect()->back()->withFlashSuccess(__('alerts.backend.access.users.session_insert'));
+    }
+
+    public function masterDelete (Request $request) {
+        $masterdelete = MasterKelas::where('id', $request->item_value)->first();
+
+        $masterdelete->delete();
+
+        return redirect()->back()->withFlashSuccess(__('alerts.backend.access.users.session_deleted'));
+    }
+
+    public function masterdone(Request $request) {
+
+        $masterupdate = MasterKelas::where('id', $request->id_item)->first();
+
+        $masterupdate->kategori = $request->kategori_kelas;
+        $masterupdate->kelas = $request->nama_kelas;
+        $masterupdate->unit = $request->unit;
+        $masterupdate->sekolah = $request->sekolah;
+        $masterupdate->kepala_sekolah = $request->kepala_sekolah;
+        $masterupdate->wali_kelas = $request->wali_kelas;
+
+        $masterupdate ->save();
+
+        return redirect()->back()->withFlashSuccess(__('alerts.backend.access.users.session_updated'));
+    }
+
+    public function masterUpdate($id)
+    {
+        $masterupdate = MasterKelas::where('id', $id)->first();
+
+        $data = [
+            'masterupdate'=> $masterupdate
+        ];
+        return new ViewResponse('backend.pricing.masterupdate', $data);
+    }
 
     /**
      * @param \App\Http\Requests\Backend\Pricing\PricingPermissionRequest $request
@@ -217,7 +287,6 @@ class PricingController extends Controller
 
             Data_siswa::insert($data_siswa_insert);
    
-            // // Pricing::query()->truncate();
             return redirect()->route('admin.pricing.index');            
 
     }
