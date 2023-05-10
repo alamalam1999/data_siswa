@@ -467,31 +467,67 @@
                          <!--end::Col-->
                          </div>
 
-                         <!--begin::Input group-->
-                         <div class="row fv-row mb-10">
+                        <!--begin::Input group-->
+                        <div class="row fv-row mb-10">
                           <!--begin::Col-->
-                          <div class="col-xl-6">
+                            <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">NISN</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Tuliskan Nomor NISN" name="first_name" autocomplete="off" />
+                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NISN" name="first_name" autocomplete="off" />
+                              </div>
+                              <!--end::Col-->
+                              <!--begin::Col-->
+                            <div class="col-xl-6">
+                                  <label class="form-label fw-bolder text-dark fs-6">NIK</label>
+                                  <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NIK" name="last_name" autocomplete="off" />
+                            </div>
+                            <!--end::Col-->
+                        </div>
+
+
+                        <!--begin::Input group-->
+                        <div class="row fv-row mb-10">
+                          <!--begin::Col-->
+                            <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
+                                <!--begin::Switch-->
+                          <div>
+                            <select id="" class="form-select form-select-solid">
+                            <option value="">Pilih Status</option>
+                            <option value="">Aktif</option>
+                            <option value="">Tidak Aktif</option>
+                            <option value="">Alum</option>
+                            </select>
                           </div>
-                         <!--end::Col-->
-                         <!--begin::Col-->
-                         <div class="col-xl-6">
-                          <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
-                        <!--begin::Switch-->
-                        <div>
-                          <select id="" class="form-select form-select-solid">
-                              <option value="">Pilih Status</option>
-                              <option value="">Aktif</option>
-                              <option value="">Tidak Aktif</option>
-                              <option value="">Alumni</option>
-                          </select>
+                          <!--end::Switch-->
+                            </div>
+                          <!--end::Col-->
+                          <!--begin::Col-->
+                            <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">Keterangan</label>
+                          <!--begin::Switch-->
+                          <div>
+                            <select id="" class="form-select form-select-solid">
+                            <option value="">Pilih Keterangan</option>
+                            <option value="">Lulus</option>
+                            <option value="">Pindah Sekolah</option>
+                            <option value="">Tidak Naik Kelas</option>
+                            <option value="">Drop Out</option>
+                            </select>
+                          </div>
+                          <!--end::Switch-->
+                            </div>
+                            <!--end::Col-->
                         </div>
-                        <!--end::Switch-->
-                         
-                        </div>
-                        <!--end::Col-->
-                   </div>
+
+
+
+
+
+
+
+
+
+
 
                           <div class="container-flex justify-content-end">
                             <div class="row">
@@ -503,7 +539,7 @@
                             <!--end: :Wrapper-->
 
                              <!--begin::Wrapper-->
-                             <div class="col-sm-10">
+                             <div class="col-sm-10" style="margin-right: 38px">
                               <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="edit">
                               <span class="indicator-label">Edit
                            </div>
