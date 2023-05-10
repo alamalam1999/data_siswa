@@ -83,77 +83,7 @@
 
         <!-- Start Footer 
     ============================================= -->
-        <footer class="bg-dark default-padding-top text-light">
-            <div id="contact" class="container">
-                <div class="row">
-                    <div class="f-items">
-                        <div class="col-md-6 item">
-                            <div class="f-item">
-                                <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" alt="Logo" width="226" height="50">
-                                <p>
-                                    Avicenna Leadership School adalah Sekolah Swasta Unggulan yang berlokasi di Jagakarsa, Cinere dan Pamulang. Avicenna Leadership School memiliki visi mewujudkan sekolah berkarakter kepemimpinan, berbasis sains dan teknologi, peduli pada lingkungan dan berprestasi.
-                                </p>
-                                <div class="social">
-                                    <img src="https://jagakarsa.sekolah-avicenna.sch.id/wp-content/uploads/2019/07/logo-home-300x84.png" alt="Logo" width="226" height="50">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-1 item">
-                        </div>
-                        <div class="col-md-5 item">
-                            <div class="f-item recent-post">
-                                <ul>
-                                    <li>
-                                        <div class="thumb">
-                                            <a href="https://jagakarsa.sekolah-avicenna.sch.id/" target="_blank">
-                                                <img src="{{ asset('frontend/img/header-jagakarsa.jpg') }}" alt="Thumb">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <a href="https://jagakarsa.sekolah-avicenna.sch.id/" target="_blank">JL. M. Kahfi II No. 66 Jagakarsa, Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12610. JAGAKARSA, Indonesia</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="thumb">
-                                            <a href="https://pamulang.sekolah-avicenna.sch.id/" target="_blank">
-                                                <img src="{{ asset('frontend/img/header-pamulang.jpg') }}" alt="Thumb">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <a href="https://pamulang.sekolah-avicenna.sch.id/" target="_blank">JL. Villa Pamulang Blok AJ (Sektor 1), Pondok Benda, Kec Pamulang, Kota Tangerang Selatan, Banten 15416. PAMULANG, Indonesia</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="thumb">
-                                            <a href="https://cinere.sekolah-avicenna.sch.id/" target="_blank">
-                                                <img src="{{ asset('frontend/img/header-cinere.jpg') }}" alt="Thumb">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <a href="https://cinere.sekolah-avicenna.sch.id/" target="_blank" style="margin-bottom: 5px;">JL. H. Rosyid No.21, Kec. Cinere, Kota Depok, Jawa Barat 16513. CINERE, Indonesia.</a>
-                                            <a href="https://cinere.sekolah-avicenna.sch.id/" target="_blank">JL. Flamboyan Blok F Cinere, Limo - Depok. Indonesia</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Start Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text-center">
-                                <p>&copy; Copyright 2022. All Rights Reserved by <a href="https://sekolah-avicenna.sch.id/">Sekolah Avicenna - Yayasan Pendidikan Avicenna Prestasi.</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Footer Bottom -->
-        </footer>
+        
         <!-- End Footer -->
     </div>
 

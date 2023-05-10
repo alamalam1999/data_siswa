@@ -145,38 +145,21 @@ class PaymentTableController extends Controller
         INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
         ".implode(' ', $innerCondition)."
-        WHERE         
+        WHERE 
+        ppdb.document_status = 7
+        AND         
         ".implode(' AND ', $whereCondition).' 
         ORDER BY payment.created_at DESC';
 
         debug($SQLQuery);
 
-        // $SQLQuery = "SELECT
-        //     registration_schedules.description AS schedule_name,
-        //     schools.school_name AS school,
-        //     Payment.*
-        // FROM Payment
-        // INNER JOIN registration_schedules ON Payment.registration_schedule_id = registration_schedules.id
-        // INNER JOIN schools ON Payment.school_site = schools.school_code";
-
         $payments = DB::select($SQLQuery);
 
         return Datatables::of($payments)
-            // ->editColumn('schedule', function ($PaymentItem) {
-            //     return $PaymentItem->schedule->description;
-            // })
-            // ->editColumn('school', function ($PaymentItem) {
-            //     return $PaymentItem->school->school_name;
-            // })
-            // ->editColumn('created_at', function ($paymentItem) {
-            //     return Carbon::parse($paymentItem->created_at)->toDateString();
-            // })
+
             ->editColumn('date_send', function ($paymentItem) {
                 return Carbon::parse($paymentItem->date_send)->toDateString();
             })
-            // ->addColumn('actions', function ($PaymentItem) {
-            //     return $PaymentItem->action_buttons;
-            // })
             ->make(true);
     }
 

@@ -125,19 +125,13 @@ class PPDBTableController extends Controller
         INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
         '.implode(' ', $innerCondition).'
-        WHERE  
+        WHERE
+        ppdb.document_status = 7
+        AND      
         '.implode(' AND ', $whereCondition).' 
         ORDER BY ppdb.created_at DESC';
 
         debug($SQLQuery);
-
-        // $SQLQuery = "SELECT
-        //     registration_schedules.description AS schedule_name,
-        //     schools.school_name AS school,
-        //     ppdb.*
-        // FROM ppdb
-        // INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
-        // INNER JOIN schools ON ppdb.school_site = schools.school_code";
 
         $ppdbs = DB::select($SQLQuery);
 

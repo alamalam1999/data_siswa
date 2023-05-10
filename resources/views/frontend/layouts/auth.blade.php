@@ -56,34 +56,11 @@
                     @yield('content')
 				</div>
 				<!--end::Body-->
-				<!--begin::Aside-->
+				{{-- <!--begin::Aside-->
 				<div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ asset('assets/media/misc/auth-bg.png') }})">
-					<!--begin::Content-->
-					<div class="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
-						<!--begin::Logo-->
-						<a href="{{ route('frontend.index') }}" class="mb-12">
-							<img alt="Logo" src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="h-50px" width="226" height="50" />
-						</a>
-						<!--end::Logo-->
-						<!--begin::Image-->
-						<img class="mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="{{ asset('assets/media/misc/auth-right.png') }}" alt="" />
-						<!--end::Image-->
-						<!--begin::Title-->
-						<h1 class="text-white fs-2qx fw-bolder text-center mb-7">Avicenna Leadership School</h1>
-						<!--end::Title-->
-						<!--begin::Text-->
-                        <div class="text-white fs-base text-center">
-                            Sekolah Swasta Unggulan yang berlokasi di 
-                            <a href="https://jagakarsa.sekolah-avicenna.sch.id/" target="_blank" class="opacity-75-hover text-warning fw-bold me-1">Jagakarsa</a>,
-                            <a href="https://cinere.sekolah-avicenna.sch.id/" target="_blank" class="opacity-75-hover text-warning fw-bold me-1">Cinere</a> dan 
-                            <a href="https://pamulang.sekolah-avicenna.sch.id/" target="_blank" class="opacity-75-hover text-warning fw-bold me-1">Pamulang</a>. 
-                            <br />Avicenna Leadership School memiliki visi mewujudkan sekolah berkarakter kepemimpinan, berbasis sains dan teknologi, peduli pada lingkungan dan berprestasi.
-						<br></div>
-						<!--end::Text-->
-					</div>
-					<!--end::Content-->
+				{{-- empty --}}
 				</div>
-				<!--end::Aside-->
+				<!--end::Aside--> --}}
 			</div>
 			<!--end::Authentication - Sign-in-->
 		</div>
