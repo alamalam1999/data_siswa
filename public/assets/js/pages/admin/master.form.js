@@ -1,6 +1,25 @@
+    const container = document.getElementById('input-cont1');
+
+    var no = 1;
+
+    function tambahInput(){
+        let input = document.createElement('input');
+        input.placeholder = 'Menambahkan Wali Sesuka Mu';
+        input.id = 'input-cont';
+        input.name = 'nama_wali_kelas_'+ no++;
+        input.classList = 'form-control form-control-lg form-control-solid mb-3';
+        container.appendChild(input);
+    }
+
+    function kurangInput(){
+        var element = document.getElementById("input-cont1");
+        var child=document.getElementById("input-cont");
+        element.removeChild(child); 
+    }
+
 $(document).ready(function() {
 
-    fetchstudent();
+      fetchstudent();
   
       function fetchstudent()
       {
@@ -14,7 +33,7 @@ $(document).ready(function() {
                $('#nama_kelas').append(
                     '<option value="'+ item.id +'">'+item.kelas+'</option>'
                ); 
-            });
+            }); 
 
             $('#nama_kelas').change(function(){
 
@@ -32,6 +51,32 @@ $(document).ready(function() {
                      });
 
                      document.getElementById('nama_wali_kelas').value=result ;               
+                     
+                }
+            })
+
+            $.each(response.masterkelas, function (key, item) {                
+                $('#kelas_utama').append(
+                     '<option value="'+ item.id +'">'+item.kategori+'</option>'
+                ); 
+             });
+
+            $('#kelas_utama').change(function(){
+
+                var datatest = $(this).val();
+                
+
+                if (datatest != null) {
+
+                    var result = "";
+
+                    $.each(response.masterkelas, function (key, item) {                
+                        if (datatest == item.id) {
+                            result = item.kepala_sekolah;
+                        }
+                     });
+
+                     document.getElementById('nama_kepala_sekolah').value=result ;               
                      
                 }
             })

@@ -404,13 +404,17 @@
                             <!--begin::Col-->
                                <div class="col-xl-6">
                                    <label class="form-label fw-bolder text-dark fs-6">Kelas Utama</label>
-                                   <input class="form-control form-control-lg form-control-solid" type="text" placeholder="metode selection dari master kelas" name="first_name" autocomplete="off" />
+                                   <select class="form-control form-control-lg form-control-solid" id="kelas_utama" name="kelas_utama">
+                                      <option value="">Pilih</option>
+                                   </select>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                <div class="col-xl-6">
-                                    <label class="form-label fw-bolder text-dark fs-6">Nama Kelas</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="metode selection dari master kelas" name="last_name" autocomplete="off" />
+                                <label class="form-label fw-bolder text-dark fs-6">Nama Kelas</label>
+                                    <select class="form-control form-control-lg form-control-solid" id="nama_kelas" name="nama_kelas" >
+                                      <option value="">Pilih</option>
+                                    </select>                              
                                </div>
                                <!--end::Col-->
                           </div>
@@ -456,13 +460,17 @@
                           <!--begin::Col-->
                           <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Nama Kepala Sekolah</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="first_name" autocomplete="off" />
+                                <input id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="nama_kepala_sekolah" autocomplete="off" />
                           </div>
                          <!--end::Col-->
                          <!--begin::Col-->
                          <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="last_name" autocomplete="off" />
+                                <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
+                                <div class="mt-3 mb-3" id='input-cont1'>
+                                  <!--Input container-->
+                                </div>
+                                <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">+Tambah input</button> <button class="btn btn-danger btn-sm fs-9" onclick="kurangInput()">-Kurang input</button>
                          </div>
                          <!--end::Col-->
                          </div>
@@ -6775,436 +6783,6 @@
 
 
 <?php $__env->startPush('after-scripts'); ?>
-<script>
-
-$(document).ready(function() {
-
-
-  var href3 = $('.linkhref3').attr('href');
-
-  $('.linkhref3').attr('href', hostBaseUrl + href3);
-
-  var href4 = $('.linkhref4').attr('href');
-
-$('.linkhref4').attr('href', hostBaseUrl + href4);
-
-var href5 = $('.linkhref5').attr('href');
-
-$('.linkhref5').attr('href', hostBaseUrl + href5);
-
-var href6 = $('.linkhref6').attr('href');
-
-$('.linkhref6').attr('href', hostBaseUrl + href6);
-
-var href7 = $('.linkhref7').attr('href');
-
-$('.linkhref7').attr('href', hostBaseUrl + href7);
-
-var href8 = $('.linkhref8').attr('href');
-
-$('.linkhref8').attr('href', hostBaseUrl + href8);
-
-$('.informasi1').hide();
-$('.informasi2').hide();
-$('.informasi3').hide();
-$('.informasi4').hide();
-$('.informasi5').hide();
-
-$('.btnregister1').hide();
-$('.register1').hide();
-$('.btnregister2').hide();
-$('.register2').hide();
-$('.btnregister3').hide();
-$('.register3').hide();
-$('.btnregister4').hide();
-$('.register4').hide();
-$('.btnregister5').hide();
-$('.register5').hide();
-$('.btnregister6').hide();
-$('.register6').hide();
-$('.btnregister7').hide();
-$('.register7').hide();
-$('.btnregister8').hide();
-$('.register8').hide();
-$('.btnregister9').hide();
-$('.register9').hide();
-
-
-
-$('.btndowncheck1').hide();
-$('.formulircheck1').hide();
-$('.formulircheckisi').hide();
-$('.informasites').hide();
-$('.informasiupspp').hide();
-$('.informasiformulir').hide();
-
-
-
-
-
-$('.btndown1').click( function() {
-  $('.btnregister1').toggle();
-  $('.btnregister2').toggle();
-  $('.btnregister3').toggle();
-  $('.btnregister4').toggle();
-  $('.btnregister5').toggle();
-  $('.btnregister6').toggle();
-  $('.btnregister7').toggle();
-  $('.btnregister8').toggle();
-  $('.btnregister9').toggle();
-
-  $('.register1').hide();
-  $('.register2').hide();
-  $('.register3').hide();
-  $('.register4').hide();
-  $('.register5').hide();
-  $('.register6').hide();
-  $('.register7').hide();
-  $('.register8').hide();
-  $('.register9').hide();
-  
-})
-
-$('.btnregister1').click( function() {
-  $('.register1').toggle();
-})
-
-$('.btnregister2').click( function() {
-  $('.register2').toggle();
-})
-
-$('.btnregister3').click( function() {
-  $('.register3').toggle();
-})
-
-$('.btnregister4').click( function() {
-  $('.register4').toggle();
-})
-
-$('.btnregister5').click( function() {
-  $('.register5').toggle();
-})
-
-$('.btnregister6').click( function() {
-  $('.register6').toggle();
-})
-
-$('.btnregister7').click( function() {
-  $('.register7').toggle();
-})
-
-$('.btnregister8').click( function() {
-  $('.register8').toggle();
-})
-
-$('.btnregister9').click( function() {
-  $('.register9').toggle();
-})
-
- 
-
-
-$('.btndown2').click( function() {
-  $('.informasi2').toggle();
-})
-
-$('.btndown3').click( function() {
-  $('.informasi3').toggle();
-})
-
-$('.btndown4').click( function() {
-  $('.informasi4').toggle();
-})
-
-$('.btndown5').click( function() {
-  $('.informasi5').toggle();
-})
-
-$('.btndowntes').click( function() {
-  $('.informasites').toggle();
-})
-
-$('.btndownupspp').click( function() {
-  $('.informasiupspp').toggle();
-})
-
-$('.btndownformulir').click( function() {
-  $('.informasiformulir').toggle();
-})
-
-
-
-
-
-$('.tab-pane-reregister').hide();
-
-    $('.tabpane5').click(function() {
-
-        $('.tab-pane-reregister').show();
-
-            $('.register1').hide();
-            $('.register2').hide();
-            $('.register3').hide();
-            $('.register4').hide();
-            $('.register5').hide();
-            $('.register6').hide();
-            $('.register7').hide();
-            $('.register8').hide();
-            $('.register9').hide();
-
-            $('.test1').hide();
-
-            $('.test2').hide();
-
-            $('.test3').hide();
-
-            $('.test4').hide();
-
-            $('.btnparent').removeClass('btn-secondary').addClass('btn-success');
-
-            $('.btnregister1').click( function() {
-              $('.register1').toggle();
-            })
-            
-            $('.btnregister2').click( function() {
-              $('.register2').toggle();
-            })
-            
-            $('.btnregister3').click( function() {
-              $('.register3').toggle();
-            })
-            
-            $('.btnregister4').click( function() {
-              $('.register4').toggle();
-            })
-            
-            $('.btnregister5').click( function() {
-              $('.register5').toggle();
-            })
-
-            $('.btnregister6').click( function() {
-              $('.register6').toggle();
-            })
-
-            $('.btnregister7').click( function() {
-              $('.register7').toggle();
-            })
-
-            $('.btnregister8').click( function() {
-              $('.register8').toggle();
-            })
-
-            $('.btnregister9').click( function() {
-              $('.register9').toggle();
-            })
-
-            $('.btntest1').click( function() {
-                $('.test1').toggle();
-                $('.test2').hide();
-                $('.test3').hide();
-                $('.test4').hide();
-            })
-
-            $('.btntest2').click( function() {
-                $('.test2').toggle();
-                $('.test1').hide();
-                $('.test3').hide();
-                $('.test4').hide();
-            })
-
-            $('.btntest3').click( function() {
-                $('.test3').toggle();
-                $('.test2').hide();
-                $('.test1').hide();
-                $('.test4').hide();
-            })
-
-            $('.btntest4').click( function() {
-                $('.test4').toggle();
-                $('.test2').hide();
-                $('.test3').hide();
-                $('.test1').hide();
-            })
-
-            $('.btnangket').click(function() {
-                $('.test4').toggle();
-                $('.test').hide();
-                $('.test2').hide();
-                $('.test3').hide();
-            })
-
-            $('.btnceksatu').click( function() {
-                $('.test2').show();
-                $('.test').hide();
-                $('.test3').hide();
-                $('.test4').hide();
-                $('.btnparent').removeClass('btn-success').addClass('btn-secondary');
-                $('.btnrules').removeClass('btn-secondary').addClass('btn-success');
-            })
-
-            $('.btncekdua').click( function() {
-                $('.test3').show();
-                $('.test').hide();
-                $('.test2').hide();
-                $('.test4').hide();
-                $('.btnconditionstudent').removeClass('btn-secondary').addClass('btn-success');
-                $('.btnrules').removeClass('btn-success').addClass('btn-secondary');
-                $('.btnparent').removeClass('btn-success').addClass('btn-secondary');
-            })
-
-
-            $('.btncektiga').click( function() {
-                $('.test4').show();
-                $('.test').hide();
-                $('.test2').hide();
-                $('.test3').hide();
-                $('.btnangket').removeClass('btn-secondary').addClass('btn-success');
-                $('.btnconditionstudent').removeClass('btn-success').addClass('btn-secondary');
-                $('.btnparent').removeClass('btn-success').addClass('btn-secondary');
-                $('.btnrules').removeClass('btn-success').addClass('btn-secondary');
-            })
-
-            $('.btncekduasebelumnya').click( function() {
-                $('.test').toggle();
-                $('.test2').hide();
-                $('.test3').hide();
-                $('.test4').hide();
-                $('.btnparent').removeClass('btn-secondary').addClass('btn-success');
-                $('.btnrules').removeClass('btn-success').addClass('btn-secondary');
-            })
-
-            $('.btncektigasebelumnya').click( function() {
-                $('.test2').toggle();
-                $('.test').hide();
-                $('.test3').hide();
-                $('.test4').hide();
-                $('.btnrules').removeClass('btn-secondary').addClass('btn-success');
-                $('.btnconditionstudent').removeClass('btn-success').addClass('btn-secondary');
-            })
-
-            $('.btncekempatsebelumnya').click( function() {
-            $('.test3').toggle();
-                $('.test').hide();
-                $('.test2').hide();
-                $('.test4').hide();
-                $('.btnconditionstudent').removeClass('btn-secondary').addClass('btn-success');
-                $('.btnangket').removeClass('btn-success').addClass('btn-secondary');
-
-            })
-
-
-
-            $('.checkbox1').click(function() {
-            $('.checkbox2').prop("checked", false);
-            })
-
-            $('.checkbox2').click(function() {
-            $('.checkbox1').prop("checked", false);
-            })
-
-            $('.checkboxsex1').click(function() {
-            $('.checkboxsex2').prop("checked",false);
-            })
-
-            $('.checkboxsex2').click(function() {
-            $('.checkboxsex1').prop("checked",false);
-            })
-
-            $('.checkboxfisik1').click(function() {
-            $('.checkboxfisik2').prop("checked",false);
-            })
-
-            $('.checkboxfisik2').click(function() {
-            $('.checkboxfisik1').prop("checked",false);
-            })
-      
-
-            var href = $('.linkhref').attr('href');
-
-            $('.linkhref').attr('href', hostBaseUrl + href);
-
-            var href2 = $('.linkhref2').attr('href');
-
-            $('.linkhref2').attr('href', hostBaseUrl + href2);
-
-
-            $('.checkboxnormalon').click(function() {
-            $('.checkboxnormaloff').prop("checked", false);
-            })
-
-            $('.checkboxnormaloff').click(function() {
-            $('.checkboxnormalon').prop("checked", false);
-            })
-
-            // tengkurap
-
-            $('.checkboxtengkurapon').click(function() {
-            $('.checkboxtengkurapoff').prop("checked", false);
-            })
-
-            $('.checkboxtengkurapoff').click(function() {
-            $('.checkboxtengkurapon').prop("checked", false);
-            })
-
-            // merangkak
-
-            $('.checkboxmerangkakon').click(function() {
-            $('.checkboxmerangkakoff').prop("checked", false);
-            })
-
-            $('.checkboxmerangkakoff').click(function() {
-            $('.checkboxmerangkakon').prop("checked", false);
-            })
-
-
-            // duduk
-
-            $('.checkboxdudukon').click(function() {
-            $('.checkboxdudukoff').prop("checked", false);
-            })
-
-            $('.checkboxdudukoff').click(function() {
-            $('.checkboxdudukon').prop("checked", false);
-            })
-
-
-            // speak
-
-            $('.checkboxspeakon').click(function() {
-            $('.checkboxspeakoff').prop("checked", false);
-            })
-
-            $('.checkboxspeakoff').click(function() {
-            $('.checkboxspeakon').prop("checked", false);
-            })
-
-
-            $('.vaksin').click(function() {
-            $('.imunisasi1').prop("checked", false);
-            $('.imunisasi2').prop("checked", false);
-            $('.imunisasi3').prop("checked", false);
-            })
-
-            $('.imunisasi1').click(function() {
-            $('.vaksin').prop("checked", false);
-            })
-
-            $('.imunisasi2').click(function() {
-            $('.vaksin').prop("checked", false);
-            })
-
-            $('.imunisasi3').click(function() {
-            $('.vaksin').prop("checked", false);
-            })
-
-    })
-
-    
-
-});
-
-
-</script>
 
 @section('pagescript')
 <input type="hidden" name="URI_UPLOAD_IMAGE" value="{{ route('admin.interview.upload') }}" />
@@ -7220,6 +6798,7 @@ $('.tab-pane-reregister').hide();
 </script>
 
 <script src="{{ asset('assets/js/pages/admin/interview.form.js') }}?v=1.0.0"></script>
+<script src="{{ asset('assets/js/pages/admin/master.form.js') }}?v=1.0.0"></script>
 @stop
 
 @endpush

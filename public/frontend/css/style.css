@@ -356,7 +356,6 @@ input {
   align-items: center;
 }
 
-
 .btn {
   display: inline-block;
   font-family: "Poppins", sans-serif;
@@ -474,7 +473,7 @@ input {
 }
 
 .bg-dark {
-  background: #91c48f none repeat scroll 0 0;
+  background: #6eb1ff none repeat scroll 0 0;
 }
 
 .bg-gradient {
