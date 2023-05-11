@@ -20,7 +20,7 @@
 		<!--begin::Mobile logo-->
 		<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 			<a href="{{ route('frontend.ppdb.store') }}" class="d-lg-none">
-				<img alt="Logo" src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="h-30px" width="226" height="1000" />
+				<img alt="Logo" src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="h-30px" width="226" height="50" />
 			</a>
 		</div>
 		<!--end::Mobile logo-->

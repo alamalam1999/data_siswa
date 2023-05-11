@@ -48,7 +48,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">               
                 <!--begin::Label-->
-                <label class="form-label fw-bolder text-dark">Kelas Utama</label>
+                <label class="form-label fw-bolder text-dark fs-10">Kelas Utama</label>
                 <!--end::Label-->
 
                 <!--begin::Input-->

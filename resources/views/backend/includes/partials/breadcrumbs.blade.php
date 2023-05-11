@@ -23,7 +23,7 @@
         <div class="menu-item active">
             <!--begin:Menu link-->
             <span class="menu-link fs-4 text-white me-2">
-                <span class="menu-title">{{ $breadcrumb->title }} Managemen Pangkalan Data Siswa Avicenna (PDSA)</span>
+                <span class="menu-title">{{ $breadcrumb->title }}Pangkalan Data Siswa Avicenna</span>
                 <span class="menu-arrow d-lg-none"></span>
             </span>
             <!--end:Menu link-->

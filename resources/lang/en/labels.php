@@ -292,7 +292,7 @@ return [
                 'deactivated' => 'Deactivated PPDB',
                 'deleted' => 'Deleted PPDB',
                 'edit' => 'Edit PPDB',
-                'management' => 'PPDB Management',
+                'management' => 'PDSA Management | ',
 
                 'table' => [
                     'created' => 'Created',
