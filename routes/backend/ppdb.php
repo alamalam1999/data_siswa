@@ -12,4 +12,6 @@ Route::group(['namespace' => 'ppdb'], function () {
 
     //For DataTables
     Route::post('ppdb/get',  [PPDBTableController::class, '__invoke'])->name('ppdb.get');
+    Route::get('fetch-students', [PPDBController::class, 'fetchstudents']);
+    
 });

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
+use App\Models\MasterKelas;
 
 class PPDBController extends Controller
 {
@@ -35,6 +36,20 @@ class PPDBController extends Controller
     {
         $this->repository = $repository;
         View::share('js', ['faqs']);
+    }
+
+    public function fetchstudents() {
+
+        
+            $masterkelas = MasterKelas::all();
+
+
+            return response()->json([
+                'masterkelas'=> $masterkelas
+            ]);
+
+
+            
     }
 
     /**
