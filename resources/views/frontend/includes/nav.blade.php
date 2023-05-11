@@ -35,24 +35,41 @@
 <div class="top-bar-area address-one-lines bg-dark text-light">
     <div class="container">
         <div class="row align-center">
+<<<<<<< HEAD
             <div class="col-md-10 address-info">
                 <div class="info box">
                     <ul>
                         <li>              
                            <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="logo" alt="Logo" width="226" height="50">
+=======
+            <div class="col-md-10 address-info" style="right: 150px">
+                <div class="info box">
+                    <ul>
+                        <li>              
+                           <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="logo" alt="Logo" width="226" height="50" style="margin-bottom: 8px">
+>>>>>>> Tommy-Dev
                         </li>
                         <li>
                         </li>
                                
                         
                         <li>
+<<<<<<< HEAD
                             <b><label for="">PANGKALAN DATA SISWA</label></b>
+=======
+                            <strong><label for style="color:rgb(71, 68, 139);font-size: 25px;margin-top: 10px;padding-top: 10px">PANGKALAN DATA SISWA SEKOLAH AVICENNA</label></strong>
+                           
+>>>>>>> Tommy-Dev
                         </li>
                     </ul>
                 </div>
             </div>
             @guest
+<<<<<<< HEAD
                 <div class="simple-link text-right col-md-4">
+=======
+                <div class="simple-link text-right col-md-2" style="padding-top: 14px;left: 100px;">
+>>>>>>> Tommy-Dev
                     
                     <h5><b><a href="{{ route('frontend.auth.login') }}"><span style="color:rgb(42, 42, 135)"><i class="fas fa-user"></span></i><span style="color:rgb(42, 42, 135)"> Login Admin</span></b></a></h5>
                 </div>

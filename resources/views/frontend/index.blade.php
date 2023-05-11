@@ -30,11 +30,12 @@
 
 <!-- Start Banner 
     ============================================= -->
-<div class="banner-area standard text-default bg-gray-hard">
+<div class="banner-area standard text-default bg-gray-hard" style="padding-top: 100px">
 
     
                     <div class="row item-flex center">
 
+<<<<<<< HEAD
                         <div class="col-md-9">
                           
                             <img src="{{ asset('assets/media/logos/pak tomz.png') }}" >
@@ -42,6 +43,15 @@
 
                        
                         <div class="col-md-5">
+=======
+                        <div class="col-md-7" style="padding-left: 140px">
+                          
+                            <img src="{{ asset('assets/media/logos/pak tomz.png') }}" width="750" height="500" style="vertical-align:middle;margin:-50px 0px">
+                        </div>
+
+                       
+                        <div class="col-md-4" style="right: 20px">
+>>>>>>> Tommy-Dev
                             <h3 class="card-title">Pencarian Data Siswa</h3>
                             <div class="progress my-2" style="display: none">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -104,7 +114,21 @@
 </div>
 <!-- End Banner -->
 
+<<<<<<< HEAD
 
+=======
+<div class="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="bottom: 50px";>
+                <div class="text-center">
+                    <b><p>© Copyright 2023. All Rights Reserved by <a href="https://sekolah-avicenna.sch.id/">Dept. Transformasi Digital BPS YPAP</a></p></b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+>>>>>>> Tommy-Dev
 
 
 <?php $__env->stopSection(); ?>
