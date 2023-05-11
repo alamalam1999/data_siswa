@@ -11,7 +11,7 @@
 
         <div class="card overflow-hidden h-xl-100 mb-10">
             <div class="card-header border-bottom-1">
-                <h3 class="card-title text-gray-800 fw-bold">Registration : <?php echo e($ppdb->document_no); ?></h3>
+                <h3 class="card-title text-gray-800 fw-bold">No. Regristrasi (Kode Siswa) : <?php echo e($ppdb->document_no); ?></h3>
 
                 <div class="card-toolbar">
                     <!--begin::Daterangepicker(defined in src/js/layout/app.js)-->

@@ -11,8 +11,8 @@
         <div class="card-header pt-7">
             <!--begin::Title-->
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bold text-gray-800">PPDB</span>
-                <span class="text-gray-400 mt-1 fw-semibold fs-6">List Data Peserta</span>
+                <span class="card-label fw-bold text-gray-800">PANGKALAN DATA SISWA</span>
+                <span class="text-gray-400 mt-1 fw-semibold fs-6">List Data Siswa Avicenna</span>
             </h3>
             <!--end::Title-->
             <!--begin::Toolbar-->
@@ -31,7 +31,7 @@
                     </span>
                     <!--end::Svg Icon-->
                     <input type="text" id="search_general" class="form-control form-control-solid w-250px ps-14"
-                        placeholder="Cari Nama Peserta">
+                        placeholder="Cari Nama Siswa">
                 </div>
                 <div class="m-0">
                     <!--begin::Menu toggle-->
