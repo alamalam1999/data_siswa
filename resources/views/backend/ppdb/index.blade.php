@@ -205,18 +205,18 @@
                             data-ajax_url="{{ route('admin.ppdb.get') }}">
                             <thead>
                                 <!--begin::Table row-->
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th class="min-w-100px w-250px sorting">Registration No</th>
-                                    <th class="min-w-100px w-250px sorting">Nama Siswa</th>
-                                    <th class="min-w-100px sorting">Sekolah</th>
-                                    <th class="min-w-100px sorting">Kelas</th>
-                                    
-                                   
-                                    <th class="min-w-200px sorting" style="width: 150px;">Status</th>
-                                    <th class="text-end min-w-100px sorting_disabled w-100px" rowspan="1" colspan="1"
-                                        aria-label="Actions" style="width: 141.766px;"></th>
-                                </tr>
-                                <!--end::Table row-->
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="min-w-100px w-250px sorting" onclick="sortTable(0)">Kode Siswa</th>
+                                <th class="min-w-100px w-250px sorting" onclick="sortTable(1)">Nama Siswa</th>
+                                <th class="min-w-100px w-250px sorting" onclick="sortTable(2)">NISN</th>
+                                <th class="min-w-100px sorting" onclick="sortTable(3)">Sekolah</th>
+                                <th class="min-w-100px sorting" onclick="sortTable(4)">Unit</th>
+                                <th class="min-w-100px w-250px sorting" onclick="sortTable(5)">Kelas Utama</th>
+                                <th class="min-w-100px sorting" onclick="sortTable(6)">Sub Kelas</th>
+                                <th class="min-w-150px mw-170px sorting" onclick="sortTable(7)">Status Siswa</th>
+                                <th class="min-w-150px mw-170px sorting" onclick="sortTable(8)">Keterangan</th>
+                                <th class="text-end min-w-100px sorting_disabled w-100px" rowspan="1" colspan="1" aria-label="Actions" style="width: 141.766px;"></th>
+                            </tr>
                             </thead>
                             <tbody>
                             </tbody>

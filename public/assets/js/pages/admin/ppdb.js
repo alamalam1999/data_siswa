@@ -116,33 +116,31 @@ FTX.Utils.documentReady(function() {
                 data: 'fullname'
             },
             {
+                data: null
+            },
+            {
                 data: 'school'
             },
             {
+                data: 'unit'
+            },
+            {
                 data: null
             },
             {
                 data: null
             },
+            {
+                data: null
+            },
+            {
+                data: null
+            },
+            {
+                data: 'id'
+            },
 
-            // {
-            //     data: 'document_no',
-            //     name: 'document_no'
-            // },
-            // {
-            //     data: 'school',
-            //     name: 'school'
-            // },
-            // {
-            //     data: 'created_at',
-            //     name: 'created_at'
-            // },
-            // {
-            //     data: 'actions',
-            //     name: 'actions',
-            //     searchable: false,
-            //     sortable: false
-            // }
+            
         ],
         columnDefs: [{
             targets: 0,
@@ -152,11 +150,32 @@ FTX.Utils.documentReady(function() {
                 return `
                 <div>
                     <span class="text-dark fw-bolder text-hover-primary d-block fs-4">` + row.document_no + `</span>
-                    <span class="text-muted fw-bold text-muted d-block fs-9">` + row.schedule + `</span>
                 </div>`;
             }
         }, {
+            targets: 1,
+            orderable: false,
+            render: function(data, type, row) {
+                return `
+                <div>
+                    <span class="text-dark fw-bolder text-hover-primary d-block fs-4">` + row.fullname + `</span>
+                </div>
+                   
+                `;
+            }
+        }, {
             targets: 2,
+        orderable: false,
+        render: function(data, type, row) {
+            return `
+                    <div>
+                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                    </div>
+               
+            `;
+            }
+        },  {
+            targets: 3,
             orderable: false,
             render: function(data, type, row) {
                 return `
@@ -166,28 +185,60 @@ FTX.Utils.documentReady(function() {
                 `;
             }
         }, {
-            targets: 3,
-            orderable: false,
-            render: function(data, type, row) {
-                return `
-                    <div>
-                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Belum dapat kelas</span>
-                    </div>
-                `;
-            }
-        }, {
             targets: 4,
             orderable: false,
             render: function(data, type, row) {
-                console.log(row);
                 return `
-                <button type="button" class="btn btn-sm w-100 btn-info-status ` + row.ppdb_status_css + `">
-                    ` + row.ppdb_status_label + `
-                </button>
+                <div>
+                <span class="text-dark fw-bolder text-hover-primary d-block fs-6">` + row.unit + `</span>
+            </div>
                 `;
             }
         }, {
             targets: 5,
+            orderable: false,
+            render: function(data, type, row) {
+                return `
+                <div>
+                <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                </div>
+                `;
+            }
+        },  {
+            targets: 6,
+            orderable: false,
+            render: function(data, type, row) {
+                console.log(row);
+                return `
+                     <div>
+                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                    </div>
+                `;
+            }
+        },  {
+            targets: 7,
+            orderable: false,
+            render: function(data, type, row) {
+                console.log(row);
+                return `
+                     <div>
+                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                    </div>
+                `;
+            }
+        },  {
+            targets: 8,
+            orderable: false,
+            render: function(data, type, row) {
+                console.log(row);
+                return `
+                     <div>
+                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                    </div>
+                `;
+            }
+        },  {
+            targets: 9,
             orderable: false,
             render: function(data, type, row) {
                 var uri_target = uri_edit.replace("::target::", row.id);

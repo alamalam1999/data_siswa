@@ -508,6 +508,7 @@
                           <div>
                             <select id="" class="form-select form-select-solid">
                             <option value="">Pilih Keterangan</option>
+                            <option value="">Siswa Avicenna</option>
                             <option value="">Lulus</option>
                             <option value="">Pindah Sekolah</option>
                             <option value="">Tidak Naik Kelas</option>

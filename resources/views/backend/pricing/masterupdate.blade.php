@@ -29,7 +29,7 @@
         <!--begin::Card header-->
         <div class="card-header bg-light">
             <div class="card-title">
-                <h2>Update Kelas</h2>
+                <h2>Edit Kelas</h2>
             </div>
         </div>
         <!--end::Card header-->
@@ -46,11 +46,11 @@
                 <!--begin::Input group-->
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">               
                    <!--begin::Label-->
-                   <label class="form-label">Kategori Kelas</label>
+                   <label class="form-label fw-bolder text-dark">Kelas Utama</label>
                    <!--end::Label-->
 
                    <!--begin::Input-->
-                   <input type="text" name="kategori_kelas" class="form-control mb-2" value="{{ $masterupdate->kategori }}">
+                   <input type="text" name="kategori_kelas" class="form-control mb-4" value="{{ $masterupdate->kategori }}">
                    <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -58,11 +58,11 @@
                 <!--begin::Input group-->
                 <div class="fv-row w-100 flex-md-root">
                     <!--begin::Label-->
-                    <label class="form-label">Nama Kelas</label>
+                    <label class="form-label fw-bolder text-dark">Sub Kelas</label>
                     <!--end::Label-->
 
                     <!--begin::Input-->
-                    <input type="text" name="nama_kelas" class="form-control mb-2" value="{{ $masterupdate->kelas }}">
+                    <input type="text" name="nama_kelas" class="form-control mb-4" value="{{ $masterupdate->kelas }}">
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -74,11 +74,11 @@
                 <!--begin::Input group-->
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">               
                     <!--begin::Label-->
-                    <label class="form-label">Unit</label>
+                    <label class="form-label fw-bolder text-dark">Unit</label>
                     <!--end::Label-->
  
                     <!--begin::Input-->
-                    <input type="text" name="unit" class="form-control mb-2" value="{{ $masterupdate->unit }}">
+                    <input type="text" name="unit" class="form-control mb-4" value="{{ $masterupdate->unit }}">
                     <!--end::Input-->
                  </div>
                  <!--end::Input group-->
@@ -86,11 +86,11 @@
                 <!--begin::Input group-->
                 <div class="fv-row w-100 flex-md-root">
                     <!--begin::Label-->
-                    <label class="form-label">Sekolah</label>
+                    <label class="form-label fw-bolder text-dark">Sekolah</label>
                     <!--end::Label-->
 
                     <!--begin::Input-->
-                    <input type="text" name="sekolah" class="form-control mb-2" value="{{ $masterupdate->sekolah }}">
+                    <input type="text" name="sekolah" class="form-control mb-4" value="{{ $masterupdate->sekolah }}">
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -102,11 +102,11 @@
                  <!--begin::Input group-->
                  <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">               
                     <!--begin::Label-->
-                    <label class="form-label">Kepala Sekolah</label>
+                    <label class="form-label fw-bolder text-dark">Kepala Sekolah</label>
                     <!--end::Label-->
  
                     <!--begin::Input-->
-                    <input type="text" name="kepala_sekolah" class="form-control mb-2" value="{{ $masterupdate->kepala_sekolah }}">
+                    <input type="text" name="kepala_sekolah" class="form-control mb-4" value="{{ $masterupdate->kepala_sekolah }}">
                     <!--end::Input-->
                  </div>
                  <!--end::Input group-->
@@ -114,11 +114,11 @@
                 <!--begin::Input group-->
                 <div class="fv-row w-100 flex-md-root">
                     <!--begin::Label-->
-                    <label class="form-label">Wali Kelas</label>
+                    <label class="form-label fw-bolder text-dark">Wali Kelas</label>
                     <!--end::Label-->
 
                     <!--begin::Input-->
-                    <input type="text" name="wali_kelas" class="form-control mb-2" value="{{ $masterupdate->wali_kelas }}">
+                    <input type="text" name="wali_kelas" class="form-control mb-4" value="{{ $masterupdate->wali_kelas }}">
                     <!--end::Input-->
 
                     <input type="hidden" name="id_item" value="{{ $masterupdate->id }}">

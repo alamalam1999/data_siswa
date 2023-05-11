@@ -54,8 +54,8 @@
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th class="min-w-100px w-250px sorting">Kategori</th>
-                                    <th class="min-w-100px w-250px sorting">Kelas</th>
+                                    <th class="min-w-100px w-250px sorting">Kelas Utama</th>
+                                    <th class="min-w-100px w-250px sorting">Sub Kelas</th>
                                     <th class="min-w-100px sorting">Unit</th>
                                     <th class="min-w-100px sorting">Sekolah</th>
                                     
