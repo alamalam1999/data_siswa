@@ -30,14 +30,14 @@
 
 <!-- Start Banner 
     ============================================= -->
-<div class="banner-area standard text-default bg-gray-hard" style="padding-top: 100px">
+<div class="banner-area standard text-default bg-gray-hard" style="padding-top: 40px">
 
     
                     <div class="row item-flex center">
 
-                        <div class="col-md-7" style="padding-left: 140px">
+                        <div class="col-md-7" style="padding-left: 70px">
                           
-                            <img src="{{ asset('assets/media/logos/pak tomz.png') }}" width="750" height="500" style="vertical-align:middle;margin:-50px 0px">
+                            <img src="{{ asset('assets/media/logos/pak tomz.png') }}" width="700" height="470" style="vertical-align:middle;margin:-25px 0px">
                         </div>
 
                        
@@ -107,7 +107,7 @@
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
-            <div class="col-md-12" style="bottom: 50px";>
+            <div class="col-md-12" style="bottom: 35px";>
                 <div class="text-center">
                     <b><p>© Copyright 2023. All Rights Reserved by <a href="https://sekolah-avicenna.sch.id/">Dept. Transformasi Digital BPS YPAP</a></p></b>
                 </div>
