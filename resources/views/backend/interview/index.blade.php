@@ -26,7 +26,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <input type="text" id="search_general" class="form-control form-control-solid w-250px ps-14" placeholder="Cari Nama Peserta">
+                <input type="text" id="search_general" class="form-control form-control-solid w-250px ps-14" placeholder="Cari Nama Siswa">
             </div>
             <div class="m-0">
                 <!--begin::Menu toggle-->

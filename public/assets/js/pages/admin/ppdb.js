@@ -149,7 +149,7 @@ FTX.Utils.documentReady(function() {
                 $(row).addClass("bg-white");
                 return `
                 <div>
-                    <span class="text-dark fw-bolder text-hover-primary d-block fs-4">` + row.document_no + `</span>
+                    <span class="text-hover-primary d-block">` + row.document_no + `</span>
                 </div>`;
             }
         }, {
@@ -158,7 +158,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                    <span class="text-dark fw-bolder text-hover-primary d-block fs-4">` + row.fullname + `</span>
+                    <span class="text-dark fw-bolder text-hover-primary d-block">` + row.fullname + `</span>
                 </div>
                    
                 `;
@@ -180,7 +180,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                     <div>
-                        <span class="text-dark fw-bolder text-hover-primary d-block fs-6">` + row.school + `</span>
+                        <span class="text-hover-primary d-block">` + row.school + `</span>
                     </div>
                 `;
             }
@@ -190,7 +190,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                <span class="text-dark fw-bolder text-hover-primary d-block fs-6">` + row.unit + `</span>
+                <span class="text-hover-primary d-block">` + row.unit + `</span>
             </div>
                 `;
             }
