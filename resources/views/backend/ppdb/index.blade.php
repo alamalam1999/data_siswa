@@ -201,21 +201,21 @@
                 <div class="col">
                     <div class="table-responsive">
                         <table id="ppdb-table"
-                            class="table table-rounded border gy-2 gs-4 align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                            class="table table-rounded border gy-2 gs-4 align-middle table-row-dashed fs-7 gy-5 dataTable no-footer"
                             data-ajax_url="{{ route('admin.ppdb.get') }}">
                             <thead>
                                 <!--begin::Table row-->
-                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-100px w-250px sorting" onclick="sortTable(0)">Kode Siswa</th>
-                                <th class="min-w-100px w-250px sorting" onclick="sortTable(1)">Nama Siswa</th>
-                                <th class="min-w-100px w-250px sorting" onclick="sortTable(2)">NISN</th>
-                                <th class="min-w-100px sorting" onclick="sortTable(3)">Sekolah</th>
-                                <th class="min-w-100px sorting" onclick="sortTable(4)">Unit</th>
-                                <th class="min-w-100px w-250px sorting" onclick="sortTable(5)">Kelas Utama</th>
-                                <th class="min-w-100px sorting" onclick="sortTable(6)">Sub Kelas</th>
-                                <th class="min-w-150px mw-170px sorting" onclick="sortTable(7)">Status Siswa</th>
-                                <th class="min-w-150px mw-170px sorting" onclick="sortTable(8)">Keterangan</th>
-                                <th class="text-end min-w-100px sorting_disabled w-100px" rowspan="1" colspan="1" aria-label="Actions" style="width: 141.766px;"></th>
+                            <tr class="text-start text-gray-400 fw-bolder fs-9 text-uppercase gs-0">
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(0)">Kode Siswa</th>
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(1)">Nama Siswa</th>
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(2)">NISN</th>
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(3)">Sekolah</th>
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(4)">Unit</th>
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(5)">Kelas Utama</th>
+                                <th class="min-w-80px w-100px sorting" onclick="sortTable(6)">Sub Kelas</th>
+                                <th class="min-w-80px mw-100px sorting" onclick="sortTable(7)">Status Siswa</th>
+                                <th class="min-w-80px mw-100px sorting" onclick="sortTable(8)">Keterangan</th>
+                                <th class="text-end min-w-80px sorting_disabled w-100px" rowspan="1" colspan="1" aria-label="Actions" style="width: 141.766px;"></th>
                             </tr>
                             </thead>
                             <tbody>

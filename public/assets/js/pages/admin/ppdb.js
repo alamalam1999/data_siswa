@@ -149,7 +149,7 @@ FTX.Utils.documentReady(function() {
                 $(row).addClass("bg-white");
                 return `
                 <div>
-                    <span class="text-hover-primary d-block">` + row.document_no + `</span>
+                    <span class="text-hover-primary d-block fw-bolder fs-8">` + row.document_no + `</span>
                 </div>`;
             }
         }, {
@@ -158,7 +158,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                    <span class="text-dark fw-bolder text-hover-primary d-block">` + row.fullname + `</span>
+                    <span class="text-dark fw-bolder fs-8 text-hover-primary d-block">` + row.fullname + `</span>
                 </div>
                    
                 `;
@@ -169,7 +169,7 @@ FTX.Utils.documentReady(function() {
         render: function(data, type, row) {
             return `
                     <div>
-                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                     </div>
                
             `;
@@ -180,7 +180,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                     <div>
-                        <span class="text-hover-primary d-block">` + row.school + `</span>
+                        <span class="text-hover-primary d-block fs-8">` + row.school + `</span>
                     </div>
                 `;
             }
@@ -190,7 +190,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                <span class="text-hover-primary d-block">` + row.unit + `</span>
+                <span class="text-hover-primary d-block fs-8">` + row.unit + `</span>
             </div>
                 `;
             }
@@ -200,7 +200,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                 </div>
                 `;
             }
@@ -211,7 +211,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                     </div>
                 `;
             }
@@ -222,7 +222,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                     </div>
                 `;
             }
@@ -233,7 +233,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-100 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                     </div>
                 `;
             }
@@ -243,9 +243,9 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 var uri_target = uri_edit.replace("::target::", row.id);
                 return `
-                <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-100 w-100">
-                Edit
-                    <span class="svg-icon icon-size-2x ms-3 me-0">
+                <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-60 w-100">
+                
+                    <span class="svg-icon icon-size-2x ms-0 me-0">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="blue"></path>
                             <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="blue"></path>
