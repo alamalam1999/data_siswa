@@ -35,7 +35,7 @@
 <div class="top-bar-area address-one-lines bg-dark text-light">
     <div class="container">
         <div class="row align-center">
-            <div class="col-md-10 address-info" style="right: 150px">
+            <div class="col-md-10 address-info" style="right: 80px">
                 <div class="info box">
                     <ul>
                         <li>              
@@ -46,7 +46,7 @@
                                
                         
                         <li>
-                            <strong><label for style="color:rgb(71, 68, 139);font-size: 25px;margin-top: 10px;padding-top: 10px">PANGKALAN DATA SISWA SEKOLAH AVICENNA</label></strong>
+                            <strong><label for style="color:rgb(71, 68, 139);font-size: 25px;margin-top: 10px;padding-top: 10px"> PANGKALAN DATA SISWA SEKOLAH AVICENNA</label></strong>
                            
                         </li>
                     </ul>
@@ -55,7 +55,7 @@
             @guest
                 <div class="simple-link text-right col-md-2" style="padding-top: 14px;left: 100px;">
                     
-                    <h5><b><a href="{{ route('frontend.auth.login') }}"><span style="color:rgb(42, 42, 135)"><i class="fas fa-user"></span></i><span style="color:rgb(42, 42, 135)"> Login Admin</span></b></a></h5>
+                    <h5><b><a href="{{ route('frontend.auth.login') }}" style="padding-right: 25px;padding-bottom: 50px"><span style="color:rgb(42, 42, 135)"><i class="fas fa-user"></span></i><span style="color:rgb(42, 42, 135)"> Login Admin</span></b></a></h5>
                 </div>
             @else
                 <div class="simple-link text-right col-md-5">

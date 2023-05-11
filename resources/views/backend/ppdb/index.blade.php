@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', app_name() . ' | PPDB Management')
+@section('title', app_name() . ' | Managemen PSDA')
 
 @section('breadcrumb-links')
 
@@ -11,8 +11,8 @@
         <div class="card-header pt-7">
             <!--begin::Title-->
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bold text-gray-800">PANGKALAN DATA SISWA</span>
-                <span class="text-gray-400 mt-1 fw-semibold fs-6">List Data Siswa Avicenna</span>
+                <span class="card-label fw-bold text-gray-800">PANGKALAN DATA SISWA AVICENNA</span>
+                <span class="text-gray-400 mt-1 fw-semibold fs-6">List Data Siswa</span>
             </h3>
             <!--end::Title-->
             <!--begin::Toolbar-->

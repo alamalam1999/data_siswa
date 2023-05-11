@@ -171,7 +171,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">PPDB</span>
+                        <span class="menu-title">PDSA</span>
                     </a>
                     <!--end:Menu link-->
                 </div>
@@ -189,7 +189,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">PPDB</span>
+                        <span class="menu-title">PDSA</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <!--end:Menu link-->
