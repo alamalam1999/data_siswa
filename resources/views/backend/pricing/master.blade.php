@@ -54,14 +54,14 @@
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-gray-400 fw-bolder fs-8 text-uppercase gs-0">
-                                    <th class="min-w-100px w-100px sorting">Kelas Utama</th>
-                                    <th class="min-w-100px w-100px sorting">Sub Kelas</th>
-                                    <th class="min-w-100px w-100px sorting">Unit</th>
-                                    <th class="min-w-100px w-100px sorting">Sekolah</th>
-                                    <th class="min-w-100px w-100px sorting">Kepala Sekolah</th>
-                                    <th class="min-w-100px w-100px sorting">Wali Kelas</th>
+                                    <th class="min-w-80px w-100px sorting">Kelas Utama</th>
+                                    <th class="min-w-80px w-100px sorting">Sub Kelas</th>
+                                    <th class="min-w-80px w-80px sorting">Unit</th>
+                                    <th class="min-w-80px w-100px sorting">Sekolah</th>
+                                    <th class="min-w-80px w-150px sorting">Kepala Sekolah</th>
+                                    <th class="min-w-80px w-150px sorting">Wali Kelas</th>
                             
-                                    <th class="text-end min-w-100px w-100px sorting_disabled w-200px" rowspan="1" colspan="1"
+                                    <th class="text-end min-w-80px w-100px sorting_disabled w-200px" rowspan="1" colspan="1"
                                         aria-label="Actions" style="width: 141.766px;padding-right: 100px">Action</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -70,21 +70,21 @@
                                 
                                 @foreach ($master as $item)
                                 <tr>
-                                    <td>{{ $item->kategori }}</td>
-                                    <td>{{ $item->kelas }}</td>
-                                    <td>{{ $item->unit }}</td>
-                                    <td>{{ $item->sekolah }}</td>
-                                    <td>{{ $item->kepala_sekolah }}</td>
-                                    <td>{{ $item->wali_kelas }}</td>
+                                    <td class="fs-7">{{ $item->kategori }}</td>
+                                    <td class="fs-7">{{ $item->kelas }}</td>
+                                    <td class="fs-7">{{ $item->unit }}</td>
+                                    <td class="fs-7">{{ $item->sekolah }}</td>
+                                    <td class="fs-7">{{ $item->kepala_sekolah }}</td>
+                                    <td class="fs-7">{{ $item->wali_kelas }}</td>
                                     <td>            
                                         
-                                       
+                                        
                                         <a href="{{ route('admin.masterupdate.class', $item->id) }}"> 
-                                        <button type="submit" data-kt-contacts-type="submit" class="btn btn-primary">
+                                        <button type="submit" data-kt-contacts-type="submit" class="btn btn-primary btn-sm fs-9" style="padding-right: 5px">
                                             <span class="indicator-label">
                                                     Edit
                                                 </span>
-                                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Design/Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <span class="svg-icon svg-icon-primary svg-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Design/Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                         <rect x="" y="0" width="24" height="24"/>
                                                         <path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "/>
@@ -99,12 +99,12 @@
                                             {{ csrf_field() }}
 
                                             <input type="hidden" name="item_value" value="{{ $item->id }}">
-                                                <button type="submit" data-kt-contacts-type="submit" class="btn btn-danger">
+                                                <button type="submit" data-kt-contacts-type="submit" class="btn btn-danger btn-sm fs-9" style="padding-right: 5px">
                                                     <span class="indicator-label">
                                                         Delete
                                                             
                                                         </span>
-                                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Files/Deleted-file.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <span class="svg-icon svg-icon-primary svg-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Files/Deleted-file.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                     <polygon points="0 0 24 0 24 24 0 24"/>
                                                                     <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
@@ -115,7 +115,7 @@
                                                 </button>  
 
                                         </form>
-                                      
+                                    
                                         
                                         
                                     </td>
