@@ -85,7 +85,7 @@
                                 <div class="row">
                                     <div class="col-5">
                                         <p class="large mt-5 text-center">
-                                            <a href="/" class="text-primary">
+                                            <a href="{{ route('frontend.auth.carisiswa') }}" class="text-primary">
                                                 <b>
                                                     <u>Cari Siswa</u>
                                                 </b>

@@ -29,6 +29,14 @@ class LoginController extends Controller
         return route(home_route());
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search() {
+        return view('frontend.auth.carisiswa');
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
