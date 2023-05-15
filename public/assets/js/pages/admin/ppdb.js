@@ -110,7 +110,7 @@ FTX.Utils.documentReady(function() {
             }
         },
         columns: [{
-                data: 'document_no'
+                data: 'no_formulir'
             },
             {
                 data: 'fullname'
@@ -137,7 +137,7 @@ FTX.Utils.documentReady(function() {
                 data: null
             },
             {
-                data: 'id'
+                data: null
             },
 
             
@@ -149,7 +149,7 @@ FTX.Utils.documentReady(function() {
                 $(row).addClass("bg-white");
                 return `
                 <div>
-                    <span class="text-hover-primary d-block fw-bolder fs-8">` + row.document_no + `</span>
+                    <span class="text-hover-primary d-block fw-bolder fs-8">` + row.no_formulir + `</span>
                 </div>`;
             }
         }, {
@@ -158,7 +158,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                    <span class="text-dark fw-bolder fs-8 text-hover-primary d-block">` + row.fullname + `</span>
+                    <span class="text-dark fw-bolder fs-8 text-hover-primary d-block">` + row.nama_lengkap + `</span>
                 </div>
                    
                 `;
@@ -169,7 +169,7 @@ FTX.Utils.documentReady(function() {
         render: function(data, type, row) {
             return `
                     <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">`+ row.nisn +`</span>
                     </div>
                
             `;
@@ -180,7 +180,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                     <div>
-                        <span class="text-hover-primary d-block fs-8">` + row.school + `</span>
+                        <span class="text-hover-primary d-block fs-8">` + row.sekolah + `</span>
                     </div>
                 `;
             }
@@ -220,9 +220,18 @@ FTX.Utils.documentReady(function() {
             orderable: false,
             render: function(data, type, row) {
                 console.log(row);
+
+                var status = '';
+
+                if(row.status_siswa == 1) {
+                    status = 'Peserta didik Baru';
+                } else {
+                    status = 'Peserta didik Pindahan';
+                }
+
                 return `
                      <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">`+ status +`</span>
                     </div>
                 `;
             }
@@ -233,7 +242,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">NULL</span>
                     </div>
                 `;
             }

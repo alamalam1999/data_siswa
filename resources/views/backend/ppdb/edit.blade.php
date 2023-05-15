@@ -105,20 +105,20 @@
 
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <?php echo e($user_account->name); ?><br />
+                                    <?php echo e($ppdb->nama_lengkap); ?><br />
                                 </h4>
 
                                 <p class="card-text">
                                     <small>
-                                        <i class="fas fa-envelope"></i> <?php echo e($user_account->email); ?><br />
+                                        <i class="fas fa-envelope"></i> <?php echo e($ppdb->email); ?><br />
                                         <i class="fas fa-calendar-check"></i> <?php echo app('translator')->get('strings.frontend.general.joined'); ?>
-                                        <?php echo e(timezone()->convertToLocal($user_account->created_at, 'F jS, Y')); ?>
+                                        <?php echo e(timezone()->convertToLocal($ppdb->created_at, 'F jS, Y')); ?>
 
                                     </small>
                                 </p>
 
                                 <?php
-                                $wa_number = $user_account->phone;
+                                $wa_number = $ppdb->phone;
                                 if (substr($wa_number, 0, 1) == '0') {
                                     $wa_number = '62' . substr($wa_number, 1);
                                 }
@@ -132,7 +132,7 @@
                                     <!--begin::Info-->
                                     <div class="m-0">
                                         <span class="fw-semibold d-block fs-8"> Whatsapp / Call</span>
-                                        <span class="fw-bold text-gray-800 text-hover-success fs-7"><?php echo e($user_account->phone); ?></span>
+                                        <span class="fw-bold text-gray-800 text-hover-success fs-7"><?php echo e($ppdb->phone); ?></span>
                                     </div>
                                     <!--end::Info-->
                                 </a>
@@ -398,7 +398,12 @@
                                <!--end::Title-->
                                </div>
                           </div>
+
+                         
                      <div class="card-body" >  
+                       {{-- FORM START --}}
+                       <form action="{{ route('admin.ppdb.information') }}" method="POST" >
+                        {{ csrf_field() }}
                       <!--begin::Input group-->
                           <div class="row fv-row mb-10">
                             <!--begin::Col-->
@@ -475,116 +480,91 @@
                          <!--end::Col-->
                          </div>
 
-                        <!--begin::Input group-->
-                        <div class="row fv-row mb-10">
-                          <!--begin::Col-->
-                            <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6">NISN</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NISN" name="first_name" autocomplete="off" />
+                              <!--begin::Input group-->
+                              <div class="row fv-row mb-10">
+                                <!--begin::Col-->
+                                  <div class="col-xl-6">
+                                      <label class="form-label fw-bolder text-dark fs-6">NISN</label>
+                                      <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NISN" name="first_name" autocomplete="off" />
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                  <div class="col-xl-6">
+                                        <label class="form-label fw-bolder text-dark fs-6">NIK</label>
+                                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NIK" name="last_name" autocomplete="off" />
+                                  </div>
+                                  <!--end::Col-->
                               </div>
-                              <!--end::Col-->
-                              <!--begin::Col-->
-                            <div class="col-xl-6">
-                                  <label class="form-label fw-bolder text-dark fs-6">NIK</label>
-                                  <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NIK" name="last_name" autocomplete="off" />
-                            </div>
-                            <!--end::Col-->
-                        </div>
+                                      <!--begin::Input group-->
+                                      <div class="row fv-row mb-10">
+                                        <!--begin::Col-->
+                                          <div class="col-xl-6">
+                                              <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
+                                              <!--begin::Switch-->
+                                        <div>
+                                          <select id="" class="form-select form-select-solid">
+                                          <option value="">Pilih Status</option>
+                                          <option value="">Aktif</option>
+                                          <option value="">Tidak Aktif</option>
+                                          <option value="">Alum</option>
+                                          </select>
+                                        </div>
+                                        <!--end::Switch-->
+                                          </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                          <div class="col-xl-6">
+                                              <label class="form-label fw-bolder text-dark fs-6">Keterangan</label>
+                                        <!--begin::Switch-->
+                                        <div>
+                                          <select id="" class="form-select form-select-solid">
+                                          <option value="">Pilih Keterangan</option>
+                                          <option value="">Siswa Avicenna</option>
+                                          <option value="">Lulus</option>
+                                          <option value="">Pindah Sekolah</option>
+                                          <option value="">Tidak Naik Kelas</option>
+                                          <option value="">Drop Out</option>
+                                          </select>
+                                        </div>
+                                        <!--end::Switch-->
+                                          </div>
+                                          <!--end::Col-->
+                                      </div>
 
+                                      <div class="container-flex justify-content-end">
+                                        <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">Submit</button>
+                                      
+                                </form>
 
-                        <!--begin::Input group-->
-                        <div class="row fv-row mb-10">
-                          <!--begin::Col-->
-                            <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
-                                <!--begin::Switch-->
-                          <div>
-                            <select id="" class="form-select form-select-solid">
-                            <option value="">Pilih Status</option>
-                            <option value="">Aktif</option>
-                            <option value="">Tidak Aktif</option>
-                            <option value="">Alum</option>
-                            </select>
-                          </div>
-                          <!--end::Switch-->
-                            </div>
-                          <!--end::Col-->
-                          <!--begin::Col-->
-                            <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6">Keterangan</label>
-                          <!--begin::Switch-->
-                          <div>
-                            <select id="" class="form-select form-select-solid">
-                            <option value="">Pilih Keterangan</option>
-                            <option value="">Siswa Avicenna</option>
-                            <option value="">Lulus</option>
-                            <option value="">Pindah Sekolah</option>
-                            <option value="">Tidak Naik Kelas</option>
-                            <option value="">Drop Out</option>
-                            </select>
-                          </div>
-                          <!--end::Switch-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
+                                {{-- FORM END --}}
+                                        <button class="btn btn-success btn-sm fs-9" onclick="kurangInput()">Edit</button>
+                                      </div>
+                                </div>
 
-
-
-
-
-
-
-
-
-
-
-                          <div class="container-flex justify-content-end">
-                            <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">Submit</button> <button class="btn btn-success btn-sm fs-9" onclick="kurangInput()">Edit</button>
-                          </div>
-                     </div>
-
-                     <div class="mt-5">
-                      <div class="card-header bg-light">
-                        <!--begin::Title-->
-                           <h3 class="card-title align-items-start flex-column">
-                             <span class="card-label fw-bolder text-dark">DATA PRESTASI</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
-                           </h3>
-                        <!--end::Title-->
-                      </div>
-                    </div>
-                    
-                    <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                              <thead>
-                                  <tr class="fw-bolder fs-6 text-gray-800">
-                                      <th class="min-w-200px">Deskripsi</th>
-                                      <th class="min-w-200px">Tingkat</th>
-                                      <th class="w-50px text-end">File</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <?php
-                                  $file_download = '#';
-                                  ?>
-                                  <?php $__currentLoopData = $file_additional; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                  <tr>
-                                      <td><?php echo e($file->deskripsi); ?></td>
-                                      <td><?php echo e($file->tingkat); ?></td>
-                                      <td><a href="/<?php echo e($file->file); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                              <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                              <span class="svg-icon svg-icon-3">
-                                                  <i class="bi bi-cloud-arrow-down"></i>
-                                              </span>
-                                              <!--end::Svg Icon-->
-                                          </a></td>
-                                  </tr>
-                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                              </tbody>
-                          </table>
-                      </div>
-                    </div>
+                                <div class="mt-5">
+                                  <div class="card-header bg-light">
+                                    <!--begin::Title-->
+                                      <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label fw-bolder text-dark">DATA PRESTASI</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
+                                      </h3>
+                                    <!--end::Title-->
+                                  </div>
+                                </div>
+                                
+                                <div class="card-body">
+                                  <div class="table-responsive">
+                                      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                                          <thead>
+                                              <tr class="fw-bolder fs-6 text-gray-800">
+                                                  <th class="min-w-200px">Deskripsi</th>
+                                                  <th class="min-w-200px">Tingkat</th>
+                                                  <th class="w-50px text-end">File</th>
+                                              </tr>
+                                          </thead>
+                                      
+                                      </table>
+                                  </div>
+                                </div>
 
 
                                 </div>
@@ -615,8 +595,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
-                                    $array= array_column($file_additional_satu, 'name_father');
+                                if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+                                    $array= $ppdb->nama_ayah;
                                       if ($array != '' && $array != null) {
                                         $data1 = $array;
                                       } else {
@@ -635,8 +615,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
-                                    $array= array_column($file_additional_satu, 'name_mother');
+                                if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+                                    $array= $ppdb->nama_ibu;
                                       if ($array != '' && $array != null) {
                                         $data1 = $array;
                                       } else {
@@ -659,8 +639,8 @@
                                 <div class="col-xl-6">
                                   <?php
   
-                                  if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
-                                    $array= array_column($file_additional_dua, 'name_work_father');
+                                  if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+                                    $array= $ppdb->pekerjaan_ayah;
                                     if ($array !='' && $array != null && !empty($array) && $array != '[]') {
                                       if ($array != '' && $array != null) { $dataworkfather = $array;
                                       } else { $dataworkfather = ''; }
@@ -687,8 +667,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                  if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
-                                    $array= array_column($file_additional_dua, 'name_work_mother');
+                                  if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+                                    $array= $ppdb->pekerjaan_ibu;
                                       if ($array != '' && $array != null) { $dataworkmother = $array;
                                       } else { $dataworkmother = ''; }
   
@@ -714,8 +694,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
-                                      $array= array_column($file_additional_tiga, 'place_work_father');
+                                if ($$ppdb_tiga !='' && $$ppdb_tiga != null && !empty($$ppdb_tiga) && $$ppdb_tiga != '[]') { 
+                                      $array= array_column($$ppdb_tiga, 'place_work_father');
                                         if ($array != '' && $array != null) { $placeworkfather = $array; } 
                                         else { $placeworkfather = ''; }
                                     }else {
@@ -731,8 +711,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                  if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
-                                    $array= array_column($file_additional_tiga, 'place_work_mother');
+                                  if ($$ppdb_tiga !='' && $$ppdb_tiga != null && !empty($$ppdb_tiga) && $$ppdb_tiga != '[]') { 
+                                    $array= array_column($$ppdb_tiga, 'place_work_mother');
                                       if ($array != '' && $array != null) { $placeworkmother = $array; } 
                                       else { $placeworkmother = ''; }
   
@@ -753,8 +733,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                  if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
-                                    $array= array_column($file_additional_empat, 'title_work_father');
+                                  if ($$ppdb_empat !='' && $$ppdb_empat != null && !empty($$ppdb_empat) && $$ppdb_empat != '[]') { 
+                                    $array= array_column($$ppdb_empat, 'title_work_father');
                                       if ($array != '' && $array != null) { $titleworkfather = $array;
                                       } else { $titleworkfather = ''; }
   
@@ -779,8 +759,8 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-6">
                                   <?php
-                                  if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
-                                    $array= array_column($file_additional_empat, 'title_work_mother');
+                                  if ($$ppdb_empat !='' && $$ppdb_empat != null && !empty($$ppdb_empat) && $$ppdb_empat != '[]') { 
+                                    $array= array_column($$ppdb_empat, 'title_work_mother');
                                       if ($array != '' && $array != null) { $titleworkmother = $array;
                                       } else { $titleworkmother = ''; }
   
@@ -811,8 +791,8 @@
                                 <div class="row">
                                   <div class="col">
                                     <?php
-                                      if ($file_additional_lima !='' && $file_additional_lima != null && !empty($file_additional_lima) && $file_additional_lima != '[]') { 
-                                        $array= array_column($file_additional_lima, 'gaji_tetap_ayah');
+                                      if ($$ppdb_lima !='' && $$ppdb_lima != null && !empty($$ppdb_lima) && $$ppdb_lima != '[]') { 
+                                        $array= array_column($$ppdb_lima, 'gaji_tetap_ayah');
                                           if ($array != '' && $array != null) { $gajiworkayah = $array;
                                           } else { $gajiworkayah = ''; }
                                         }else {
@@ -826,8 +806,8 @@
                                   </div>
                                   <div class="col">
                                     <?php
-                                      if ($file_additional_lima !='' && $file_additional_lima != null && !empty($file_additional_lima) && $file_additional_lima != '[]') { 
-                                      $array= array_column($file_additional_lima, 'income_work_father');
+                                      if ($$ppdb_lima !='' && $$ppdb_lima != null && !empty($$ppdb_lima) && $$ppdb_lima != '[]') { 
+                                      $array= array_column($$ppdb_lima, 'income_work_father');
   
                                       if ($array !='' && $array != null && !empty($array) && $array != '[]') {
                                         if ($array != '' && $array != null) { $incomeworkayah = $array; } 
@@ -859,8 +839,8 @@
                               <div class="row">
                                 <div class="col">
                                   <?php
-                                if ($file_additional_lima !='' && $file_additional_lima != null && !empty($file_additional_lima) && $file_additional_lima != '[]') { 
-                                        $array= array_column($file_additional_lima, 'gaji_tetap_ibu');
+                                if ($$ppdb_lima !='' && $$ppdb_lima != null && !empty($$ppdb_lima) && $$ppdb_lima != '[]') { 
+                                        $array= array_column($$ppdb_lima, 'gaji_tetap_ibu');
                                           if ($array != '' && $array != null) { $gajiworkmother = $array;
                                           } else { $gajiworkmother = ''; }     
                                           
@@ -875,8 +855,8 @@
                                 </div>
                                 <div class="col">
                                   <?php
-                                if ($file_additional_lima !='' && $file_additional_lima != null && !empty($file_additional_lima) && $file_additional_lima != '[]') { 
-                                    $array= array_column($file_additional_lima, 'income_work_mother');
+                                if ($$ppdb_lima !='' && $$ppdb_lima != null && !empty($$ppdb_lima) && $$ppdb_lima != '[]') { 
+                                    $array= array_column($$ppdb_lima, 'income_work_mother');
   
   
                                     if ($array !='' && $array != null && !empty($array) && $array != '[]') {
@@ -1066,8 +1046,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-          if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
-              $array= array_column($file_additional_satu, 'name_father');
+          if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+              $array= array_column($ppdb, 'name_father');
                 if ($array != '' && $array != null) {
                   $data1 = $array;
                 } else {
@@ -1085,8 +1065,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-          if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
-              $array= array_column($file_additional_satu, 'name_mother');
+          if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+              $array= array_column($ppdb, 'name_mother');
                 if ($array != '' && $array != null) {
                   $data1 = $array;
                 } else {
@@ -1108,8 +1088,8 @@
           <div class="col-xl-6">
             <?php
 
-            if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
-              $array= array_column($file_additional_dua, 'name_work_father');
+            if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+              $array= array_column($ppdb, 'name_work_father');
               if ($array !='' && $array != null && !empty($array) && $array != '[]') {
                 if ($array != '' && $array != null) { $dataworkfather = $array;
                 } else { $dataworkfather = ''; }
@@ -1135,8 +1115,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-            if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
-              $array= array_column($file_additional_dua, 'name_work_mother');
+            if ($ppdb !='' && $ppdb != null && !empty($ppdb) && $ppdb != '[]') { 
+              $array= array_column($ppdb, 'name_work_mother');
                 if ($array != '' && $array != null) { $dataworkmother = $array;
                 } else { $dataworkmother = ''; }
 
@@ -1161,8 +1141,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-          if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
-                $array= array_column($file_additional_tiga, 'place_work_father');
+          if ($$ppdb_tiga !='' && $$ppdb_tiga != null && !empty($$ppdb_tiga) && $$ppdb_tiga != '[]') { 
+                $array= array_column($$ppdb_tiga, 'place_work_father');
                   if ($array != '' && $array != null) { $placeworkfather = $array; } 
                   else { $placeworkfather = ''; }
               }else {
@@ -1177,8 +1157,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-            if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
-              $array= array_column($file_additional_tiga, 'place_work_mother');
+            if ($$ppdb_tiga !='' && $$ppdb_tiga != null && !empty($$ppdb_tiga) && $$ppdb_tiga != '[]') { 
+              $array= array_column($$ppdb_tiga, 'place_work_mother');
                 if ($array != '' && $array != null) { $placeworkmother = $array; } 
                 else { $placeworkmother = ''; }
 
@@ -1198,8 +1178,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-            if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
-              $array= array_column($file_additional_empat, 'title_work_father');
+            if ($$ppdb_empat !='' && $$ppdb_empat != null && !empty($$ppdb_empat) && $$ppdb_empat != '[]') { 
+              $array= array_column($$ppdb_empat, 'title_work_father');
                 if ($array != '' && $array != null) { $titleworkfather = $array;
                 } else { $titleworkfather = ''; }
 
@@ -1223,8 +1203,8 @@
           <!--begin::Col-->
           <div class="col-xl-6">
             <?php
-            if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
-              $array= array_column($file_additional_empat, 'title_work_mother');
+            if ($$ppdb_empat !='' && $$ppdb_empat != null && !empty($$ppdb_empat) && $$ppdb_empat != '[]') { 
+              $array= array_column($$ppdb_empat, 'title_work_mother');
                 if ($array != '' && $array != null) { $titleworkmother = $array;
                 } else { $titleworkmother = ''; }
 
@@ -1954,7 +1934,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data1');
+                                          $array= array_column($$ppdbdua, 'data1');
                                           if ($array != '' && $array != null) {
                                             $data1 = $array;
                                           } else {
@@ -1967,7 +1947,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data2');
+                                          $array= array_column($$ppdbdua, 'data2');
                                           if ($array != '' && $array != null) {
                                             $data2 = $array;
                                           } else {
@@ -1980,7 +1960,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data3');
+                                          $array= array_column($$ppdbdua, 'data3');
                                           if ($array != '' && $array != null) {
                                             $data3 = $array;
                                           } else {
@@ -1993,7 +1973,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data4');
+                                          $array= array_column($$ppdbdua, 'data4');
                                           if ($array != '' && $array != null) {
                                             $data4 = $array;
                                           } else {
@@ -2018,7 +1998,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data5');
+                                          $array= array_column($$ppdbdua, 'data5');
                                           if ($array != '' && $array != null) {
                                             $data5 = $array;
                                           } else {
@@ -2032,7 +2012,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data6');
+                                          $array= array_column($$ppdbdua, 'data6');
                                           if ($array != '' && $array != null) {
                                             $data6 = $array;
                                           } else {
@@ -2055,7 +2035,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data7');
+                                          $array= array_column($$ppdbdua, 'data7');
                                           if ($array != '' && $array != null) {
                                             $data7 = $array;
                                           } else {
@@ -2069,7 +2049,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data8');
+                                          $array= array_column($$ppdbdua, 'data8');
                                           if ($array != '' && $array != null) {
                                             $data8 = $array;
                                           } else {
@@ -2085,7 +2065,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data9');
+                                          $array= array_column($$ppdbdua, 'data9');
                                           if ($array != '' && $array != null) {
                                             $data9 = $array;
                                           } else {
@@ -2099,7 +2079,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data10');
+                                          $array= array_column($$ppdbdua, 'data10');
                                           if ($array != '' && $array != null) {
                                             $data10 = $array;
                                           } else {
@@ -2113,7 +2093,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data11');
+                                          $array= array_column($$ppdbdua, 'data11');
                                           if ($array != '' && $array != null) {
                                             $data11 = $array;
                                           } else {
@@ -2127,7 +2107,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data12');
+                                          $array= array_column($$ppdbdua, 'data12');
                                           if ($array != '' && $array != null) {
                                             $data12 = $array;
                                           } else {
@@ -2163,7 +2143,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data13');
+                                          $array= array_column($$ppdbdua, 'data13');
                                           if ($array != '' && $array != null) {
                                             $data13 = $array;
                                           } else {
@@ -2185,7 +2165,7 @@
                                     </div>
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data14');
+                                          $array= array_column($$ppdbdua, 'data14');
                                           if ($array != '' && $array != null) {
                                             $data14 = $array;
                                           } else {
@@ -2199,7 +2179,7 @@
                     
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionaldua, 'data15');
+                                          $array= array_column($$ppdbdua, 'data15');
                                           if ($array != '' && $array != null) {
                                             $data15 = $array;
                                           } else {
@@ -2254,7 +2234,7 @@
                                           </select>
                                         </div>
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data16');
+                                              $array= array_column($$ppdbdua, 'data16');
                                               if ($array != '' && $array != null) {
                                                 $data16 = $array;
                                               } else {
@@ -2315,7 +2295,7 @@
   
                                     <div class="form-group mb-4">
                                       <?php
-                                        $array= array_column($file_additionaldua, 'data17');
+                                        $array= array_column($$ppdbdua, 'data17');
                                         if ($array != '' && $array != null) {
                                           $data17 = $array;
                                         } else {
@@ -2332,7 +2312,7 @@
                                         <div class="col-sm">
               
                                             <?php
-                                                $array= array_column($file_additionaldua, 'data18');
+                                                $array= array_column($$ppdbdua, 'data18');
                                                 if ($array != '' && $array != null) {
                                                   $data18 = $array;
                                                 } else {
@@ -2344,7 +2324,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data19');
+                                                $array= array_column($$ppdbdua, 'data19');
                                                 if ($array != '' && $array != null) {
                                                   $data19 = $array;
                                                 } else {
@@ -2360,7 +2340,7 @@
               
                                     <div class="form-group mb-4">
                                            <?php
-                                                $array= array_column($file_additionaldua, 'data20');
+                                                $array= array_column($$ppdbdua, 'data20');
                                                 if ($array != '' && $array != null) {
                                                   $data20 = $array;
                                                 } else {
@@ -2374,7 +2354,7 @@
               
                                     <div class="form-group mb-4">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data21');
+                                                $array= array_column($$ppdbdua, 'data21');
                                                 if ($array != '' && $array != null) {
                                                   $data21 = $array;
                                                 } else {
@@ -2388,7 +2368,7 @@
               
                                     <div class="form-group mb-4">
                                            <?php
-                                                $array= array_column($file_additionaldua, 'data22');
+                                                $array= array_column($$ppdbdua, 'data22');
                                                 if ($array != '' && $array != null) {
                                                   $data22 = $array;
                                                 } else {
@@ -2402,7 +2382,7 @@
               
                                     <div class="form-group mb-4">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data23');
+                                                $array= array_column($$ppdbdua, 'data23');
                                                 if ($array != '' && $array != null) {
                                                   $data23 = $array;
                                                 } else {
@@ -2416,7 +2396,7 @@
               
                                     <div class="form-group mb-4">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data24');
+                                                $array= array_column($$ppdbdua, 'data24');
                                                 if ($array != '' && $array != null) {
                                                   $data24 = $array;
                                                 } else {
@@ -2430,7 +2410,7 @@
               
                                     <div class="form-group mb-4">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data25');
+                                                $array= array_column($$ppdbdua, 'data25');
                                                 if ($array != '' && $array != null) {
                                                   $data25 = $array;
                                                 } else {
@@ -2464,7 +2444,7 @@
               
                                     <div class="form-group mb-4">
                                       <?php
-                                                $array= array_column($file_additionaldua, 'data26');
+                                                $array= array_column($$ppdbdua, 'data26');
                                                 if ($array != '' && $array != null) {
                                                   $data26 = $array;
                                                 } else {
@@ -2500,7 +2480,7 @@
               
                                     <div class="form-group mb-4">
                                       <?php
-                                                $array= array_column($file_additionaldua, 'data27');
+                                                $array= array_column($$ppdbdua, 'data27');
                                                 if ($array != '' && $array != null) {
                                                   $data27 = $array;
                                                 } else {
@@ -2515,7 +2495,7 @@
               
                                     <div class="form-group mb-4">
                                       <?php
-                                                $array= array_column($file_additionaldua, 'data28');
+                                                $array= array_column($$ppdbdua, 'data28');
                                                 if ($array != '' && $array != null) {
                                                   $data28 = $array;
                                                 } else {
@@ -2528,7 +2508,7 @@
               
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data29');
+                                            $array= array_column($$ppdbdua, 'data29');
                                             if ($array != '' && $array != null) {
                                               $data29 = $array;
                                             } else {
@@ -2560,7 +2540,7 @@
 
                                       <div class="form-group mb-4">
                                                 <?php
-                                                    $array= array_column($file_additionaldua, 'data30');
+                                                    $array= array_column($$ppdbdua, 'data30');
                                                     if ($array != '' && $array != null) {
                                                       $data30 = $array;
                                                     } else {
@@ -2574,7 +2554,7 @@
                       
                                       <div class="form-group mb-4">
                                               <?php
-                                                    $array= array_column($file_additionaldua, 'data31');
+                                                    $array= array_column($$ppdbdua, 'data31');
                                                     if ($array != '' && $array != null) {
                                                       $data31 = $array;
                                                     } else {
@@ -2599,7 +2579,7 @@
                                           </div>
                                           <div class="col-sm">
                                             <?php
-                                                  $array= array_column($file_additionaldua, 'data32');
+                                                  $array= array_column($$ppdbdua, 'data32');
                                                   if ($array != '' && $array != null) {
                                                     $data32 = $array;
                                                   } else {
@@ -2625,7 +2605,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                                  $array= array_column($file_additionaldua, 'data33');
+                                                  $array= array_column($$ppdbdua, 'data33');
                                                   if ($array != '' && $array != null) {
                                                     $data33 = $array;
                                                   } else {
@@ -2639,7 +2619,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                                  $array= array_column($file_additionaldua, 'data34');
+                                                  $array= array_column($$ppdbdua, 'data34');
                                                   if ($array != '' && $array != null) {
                                                     $data34 = $array;
                                                   } else {
@@ -2654,7 +2634,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                                  $array= array_column($file_additionaldua, 'data35');
+                                                  $array= array_column($$ppdbdua, 'data35');
                                                   if ($array != '' && $array != null) {
                                                     $data35 = $array;
                                                   } else {
@@ -2678,7 +2658,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                                  $array= array_column($file_additionaldua, 'data36');
+                                                  $array= array_column($$ppdbdua, 'data36');
                                                   if ($array != '' && $array != null) {
                                                     $data36 = $array;
                                                   } else {
@@ -2717,7 +2697,7 @@
                       
                                       <div class="form-group mb-1">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data37');
+                                            $array= array_column($$ppdbdua, 'data37');
                                             if ($array != '' && $array != null) {
                                               $data37 = $array;
                                             } else {
@@ -2731,7 +2711,7 @@
                       
                                       <div class="form-group mb-1">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data38');
+                                            $array= array_column($$ppdbdua, 'data38');
                                             if ($array != '' && $array != null) {
                                               $data38 = $array;
                                             } else {
@@ -2745,7 +2725,7 @@
                       
                                       <div class="form-group mb-1">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data39');
+                                            $array= array_column($$ppdbdua, 'data39');
                                             if ($array != '' && $array != null) {
                                               $data39 = $array;
                                             } else {
@@ -2767,7 +2747,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data40');
+                                              $array= array_column($$ppdbdua, 'data40');
                                               if ($array != '' && $array != null) {
                                                 $data40 = $array;
                                               } else {
@@ -2781,7 +2761,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data41');
+                                              $array= array_column($$ppdbdua, 'data41');
                                               if ($array != '' && $array != null) {
                                                 $data41 = $array;
                                               } else {
@@ -2795,7 +2775,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data42');
+                                              $array= array_column($$ppdbdua, 'data42');
                                               if ($array != '' && $array != null) {
                                                 $data42 = $array;
                                               } else {
@@ -2809,7 +2789,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data43');
+                                              $array= array_column($$ppdbdua, 'data43');
                                               if ($array != '' && $array != null) {
                                                 $data43 = $array;
                                               } else {
@@ -2853,7 +2833,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data44');
+                                              $array= array_column($$ppdbdua, 'data44');
                                               if ($array != '' && $array != null) {
                                                 $data44 = $array;
                                               } else {
@@ -2901,7 +2881,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data45');
+                                              $array= array_column($$ppdbdua, 'data45');
                                               if ($array != '' && $array != null) {
                                                 $data45 = $array;
                                               } else {
@@ -2929,7 +2909,7 @@
                       
                                         <div class="form-group mb-4">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data46');
+                                              $array= array_column($$ppdbdua, 'data46');
                                               if ($array != '' && $array != null) {
                                                 $data46 = $array;
                                               } else {
@@ -2994,7 +2974,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data47');
+                                              $array= array_column($$ppdbdua, 'data47');
                                               if ($array != '' && $array != null) {
                                                 $data47 = $array;
                                               } else {
@@ -3008,7 +2988,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data48');
+                                              $array= array_column($$ppdbdua, 'data48');
                                               if ($array != '' && $array != null) {
                                                 $data48 = $array;
                                               } else {
@@ -3022,7 +3002,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                        $array= array_column($file_additionaldua, 'data49');
+                                        $array= array_column($$ppdbdua, 'data49');
                                         if ($array != '' && $array != null) {
                                           $data49 = $array;
                                         } else {
@@ -3036,7 +3016,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data50');
+                                            $array= array_column($$ppdbdua, 'data50');
                                             if ($array != '' && $array != null) {
                                               $data50 = $array;
                                             } else {
@@ -3080,7 +3060,7 @@
                       
                                       <div class="form-group mb-4">
                                             <?php
-                                                $array= array_column($file_additionaldua, 'data51');
+                                                $array= array_column($$ppdbdua, 'data51');
                                                 if ($array != '' && $array != null) {
                                                   $data51 = $array;
                                                 } else {
@@ -3128,7 +3108,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                                $array= array_column($file_additionaldua, 'data52');
+                                                $array= array_column($$ppdbdua, 'data52');
                                                 if ($array != '' && $array != null) {
                                                   $data52 = $array;
                                                 } else {
@@ -3156,7 +3136,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                                $array= array_column($file_additionaldua, 'data53');
+                                                $array= array_column($$ppdbdua, 'data53');
                                                 if ($array != '' && $array != null) {
                                                   $data53 = $array;
                                                 } else {
@@ -3219,7 +3199,7 @@
                     
                                   <div class="form-group mb-4">
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data54');
+                                              $array= array_column($$ppdbdua, 'data54');
                                               if ($array != '' && $array != null) {
                                                 $data54 = $array;
                                               } else {
@@ -3233,7 +3213,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data55');
+                                          $array= array_column($$ppdbdua, 'data55');
                                           if ($array != '' && $array != null) {
                                             $data55 = $array;
                                           } else {
@@ -3247,7 +3227,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data56');
+                                          $array= array_column($$ppdbdua, 'data56');
                                           if ($array != '' && $array != null) {
                                             $data56 = $array;
                                           } else {
@@ -3261,7 +3241,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data57');
+                                          $array= array_column($$ppdbdua, 'data57');
                                           if ($array != '' && $array != null) {
                                             $data57 = $array;
                                           } else {
@@ -3305,7 +3285,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data58');
+                                          $array= array_column($$ppdbdua, 'data58');
                                           if ($array != '' && $array != null) {
                                             $data58 = $array;
                                           } else {
@@ -3353,7 +3333,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data59');
+                                          $array= array_column($$ppdbdua, 'data59');
                                           if ($array != '' && $array != null) {
                                             $data59 = $array;
                                           } else {
@@ -3383,7 +3363,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data60');
+                                          $array= array_column($$ppdbdua, 'data60');
                                           if ($array != '' && $array != null) {
                                             $data60 = $array;
                                           } else {
@@ -3397,7 +3377,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data61');
+                                          $array= array_column($$ppdbdua, 'data61');
                                           if ($array != '' && $array != null) {
                                             $data61 = $array;
                                           } else {
@@ -3411,7 +3391,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data62');
+                                          $array= array_column($$ppdbdua, 'data62');
                                           if ($array != '' && $array != null) {
                                             $data62 = $array;
                                           } else {
@@ -3425,7 +3405,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data63');
+                                          $array= array_column($$ppdbdua, 'data63');
                                           if ($array != '' && $array != null) {
                                             $data63 = $array;
                                           } else {
@@ -3485,7 +3465,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data64');
+                                          $array= array_column($$ppdbdua, 'data64');
                                           if ($array != '' && $array != null) {
                                             $data64 = $array;
                                           } else {
@@ -3499,7 +3479,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data65');
+                                          $array= array_column($$ppdbdua, 'data65');
                                           if ($array != '' && $array != null) {
                                             $data65 = $array;
                                           } else {
@@ -3513,7 +3493,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                            $array= array_column($file_additionaldua, 'data66');
+                                            $array= array_column($$ppdbdua, 'data66');
                                             if ($array != '' && $array != null) {
                                               $data66 = $array;
                                             } else {
@@ -3529,7 +3509,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                              $array= array_column($file_additionaldua, 'data67');
+                                              $array= array_column($$ppdbdua, 'data67');
                                               if ($array != '' && $array != null) {
                                                 $data67 = $array;
                                               } else {
@@ -3543,7 +3523,7 @@
                     
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionaldua, 'data68');
+                                          $array= array_column($$ppdbdua, 'data68');
                                           if ($array != '' && $array != null) {
                                             $data68 = $array;
                                           } else {
@@ -3584,7 +3564,7 @@
                                     <div class="row">
                                         <div class="col-sm">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data81');
+                                              $array= array_column($$ppdbdua, 'data81');
                                               if ($array != '' && $array != null) {
                                                 $data81 = $array;
                                               } else {
@@ -3610,7 +3590,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data82');
+                                              $array= array_column($$ppdbdua, 'data82');
                                               if ($array != '' && $array != null) {
                                                 $data82 = $array;
                                               } else {
@@ -3639,7 +3619,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data83');
+                                                $array= array_column($$ppdbdua, 'data83');
                                                 if ($array != '' && $array != null) {
                                                   $data83 = $array;
                                                 } else {
@@ -3650,7 +3630,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data84');
+                                                $array= array_column($$ppdbdua, 'data84');
                                                 if ($array != '' && $array != null) {
                                                   $data84 = $array;
                                                 } else {
@@ -3661,7 +3641,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data85');
+                                              $array= array_column($$ppdbdua, 'data85');
                                               if ($array != '' && $array != null) {
                                                 $data85 = $array;
                                               } else {
@@ -3677,7 +3657,7 @@
                                     <div class="row">
                                       <div class="col-sm">
                                         <?php
-                                                $array= array_column($file_additionaldua, 'data86');
+                                                $array= array_column($$ppdbdua, 'data86');
                                                 if ($array != '' && $array != null) {
                                                   $data86 = $array;
                                                 } else {
@@ -3702,7 +3682,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data87');
+                                            $array= array_column($$ppdbdua, 'data87');
                                             if ($array != '' && $array != null) {
                                               $data87 = $array;
                                             } else {
@@ -3731,7 +3711,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data88');
+                                            $array= array_column($$ppdbdua, 'data88');
                                             if ($array != '' && $array != null) {
                                               $data88 = $array;
                                             } else {
@@ -3742,7 +3722,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data89');
+                                            $array= array_column($$ppdbdua, 'data89');
                                             if ($array != '' && $array != null) {
                                               $data89 = $array;
                                             } else {
@@ -3753,7 +3733,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data90');
+                                            $array= array_column($$ppdbdua, 'data90');
                                             if ($array != '' && $array != null) {
                                               $data90 = $array;
                                             } else {
@@ -3769,7 +3749,7 @@
                                   <div class="row">
                                     <div class="col-sm">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data91');
+                                            $array= array_column($$ppdbdua, 'data91');
                                             if ($array != '' && $array != null) {
                                               $data91 = $array;
                                             } else {
@@ -3795,7 +3775,7 @@
                                     </div>
                                     <div class="col-sm">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data92');
+                                            $array= array_column($$ppdbdua, 'data92');
                                             if ($array != '' && $array != null) {
                                               $data92 = $array;
                                             } else {
@@ -3824,7 +3804,7 @@
                                     </div>
                                     <div class="col-sm">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data93');
+                                            $array= array_column($$ppdbdua, 'data93');
                                             if ($array != '' && $array != null) {
                                               $data93 = $array;
                                             } else {
@@ -3835,7 +3815,7 @@
                                     </div>
                                     <div class="col-sm">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data94');
+                                            $array= array_column($$ppdbdua, 'data94');
                                             if ($array != '' && $array != null) {
                                               $data94 = $array;
                                             } else {
@@ -3846,7 +3826,7 @@
                                     </div>
                                     <div class="col-sm">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data95');
+                                            $array= array_column($$ppdbdua, 'data95');
                                             if ($array != '' && $array != null) {
                                               $data95 = $array;
                                             } else {
@@ -3889,7 +3869,7 @@
                                     <div class="row">
                                         <div class="col-sm">
                                           <?php
-                                            $array= array_column($file_additionaldua, 'data96');
+                                            $array= array_column($$ppdbdua, 'data96');
                                             if ($array != '' && $array != null) {
                                               $data96 = $array;
                                             } else {
@@ -3916,7 +3896,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                            $array= array_column($file_additionaldua, 'data97');
+                                            $array= array_column($$ppdbdua, 'data97');
                                             if ($array != '' && $array != null) {
                                               $data97 = $array;
                                             } else {
@@ -3927,7 +3907,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data98');
+                                              $array= array_column($$ppdbdua, 'data98');
                                               if ($array != '' && $array != null) {
                                                 $data98 = $array;
                                               } else {
@@ -3938,7 +3918,7 @@
                                         </div>
                                         <div class="col-sm">
                                           <?php
-                                              $array= array_column($file_additionaldua, 'data99');
+                                              $array= array_column($$ppdbdua, 'data99');
                                               if ($array != '' && $array != null) {
                                                 $data99 = $array;
                                               } else {
@@ -3952,7 +3932,7 @@
                                     <div class="row">
                                       <div class="col-sm">
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data100');
+                                              $array= array_column($$ppdbdua, 'data100');
                                               if ($array != '' && $array != null) {
                                                 $data100 = $array;
                                               } else {
@@ -3979,7 +3959,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data101');
+                                              $array= array_column($$ppdbdua, 'data101');
                                               if ($array != '' && $array != null) {
                                                 $data101 = $array;
                                               } else {
@@ -3990,7 +3970,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                              $array= array_column($file_additionaldua, 'data102');
+                                              $array= array_column($$ppdbdua, 'data102');
                                               if ($array != '' && $array != null) {
                                                 $data102 = $array;
                                               } else {
@@ -4001,7 +3981,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data103');
+                                            $array= array_column($$ppdbdua, 'data103');
                                             if ($array != '' && $array != null) {
                                               $data103 = $array;
                                             } else {
@@ -4015,7 +3995,7 @@
                                     <div class="row">
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data104');
+                                            $array= array_column($$ppdbdua, 'data104');
                                             if ($array != '' && $array != null) {
                                               $data104 = $array;
                                             } else {
@@ -4042,7 +4022,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data105');
+                                            $array= array_column($$ppdbdua, 'data105');
                                             if ($array != '' && $array != null) {
                                               $data105 = $array;
                                             } else {
@@ -4053,7 +4033,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data106');
+                                            $array= array_column($$ppdbdua, 'data106');
                                             if ($array != '' && $array != null) {
                                               $data106 = $array;
                                             } else {
@@ -4064,7 +4044,7 @@
                                       </div>
                                       <div class="col-sm">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data107');
+                                            $array= array_column($$ppdbdua, 'data107');
                                             if ($array != '' && $array != null) {
                                               $data107 = $array;
                                             } else {
@@ -4095,7 +4075,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data69');
+                                            $array= array_column($$ppdbdua, 'data69');
                                             if ($array != '' && $array != null) {
                                               $data69 = $array;
                                             } else {
@@ -4110,7 +4090,7 @@
                                     <div>
                                       <label for="">Jenis Pendaftaran</label>
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data70');
+                                            $array= array_column($$ppdbdua, 'data70');
                                             if ($array != '' && $array != null) {
                                               $data70 = $array;
                                             } else {
@@ -4135,7 +4115,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                      $array= array_column($file_additionaldua, 'data71');
+                                      $array= array_column($$ppdbdua, 'data71');
                                             if ($array != '' && $array != null) {
                                               $data71 = $array;
                                             } else {
@@ -4149,7 +4129,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data72');
+                                            $array= array_column($$ppdbdua, 'data72');
                                             if ($array != '' && $array != null) {
                                               $data72 = $array;
                                             } else {
@@ -4163,7 +4143,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data73');
+                                            $array= array_column($$ppdbdua, 'data73');
                                             if ($array != '' && $array != null) {
                                               $data73 = $array;
                                             } else {
@@ -4177,7 +4157,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data74');
+                                            $array= array_column($$ppdbdua, 'data74');
                                             if ($array != '' && $array != null) {
                                               $data74 = $array;
                                             } else {
@@ -4192,7 +4172,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data75');
+                                            $array= array_column($$ppdbdua, 'data75');
                                             if ($array != '' && $array != null) {
                                               $data75 = $array;
                                             } else {
@@ -4207,7 +4187,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionaldua, 'data76');
+                                            $array= array_column($$ppdbdua, 'data76');
                                             if ($array != '' && $array != null) {
                                               $data76 = $array;
                                             } else {
@@ -4224,7 +4204,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                              $array= array_column($file_additionaldua, 'data77');
+                                              $array= array_column($$ppdbdua, 'data77');
                                               if ($array != '' && $array != null) {
                                                 $data77 = $array;
                                               } else {
@@ -4260,7 +4240,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                              $array= array_column($file_additionaldua, 'data78');
+                                              $array= array_column($$ppdbdua, 'data78');
                                               if ($array != '' && $array != null) {
                                                 $data78 = $array;
                                               } else {
@@ -4274,7 +4254,7 @@
                       
                                     <div class="form-group mb-4">
                                       <?php
-                                              $array= array_column($file_additionaldua, 'data79');
+                                              $array= array_column($$ppdbdua, 'data79');
                                               if ($array != '' && $array != null) {
                                                 $data79 = $array;
                                               } else {
@@ -4288,7 +4268,7 @@
                       
                                     <div class="custom-control custom-switch mb-4">
                                       <?php
-                                              $array= array_column($file_additionaldua, 'data80');
+                                              $array= array_column($$ppdbdua, 'data80');
                                               if ($array != '' && $array != null) {
                                                 $data80 = $array;
                                               } else {
@@ -4324,7 +4304,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data1');
+                                            $array= array_column($$ppdbdua, 'data1');
                                             if ($array != '' && $array != null) {
                                               $data1 = $array;
                                             } else {
@@ -4337,7 +4317,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data2');
+                                            $array= array_column($$ppdbdua, 'data2');
                                             if ($array != '' && $array != null) {
                                               $data2 = $array;
                                             } else {
@@ -4350,7 +4330,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data3');
+                                            $array= array_column($$ppdbdua, 'data3');
                                             if ($array != '' && $array != null) {
                                               $data3 = $array;
                                             } else {
@@ -4363,7 +4343,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data4');
+                                            $array= array_column($$ppdbdua, 'data4');
                                             if ($array != '' && $array != null) {
                                               $data4 = $array;
                                             } else {
@@ -4388,7 +4368,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data5');
+                                            $array= array_column($$ppdbdua, 'data5');
                                             if ($array != '' && $array != null) {
                                               $data5 = $array;
                                             } else {
@@ -4402,7 +4382,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data6');
+                                            $array= array_column($$ppdbdua, 'data6');
                                             if ($array != '' && $array != null) {
                                               $data6 = $array;
                                             } else {
@@ -4425,7 +4405,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data7');
+                                            $array= array_column($$ppdbdua, 'data7');
                                             if ($array != '' && $array != null) {
                                               $data7 = $array;
                                             } else {
@@ -4439,7 +4419,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data8');
+                                            $array= array_column($$ppdbdua, 'data8');
                                             if ($array != '' && $array != null) {
                                               $data8 = $array;
                                             } else {
@@ -4455,7 +4435,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data9');
+                                            $array= array_column($$ppdbdua, 'data9');
                                             if ($array != '' && $array != null) {
                                               $data9 = $array;
                                             } else {
@@ -4469,7 +4449,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data10');
+                                            $array= array_column($$ppdbdua, 'data10');
                                             if ($array != '' && $array != null) {
                                               $data10 = $array;
                                             } else {
@@ -4483,7 +4463,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data11');
+                                            $array= array_column($$ppdbdua, 'data11');
                                             if ($array != '' && $array != null) {
                                               $data11 = $array;
                                             } else {
@@ -4497,7 +4477,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data12');
+                                            $array= array_column($$ppdbdua, 'data12');
                                             if ($array != '' && $array != null) {
                                               $data12 = $array;
                                             } else {
@@ -4533,7 +4513,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data13');
+                                            $array= array_column($$ppdbdua, 'data13');
                                             if ($array != '' && $array != null) {
                                               $data13 = $array;
                                             } else {
@@ -4555,7 +4535,7 @@
                                       </div>
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data14');
+                                            $array= array_column($$ppdbdua, 'data14');
                                             if ($array != '' && $array != null) {
                                               $data14 = $array;
                                             } else {
@@ -4569,7 +4549,7 @@
                       
                                       <div class="form-group mb-4">
                                         <?php
-                                            $array= array_column($file_additionaldua, 'data15');
+                                            $array= array_column($$ppdbdua, 'data15');
                                             if ($array != '' && $array != null) {
                                               $data15 = $array;
                                             } else {
@@ -4624,7 +4604,7 @@
                                             </select>
                                           </div>
                                           <?php
-                                                $array= array_column($file_additionaldua, 'data16');
+                                                $array= array_column($$ppdbdua, 'data16');
                                                 if ($array != '' && $array != null) {
                                                   $data16 = $array;
                                                 } else {
@@ -4697,7 +4677,7 @@
                                     <div class="form-group mb-4">
                                       <label for="exampleFormControlInput1">Nama Orang Tua / Wali</label>
                                       <?php
-                                        $array= array_column($file_additionalsatu, 'nameparent');
+                                        $array= array_column($$ppdbsatu, 'nameparent');
                                         if ($array != '' && $array != null) {
                                           $result = $array;
                                         } else {
@@ -4710,7 +4690,7 @@
                                     <div class="form-group mb-4">
                                         <label for="exampleFormControlInput1">Alamat Orang Tua / Wali</label>
                                         <?php
-                                        $array= array_column($file_additionalsatu, 'addressparent');
+                                        $array= array_column($$ppdbsatu, 'addressparent');
                                         if ($array != '' && $array != null) {
                                           $result = $array;
                                         } else {
@@ -4726,7 +4706,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                        $array= array_column($file_additionalsatu, 'firstpayment');
+                                        $array= array_column($$ppdbsatu, 'firstpayment');
                                         if ($array != '' && $array != null) {
                                           $result = $array;
                                         } else {
@@ -4740,7 +4720,7 @@
                                       </div>
                                       <div class="form-check">
                                         <?php
-                                        $array= array_column($file_additionalsatu, 'firstpayment2');
+                                        $array= array_column($$ppdbsatu, 'firstpayment2');
                                         if ($array != '' && $array != null) {
                                           $result = $array;
                                         } else {
@@ -4760,7 +4740,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'datasatu');
+                                              $array= array_column($$ppdbsatu, 'datasatu');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4781,7 +4761,7 @@
                                         </div>
                                             <div class="form-check">
                                               <?php
-                                              $array= array_column($file_additionalsatu, 'datadua');
+                                              $array= array_column($$ppdbsatu, 'datadua');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4801,7 +4781,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'datatiga');
+                                              $array= array_column($$ppdbsatu, 'datatiga');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4823,7 +4803,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'dataempat');
+                                              $array= array_column($$ppdbsatu, 'dataempat');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4843,7 +4823,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'datalima');
+                                              $array= array_column($$ppdbsatu, 'datalima');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4863,7 +4843,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'dataenam');
+                                              $array= array_column($$ppdbsatu, 'dataenam');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4883,7 +4863,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'datatujuh');
+                                              $array= array_column($$ppdbsatu, 'datatujuh');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4903,7 +4883,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'datadelapan');
+                                              $array= array_column($$ppdbsatu, 'datadelapan');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4923,7 +4903,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'datasembilan');
+                                              $array= array_column($$ppdbsatu, 'datasembilan');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -4943,7 +4923,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datasepuluh');
+                                          $array= array_column($$ppdbsatu, 'datasepuluh');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -4965,7 +4945,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'dataempat');
+                                          $array= array_column($$ppdbsatu, 'dataempat');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -4985,7 +4965,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datalima');
+                                          $array= array_column($$ppdbsatu, 'datalima');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5004,7 +4984,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'dataenam');
+                                          $array= array_column($$ppdbsatu, 'dataenam');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5024,7 +5004,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datatujuh');
+                                          $array= array_column($$ppdbsatu, 'datatujuh');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5044,7 +5024,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datadelapan');
+                                          $array= array_column($$ppdbsatu, 'datadelapan');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5064,7 +5044,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datasembilan');
+                                          $array= array_column($$ppdbsatu, 'datasembilan');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5084,7 +5064,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datasepuluh');
+                                          $array= array_column($$ppdbsatu, 'datasepuluh');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5104,7 +5084,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'datasebelas');
+                                          $array= array_column($$ppdbsatu, 'datasebelas');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5124,7 +5104,7 @@
                                         </div>
                                         <div class="form-check">
                                           <?php
-                                          $array= array_column($file_additionalsatu, 'dataduabelas');
+                                          $array= array_column($$ppdbsatu, 'dataduabelas');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5154,7 +5134,7 @@
                                     <div class="form-group mb-4">
                                       <label for="exampleFormControlInput1">Nama Orang Tua / Wali</label>
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'nameparent');
+                                          $array= array_column($$ppdbsatu, 'nameparent');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5166,7 +5146,7 @@
                   
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'data13');
+                                          $array= array_column($$ppdbsatu, 'data13');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5183,7 +5163,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data14');
+                                                $array= array_column($$ppdbsatu, 'data14');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5228,7 +5208,7 @@
                                         </div>
                                             <div class="form-check">
                                               <?php
-                                              $array= array_column($file_additionalsatu, 'data15');
+                                              $array= array_column($$ppdbsatu, 'data15');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -5255,7 +5235,7 @@
                                   <div class="informasi4">
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'data16');
+                                          $array= array_column($$ppdbsatu, 'data16');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5274,7 +5254,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                        $array= array_column($file_additionalsatu, 'data17');
+                                        $array= array_column($$ppdbsatu, 'data17');
                                         if ($array != '' && $array != null) {
                                           $result = $array;
                                         } else {
@@ -5288,7 +5268,7 @@
                                       </div>
                                       <div class="form-check">
                                         <?php
-                                        $array= array_column($file_additionalsatu, 'data18');
+                                        $array= array_column($$ppdbsatu, 'data18');
                                         if ($array != '' && $array != null) {
                                           $result = $array;
                                         } else {
@@ -5304,7 +5284,7 @@
             
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'data19');
+                                          $array= array_column($$ppdbsatu, 'data19');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5317,7 +5297,7 @@
             
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'data20');
+                                          $array= array_column($$ppdbsatu, 'data20');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5330,7 +5310,7 @@
             
                                     <div class="form-group mb-4">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'data21');
+                                          $array= array_column($$ppdbsatu, 'data21');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5343,7 +5323,7 @@
             
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionalsatu, 'data22');
+                                          $array= array_column($$ppdbsatu, 'data22');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5356,7 +5336,7 @@
             
                                   <div class="form-group mb-4">
                                     <?php
-                                    $array= array_column($file_additionalsatu, 'data23');
+                                    $array= array_column($$ppdbsatu, 'data23');
                                     if ($array != '' && $array != null) {
                                       $result = $array;
                                     } else {
@@ -5375,7 +5355,7 @@
                                     </div>
                                     <div class="form-check mb-2">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'data24');
+                                          $array= array_column($$ppdbsatu, 'data24');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5389,7 +5369,7 @@
                                     </div>
                                     <div class="form-check mb-2">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'data25');
+                                            $array= array_column($$ppdbsatu, 'data25');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -5403,7 +5383,7 @@
                                     </div>
                                     <div class="form-check">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'data26');
+                                            $array= array_column($$ppdbsatu, 'data26');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -5444,7 +5424,7 @@
                                     </div>
                                     <div class="form-check mb-2">
                                       <?php
-                                          $array= array_column($file_additionalsatu, 'datavaksin24');
+                                          $array= array_column($$ppdbsatu, 'datavaksin24');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -5458,7 +5438,7 @@
                                     </div>
                                     <div class="form-check mb-2">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'datavaksin25');
+                                            $array= array_column($$ppdbsatu, 'datavaksin25');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -5472,7 +5452,7 @@
                                     </div>
                                     <div class="form-check mb-2">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'datavaksin26');
+                                            $array= array_column($$ppdbsatu, 'datavaksin26');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -5486,7 +5466,7 @@
                                     </div>
                                     <div class="form-check">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'datavaksin27');
+                                            $array= array_column($$ppdbsatu, 'datavaksin27');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -5527,7 +5507,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'data27');
+                                              $array= array_column($$ppdbsatu, 'data27');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -5541,7 +5521,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data28');
+                                                $array= array_column($$ppdbsatu, 'data28');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5555,7 +5535,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data29');
+                                                $array= array_column($$ppdbsatu, 'data29');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5570,7 +5550,7 @@
             
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data30');
+                                                $array= array_column($$ppdbsatu, 'data30');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5585,7 +5565,7 @@
             
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data31');
+                                                $array= array_column($$ppdbsatu, 'data31');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5607,7 +5587,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'data32');
+                                              $array= array_column($$ppdbsatu, 'data32');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -5621,7 +5601,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data33');
+                                                $array= array_column($$ppdbsatu, 'data33');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5635,7 +5615,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data34');
+                                                $array= array_column($$ppdbsatu, 'data34');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5650,7 +5630,7 @@
             
                                         <div class="form-check">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data35');
+                                                $array= array_column($$ppdbsatu, 'data35');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -5680,7 +5660,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check mb-2">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data36');
+                                                  $array= array_column($$ppdbsatu, 'data36');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5697,7 +5677,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data37');
+                                                  $array= array_column($$ppdbsatu, 'data37');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5723,7 +5703,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check mb-2">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data38');
+                                                  $array= array_column($$ppdbsatu, 'data38');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5740,7 +5720,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data39');
+                                                  $array= array_column($$ppdbsatu, 'data39');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5767,7 +5747,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check mb-2">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data40');
+                                                  $array= array_column($$ppdbsatu, 'data40');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5784,7 +5764,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data41');
+                                                  $array= array_column($$ppdbsatu, 'data41');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5812,7 +5792,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check mb-2">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data42');
+                                                  $array= array_column($$ppdbsatu, 'data42');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5829,7 +5809,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data43');
+                                                  $array= array_column($$ppdbsatu, 'data43');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5857,7 +5837,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check mb-2">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data44');
+                                                  $array= array_column($$ppdbsatu, 'data44');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5874,7 +5854,7 @@
                                               <div class="col-sm">
                                                 <div class="form-check">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data45');
+                                                  $array= array_column($$ppdbsatu, 'data45');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5907,7 +5887,7 @@
             
                                                 <div class="form-check mb-2">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data46');
+                                                  $array= array_column($$ppdbsatu, 'data46');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5922,7 +5902,7 @@
             
                                                 <div class="form-check">
                                                   <?php
-                                                  $array= array_column($file_additionalsatu, 'data47');
+                                                  $array= array_column($$ppdbsatu, 'data47');
                                                   if ($array != '' && $array != null) {
                                                     $result = $array;
                                                   } else {
@@ -5947,7 +5927,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                            $array= array_column($file_additionalsatu, 'data48');
+                                            $array= array_column($$ppdbsatu, 'data48');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -5961,7 +5941,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data49');
+                                              $array= array_column($$ppdbsatu, 'data49');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -5975,7 +5955,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data50');
+                                              $array= array_column($$ppdbsatu, 'data50');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -5990,7 +5970,7 @@
             
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data51');
+                                              $array= array_column($$ppdbsatu, 'data51');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6009,7 +5989,7 @@
             
                                   <div class="form-group mb-4">
                                     <?php
-                                          $array= array_column($file_additionalsatu, 'data52');
+                                          $array= array_column($$ppdbsatu, 'data52');
                                           if ($array != '' && $array != null) {
                                             $result = $array;
                                           } else {
@@ -6026,7 +6006,7 @@
             
                               <div class="form-group mb-4">
                                 <?php
-                                      $array= array_column($file_additionalsatu, 'data53');
+                                      $array= array_column($$ppdbsatu, 'data53');
                                       if ($array != '' && $array != null) {
                                         $result = $array;
                                       } else {
@@ -6042,7 +6022,7 @@
             
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'data54');
+                                            $array= array_column($$ppdbsatu, 'data54');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -6070,7 +6050,7 @@
                                     
                                     <div class="form-group mb-4">
                                       <?php
-                                            $array= array_column($file_additionalsatu, 'data55');
+                                            $array= array_column($$ppdbsatu, 'data55');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -6095,7 +6075,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data56');
+                                                $array= array_column($$ppdbsatu, 'data56');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6126,7 +6106,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data57');
+                                                $array= array_column($$ppdbsatu, 'data57');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6155,7 +6135,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data58');
+                                                $array= array_column($$ppdbsatu, 'data58');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6186,7 +6166,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data59');
+                                                $array= array_column($$ppdbsatu, 'data59');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6218,7 +6198,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data60');
+                                                $array= array_column($$ppdbsatu, 'data60');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6251,7 +6231,7 @@
                                       </div>
                                       <div class="mb-2">
                                                 <?php
-                                                $array= array_column($file_additionalsatu, 'data61');
+                                                $array= array_column($$ppdbsatu, 'data61');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6279,7 +6259,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                            $array= array_column($file_additionalsatu, 'data62');
+                                            $array= array_column($$ppdbsatu, 'data62');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -6293,7 +6273,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data63');
+                                              $array= array_column($$ppdbsatu, 'data63');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6307,7 +6287,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data64');
+                                              $array= array_column($$ppdbsatu, 'data64');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6322,7 +6302,7 @@
                   
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data65');
+                                              $array= array_column($$ppdbsatu, 'data65');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6344,7 +6324,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'dataschool62');
+                                              $array= array_column($$ppdbsatu, 'dataschool62');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6358,7 +6338,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'dataschool63');
+                                                $array= array_column($$ppdbsatu, 'dataschool63');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6372,7 +6352,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'dataschool64');
+                                                $array= array_column($$ppdbsatu, 'dataschool64');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6387,7 +6367,7 @@
                   
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'dataschool65');
+                                                $array= array_column($$ppdbsatu, 'dataschool65');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6410,7 +6390,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                            $array= array_column($file_additionalsatu, 'data66');
+                                            $array= array_column($$ppdbsatu, 'data66');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -6424,7 +6404,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data67');
+                                              $array= array_column($$ppdbsatu, 'data67');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6438,7 +6418,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data68');
+                                              $array= array_column($$ppdbsatu, 'data68');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6453,7 +6433,7 @@
                   
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data69');
+                                              $array= array_column($$ppdbsatu, 'data69');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6468,7 +6448,7 @@
                   
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data70');
+                                              $array= array_column($$ppdbsatu, 'data70');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6491,7 +6471,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                              $array= array_column($file_additionalsatu, 'data71');
+                                              $array= array_column($$ppdbsatu, 'data71');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6505,7 +6485,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data72');
+                                                $array= array_column($$ppdbsatu, 'data72');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6519,7 +6499,7 @@
                                         </div>
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data73');
+                                                $array= array_column($$ppdbsatu, 'data73');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6534,7 +6514,7 @@
                   
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data74');
+                                                $array= array_column($$ppdbsatu, 'data74');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6549,7 +6529,7 @@
                   
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data75');
+                                                $array= array_column($$ppdbsatu, 'data75');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6565,7 +6545,7 @@
                   
                                         <div class="form-check mb-2">
                                           <?php
-                                                $array= array_column($file_additionalsatu, 'data76');
+                                                $array= array_column($$ppdbsatu, 'data76');
                                                 if ($array != '' && $array != null) {
                                                   $result = $array;
                                                 } else {
@@ -6587,7 +6567,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                            $array= array_column($file_additionalsatu, 'data77');
+                                            $array= array_column($$ppdbsatu, 'data77');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -6601,7 +6581,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data78');
+                                              $array= array_column($$ppdbsatu, 'data78');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6615,7 +6595,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data79');
+                                              $array= array_column($$ppdbsatu, 'data79');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6630,7 +6610,7 @@
                   
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data80');
+                                              $array= array_column($$ppdbsatu, 'data80');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6652,7 +6632,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                            $array= array_column($file_additionalsatu, 'data81');
+                                            $array= array_column($$ppdbsatu, 'data81');
                                             if ($array != '' && $array != null) {
                                               $result = $array;
                                             } else {
@@ -6666,7 +6646,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data82');
+                                              $array= array_column($$ppdbsatu, 'data82');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6680,7 +6660,7 @@
                                       </div>
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data83');
+                                              $array= array_column($$ppdbsatu, 'data83');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6695,7 +6675,7 @@
                   
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data84');
+                                              $array= array_column($$ppdbsatu, 'data84');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6710,7 +6690,7 @@
                   
                                       <div class="form-check mb-2">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data85');
+                                              $array= array_column($$ppdbsatu, 'data85');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {
@@ -6728,7 +6708,7 @@
                                       
                                       <div class="form-group mb-4">
                                         <?php
-                                              $array= array_column($file_additionalsatu, 'data86');
+                                              $array= array_column($$ppdbsatu, 'data86');
                                               if ($array != '' && $array != null) {
                                                 $result = $array;
                                               } else {

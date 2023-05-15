@@ -321,6 +321,8 @@ class PricingController extends Controller
 
     public function check_excel2() {
 
+        // FILE ADDITIONAL 2
+
         $pricings = 'ada';
 
         $pricings_wave2 = 12;

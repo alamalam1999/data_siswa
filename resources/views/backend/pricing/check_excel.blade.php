@@ -35,7 +35,7 @@
             <tr>
                 <th>NO</th>
                 <th>NAMA_ORANG_TUA</th>
-                <th>ALAMAT_ORANG_TUA_ATAU_WALi</th>
+                <th>ALAMAT_ORANG_TUA_ATAU_WALI</th>
                 <th>MEMBAYAR_UANG_PANGKAL_UP</th>
                 <th>MEMBAYAR_UANG_PANGKAL_UP_2</th>
                 <th>PEMBAYARAN_SPP_BULAN_JULI_2023</th>
@@ -65,102 +65,102 @@
                <th>IMUNISASI_LENGKAP</th>
                <th>ADA_GANGGUAN_DAN_KELAINAN</th>
 
-                <th>Tidak Ada Gangguan dan Kelainan</th>
+                <th>TIDAK_ADA_GANGGUAN_DAN_KELAINAN</th>
 
                <th>BERBAHAYA</th>
                <th>TIDAK_BERBAHAYA</th>
                <th>YANG_LAIN</th>
 
-                <th>Normal, tidak ada gangguan</th>
+                <th>NORMAL_TIDAK_ADA_GANGGUAN</th>
 
                 <th>ADA_KOMPILASI_KETIKA_MELAHIRKAN</th>
                 <th>NORMAL_TIDAK_ADA_CACAT_BAWAAN</th>
                 <th>ADA_CACAT_BAWAAN</th>
 
-                <th>Normal</th>
-
-                <th>Terlambat</th>
-
-                <th>Normal</th>
+                <th>NORMAL</th>
 
                 <th>TERLAMBAT</th>
 
-                <th>Normal</th>
+                <th>NORMAL</th>
 
-                <th>Terlambat</th>
+                <th>TERLAMBAT</th>
 
-                <th>Normal</th>
+                <th>NORMLA</th>
 
-                <th>Terlambat</th>
+                <th>TERLAMBAT</th>
 
-                <th>Normal</th>
+                <th>NORMAL</th>
 
-                <th>Terlambat</th>
+                <th>TERLAMBAT</th>
 
-                <th>Ada</th>
-                <th>tidak Ada</th>
-                <th>Ya , Pernah</th>
+                <th>NORMAL</th>
 
-                <th>Tidak Pernah</th>
+                <th>TERLAMBAT</th>
 
-                <th>Ya, Punya Riwayat kejang demam (tiap demam pasti kejang)</th>
-                <th>Tidak ada riwayat kejang demam</th>
+                <th>ADA</th>
+                <th>TIDAK_ADA</th>
+                <th>YA_PERNAH</th>
 
-                <th>apakah memiliki riwayat penyakit yang di derita</th>
-                <th>apakah pernah dirawat di rumah sakit?</th>
+                <th>TIDAK_PERNAH</th>
 
-                <th>catatan lain jika ada</th>
+                <th>YA_RIWAYAT_KEJANG_DEMAM</th>
+                <th>TIDAK_RIWAYAT_KEJANG_DEMAM</th>
 
-                <th>Sekolah Asal</th>
-                <th>Brand</th>
-                <th>Kegiatan Sekolah</th>
-                <th>Media Cetak</th>
-                <th>Media Elektronik</th>
+                <th>MEMILIKI_RIWAYAT_PENYAKIT_DIDERITA</th>
+                <th>PERNAH_RAWAT_RUMAH_SAKIT</th>
+
+                <th>CATATAN_LAIN</th>
+
+                <th>SEKOLAH_ASAL</th>
+                <th>BRAND</th>
+                <th>KEGIATAN_SEKOLAH</th>
+                <th>MEDIA_CETAK</th>
+                <th>MEDIA_ELEKTRONIK</th>
                 <th>Media Sosial</th>
-                <th>Internet</th>
-                <th>Program Sekolah</th>
-                <th>Fasilitas % pelayanan</th>
-                <th>Jarak</th>
+                <th>MEDIA_SOSIAL</th>
+                <th>PROGRAM_SEKOLAH</th>
+                <th>FASILITAS_PELAYANAN</th>
+                <th>JARAK</th>
 
-                <th>Uang Sekolah Terjangkau</th>
+                <th>UANG_SEKOLAH_TERJANGKAU</th>
 
-                <th>Fasilitas Sekolah lengkap</th>
-                <th>Kebersihan Gedung Sekolah</th>
-                <th>Pelayanan baik penyampaian informasi cukup jelas</th>
-                <th>Tenaga pendidik yang Berkompeten & Profesional</th>
+                <th>FASILITAS_SEKOLAH_LENGKAP</th>
+                <th>KEBERSIHAN_GEDUNG_SEKOLAH</th>
+                <th>PELAYANAN_INFORMASI</th>
+                <th>TENAGA_PENDIDIK_KOMPETEN</th>
                 
-                <th>Tidak Memilih Fasilitas & Pelayanan</th>
-                <th>1Km dari tempat tinggal</th>
+                <th>TIDAK_PILIH_FASILITAS_PELAYANAN</th>
+                <th>1KM_JARAK</th>
                 
-                <th>1 - 5 Km dari tempat tinggal</th>
+                <th>1_SAMPAI_5KM </th>
 
-                <th>6 - 10 Km dari tempat Tinggal</th>
-                <th>11 - 20 Km dan tempat tinggal</th>
-                <th>21 - 30 Km dari tempat tinggal</th>
-                <th>Tidak memilih 'Jarak'</th>
-                <th>Uang Pangkal</th>
+                <th>6_SAMPAI_10KM </th>
+                <th>11_SAMPAI_20KM </th>
+                <th>21_SAMPAI_30KM </th>
+                <th>TIDAK_PILIH_JARAK'</th>
+                <th>UANG_PANGKAL</th>
                 <th>SPP</th> 
 
-                <th>Tanda Adanya biaya Tambahan</th>
+                <th>TANDA_BIAYA_TAMBAHAN</th>
 
-                <th>Tidak Memiliki Uang Sekolah Terjangkau</th>
+                <th>TIDAK_TERJANGKAU_UANG_SEKOLAH</th>
 
-                <th>Sederhana dan Mudah</th>
-                <th>Standar seperti disekolah lain</th>
+                <th>SEDERHANA_DAN_MUDAH</th>
+                <th>STANDAR_SAMA_SEKOLAH_LAIN</th>
 
-                <th>Berbelit belit dan perlu disederhanakan</th>
-                <th>Tidak Memiliki Uang Sekolah Terjangkau</th>
-                <th>Merepotkan</th>
+                <th>BERBELIT_BELIT</th>
+                <th>UANG_SEKOLAH_TIDAK_MURAH</th>
+                <th>MEREPOTKAN</th>
 
-                <th>Pendapat Saya</th>
-                <th>Memiliki Program Habits  7 "Leader in Me"</th>
-                <th>Prestasi Sekolah</th>
-                <th>Ekstrakulikuler</th>
-                <th>booster 1</th>
+                <th>PENDAPAT_SAYA</th>
+                <th>PROGRAM_7_HABITS</th>
+                <th>PRESTASI_SEKOLAH</th>
+                <th>EKSTRAKULIKULER</th>
+                <th>BOOSTER_1</th>
 
-                <th>booster 2</th>
-                <th>booster 3</th>
-                <th>belum vaksin</th>
+                <th>BOOSTER_2</th>
+                <th>BOOSTER_3</th>
+                <th>BELUM_VAKSIN</th>
             </tr>
             </thead>
             <tbody>

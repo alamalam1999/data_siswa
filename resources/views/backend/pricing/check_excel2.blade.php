@@ -652,9 +652,9 @@
                           } 
 
                 if ($file_additionaldua !='' && $file_additionaldua != null && !empty($file_additionaldua) && $file_additionaldua != '[]') { 
-                     $data33= array_column($file_additionaldua, 'data49');
-                      if ($data33 != '' && $data33 != null) {
-                           $data49 = $data33;
+                     $data33_49= array_column($file_additionaldua, 'data49');
+                      if ($data33_49 != '' && $data33_49 != null) {
+                           $data49 = $data33_49;
                           } else {
                            $data49 = '';
                           }
