@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Backend\Pricing;
 
 use Carbon\Carbon;
+use App\Models\Payment;
 use App\Models\Pricing;
 use App\Models\Register;
 use App\Models\Data_siswa;
+use App\Imports\DataImport;
+use App\Models\MasterKelas;
 use App\Exports\SiswaExport;
 use Illuminate\Http\Request;
 use App\Imports\PricingImport;
@@ -18,8 +21,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
-use App\Imports\DataImport;
-use App\Models\MasterKelas;
 
 class PricingController extends Controller
 {
@@ -303,7 +304,10 @@ class PricingController extends Controller
 
         $pricings_wave2 = 12;
 
-        $reregistration = Register::all();
+        $reregistration = Register::where('ppdb.document_status', 7)
+        ->join('ppdb', 'ppdb.id', '=', 'reregister.ppdb_id')   
+        ->select('reregister.*')
+        ->get();
 
         foreach($reregistration as $reregistrations){
             $something = $reregistrations;
@@ -343,6 +347,31 @@ class PricingController extends Controller
         ];
 
         return new ViewResponse('backend.pricing.check_excel2', $data);
+    }
+
+    public function check_payment() {
+        // FILE PAYMENT
+        $pricings = 'ada';
+        $pricings_wave2 = 12;
+
+        $reregistration = Register::where('ppdb.document_status', 7)
+        ->join('ppdb', 'ppdb.id', '=', 'reregister.ppdb_id')   
+        ->select('reregister.*')
+        ->get();
+
+        $payment_reregistration = Payment::where('ppdb.document_status', 7)
+        ->join('ppdb', 'ppdb.id', '=', 'payment.ppdb_id')
+        ->select('payment.*')
+        ->get();
+
+        debug($payment_reregistration);
+        $data = [
+            'pricings' => $pricings,
+            'pricings_wave2' => $pricings_wave2,
+            'payment_reregistration' => $payment_reregistration
+        ];
+
+        return new ViewResponse('backend.pricing.check_payment', $data);
     }
 
 

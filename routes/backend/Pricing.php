@@ -25,6 +25,9 @@ Route::group(['namespace' => 'pricing'], function () {
 
 
     Route::get('checktable2', [PricingController::class, 'check_excel2'])->name('pricing.check_excel2');
+    Route::get('check_payment', [PricingController::class, 'check_payment'])->name('pricing.check_payment');
+
+    Route::get('check_interview', [PricingController::class, 'check_interview'])->name('pricing.check_interview');
 
     Route::get('pricingwave2', [PricingController::class, 'indexwave2'])->name('pricing.indexwave2');
 });

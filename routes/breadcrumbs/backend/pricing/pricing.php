@@ -26,14 +26,18 @@ Breadcrumbs::for('admin.pricing.indexwave2', function ($trail) {
 });
 
 Breadcrumbs::for('admin.pricing.check_excel', function ($trail) {
-    $trail->push('Pricing Check', route('admin.pricing.check_excel'));
+    $trail->push('Data Check', route('admin.pricing.check_excel'));
 });
 
 Breadcrumbs::for('admin.pricing.check_excel2', function ($trail) {
-    $trail->push('Pricing Check', route('admin.pricing.check_excel2'));
+    $trail->push('Data Check', route('admin.pricing.check_excel2'));
 });
 
 
 Breadcrumbs::for('admin.pricing.export_excel', function ($trail) {
-    $trail->push('Pricing export_excel', route('admin.pricing.export_excel'));
+    $trail->push('Data export_excel', route('admin.pricing.export_excel'));
+});
+
+Breadcrumbs::for('admin.pricing.check_payment', function ($trail) {
+    $trail->push('Data check_payment', route('admin.pricing.check_payment'));
 });

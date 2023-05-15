@@ -22,7 +22,29 @@
             <div class="col">
               
             </div>
-          </div>      
+          </div>   
+          
+          <div class="row">
+            <div>
+                <a href="{{ route('admin.pricing.check_payment') }}">
+                <button id="btn-search" type="submit" class="testing2 btn btn-flex btn-primary">Cek Data Siswa Payment</button>
+                </a>
+            </div>
+            <div class="col">
+              
+            </div>
+          </div>   
+
+          <div class="row">
+            <div>
+                <a href="{{ route('admin.pricing.check_excel') }}">
+                <button id="btn-search" type="submit" class="testing2 btn btn-flex btn-primary">Cek Data Siswa Additional 1</button>
+                </a>
+            </div>
+            <div class="col">
+              
+            </div>
+          </div>  
     </div>
     <div class="card-header pt-7 pb-7">
 
