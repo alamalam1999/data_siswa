@@ -65,7 +65,7 @@
                                   
                                               <!--begin::Label-->
                                               <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar" data-bs-original-title="Change avatar" data-kt-initialized="1">
-                                                  <i class="bi bi-cloud-arrow-up-fill fs-7" style="color: #45f215"><span class="path1"></span><span class="path2"></span></i>
+                                                  <i class="bi bi-cloud-arrow-up-fill fs-7" style="color: #2dbe05"><span class="path1"></span><span class="path2"></span></i>
                                                   <!--begin::Inputs-->
                                                   <input type="file" name="avatar" accept=".png, .jpg, .jpeg">
                                                   <input type="hidden" name="avatar_remove" value="1">
@@ -75,7 +75,7 @@
                                   
                                               <!--begin::Cancel-->
                                               <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" aria-label="Cancel avatar" data-bs-original-title="Cancel avatar" data-kt-initialized="1">
-                                                  <i class="bi bi-trash-fill fs-7" style="color: #ed1014"><span class="path1"></span><span class="path2"></span></i>            </span>
+                                                  <i class="bi bi-trash-fill fs-7" style="color: #ed1014"><span class="path1"></span></i>
                                               <!--end::Cancel-->
                                   
                                               <!--begin::Remove-->
