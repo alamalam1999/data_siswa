@@ -48,8 +48,8 @@
                                       <!--begin::Card header-->
                                       <div class="card-header">
                                           <!--begin::Card title-->
-                                          <div class="card-title">
-                                              <h2>Thumbnail</h2>
+                                          <div class="card-title" style="padding-left: 50px">
+                                              <h5>Pas Photo Siswa</h5>
                                           </div>
                                           <!--end::Card title-->
                                       </div>
@@ -65,7 +65,7 @@
                                   
                                               <!--begin::Label-->
                                               <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar" data-bs-original-title="Change avatar" data-kt-initialized="1">
-                                                  <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                                  <i class="bi bi-cloud-arrow-up-fill fs-7" style="color: #45f215"><span class="path1"></span><span class="path2"></span></i>
                                                   <!--begin::Inputs-->
                                                   <input type="file" name="avatar" accept=".png, .jpg, .jpeg">
                                                   <input type="hidden" name="avatar_remove" value="1">
@@ -75,7 +75,7 @@
                                   
                                               <!--begin::Cancel-->
                                               <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" aria-label="Cancel avatar" data-bs-original-title="Cancel avatar" data-kt-initialized="1">
-                                                  <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>            </span>
+                                                  <i class="bi bi-trash-fill fs-7" style="color: #ed1014"><span class="path1"></span><span class="path2"></span></i>            </span>
                                               <!--end::Cancel-->
                                   
                                               <!--begin::Remove-->
@@ -539,22 +539,7 @@
 
 
                           <div class="container-flex justify-content-end">
-                            <div class="row">
-                            <!--begin::Wrapper-->
-                              <div class="col">
-                                 <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
-                                 <span class="indicator-label">Submit
-                              </div>
-                            <!--end: :Wrapper-->
-
-                             <!--begin::Wrapper-->
-                             <div class="col-sm-10" style="margin-right: 38px">
-                              <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="edit">
-                              <span class="indicator-label">Edit
-                           </div>
-                         <!--end: :Wrapper-->
-
-                            </div>
+                            <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">Submit</button> <button class="btn btn-success btn-sm fs-9" onclick="kurangInput()">Edit</button>
                           </div>
                      </div>
 
@@ -1963,7 +1948,7 @@
                                       <!--end::Title-->
                                   </div>
 
-                                <div class="btnregister1 mb-4 mt-6" style="background-color: #EBEBEB;"> <h4>1. Formulir Peserta Didik</h4> </div>
+                                <div class="btnregister1 mb-4 mt-6" style="background-color: #EBEBEB;"> <h5>1. Formulir Peserta Didik</h5> </div>
                                 <div class="register1">
                                   <div style="color:rgb(255, 255, 255); background-color: #caaf35; text-align:center;" class="mb-4 mt-3">FORMULIR PESERTA DIDIK</div>
                     
@@ -2325,7 +2310,7 @@
                                     </div>
                                   </div>
 
-                                  <div class="btnregister2 mb-4 mt-6" style="background-color:#EBEBEB;"> <h5>a. Detail 1</h5> </div>
+                                  <div class="btnregister2 mb-4 mt-6" style="background-color:#EBEBEB;"> <p>a. Detail 1</p> </div>
                                   <div class="register2">
   
                                     <div class="form-group mb-4">
@@ -2570,7 +2555,7 @@
               
                             </div>
 
-                              <div class="btnregister3 mb-4 mt-6" style="background-color: #EBEBEB;"><h5>b. Detail 2</h5> </div>
+                              <div class="btnregister3 mb-4 mt-6" style="background-color: #EBEBEB;"><p>b. Detail 2</p> </div>
                                 <div class="register3">
 
                                       <div class="form-group mb-4">
@@ -2776,7 +2761,7 @@
 
 
 
-                                <div class="btnregister4 mb-4 mt-6" style="background-color: #EBEBEB;"><h5>c. Data Ayah Kandung</h5> </div>
+                                <div class="btnregister4 mb-4 mt-6" style="background-color: #EBEBEB;"><p>c. Data Ayah Kandung</p> </div>
                                 <div class="register4">
                                         <div style="color:rgb(255, 255, 255); background-color: #dd00ff; text-align:center;" class="mb-4 mt-3">DATA AYAH KANDUNG</div>
                       
@@ -3003,7 +2988,7 @@
                               
 
 
-                            <div class="btnregister5 mb-4 mt-6" style="background-color: #EBEBEB;"> <h5>d. Data Ibu Kandung</h5></div>
+                            <div class="btnregister5 mb-4 mt-6" style="background-color: #EBEBEB;"> <p>d. Data Ibu Kandung</p></div>
                             <div class="register5">
                                       <div style="color:rgb(255, 255, 255); background-color: #dd00ff; text-align:center;" class="mb-4 mt-3">DATA IBU KANDUNG</div>
                       
@@ -3227,7 +3212,7 @@
                       
                             </div>
 
-                            <div class="btnregister6 mb-4 mt-6" style="background-color: #EBEBEB;"><h5>e. Data Wali</h5> </div>
+                            <div class="btnregister6 mb-4 mt-6" style="background-color: #EBEBEB;"><p>e. Data Wali</p> </div>
                               <div class="register6">
                                   <div style="color:rgb(255, 255, 255); background-color: #dd00ff; text-align:center;" class="mb-4 mt-3">DATA WALI</div>
                     
@@ -3493,7 +3478,7 @@
 
 
 
-                             <div class="btnregister7 mb-4 mt-6" style="background-color: #EBEBEB;"> <h5>f. Data Rincian Peserta Didik</h5> </div>
+                             <div class="btnregister7 mb-4 mt-6" style="background-color: #EBEBEB;"> <p>f. Data Rincian Peserta Didik</p> </div>
                              <div class="register7">
                                   <div style="color:rgb(255, 255, 255); background-color: #24d73c; text-align:center;" class="mb-4 mt-3">DATA RINCIAN PESERTA DIDIK</div>
                                   <div style="color:rgb(255, 255, 255); background-color: #dd00ff; text-align:center;" class="mb-4 mt-3">DATA PERIODIK</div>
@@ -3572,7 +3557,7 @@
                     
                                 </div>
 
-                                <div class="btnregister8 mb-4 mt-6" style="background-color: #EBEBEB;"> <h5>g. Prestasi</h5> </div>
+                                <div class="btnregister8 mb-4 mt-6" style="background-color: #EBEBEB;"> <p>g. Prestasi</p> </div>
                                 <div class="register8">
                                   <div style="color:rgb(255, 255, 255); background-color: #dd00ff; text-align:center;" class="mb-4 mt-3">PRESTASI</div>
                     
@@ -4104,7 +4089,7 @@
                     
                                 </div>
 
-                                <div class="btnregister9 mb-4 mt-6" style="background-color: #EBEBEB;"><h5>h. Registrasi Peserta Didik</h5> </div>
+                                <div class="btnregister9 mb-4 mt-6" style="background-color: #EBEBEB;"><p>h. Registrasi Peserta Didik</p> </div>
                                 <div class="register9">
                                     <div style="color:rgb(255, 255, 255); background-color: #6dd31a; text-align:center;" class="mb-4 mt-3">REGISTRASI PESERTA DIDIK</div>
                       

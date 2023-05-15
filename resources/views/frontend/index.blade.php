@@ -56,7 +56,7 @@
                                 </label>
                             </div>
 
-                            <form id="form1" name="form1" onsubmit="return false">
+                            <form id="form1" name="form1" onsubmit="return false" style="margin-top: 25px">
                                 <div class="form-group">
                                     <label>
                                         <b>Nama Siswa</b>
