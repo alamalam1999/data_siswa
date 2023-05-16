@@ -1,5 +1,5 @@
 <!--begin::Header-->
-<div id="kt_app_header" class="app-header" style="background-color: #85B6FF">
+<div id="kt_app_header" class="app-header" style="background-color: #43e9d3">
 
 
 	<!--begin::Header container-->
