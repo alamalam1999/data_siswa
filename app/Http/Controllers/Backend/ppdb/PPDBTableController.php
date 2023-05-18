@@ -117,9 +117,19 @@ class PPDBTableController extends Controller
         }
 
         $SQLQuery = 'SELECT
-            *
-        FROM data_siswa
-        ';
+            registration_schedules.description AS schedule,
+            schools.school_name AS school,
+            ppdb.*
+        FROM ppdb
+        INNER JOIN schools ON ppdb.school_site = schools.school_code
+        INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
+        INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
+        '.implode(' ', $innerCondition).'
+        WHERE
+        ppdb.document_status = 7
+        AND      
+        '.implode(' AND ', $whereCondition).' 
+        ORDER BY ppdb.created_at DESC';
 
         debug($SQLQuery);
 
@@ -130,7 +140,9 @@ class PPDBTableController extends Controller
             ->editColumn('created_at', function ($ppdbItem) {
                 return Carbon::parse($ppdbItem->created_at)->toDateString();
             })
-
+            // ->addColumn('actions', function ($ppdbItem) {
+            //     return $ppdbItem->action_buttons;
+            // })
             ->make(true);
     }
 

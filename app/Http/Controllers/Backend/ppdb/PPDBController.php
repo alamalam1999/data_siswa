@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\View;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
-use App\Models\Data_History;
-use App\Models\Data_siswa;
 use App\Models\MasterKelas;
 
 class PPDBController extends Controller
@@ -119,7 +117,7 @@ class PPDBController extends Controller
      *
      * @return ViewResponse
      */
-    public function edit(Data_siswa $ppdb, PPDBPermissionRequest $request)
+    public function edit(PPDB $ppdb, PPDBPermissionRequest $request)
     {
         // debug($ppdb);
         $schools = School::All();
@@ -128,7 +126,7 @@ class PPDBController extends Controller
         $ppdb_interview = PPDBInterview::where('ppdb_id', $ppdb->id)->first();
         $user_ppdb = User::where('id', $ppdb->id_user)->first();
 
-        //$ppdb_testing = PPDB::where('id_user', $user_ppdb->id)->first();
+        $ppdb_testing = PPDB::where('id_user', $user_ppdb->id)->first();
         $ppdb_testing = $ppdb;
 
 
@@ -204,9 +202,246 @@ class PPDBController extends Controller
             $file_additional = json_decode($ppdb->file_additional);
         }
 
+        $user_account = User::where('id', $ppdb->id_user)->first();
+        $payment_formulir = Payment::where([
+            ['ppdb_id', '=', $ppdb->id],
+            ['payment_type', '=', 'FEE_FORMULIR']
+        ])->first();
+
+        $payment_up_spp = Payment::where([ 
+            ['ppdb_id', '=', $ppdb->id],
+            ['payment_type', '=', 'FEE_TOTAL']
+        ])->first();
+
+        $fee_up = Payment::where([ 
+            ['ppdb_id', '=', $ppdb->id],
+            ['payment_type', '=', 'FEE_UP']
+        ])->first();
+
+        $fee_spp = Payment::where([ 
+            ['ppdb_id', '=', $ppdb->id],
+            ['payment_type', '=', 'FEE_SPP']
+        ])->first();
+        $school_stage = "";
+
+        if ($ppdb->stage == "TK" || $ppdb->stage == "KB") {
+            $school_stage = [
+                'Rp.200.000.-',      
+            ];
+        } else  {
+            $school_stage = [
+                'Rp.300.000.-',
+            ];
+        }
+
+        $reregistration = ReRegistration::where('ppdb_id', $ppdb->id)->first();
+
+        $file_additionalsatu = [];
+        $file_additionaldua = [];
+        $medco_employee_file = [];
+
+        
+        $school_recomendation_file = [];
+        $interview_result_file = [];
+        $kesiapan_file = [];
+        $psikotest_file = [];
+        $academic_file = [];
+        $interview_parent_file = [];
+        $interview_student_file = [];
+        $observasi_file = [];
+
+        if (!empty($ppdb_interview->school_recomendation_file) && $ppdb_interview->school_recomendation_file != "" && $ppdb_interview->school_recomendation_file != "[]") {
+            $school_recomendation_file = json_decode($ppdb_interview->school_recomendation_file);
+        }
+
+        if (!empty($ppdb_interview->interview_result_file) && $ppdb_interview->interview_result_file != "" && $ppdb_interview->interview_result_file != "[]") {
+            $interview_result_file = json_decode($ppdb_interview->interview_result_file);
+        } 
+
+        if (!empty($ppdb_interview->kesiapan_file) && $ppdb_interview->kesiapan_file != "" && $ppdb_interview->kesiapan_file != "[]") {
+            $kesiapan_file = json_decode($ppdb_interview->kesiapan_file);
+        }
+
+        if (!empty($ppdb_interview->psikotest_file) && $ppdb_interview->psikotest_file != "" && $ppdb_interview->psikotest_file != "[]") {
+            $psikotest_file = json_decode($ppdb_interview->psikotest_file);
+        }
+        
+        if (!empty($ppdb_interview->academic_file) && $ppdb_interview->academic_file != "" && $ppdb_interview->academic_file != "[]") {
+            $academic_file = json_decode($ppdb_interview->academic_file);
+        }
+        
+        if (!empty($ppdb_interview->interview_parent_file) && $ppdb_interview->interview_parent_file != "" && $ppdb_interview->interview_parent_file != "[]") {
+            $interview_parent_file = json_decode($ppdb_interview->interview_parent_file);
+        }
+        
+        if (!empty($ppdb_interview->interview_student_file) && $ppdb_interview->interview_student_file != "" && $ppdb_interview->interview_student_file != "[]") {
+            $interview_student_file = json_decode($ppdb_interview->interview_student_file);
+        }
+        
+        if (!empty($ppdb_interview->observasi_file) && $ppdb_interview->observasi_file != "" && $ppdb_interview->observasi_file != "[]") {
+            $observasi_file = json_decode($ppdb_interview->observasi_file);
+        }
+
+        if (!empty($reregistration->file_additionalsatu) && $reregistration->file_additionalsatu != "" && $reregistration->file_additionalsatu != "[]") {
+            $file_additionalsatu = json_decode($reregistration->file_additionalsatu);
+        }
+
+        if (!empty($reregistration->medco_employee_file) && $reregistration->medco_employee_file != "" && $reregistration->medco_employee_file != "[]") {
+            $medco_employee_file = json_decode($reregistration->medco_employee_file);
+        }
+
+        if (!empty($reregistration->file_additionaldua) && $reregistration->file_additionaldua !="" && $reregistration->file_additionaldua != "[]") {
+            $file_additionaldua = json_decode($reregistration->file_additionaldua);
+        }
+
+        if (!empty($reregistration->file_additionaldua) && $reregistration->file_additionaldua !="" && $reregistration->file_additional != "[]") {
+            $file_additionaldua = json_decode($reregistration->file_additionaldua);
+        }
+
+        $data56= array_column($file_additionalsatu, 'data56');
+
+        $brand = '';
+        if ($data56[0] ?? $data56 == 1) {
+            $brand = "Keluarga";
+        } else if ($data56[0] ?? $data56 == 2) {
+            $brand = "Tetangga";
+        } else if ($data56[0] ?? $data56 == 3) {
+            $brand = "Teman";
+        } else {
+            $brand = "Tidak Melalui Brand";
+        }
+
+        $data57= array_column($file_additionalsatu, 'data57');
+
+        $kegiatan_sekolah = '';
+        if ($data57[0] ?? $data57 == 1) {
+            $kegiatan_sekolah = "Open House";
+        } else if ($data57[0] ?? $data57 == 2) {
+            $kegiatan_sekolah = "Lomba Antar Sekolah";
+        } else if ($data57[0] ?? $data57 == 3) {
+            $kegiatan_sekolah = "Tidak Melalui Kegiatan Sekolah";
+        } else {
+            $kegiatan_sekolah = "No Input";
+        }
+
+        $data58= array_column($file_additionalsatu, 'data58');
+
+        $media_cetak = '';
+        if ($data58[0] ?? $data58 == 1) {
+            $media_cetak = "Spanduk";
+        } else if ($data58[0] ?? $data58 == 2) {
+            $media_cetak = "Brosur";
+        } else if ($data58[0] ?? $data58 == 3) {
+            $media_cetak = "Koran";
+        } else {
+            $media_cetak = "Tidak Melalui Media Cetak";
+        }
+
+        $data59= array_column($file_additionalsatu, 'data59');
+
+        $media_elektronik = '';
+        if ($data59[0] ?? $data59 == 1) {
+            $media_elektronik = "Televisi";
+        } else if ($data59[0] ?? $data59 == 2) {
+            $media_elektronik = "Radio";
+        } else if ($data59[0] ?? $data59 == 3) {
+            $media_elektronik = "SMS";
+        } else {
+            $media_elektronik = "Tidak Melalui Media Elektronik";
+        }
+
+        $data60= array_column($file_additionalsatu, 'data60');
+
+        $media_sosial = '';
+        if ($data60[0] ?? $data60 == 1) {
+            $media_sosial = "Instagram";
+        } else if ($data60[0] ?? $data60 == 2) {
+            $media_sosial = "Facebook";
+        } else if ($data60[0] ?? $data60 == 3) {
+            $media_sosial = "Twitter";
+        } else {
+            $media_sosial = "Tidak Melalui Media Sosial";
+        }
+
+        $data61= array_column($file_additionalsatu, 'data61');
+
+        $internet = '';
+        if ($data61[0] ?? $data61 == 1) {
+            $internet = "Website";
+        } else if ($data61[0] ?? $data61 == 2) {
+            $internet = "Google";
+        } else if ($data61[0] ?? $data61 == 3) {
+            $internet = "Forum";
+        } else {
+            $internet = "Tidak Melalui Internet";
+        }
+
+        $file_additional_satu = '';
+        $file_additional_dua = '';
+        $file_additional_tiga = '';
+        $file_additional_empat = '';
+        $file_additional_lima = '';
+        $slip_gaji_parent = '';
+
+        if (!empty($ppdb_testing->file_additional_satu != "[]") 
+            || !empty($ppdb_testing->file_additional_dua != "[]")
+            || !empty($ppdb_testing->file_additional_tiga != "[]")
+            || !empty($ppdb_testing->file_additional_empat != "[]")
+            || !empty($ppdb_testing->file_additional_lima != "[]")
+            || !empty($ppdb_testing->slip_gaji_parent != "[]")) {
+            $file_additional_satu = json_decode($ppdb_testing->file_additional_satu);
+            $file_additional_dua   = json_decode($ppdb_testing->file_additional_dua);
+            $file_additional_tiga  = json_decode($ppdb_testing->file_additional_tiga);
+            $file_additional_empat = json_decode($ppdb_testing->file_additional_empat);
+            $file_additional_lima  = json_decode($ppdb_testing->file_additional_lima);
+            $slip_gaji_parent      =json_decode($ppdb_testing->slip_gaji_parent);
+        }
+
         return new ViewResponse('backend.ppdb.edit', [
             'ppdb'              => $ppdb,
-   
+            'user_account'      => $user_account,
+            'schools'           => $schools,
+            'enum_datas'        => $enum_datas,
+            'discount_groups'   => $discount_groups,
+            'file_uploaded'     => $file_uploaded,
+            'file_additional'   => $file_additional,
+            'payment_formulir'  => $payment_formulir,
+            'payment_up_spp'    => $payment_up_spp,
+            'school_stage'      => $school_stage,
+            'reregistration'    => $reregistration,
+            'file_additionalsatu' => $file_additionalsatu,
+            'medco_employee_file' => $medco_employee_file,
+            'brand'               => $brand,
+            'kegiatan_sekolah'    => $kegiatan_sekolah,
+            'media_cetak'         => $media_cetak,
+            'media_elektronik'    => $media_elektronik,
+            'media_sosial'        => $media_sosial,
+            'internet'            => $internet,
+            'ppdb_interview'      => $ppdb_interview,
+            'is_enabled_form'     => $is_enabled_form,
+            'is_enabled_rnd'      => $is_enabled_rnd,
+            'is_enabled_submit'   => $is_enabled_submit,
+            'is_interviewer'      => $is_interviewer,
+            'is_rnd'              => $is_rnd,
+            'is_rnd_edit'         => $is_rnd_edit,
+            'result_interview'    => $result_interview,
+            'fee_up'              => $fee_up,
+            'fee_spp'             => $fee_spp,
+            'file_additionaldua'  => $file_additionaldua,
+            'kesiapan_file'             => $kesiapan_file,
+            'school_recomendation_file' => $school_recomendation_file,
+            'interview_result_file'     => $interview_result_file,
+            'psikotest_file'            => $psikotest_file,
+            'academic_file'             => $academic_file,
+            'interview_parent_file'     => $interview_parent_file,
+            'interview_student_file'    => $interview_student_file,
+            'observasi_file'            => $observasi_file,
+            'file_additional_satu'      => $file_additional_satu,
+            'file_additional_dua'       => $file_additional_dua,
+            'file_additional_tiga'      => $file_additional_tiga,
+            'file_additional_empat'     => $file_additional_empat,
+            'file_additional_lima'      => $file_additional_lima,
+            'slip_gaji_parent'          => $slip_gaji_parent
         ]);
     }
 
@@ -248,24 +483,6 @@ class PPDBController extends Controller
         } catch (\Exception $e) {
             return $this->respondInternalError($e->getMessage());
         }
-    }
-
-     /**
-     * @param \App\Models\Data_Siswa $data_siswa
-     * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
-     *
-     * @return \App\Http\Responses\RedirectResponse
-     */
-    public function addInformation(Data_Siswa $data_siswa, PPDBPermissionRequest $request)
-    {
-        // try {
-        //     $data_siswa = new Data_History;
-
-        //     $data_siswa->id_data_siswa = $ppdb->id;
-        //     $data_siswa->kelas_utama = $request->
-        // }
-
-        return $data_siswa->id;
     }
 
     /**
