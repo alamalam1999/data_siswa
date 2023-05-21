@@ -125,7 +125,7 @@ class Data_siswa extends Model
 		'jenis_3_0',
 		'keterangan_3',
 		'tahun_mulai_3',
-		'tahun_selesai_3'
-		
+		'tahun_selesai_3',
+		'ppdb_id'
     ];
 }

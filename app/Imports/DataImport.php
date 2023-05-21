@@ -16,7 +16,7 @@ class DataImport implements ToModel, WithHeadingRow
     {
         return new Data_siswa([
         'no_formulir'               => $row['NO_FORMULIR'],
-        'ppdb_id'                   => "manual",
+        'ppdb_id'                   => $row['PPDB_ID'],
     	'tahun_ajaran'              => $row['TAHUN_AJARAN'],
     	'tanggal_pendaftaran'       => $row['TANGGAL_PENDAFTARAN'],
     	'status_siswa'              => $row['STATUS_SISWA'],

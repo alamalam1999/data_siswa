@@ -6,11 +6,14 @@ use App\Models\Traits\ModelAttributes;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class PPDBInterview extends BaseModel
+class PPDBInterview extends Model
 {
-    use ModelAttributes, SoftDeletes;
 
     protected $table = 'ppdb_interviews';
+
+    public $incrementing = false;
+
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'ppdb_id',
