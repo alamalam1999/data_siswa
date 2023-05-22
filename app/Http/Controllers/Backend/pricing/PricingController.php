@@ -10,8 +10,14 @@ use App\Models\Register;
 use App\Models\Data_siswa;
 use App\Imports\DataImport;
 use App\Imports\PPDBImport;
+use App\Models\Data_siswa2;
+use App\Models\Data_siswa3;
+use App\Models\Data_siswa4;
 use App\Models\MasterKelas;
 use App\Exports\SiswaExport;
+use App\Imports\DataImport2;
+use App\Imports\DataImport3;
+use App\Imports\DataImport4;
 use Illuminate\Http\Request;
 use App\Models\PPDBInterview;
 use App\Imports\PaymentImport;
@@ -26,6 +32,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
+use Symfony\Component\VarDumper\Cloner\Data;
 use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
 
 class PricingController extends Controller
@@ -276,7 +283,7 @@ class PricingController extends Controller
 
             foreach ($ppdb_siswa[0] as $ppdb_siswas) {
                 array_push($ppdb_insert, [        
-                        'id'                    => $ppdb_siswas['id'],  
+                        'id'                         => $ppdb_siswas['ppdb_id'],  
                         'registration_schedule_id'   => $ppdb_siswas['registration_schedule_id'],      
                         'document_no'                => $ppdb_siswas['document_no'],
                         'document_status'            => $ppdb_siswas['document_status'],
@@ -476,121 +483,160 @@ class PricingController extends Controller
                //DATASISWA_2
                $data_siswa2 = [];      
             
-               $data_siswa2 = Excel::toArray(new DataImport, $request->file('file_pricing'));
+               $data_siswa2 = Excel::toArray(new DataImport2, $request->file('file_pricing'));
    
                $data_siswa2_insert = [];
    
-               foreach ($data_siswa2[1] as $data_siswas2) {
-                   array_push($data_siswa_insert, [
+               foreach ($data_siswa2[2] as $data_siswas2) {
+                   array_push($data_siswa2_insert, [
                            'nama_orang_tua'                                             => $data_siswas2['nama_orang_tua'],           
-                           'alamat_orang_tua_atau_wali'                                 => $data_siswas2['alamat_orang_tua_atau_wali'],
-                           'membayar_uang_pangkal_up_2'                                 => $data_siswas2['membayar_uang_pangkal_up_2'],     
-                           'pembayaran_spp_bulan_juli_2023'                             => $data_siswas2['pembayaran_spp_bulan_juli_2023'], 
-                           'pembayaran_spp_setiap_bulannya_selambat'                    => $data_siswas2['pembayaran_spp_setiap_bulannya_selambat'], 
-                           'jika_putra_putri_kami_sudah_melaksanakan_tes'               => $data_siswas2['jika_putra_putri_kami_sudah_melaksanakan_tes'], 
-                           'jika_putra_putri_kami_diterima_di_sekolah_negeri'           => $data_siswas2['jika_putra_putri_kami_diterima_di_sekolah_negeri'], 
-                           'apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'      => $data_siswas2['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],    
-                           'apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'      => $data_siswas2['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'], 
-                           'kami_akan_mematuhi_seluruh_tata_tertib_sekolah'             => $data_siswas2['kami_akan_mematuhi_seluruh_tata_tertib_sekolah'], 
-                           'seluruh_aktivitas_putra_putri_kami_dalam_photo_video'       => $data_siswas2['seluruh_aktivitas_putra_putri_kami_dalam_photo_video'], 
-                           'seluruh_hasil_karya_peserta_didik_diijinkan'                => $data_siswas2['seluruh_hasil_karya_peserta_didik_diijinkan'], 
-                           'berdasarkan_apa_yang_telah_saya_baca_dan_pahami'            => $data_siswas2['berdasarkan_apa_yang_telah_saya_baca_dan_pahami'], 
+                           'alamat_orang_tua'                                           => $data_siswas2['alamat_orang_tua_atau_wali'],
+                           'uang_pangkal_up_2'                                          => $data_siswas2['membayar_uang_pangkal_up_2'],     
+                           'spp_bulan_juli_2023'                                        => $data_siswas2['pembayaran_spp_bulan_juli_2023'], 
+                           'spp_setiap_bulan'                                           => $data_siswas2['pembayaran_spp_setiap_bulannya_selambat'], 
+                           'sudah_melaksanakan_tes'                                     => $data_siswas2['jika_putra_putri_kami_sudah_melaksanakan_tes'], 
+                           'diterima_di_sekolah_negeri'                                 => $data_siswas2['jika_putra_putri_kami_diterima_di_sekolah_negeri'], 
+                           'sudah_bersekolah_di_avicenna'                               => $data_siswas2['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],    
+                           'sudah_bersekolah_di_avicenna_2'                             => $data_siswas2['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],  //tanda tanya
+                           'tata_tertib_sekolah'                                        => $data_siswas2['kami_akan_mematuhi_seluruh_tata_tertib_sekolah'], 
+                           'aktivitas_foto_video'                                       => $data_siswas2['seluruh_aktivitas_putra_putri_kami_dalam_photo_video'], 
+                           'didik_diijinkan'                                            => $data_siswas2['seluruh_hasil_karya_peserta_didik_diijinkan'], 
+                           'baca_dan_pahami'                                            => $data_siswas2['berdasarkan_apa_yang_telah_saya_baca_dan_pahami'], 
                            'nama_calon_murid'                                           => $data_siswas2['nama_calon_murid'], 
                            'kelas'                                                      => $data_siswas2['kelas'], 
                            'persetujuan_tata_tertib'                                    => $data_siswas2['persetujuan_tata_tertib'], 
-                           'keadaan_jasmani'                                            => $data_siswas2['keadaan_jasmani'], 
-                           'jenis_kelamin_laki'                                         => $data_siswas2['jenis_kelamin_laki'], 
-                           'jenis_kelamin_perempuan'                                    => $data_siswas2['jenis_kelamin_perempuan'], 
-                           'tempat_lahir'                                               => $data_siswas2[''], 
+                           'jasmani'                                                    => $data_siswas2['keadaan_jasmani'], 
+                           'laki_laki'                                                  => $data_siswas2['jenis_kelamin_laki'], 
+                           'perempuan'                                                  => $data_siswas2['jenis_kelamin_perempuan'], 
+                           'tempat_lahir'                                               => $data_siswas2['tempat_lahir'], 
                            'tanggal_lahir'                                              => $data_siswas2['tanggal_lahir'], 
                            'berat_badan'                                                => $data_siswas2['berat_badan'], 
                            'tinggi_badan'                                               => $data_siswas2['tinggi_badan'], 
                            'golongan_darah'                                             => $data_siswas2['golongan_darah'], 
-                           'memiliki_catatan_imunisasi'                                 => $data_siswas2['memiliki_catatan_imunisasi'], 
-                           'saat_bayi_mendapatkan_imunisasi'                            => $data_siswas2['saat_bayi_mendapatkan_imunisasi'], 
+                           'catatan_imunisasi'                                          => $data_siswas2['memiliki_catatan_imunisasi'], 
+                           'imunisasi'                                                  => $data_siswas2['saat_bayi_mendapatkan_imunisasi'], 
                            'imunisasi_lengkap'                                          => $data_siswas2['imunisasi_lengkap'], 
-                           'ada_gangguan_dan_kelainan'                                  => $data_siswas2['ada_gangguan_dan_kelainan'], 
-                           'tidak_ada_gangguan_dan_kelainan'                            => $data_siswas2['tidak_ada_gangguan_dan_kelainan'], 
+                           'gangguan_dan_kelainan'                                      => $data_siswas2['ada_gangguan_dan_kelainan'], 
+                           'tidak_ada_gangguan'                                         => $data_siswas2['tidak_ada_gangguan_dan_kelainan'], 
                            'berbahaya'                                                  => $data_siswas2['berbahaya'], 
                            'tidak_berbahaya'                                            => $data_siswas2['tidak_berbahaya'], 
-
-
-                           'yang_lain'                                                  => $data_siswas2['yang_lain'], 
-                           'normal_tidak_ada_gangguan'                                  => $data_siswas2['normal_tidak_ada_gangguan'], 
-                           'ada_kompilasi_ketika_melahirkan'                            => $data_siswas2['ada_kompilasi_ketika_melahirkan'], 
-                           'normal_tidak_ada_cacat_bawaan'                              => $data_siswas2['normal_tidak_ada_cacat_bawaan'], 
-                           'ada_cacat_bawaan'                                           => $data_siswas2['ada_cacat_bawaan'], 
-                           'normal'                                                     => $data_siswas2['normal'], 
-                           'terlambat'                                                  => $data_siswas2['terlambat'], 
-                           'normal'                                                     => $data_siswas2['normal'], 
-                           'terlambat'                                                  => $data_siswas2['terlambat'], 
-                           'normal'                                                     => $data_siswas2['normal'], 
-                           'terlambat'                                                  => $data_siswas2['terlambat'], 
-                           'normal'                                                     => $data_siswas2['normal'], 
-                           'terlambat'                                                  => $data_siswas2['terlambat'],
-                           'normal'                                                     => $data_siswas2['normal'], 
-                           'terlambat'                                                  => $data_siswas2['terlambat'], 
-                           'ada'                                                        => $data_siswas2['ada'], 
-                           'tidak_ada'                                                  => $data_siswas2['tidak_ada'], 
-                           'ya_pernah'                                                  => $data_siswas2['ya_pernah'], 
-                           'tidak_pernah'                                               => $data_siswas2['tidak_pernah'], 
-                           'ya_riwayat_kejang_demam'                                    => $data_siswas2['ya_riwayat_kejang_demam'], 
-                           'tidak_riwayat_kejang_demam'                                 => $data_siswas2['tidak_riwayat_kejang_demam'], 
-                           'memiliki_riwayat_penyakit_diderita'                         => $data_siswas2['memiliki_riwayat_penyakit_diderita'], 
-                           'pernah_rawat_rumah_sakit'                                   => $data_siswas2['pernah_rawat_rumah_sakit'], 
-                           'catatan_lain'                                               => $data_siswas2['catatan_lain'], 
-                           'sekolah_asal'                                               => $data_siswas2['sekolah_asal'], 
-                           'brand'                                                      => $data_siswas2['brand'], 
-                           'kegiatan_sekolah'                                           => $data_siswas2['kegiatan_sekolah'], 
-                           'media_cetak'                                                => $data_siswas2['media_cetak'], 
-                           'media_elektronik'                                           => $data_siswas2['media_elektronik'], 
-                           'media_sosial'                                               => $data_siswas2['media_sosial'], 
-
-                           
-                           'media_sosial'                                               => $data_siswas2['media_sosial'], 
-                           'program_sekolah'                                            => $data_siswas2['program_sekolah'], 
-                           'fasilitas_pelayanan'                                        => $data_siswas2['fasilitas_pelayanan'], 
-                           'jarak'                                                      => $data_siswas2['jarak'], 
-                           'uang_sekolah_terjangkau'                                    => $data_siswas2['uang_sekolah_terjangkau'], 
-                           'fasilitas_sekolah_lengkap'                                  => $data_siswas2['fasilitas_sekolah_lengkap'], 
-                           'kebersihan_gedung_sekolah'                                  => $data_siswas2['kebersihan_gedung_sekolah'], 
-                           'pelayanan_informasi'                                        => $data_siswas2['pelayanan_informasi'], 
-                           'tenaga_pendidik_kompeten'                                   => $data_siswas2['tenaga_pendidik_kompeten'], 
-                           'tidak_pilih_fasilitas_pelayanan'                            => $data_siswas2['tidak_pilih_fasilitas_pelayanan'], 
-                           '1km_jarak'                                                  => $data_siswas2['1km_jarak'], 
-                           '1_sampai_5km'                                               => $data_siswas2['1_sampai_5km'], 
-                           '6_sampai_10km'                                              => $data_siswas2['6_sampai_10km'], 
-                           '11_sampai_20km'                                             => $data_siswas2['11_sampai_20km'], 
-                           '21_sampai_30km'                                             => $data_siswas2['21_sampai_30km'], 
-                           'tidak_pilih_jarak'                                          => $data_siswas2['tidak_pilih_jarak'], 
-                           'uang_pangkal'                                               => $data_siswas2['uang_pangkal'], 
-                           'spp'                                                        => $data_siswas2['spp'], 
-                           'tanda_biaya_tambahan'                                       => $data_siswas2['tanda_biaya_tambahan'], 
-                           'tidak_terjangkau_uang_sekolah'                              => $data_siswas2['tidak_terjangkau_uang_sekolah'], 
-                           'sederhana_dan_mudah'                                        => $data_siswas2['sederhana_dan_mudah'], 
-                           'standar_sama_sekolah_lain'                                  => $data_siswas2['standar_sama_sekolah_lain'], 
-                           'berbelit_belit'                                             => $data_siswas2['berbelit_belit'], 
-                           'uang_sekolah_tidak_murah'                                   => $data_siswas2['uang_sekolah_tidak_murah'], 
-                           'merepotkan'                                                 => $data_siswas2['merepotkan'], 
-                           'pendapat_saya'                                              => $data_siswas2['pendapat_saya'], 
-                           'program_7_habits'                                           => $data_siswas2['program_7_habits'], 
-                           'prestasi_sekolah'                                           => $data_siswas2['prestasi_sekolah'], 
-                           'ekstrakulikuler'                                            => $data_siswas2['ekstrakulikuler'], 
-                           'booster_1'                                                  => $data_siswas2['booster_1'], 
-                           'booster_2'                                                  => $data_siswas2['booster_2'], 
-                           'booster_3'                                                  => $data_siswas2['booster_3'], 
-                           'belum_vaksin'                                               => $data_siswas2['belum_vaksin'], 
                            'ppdb_id'                                                    => $data_siswas2['ppdb_id']
 
                     
                    ]);
                }
    
-               debug($data_siswa_insert);
+               debug($data_siswa2_insert);
    
-               Data_siswa::query()->truncate();
+               Data_siswa2::query()->truncate();
    
-               Data_siswa::insert($data_siswa_insert);
+               Data_siswa2::insert($data_siswa2_insert);
+
+
+                //DATASISWA_3
+                $data_siswa3 = [];      
+            
+                $data_siswa3 = Excel::toArray(new DataImport3, $request->file('file_pricing'));
+    
+                $data_siswa3_insert = [];
+    
+                foreach ($data_siswa3[2] as $data_siswas3) {
+                    array_push($data_siswa3_insert, [
+                        'ppdb_id'                                                    => $data_siswas2['ppdb_id'],
+                        'yang_lain'                                                  => $data_siswas3['yang_lain'], 
+                        'normal_tidak_gangguan'                                  => $data_siswas3['normal_tidak_ada_gangguan'], 
+                        'kompilasi_ketika_melahirkan'                                => $data_siswas3['ada_kompilasi_ketika_melahirkan'], 
+                        'tidak_ada_cacat'                                            => $data_siswas3['normal_tidak_ada_cacat_bawaan'], 
+                        'cacat_bawaan'                                               => $data_siswas3['ada_cacat_bawaan'], 
+                        'normal_1'                                                     => $data_siswas3['normal_1'], 
+                        'terlambat_1'                                                  => $data_siswas3['terlambat_1'], 
+                        'normal_2'                                                     => $data_siswas3['normal_2'], 
+                        'terlambat_2'                                                  => $data_siswas3['terlambat_2'], 
+                        'normal_3'                                                     => $data_siswas3['normal_3'], 
+                        'terlambat_3'                                                  => $data_siswas3['terlambat_3'], 
+                        'normal_4'                                                     => $data_siswas3['normal_4'], 
+                        'terlambat_4'                                                  => $data_siswas3['terlambat_4'],
+                        'normal_5'                                                     => $data_siswas3['normal_5'], 
+                        'terlambat_5'                                                  => $data_siswas3['terlambat_5'], 
+                        'ada'                                                        => $data_siswas3['ada'], 
+                        'tidak_ada'                                                  => $data_siswas3['tidak_ada'], 
+                        'ya_pernah'                                                  => $data_siswas3['ya_pernah'], 
+                        'tidak_pernah'                                               => $data_siswas3['tidak_pernah'], 
+                        'ya_riwayat_kejang'                                    => $data_siswas3['ya_riwayat_kejang_demam'], 
+                        'tidak_riwayat_kejang'                                 => $data_siswas3['tidak_riwayat_kejang_demam'], 
+                        'riwayat_penyakit_diderita'                                  => $data_siswas3['memiliki_riwayat_penyakit_diderita'], 
+                        'rawat_rumah_sakit'                                   => $data_siswas3['pernah_rawat_rumah_sakit'], 
+                        'catatan_lain'                                               => $data_siswas3['catatan_lain'], 
+                        'sekolah_asal'                                               => $data_siswas3['sekolah_asal'], 
+                        'brand'                                                      => $data_siswas3['brand'], 
+                        'kegiatan_sekolah'                                           => $data_siswas3['kegiatan_sekolah'], 
+                        'media_cetak'                                                => $data_siswas3['media_cetak'], 
+                        'media_elektronik'                                           => $data_siswas3['media_elektronik'], 
+                        'media_sosial'                                               => $data_siswas3['media_sosial']
+ 
+                     
+                    ]);
+                }
+    
+                debug($data_siswa3_insert);
+    
+                Data_siswa3::query()->truncate();
+    
+                Data_siswa3::insert($data_siswa3_insert);
+
+
+                //DATASISWA_4
+                $data_siswa4 = [];      
+            
+                $data_siswa4 = Excel::toArray(new DataImport4, $request->file('file_pricing'));
+    
+                $data_siswa4_insert = [];
+    
+                foreach ($data_siswa4[2] as $data_siswas4) {
+                    array_push($data_siswa4_insert, [
+                        'media_sosial_2'                                             => $data_siswas4['media_sosial'], 
+                        'program_sekolah'                                            => $data_siswas4['program_sekolah'], 
+                        'fasilitas_pelayanan'                                        => $data_siswas4['fasilitas_pelayanan'], 
+                        'jarak'                                                      => $data_siswas4['jarak'], 
+                        'uang_sekolah_terjangkau'                                    => $data_siswas4['uang_sekolah_terjangkau'], 
+                        'fasilitas_lengkap'                                          => $data_siswas4['fasilitas_sekolah_lengkap'], 
+                        'kebersihan'                                                 => $data_siswas4['kebersihan_gedung_sekolah'], 
+                        'pelayanan_informasi'                                        => $data_siswas4['pelayanan_informasi'], 
+                        'tenaga_pendidik_kompeten'                                   => $data_siswas4['tenaga_pendidik_kompeten'], 
+                        'tidak_pilih_fasilitas_pelayanan'                            => $data_siswas4['tidak_pilih_fasilitas_pelayanan'], 
+                        '1km_jarak'                                                  => $data_siswas4['1km_jarak'], 
+                        '1_sampai_5km'                                               => $data_siswas4['1_sampai_5km'], 
+                        '6_sampai_10km'                                              => $data_siswas4['6_sampai_10km'], 
+                        '11_sampai_20km'                                             => $data_siswas4['11_sampai_20km'], 
+                        '21_sampai_30km'                                             => $data_siswas4['21_sampai_30km'], 
+                        'tidak_pilih_jarak'                                          => $data_siswas4['tidak_pilih_jarak'], 
+                        'uang_pangkal'                                               => $data_siswas4['uang_pangkal'], 
+                        'spp'                                                        => $data_siswas4['spp'], 
+                        'tanda_biaya_tambahan'                                       => $data_siswas4['tanda_biaya_tambahan'], 
+                        'tidak_terjangkau'                                           => $data_siswas4['tidak_terjangkau_uang_sekolah'], 
+                        'sederhana_dan_mudah'                                        => $data_siswas4['sederhana_dan_mudah'], 
+                        'standar_sama'                                               => $data_siswas4['standar_sama_sekolah_lain'], 
+                        'berbelit_belit'                                             => $data_siswas4['berbelit_belit'], 
+                        'tidak_murah'                                                => $data_siswas4['uang_sekolah_tidak_murah'], 
+                        'merepotkan'                                                 => $data_siswas4['merepotkan'], 
+                        'pendapat_saya'                                              => $data_siswas4['pendapat_saya'], 
+                        'program_7_habits'                                           => $data_siswas4['program_7_habits'], 
+                        'prestasi_sekolah'                                           => $data_siswas4['prestasi_sekolah'], 
+                        'ekstrakulikuler'                                            => $data_siswas4['ekstrakulikuler'], 
+                        'booster_1'                                                  => $data_siswas4['booster_1'], 
+                        'booster_2'                                                  => $data_siswas4['booster_2'], 
+                        'booster_3'                                                  => $data_siswas4['booster_3'], 
+                        'belum_vaksin'                                               => $data_siswas4['belum_vaksin'], 
+                        'ppdb_id'                                                    => $data_siswas4['ppdb_id']                    
+                    ]);
+                }
+    
+                debug($data_siswa4_insert);
+    
+                Data_siswa4::query()->truncate();
+    
+                Data_siswa4::insert($data_siswa4_insert);
+
       
                return redirect()->route('admin.pricing.index');    
          
