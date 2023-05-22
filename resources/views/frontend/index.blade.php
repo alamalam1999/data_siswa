@@ -32,7 +32,7 @@
     ============================================= -->
 
 <div class="d-flex flex-center flex-column flex-lg-row-fluid">
-<div class="banner-area standard text-default bg-gray-hard" style="padding-top: 30px;padding-bottom: 80px">
+<div class="banner-area standard text-default bg-gray-hard" style="padding-top: 30px;padding-bottom: 105px">
 
     
                     <div class="row item-flex center">
