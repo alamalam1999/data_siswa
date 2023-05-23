@@ -568,7 +568,7 @@
                                               <tr>
                                                   <td><?php echo e($file->deskripsi); ?></td>
                                                   <td><?php echo e($file->tingkat); ?></td>
-                                                  <td><a href="/<?php echo e($file->file); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                  <td><a href="https://ppdb.sekolah-avicenna.sch.id/{{ e($file->file) }}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                           <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                                                           <span class="svg-icon svg-icon-3">
                                                               <i class="bi bi-cloud-arrow-down"></i>
