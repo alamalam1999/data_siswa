@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\DatasiswaController;
+use App\Models\Data_siswa;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,19 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
+
+    
+
+    
+    Route::group(['middleware' => ['auth::sanctum']], function () {
+        Route::get('/data_siswa', [DatasiswaController::class, 'index'] );
+    });
+
+
 Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], function () {
+
+
+
     Route::group(['prefix' => 'auth', 'middleware' => ['guest']], function () {
         // Route::post('register', 'RegisterController@register');
         Route::post('login', 'AuthController@login');
@@ -46,4 +61,7 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], functio
         // Blogs
         Route::apiResource('blogs', 'BlogsController');
     });
+
+
+   
 });

@@ -24,6 +24,7 @@
         "langleyfoxall/laravel-nist-password-rules": "^4.0",
         "laravel/framework": "^6.3",
         "laravel/passport": "^9.2",
+        "laravel/sanctum": "^2.15",
         "laravel/socialite": "^4.1",
         "laravelcollective/html": "^6.1",
         "maatwebsite/excel": "^3.1",
