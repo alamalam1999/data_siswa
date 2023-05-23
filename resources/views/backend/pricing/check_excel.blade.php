@@ -59,58 +59,37 @@
                 <th>BERAT_BADAN</th>
                 <th>TINGGI_BADAN</th>
                 <th>GOLONGAN_DARAH</th>
-
                <th>MEMILIKI_CATATAN_IMUNISASI</th>
                <th>SAAT_BAYI_MENDAPATKAN_IMUNISASI</th>
                <th>IMUNISASI_LENGKAP</th>
                <th>ADA_GANGGUAN_DAN_KELAINAN</th>
-
                 <th>TIDAK_ADA_GANGGUAN_DAN_KELAINAN</th>
-
                <th>BERBAHAYA</th>
                <th>TIDAK_BERBAHAYA</th>
                <th>YANG_LAIN</th>
-
                 <th>NORMAL_TIDAK_ADA_GANGGUAN</th>
-
                 <th>ADA_KOMPILASI_KETIKA_MELAHIRKAN</th>
                 <th>NORMAL_TIDAK_ADA_CACAT_BAWAAN</th>
                 <th>ADA_CACAT_BAWAAN</th>
-
                 <th>NORMAL</th>
-
                 <th>TERLAMBAT</th>
-
                 <th>NORMAL</th>
-
                 <th>TERLAMBAT</th>
-
-                <th>NORMLA</th>
-
-                <th>TERLAMBAT</th>
-
                 <th>NORMAL</th>
-
                 <th>TERLAMBAT</th>
-
                 <th>NORMAL</th>
-
                 <th>TERLAMBAT</th>
-
+                <th>NORMAL</th>
+                <th>TERLAMBAT</th>
                 <th>ADA</th>
                 <th>TIDAK_ADA</th>
                 <th>YA_PERNAH</th>
-
                 <th>TIDAK_PERNAH</th>
-
                 <th>YA_RIWAYAT_KEJANG_DEMAM</th>
                 <th>TIDAK_RIWAYAT_KEJANG_DEMAM</th>
-
                 <th>MEMILIKI_RIWAYAT_PENYAKIT_DIDERITA</th>
                 <th>PERNAH_RAWAT_RUMAH_SAKIT</th>
-
                 <th>CATATAN_LAIN</th>
-
                 <th>SEKOLAH_ASAL</th>
                 <th>BRAND</th>
                 <th>KEGIATAN_SEKOLAH</th>
@@ -121,43 +100,32 @@
                 <th>PROGRAM_SEKOLAH</th>
                 <th>FASILITAS_PELAYANAN</th>
                 <th>JARAK</th>
-
                 <th>UANG_SEKOLAH_TERJANGKAU</th>
-
                 <th>FASILITAS_SEKOLAH_LENGKAP</th>
                 <th>KEBERSIHAN_GEDUNG_SEKOLAH</th>
                 <th>PELAYANAN_INFORMASI</th>
-                <th>TENAGA_PENDIDIK_KOMPETEN</th>
-                
+                <th>TENAGA_PENDIDIK_KOMPETEN</th>       
                 <th>TIDAK_PILIH_FASILITAS_PELAYANAN</th>
-                <th>1KM_JARAK</th>
-                
+                <th>1KM_JARAK</th>           
                 <th>1_SAMPAI_5KM </th>
-
                 <th>6_SAMPAI_10KM </th>
                 <th>11_SAMPAI_20KM </th>
                 <th>21_SAMPAI_30KM </th>
                 <th>TIDAK_PILIH_JARAK'</th>
                 <th>UANG_PANGKAL</th>
                 <th>SPP</th> 
-
                 <th>TANDA_BIAYA_TAMBAHAN</th>
-
                 <th>TIDAK_TERJANGKAU_UANG_SEKOLAH</th>
-
                 <th>SEDERHANA_DAN_MUDAH</th>
                 <th>STANDAR_SAMA_SEKOLAH_LAIN</th>
-
                 <th>BERBELIT_BELIT</th>
                 <th>UANG_SEKOLAH_TIDAK_MURAH</th>
                 <th>MEREPOTKAN</th>
-
                 <th>PENDAPAT_SAYA</th>
                 <th>PROGRAM_7_HABITS</th>
                 <th>PRESTASI_SEKOLAH</th>
                 <th>EKSTRAKULIKULER</th>
                 <th>BOOSTER_1</th>
-
                 <th>BOOSTER_2</th>
                 <th>BOOSTER_3</th>
                 <th>BELUM_VAKSIN</th>

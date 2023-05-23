@@ -924,7 +924,7 @@
                                             }
                                     ?>
                                           <label class="form-label fw-bolder text-muted fs-6">Slip Gaji Ayah</label> 
-                                          <a href="/<?php echo e(($slipworkfather =='' && $slipworkfather == null) ? '' : $slipworkfather[0]); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                          <a href="https://ppdb.sekolah-avicenna.sch.id/{{ e(($slipworkfather =='' && $slipworkfather == null) ? '' : $slipworkfather[0]) }}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                           <span class="svg-icon svg-icon-3">
                                               <i class="bi bi-cloud-arrow-down"></i>
                                           </span>
@@ -941,7 +941,7 @@
                                             } 
                                     ?>
                                           <label class="form-label fw-bolder text-muted fs-6">Slip Gaji Ibu</label> 
-                                              <a href="/<?php echo e(($slipworkmother =='' && $slipworkmother == null) ? '' : $slipworkmother[0]); ?>" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                              <a href="https://ppdb.sekolah-avicenna.sch.id/{{ e(($slipworkmother =='' && $slipworkmother == null) ? '' : $slipworkmother[0]) }}" target="_blank" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                               <span class="svg-icon svg-icon-3">
                                                   <i class="bi bi-cloud-arrow-down"></i>
                                               </span>
@@ -5431,7 +5431,7 @@
                                       ?>
                                       
 
-                                      <a href="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>" target="_blank" class="linkhref ms-3">Download File</a>
+                                      <a href="https://ppdb.sekolah-avicenna.sch.id/{{ e(($result =='' && $result == null) ? '' : $result[0]) }}" target="_blank" class="linkhref ms-3">Download File</a>
                                     
                                   </div>          
             
@@ -5512,7 +5512,7 @@
                                         $result = '';
                                     }
                                 ?>
-                                <a href="<?php echo e(($result =='' && $result == null) ? '' : $result[0]); ?>" class="linkhref2">Check File</a>
+                                <a href="https://ppdb.sekolah-avicenna.sch.id/{{ e(($result =='' && $result == null) ? '' : $result[0]) }}" target="_blank" class="linkhref2">Check File</a>
                                     
                                   </div>
                                       
