@@ -64,7 +64,7 @@
                                     <th class="min-w-80px w-100px sorting">Sekolah</th>
                                     <th class="min-w-80px w-150px sorting">Kepala Sekolah</th>
                                     <th class="min-w-80px w-150px sorting">Wali Kelas</th>
-                                    <th class="min-w-80px w-150px sorting" rowspan="1" colspan="3" style="padding-left: 36px">Action</th>
+                                    <th class="min-w-80px w-150px sorting" rowspan="1" colspan="3" style="padding-left: 41px">Action</th>
                                    
                                         
                                 </tr>

@@ -898,11 +898,11 @@ nav.navbar.bootsnav.navbar-transparent.pad-top {
 }
 .top-bar-area .simple-link::after {
   position: absolute;
-  top: -30px;
+  top: -2px;
   content: "";
-  height: 100px;
+  height: 45px;
   width: 800px;
-  background: #f4ff93;
+  background: #faffcf;
   left: 0;
   z-index: -1;
   transform: skew(25deg);

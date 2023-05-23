@@ -51,7 +51,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">@lang('menus.backend.sidebar.dashboard')</span>
+                        <span class="menu-title">@lang('menus.backend.sidebar.dashboard')PSDA</span>
                     </a>
                     <!--end:Menu link-->
                 </div>

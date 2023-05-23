@@ -47,17 +47,19 @@
                                     <div class="card card-flush py-4">
                                       <!--begin::Card header-->
                                       <div class="card-header">
-                                          <!--begin::Card title-->
-                                          <div class="card-title" style="padding-left: 50px">
-                                              <h5>Pas Photo Siswa</h5>
-                                          </div>
-                                          <!--end::Card title-->
+                                        
                                       </div>
                                       <!--end::Card header-->
                                   
                                       <!--begin::Card body-->
                                       <div class="card-body text-center pt-0">
                                           <!--begin::Image input-->
+
+                                           <!--begin::Card title-->
+                                           <div class="card-title" style="padding-left: 5px">
+                                            <h5>Pas Photo Siswa</h5>
+                                        </div>
+                                        <!--end::Card title-->
                                                   
                                           <div class="image-input image-input-outline image-input-placeholder mb-3 image-input-changed" data-kt-image-input="true">
                                               <!--begin::Preview existing avatar-->
@@ -86,7 +88,7 @@
                                           <!--end::Image input-->
                                   
                                           <!--begin::Description-->
-                                          <div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                                          <div class="text-muted fs-7">Set the phot thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                                           <!--end::Description-->
                                       </div>
                                       <!--end::Card body-->
@@ -174,8 +176,8 @@
                                                     </div>
                                                     <div class="d-flex justify-content-start flex-column">
                                                         <div class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
-                                                            PROFILE</div>
-                                                        <span class="text-gray-400 fw-semibold d-block fs-7">Data Orangtua/Wali</span>
+                                                            DATA</div>
+                                                        <span class="text-gray-400 fw-semibold d-block fs-7">Orangtua/Wali</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -411,7 +413,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                <div class="col-xl-6">
-                                <label class="form-label fw-bolder text-dark fs-6">Nama Kelas</label>
+                                <label class="form-label fw-bolder text-dark fs-6">Sub Kelas</label>
                                     <select class="form-control form-control-lg form-control-solid" id="nama_kelas" name="nama_kelas" >
                                       <option value="">Pilih</option>
                                     </select>                              
@@ -440,7 +442,7 @@
                              <!--end::Col-->
                              <!--begin::Col-->
                               <div class="col-xl-6">
-                                  <label class="form-label fw-bolder text-dark fs-6">Wilayah</label>
+                                  <label class="form-label fw-bolder text-dark fs-6">Sekolah</label>
                             <!--begin::Switch-->
                             <div>
                               <select id="" class="form-select form-select-solid">
