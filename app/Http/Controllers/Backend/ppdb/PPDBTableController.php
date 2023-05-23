@@ -137,6 +137,15 @@ class PPDBTableController extends Controller
 
         return Datatables::of($ppdbs)
 
+       // ->editColumn('schedule', function ($ppdbItem) {
+            //     return $ppdbItem->schedule->description;
+            // })
+            ->editColumn('ppdb_status_label', function ($ppdbItem) {
+                return ppdb_status_label($ppdbItem->document_status);
+            })
+            ->editColumn('ppdb_status_css', function ($ppdbItem) {
+                return ppdb_status_css($ppdbItem->document_status);
+            })
             ->editColumn('created_at', function ($ppdbItem) {
                 return Carbon::parse($ppdbItem->created_at)->toDateString();
             })

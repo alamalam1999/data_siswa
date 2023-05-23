@@ -149,7 +149,7 @@ FTX.Utils.documentReady(function() {
                 $(row).addClass("bg-white");
                 return `
                 <div>
-                    <span class="text-hover-primary d-block fw-bolder fs-8">` + row.no_formulir + `</span>
+                    <span class="text-hover-primary d-block fw-bolder fs-8">` + row.document_no + `</span>
                 </div>`;
             }
         }, {
@@ -158,7 +158,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                    <span class="text-dark fw-bolder fs-8 text-hover-primary d-block">` + row.nama_lengkap + `</span>
+                    <span class="text-dark fw-bolder fs-8 text-hover-primary d-block">` + row.fullname + `</span>
                 </div>
                    
                 `;
