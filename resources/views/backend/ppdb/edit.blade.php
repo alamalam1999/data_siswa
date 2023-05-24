@@ -1064,183 +1064,86 @@
         <div class="row fv-row mb-7 fv-plugins-icon-container">
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-          if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
-              $array= array_column($file_additional_satu, 'name_father');
-                if ($array != '' && $array != null) {
-                  $data1 = $array;
-                } else {
-                  $data1 = '';
-                }
-              }else {
-                $data1 = '';
-              }
-            ?>
+            
               <label class="form-label fw-bolder text-muted fs-6">No. Registrasi (Kode Siswa)</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->document_no; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
+
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-          if ($file_additional_satu !='' && $file_additional_satu != null && !empty($file_additional_satu) && $file_additional_satu != '[]') { 
-              $array= array_column($file_additional_satu, 'name_mother');
-                if ($array != '' && $array != null) {
-                  $data1 = $array;
-                } else {
-                  $data1 = '';
-                }
-              }else {
-                $data1 = '';
-              }
-            ?>
+
+            
               <label class="form-label fw-bolder text-muted fs-6">Gelombang Daftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo ($ppdb->registration_schedule_id == 5 ? "Gelombang 1" : "Gelombang 2"); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
       </div>
+
         <!--begin::Input group-->
         <div class="row fv-row mb-7 fv-plugins-icon-container">
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-
-            if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
-              $array= array_column($file_additional_dua, 'name_work_father');
-              if ($array !='' && $array != null && !empty($array) && $array != '[]') {
-                if ($array != '' && $array != null) { $dataworkfather = $array;
-                } else { $dataworkfather = ''; }
-
-                if ($dataworkfather[0] == 1) { $dataworkfather = 'Badan Swasta';
-                } else if ($dataworkfather[0] == 2) { $dataworkfather = 'Badan Pemerintahan';
-                } else if ($dataworkfather[0] == 3) { $dataworkfather = 'Wirausaha';
-                } else if ($dataworkfather[0] == 4) { $dataworkfather = 'Pensiuanan';
-                } else if ($dataworkfather[0] == 5) { $dataworkfather = 'Tidak Bekerja'; } 
-              } else {
-                $dataworkfather = '';
-              }
-            } else {
-              $dataworkfather = '';
-            }
-
-              ?>
-              <label class="form-label fw-bolder text-muted fs-6">Tanggal Daftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($dataworkfather =='' && $dataworkfather == null) ? '' : $dataworkfather); ?>" readonly autocomplete="off">
+            
+              <label class="form-label fw-bolder text-muted fs-6">Waktu Daftar</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->created_at; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
+
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-            if ($file_additional_dua !='' && $file_additional_dua != null && !empty($file_additional_dua) && $file_additional_dua != '[]') { 
-              $array= array_column($file_additional_dua, 'name_work_mother');
-                if ($array != '' && $array != null) { $dataworkmother = $array;
-                } else { $dataworkmother = ''; }
-
-                if ($dataworkmother[0] == 1) { $dataworkmother = 'Badan Swasta';
-                } else if ($dataworkmother[0] == 2) { $dataworkmother = 'Badan Pemerintahan';
-                } else if ($dataworkmother[0] == 3) { $dataworkmother = 'Wirausaha';
-                } else if ($dataworkmother[0] == 4) { $dataworkmother = 'Pensiuanan';
-                } else if ($dataworkmother[0] == 5) { $dataworkmother = 'Ibu Rumah Tangga'; } 
-              } else {
-              $dataworkmother = '';
-            }
-            ?>
-              <label class="form-label fw-bolder text-muted fs-6">Status Siswa</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($dataworkmother =='' && $dataworkmother == null) ? '' : $dataworkmother); ?>" readonly autocomplete="off">
+           
+              <label class="form-label fw-bolder text-muted fs-6">Status Mendaftar</label>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->student_status; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
         </div>
         <!--end::Input group-->
+
         <!--begin::Input group-->
         <div class="row fv-row mb-7 fv-plugins-icon-container">
+
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-          if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
-                $array= array_column($file_additional_tiga, 'place_work_father');
-                  if ($array != '' && $array != null) { $placeworkfather = $array; } 
-                  else { $placeworkfather = ''; }
-              }else {
-                $placeworkfather = '';
-              }
-            ?>
+            
               <label class="form-label fw-bolder text-muted fs-6">Tujuan Sekolah</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($placeworkfather =='' && $placeworkfather == null) ? '' : $placeworkfather[0]); ?>" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->school_site; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
+
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-            if ($file_additional_tiga !='' && $file_additional_tiga != null && !empty($file_additional_tiga) && $file_additional_tiga != '[]') { 
-              $array= array_column($file_additional_tiga, 'place_work_mother');
-                if ($array != '' && $array != null) { $placeworkmother = $array; } 
-                else { $placeworkmother = ''; }
-
-              }else {
-                $placeworkmother = '';
-              }
-            ?>
+            
               <label class="form-label fw-bolder text-muted fs-6">Jenjang & Kelas</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($placeworkmother =='' && $placeworkmother == null) ? '' : $placeworkmother[0]); ?>" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->stage."-";  echo $ppdb->classes; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
         </div>
         <!--end::Input group-->
+
         <!--begin::Input group-->
         <div class="row fv-row mb-7 fv-plugins-icon-container">
+
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-            if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
-              $array= array_column($file_additional_empat, 'title_work_father');
-                if ($array != '' && $array != null) { $titleworkfather = $array;
-                } else { $titleworkfather = ''; }
-
-                if ($titleworkfather[0] == 1) { $titleworkfather = 'Staff (Tetap)';
-                } else if ($titleworkfather[0] == 2) { $titleworkfather = 'Dosen / Guru';
-                } else if ($titleworkfather[0] == 3) { $titleworkfather = 'Supervisor';
-                } else if ($titleworkfather[0] == 4) { $titleworkfather = 'Manager';
-                } else if ($titleworkfather[0] == 5) { $titleworkfather = 'Direksi'; 
-                } else if ($titleworkfather[0] == 6) { $titleworkfather = 'Pegawai Honorer'; 
-                } else if ($titleworkfather[0] == 7) { $titleworkfather = 'Pegawai Kontrak'; 
-                } else if ($titleworkfather[0] == 8) { $titleworkfather = 'Lainnya'; } 
-              }else {
-                $titleworkfather = '';
-              }
-            ?>
+            
               <label class="form-label fw-bolder text-muted fs-6">Status Kesiswaan</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($titleworkfather =='' && $titleworkfather == null) ? '' : $titleworkfather); ?>" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->status_siswa; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
+
           <!--begin::Col-->
           <div class="col-xl-6">
-            <?php
-            if ($file_additional_empat !='' && $file_additional_empat != null && !empty($file_additional_empat) && $file_additional_empat != '[]') { 
-              $array= array_column($file_additional_empat, 'title_work_mother');
-                if ($array != '' && $array != null) { $titleworkmother = $array;
-                } else { $titleworkmother = ''; }
-
-                if ($titleworkmother[0] == 1) { $titleworkmother = 'Staff (Tetap)';
-                } else if ($titleworkmother[0] == 2) { $titleworkmother = 'Dosen / Guru';
-                } else if ($titleworkmother[0] == 3) { $titleworkmother = 'Supervisor';
-                } else if ($titleworkmother[0] == 4) { $titleworkmother = 'Manager';
-                } else if ($titleworkmother[0] == 5) { $titleworkmother = 'Direksi'; 
-                } else if ($titleworkmother[0] == 6) { $titleworkmother = 'Pegawai Honorer'; 
-                } else if ($titleworkmother[0] == 7) { $titleworkmother = 'Pegawai Kontrak'; 
-                } else if ($titleworkmother[0] == 8) { $titleworkmother = 'Lainnya'; } 
-              }else {
-                $titleworkmother = '';
-              }
-            ?>
+           
               <label class="form-label fw-bolder text-muted fs-6">Asal Sekolah</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo e(($titleworkmother =='' && $titleworkmother == null) ? '' : $titleworkmother); ?>" readonly autocomplete="off">
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->school_origin; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->

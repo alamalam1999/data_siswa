@@ -146,7 +146,7 @@
                        <!--end::Col-->
                        <!--begin::Col-->
                        <div class="col-xl-6">
-                              <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 240px">Wilayah</label>
+                              <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 240px">Agama</label>
                               <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off">
                         </div>
                        <!--end::Col-->
