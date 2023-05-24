@@ -1,6 +1,18 @@
+
+
 <?php $__env->startSection('title', app_name() . ' | ' . __('navs.general.home')); ?>
 
 <?php $__env->startSection('content'); ?>
+
+<body class="dashboardawal" 
+style="
+background: linear-gradient(
+    90deg,
+    rgba(237, 245, 255, 1) 0%,
+    rgba(204, 223, 247, 1) 100%
+  );">
+    
+
 <!-- Header  ============================================= -->
 <header id="home">
 
@@ -31,10 +43,8 @@
 <!-- Start Banner 
     ============================================= -->
 
-<div class="d-flex flex-center flex-column flex-lg-row-fluid">
-<div class="banner-area standard text-default bg-gray-hard" style="padding-top: 30px;padding-bottom: 105px">
+<div style="margin-top: 50px">
 
-    
                     <div class="row item-flex center">
 
                         <div class="col-md-7" style="padding-left: 70px">
@@ -110,13 +120,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+               
 </div>
             
 
 
 <!-- End Banner -->
-
+</body>
 
 
 
