@@ -111,6 +111,27 @@ class PPDBController extends Controller
         return new RedirectResponse(route('admin.ppdb.index'), ['flash_success' => __('alerts.backend.ppdb.created')]);
     }
 
+      /**
+     * @param \App\Models\Faq $faq
+     * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
+     * @param \App\Http\Requests\Backend\Faqs\ManageFaqsRequest $request
+     *
+     * @return ViewResponse
+     */
+    public function upload_fhoto(Request $request){
+
+        $savefhoto = PPDB::where('id',$request->id_ppdb)->first();
+
+        $image = base64_encode(file_get_contents($request->file('fhoto_siswa')));
+
+
+        $savefhoto->fhoto_siswa = $image;
+
+        $savefhoto->save();
+
+        return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Upload']);;
+    }
+
     /**
      * @param \App\Models\Faq $faq
      * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
