@@ -34,17 +34,16 @@
 
 <div class="top-bar-area address-one-lines bg-dark text-light">
     <div class="container">
-        <div class="row align-center">
-            <div class="col-md-10 address-info" style="right: 60px; top:3px">
+        <div class="row align-center" style="padding-bottom: 5px">
+            <div class="col-md-10 address-info" style="right: 90px; top:3px">
                 <div class="info box">
                     <ul>
+                        <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="logo" alt="Logo" width="750" height="50" style="margin-bottom: 1px">
                         
-                                     
-                           <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="logo" alt="Logo" width="226" height="50" style="margin-bottom: 8px">
-                          
+                           
+    
                         
-                        
-                            <strong><label for style="color:rgb(71, 68, 139);font-size: 25px;margin-top: 10px;padding-top: 10px">| PANGKALAN DATA SISWA SEKOLAH AVICENNA</label></strong>
+                            
                            
                         
                     </ul>

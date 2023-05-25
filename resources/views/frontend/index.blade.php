@@ -43,7 +43,7 @@ background: linear-gradient(
 <!-- Start Banner 
     ============================================= -->
 
-<div style="margin-top: 50px">
+<div style="margin-top: 25px">
 
                     <div class="row item-flex center">
 

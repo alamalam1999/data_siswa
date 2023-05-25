@@ -490,8 +490,11 @@
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">NISN</label>
-                                      <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NISN" name="first_name" autocomplete="off" />
+                                      <input class="form-control form-control-lg form-control-solid" type="text" value="<?php echo $data_siswa->nisn; ?>" readonly autocomplete="off">
+                                      <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
+
+
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                   <div class="col-xl-6">

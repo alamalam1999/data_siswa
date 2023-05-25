@@ -167,12 +167,21 @@ FTX.Utils.documentReady(function() {
             targets: 2,
         orderable: false,
         render: function(data, type, row) {
+            if(row.nisn != null){
+                return `
+                <div>
+                    <span class="text-red fw-bolder fs-8 text-hover-danger d-block">`+ row.nisn + `</span>
+                </div>
+        `;
+            } else{
+
             return `
                     <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">`+ row.nisn +`</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.nisn + `</span>
                     </div>
                
             `;
+        }
             }
         },  {
             targets: 3,
@@ -200,7 +209,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                 </div>
                 `;
             }
@@ -211,7 +220,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                     </div>
                 `;
             }
@@ -231,7 +240,7 @@ FTX.Utils.documentReady(function() {
 
                 return `
                      <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">`+ status +`</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ status +`</span>
                     </div>
                 `;
             }
@@ -242,7 +251,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-80 btn-info-status ppdb-bg-status-not-have-class">NULL</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">Null</span>
                     </div>
                 `;
             }
