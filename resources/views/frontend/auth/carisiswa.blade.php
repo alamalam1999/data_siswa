@@ -58,9 +58,8 @@
                             
                     <div class="image-input image-input-outline image-input-placeholder image-input-changed" data-kt-image-input="true">
                         <!--begin::Preview existing avatar-->
-                          <div class="image-input-wrapper w-165px h-200px" style="background-image: url(
-                          
-                            );"></div>                                                          <!--end::Preview existing avatar-->
+                          <div class="image-input-wrapper w-165px h-200px" style="background-image: url(&quot;data:image/png;base64,{{ $data_search->fhoto_siswa }}&quot;);"></div>                                                         
+                           <!--end::Preview existing avatar-->
             
                         <!--begin::Label-->
                         
@@ -85,15 +84,13 @@
                                 <!--begin::Col-->
                                    <div class="col-xl-6">
                                        <label class="form-label fw-bolder text-dark fs-7" style="padding-right: 240px">Nama</label>
-                                       <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $nama }}">     
+                                       <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_search->fullname }}">     
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                    <div class="col-xl-6">
                                     <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 250px">Sekolah</label>
-                                        <select class="form-control form-control-lg form-control-solid" id="nama_kelas" name="nama_kelas">
-                                          <option value="">Pilih</option>
-                                        <option value="2">A - 2</option><option value="3">1 - F</option><option value="4">A-5</option><option value="5">null</option></select>                              
+                                    <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_search->stage }}">
                                    </div>
                                    <!--end::Col-->
                               </div>
@@ -105,7 +102,7 @@
                               <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 260px">NISN</label>
                               <!--begin::Switch-->
                         <div>
-                          <input class="form-control form-control-solid" type="text" value="{{ $nisn }}">
+                          <input class="form-control form-control-solid" type="text" value="{{ $data_siswa->nisn }}">
                         </div>
                         <!--end::Switch-->
                           </div>
@@ -113,16 +110,7 @@
                          <!--begin::Col-->
                           <div class="col-xl-6">
                               <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 260px">Kelas</label>
-                        <!--begin::Switch-->
-                        <div>
-                          <select id="" class="form-select form-select-solid">
-                          <option value="">Pilih Wilayah</option>
-                          <option value="">Jagakarsa</option>
-                          <option value="">Cinere</option>
-                          <option value="">Pamulang</option>
-                          </select>
-                        </div>
-                        <!--end::Switch-->
+                              <input class="form-control form-control-lg form-control-solid"  type="text" value="{{ $data_search->classes }}">
                           </div>
                           <!--end::Col-->
                        </div>
@@ -137,8 +125,31 @@
                        <!--end::Col-->
                        <!--begin::Col-->
                        <div class="col-xl-6">
+                        <?php
+                          $agama =  $data_siswa->agama;
+
+                          if(!empty($agama)) {
+                                            if ($agama == 1) {
+                                              $agama = 'Islam';
+                                            } else if ($agama == 2) {
+                                              $agama = 'Kristen';
+                                            } else if ($agama == 3) {
+                                              $agama = 'Katholik';
+                                            } else if ($agama == 4) {
+                                              $agama = 'Hindu';
+                                            } else if ($agama == 5) {
+                                              $agama = 'Budha';
+                                            } else if ($agama == 6) {
+                                              $agama = 'Khong Hu Chu';
+                                            } else if ($agama == 7) {
+                                              $agama = 'Kepercayaan Kpd Tuhan YME';
+                                            } else if ($agama == 8) {
+                                              $agama = 'Lainnya';
+                                            }
+                            }                      
+                          ?>
                               <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 240px">Agama</label>
-                              <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off">
+                              <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" value="{{ $agama }}" name="nama_wali_kelas" autocomplete="off">
                         </div>
                        <!--end::Col-->
                        </div>
@@ -147,14 +158,26 @@
                         <div class="row fv-row mb-20">
                           <!--begin::Col-->
                           <div class="col-xl-6">
+                          <?php
+
+                          $jenis_kelamin =  $data_siswa->jenis_kelamin;
+
+                          if(!empty($jenis_kelamin)) {
+                                            if ($jenis_kelamin == 1) {
+                                                $jenis_kelamin = 'Perempuan';
+                                              } else  {
+                                                $jenis_kelamin = 'Laki - Laki';
+                                              } 
+                            }                      
+                          ?>
                                 <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 190px">Jenis kelamin</label>
-                                <input id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="nama_kepala_sekolah" autocomplete="off">
+                                <input  class="form-control form-control-lg form-control-solid" type="text"  value="{{ $jenis_kelamin }}" autocomplete="off">
                           </div>
                         <!--end::Col-->
                         <!--begin::Col-->
                         <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 200px">Status Siswa</label>
-                                <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off">
+                              <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_search->status }}" autocomplete="off">
                           </div>
                         <!--end::Col-->
                         </div>

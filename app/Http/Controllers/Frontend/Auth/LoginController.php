@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use DB;
+use App\Models\PPDB;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Facades\Agent;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
 use App\Events\Frontend\Auth\UserLoggedIn;
 use App\Events\Frontend\Auth\UserLoggedOut;
+use App\Models\Data_siswa;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
@@ -35,12 +37,20 @@ class LoginController extends Controller
      */
     public function search(Request $request) {
 
-        $data_search = Data_siswa::where();
+        $data_search = PPDB::where([['document_no','=',$request->kode_siswa],
+                                   ['fullname','like', '%'.$request->nama.'%']])
+                                    ->select('ppdb.id', 'ppdb.classes','ppdb.stage', 'ppdb.fullname', 'ppdb.fhoto_siswa', 'ppdb.status_siswa as status')->first();
+
+        $data_siswa  = Data_siswa::where([['ppdb_id',$data_search->id],
+                                         ['nisn', $request->nisn]
+                                        ])->first();
 
         $data = [
-            'nisn'        => $request->nisn,
-            'nama'        => $request->nama,
-            'kode_siswa'  => $request->kode_siswa
+            'nisn'              => $request->nisn,
+            'nama'              => $request->nama,
+            'kode_siswa'        => $request->kode_siswa,
+            'data_siswa'        => $data_siswa,
+            'data_search'       => $data_search
         ];
 
         return view('frontend.auth.carisiswa',$data);
