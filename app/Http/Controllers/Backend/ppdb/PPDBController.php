@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
+use App\Models\Data_siswa;
 use App\Models\MasterKelas;
 
 class PPDBController extends Controller
@@ -149,6 +150,8 @@ class PPDBController extends Controller
 
         $ppdb_testing = PPDB::where('id_user', $user_ppdb->id)->first();
         $ppdb_testing = $ppdb;
+
+        $data_siswa = Data_siswa::where('ppdb_id', $ppdb->id)->first();
 
 
         $is_interviewer = false;
@@ -462,7 +465,8 @@ class PPDBController extends Controller
             'file_additional_tiga'      => $file_additional_tiga,
             'file_additional_empat'     => $file_additional_empat,
             'file_additional_lima'      => $file_additional_lima,
-            'slip_gaji_parent'          => $slip_gaji_parent
+            'slip_gaji_parent'          => $slip_gaji_parent,
+            'data_siswa'                => $data_siswa,
         ]);
     }
 

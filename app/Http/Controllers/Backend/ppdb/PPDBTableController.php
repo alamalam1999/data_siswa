@@ -119,11 +119,13 @@ class PPDBTableController extends Controller
         $SQLQuery = 'SELECT
             registration_schedules.description AS schedule,
             schools.school_name AS school,
-            ppdb.*
+            ppdb.*,
+            data_siswa.nisn
         FROM ppdb
         INNER JOIN schools ON ppdb.school_site = schools.school_code
         INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
+        INNER JOIN data_siswa ON data_siswa.ppdb_id = ppdb.id
         '.implode(' ', $innerCondition).'
         WHERE
         ppdb.document_status = 7
