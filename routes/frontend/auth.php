@@ -35,7 +35,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
         Route::post('login', [LoginController::class, 'loginCustom'])->name('login.post');
 
-        Route::get('carisiswa', [LoginController::class, 'search'])->name('carisiswa');
+        Route::post('carisiswa', [LoginController::class, 'search'])->name('carisiswa');
 
         // Socialite Routes
         Route::get('login/{provider}', [SocialLoginController::class, 'login'])->name('social.login');

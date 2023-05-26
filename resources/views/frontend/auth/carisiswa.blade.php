@@ -107,14 +107,7 @@
                               <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 260px">NISN</label>
                               <!--begin::Switch-->
                         <div>
-                          <select id="" class="form-select form-select-solid">
-                          <option value="">Pilih Unit</option>
-                          <option value="">KB</option>
-                          <option value="">TK</option>
-                          <option value="">SD</option>
-                          <option value="">SMP</option>
-                          <option value="">SMA</option>
-                          </select>
+                          <input class="form-control form-control-solid" type="text" value="{{ $nisn }}">
                         </div>
                         <!--end::Switch-->
                           </div>
