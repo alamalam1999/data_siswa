@@ -35,10 +35,12 @@ class LoginController extends Controller
      */
     public function search(Request $request) {
 
-        
+        $data_search = Data_siswa::where();
 
         $data = [
-            'nisn'  => $request->nisn
+            'nisn'        => $request->nisn,
+            'nama'        => $request->nama,
+            'kode_siswa'  => $request->kode_siswa
         ];
 
         return view('frontend.auth.carisiswa',$data);

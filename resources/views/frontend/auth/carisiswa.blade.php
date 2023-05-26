@@ -85,9 +85,7 @@
                                 <!--begin::Col-->
                                    <div class="col-xl-6">
                                        <label class="form-label fw-bolder text-dark fs-7" style="padding-right: 240px">Nama</label>
-                                       <select class="form-control form-control-lg form-control-solid" id="kelas_utama" name="kelas_utama">
-                                          <option value="">Pilih</option>
-                                       <option value="2">Kelas 1</option><option value="3">1</option><option value="4">7</option><option value="5">Kelas 4</option></select>
+                                       <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $nama }}">     
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
@@ -134,7 +132,7 @@
                         <!--begin::Col-->
                         <div class="col-xl-6">
                               <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 190px">No. Registrasi</label>
-                              <input id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="nama_kepala_sekolah" autocomplete="off">
+                              <input  class="form-control form-control-lg form-control-solid" type="text" value="{{ $kode_siswa }}"  name="nama_kepala_sekolah" autocomplete="off">
                         </div>
                        <!--end::Col-->
                        <!--begin::Col-->
