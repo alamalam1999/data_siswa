@@ -409,6 +409,44 @@
                      <div class="card-body" >  
                        {{-- FORM START --}}
                        
+
+
+                        <!--begin::Input group-->
+                        <div class="row fv-row mb-10">
+                          <!--begin::Col-->
+                            <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">Unit</label>
+                                <!--begin::Switch-->
+                          <div>
+                            <select id="unit" class="form-select form-select-solid">
+                            <option value="">Pilih Unit</option>
+                            <option value="KB">KB</option>
+                            <option value="TK">TK</option>
+                            <option value="SD">SD</option>
+                            <option value="SMP">SMP</option>
+                            <option value="SMA">SMA</option>
+                            </select>
+                          </div>
+                          <!--end::Switch-->
+                            </div>
+                           <!--end::Col-->
+                           <!--begin::Col-->
+                            <div class="col-xl-6">
+                                <label class="form-label fw-bolder text-dark fs-6">Sekolah</label>
+                          <!--begin::Switch-->
+                          <div>
+                            <select id="sekolah" class="form-select form-select-solid">
+                            <option value="">Pilih Wilayah</option>
+                            <option value="JAGAKARSA">Jagakarsa</option>
+                            <option value="CINERE">Cinere</option>
+                            <option value="PAMULANG">Pamulang</option>
+                            </select>
+                          </div>
+                          <!--end::Switch-->
+                            </div>
+                            <!--end::Col-->
+                         </div>
+
                       <!--begin::Input group-->
                           <div class="row fv-row mb-10">
                             <!--begin::Col-->
@@ -429,41 +467,7 @@
                                <!--end::Col-->
                           </div>
 
-                      <!--begin::Input group-->
-                           <div class="row fv-row mb-10">
-                            <!--begin::Col-->
-                              <div class="col-xl-6">
-                                  <label class="form-label fw-bolder text-dark fs-6">Unit</label>
-                                  <!--begin::Switch-->
-                            <div>
-                              <select id="" class="form-select form-select-solid">
-                              <option value="">Pilih Unit</option>
-                              <option value="">KB</option>
-                              <option value="">TK</option>
-                              <option value="">SD</option>
-                              <option value="">SMP</option>
-                              <option value="">SMA</option>
-                              </select>
-                            </div>
-                            <!--end::Switch-->
-                              </div>
-                             <!--end::Col-->
-                             <!--begin::Col-->
-                              <div class="col-xl-6">
-                                  <label class="form-label fw-bolder text-dark fs-6">Sekolah</label>
-                            <!--begin::Switch-->
-                            <div>
-                              <select id="" class="form-select form-select-solid">
-                              <option value="">Pilih Wilayah</option>
-                              <option value="">Jagakarsa</option>
-                              <option value="">Cinere</option>
-                              <option value="">Pamulang</option>
-                              </select>
-                            </div>
-                            <!--end::Switch-->
-                              </div>
-                              <!--end::Col-->
-                           </div>
+                     
 
                           <!--begin::Input group-->
                           <div class="row fv-row mb-10">
@@ -490,7 +494,7 @@
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">NISN</label>
-                                      <input class="form-control form-control-lg form-control-solid" type="text" value="<?php echo $data_siswa->nisn; ?>" readonly autocomplete="off">
+                                      <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_siswa->nisn }}" name="nisn" readonly autocomplete="off">
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
 
@@ -498,8 +502,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                   <div class="col-xl-6">
-                                        <label class="form-label fw-bolder text-dark fs-6">NIK</label>
-                                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="tuliskan nomor NIK" name="last_name" autocomplete="off" />
+                                        <label class="form-label fw-bolder text-dark fs-6">NIK Siswa</label>
+                                        <input class="form-control form-control-lg form-control-solid" type="text"  name="last_name" autocomplete="off" />
                                   </div>
                                   <!--end::Col-->
                               </div>

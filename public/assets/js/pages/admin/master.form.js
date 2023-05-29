@@ -38,8 +38,6 @@ $(document).ready(function() {
             $('#nama_kelas').change(function(){
 
                 var datatest = $(this).val();
-                
-
                 if (datatest != null) {
 
                     var result = "";
@@ -55,31 +53,63 @@ $(document).ready(function() {
                 }
             })
 
-            $.each(response.masterkelas, function (key, item) {                
-                $('#kelas_utama').append(
-                     '<option value="'+ item.id +'">'+item.kategori+'</option>'
-                ); 
-             });
+            $('#unit').change(function() {           
 
-            $('#kelas_utama').change(function(){
-
-                var datatest = $(this).val();
+              var dataunit = $(this).val();
+              if (dataunit != null) {
                 
+                var resultunit_sekolah = "";
 
-                if (datatest != null) {
 
-                    var result = "";
+                if (dataunit == 'SD') {
+
+                  $('#kelas_utama').empty();
+
+                  for(let i = 1; i <= 6; i++) {
+                    $('#kelas_utama').append(                
+                        '<option value="'+i+'">'+i+'</option>'    
+                    ); 
+                  }
+                } else if (dataunit == 'SMP') {
+
+                  $('#kelas_utama').empty();
+
+                  for(let i = 7; i <= 9; i++) {
+                    $('#kelas_utama').append(                
+                        '<option value="'+i+'">'+i+'</option>'    
+                    ); 
+                  }
+                } else if (dataunit == 'SMA') {
+
+                  $('#kelas_utama').empty();
+
+                  for(let i = 10; i <= 12; i++) {
+                    $('#kelas_utama').append(                
+                        '<option value="'+i+'">'+i+'</option>'    
+                    ); 
+                  }
+                }
+
+                  
+                  $('#sekolah').change(function() {
+
+                    var datasekolah = $(this).val();
 
                     $.each(response.masterkelas, function (key, item) {                
-                        if (datatest == item.id) {
-                            result = item.kepala_sekolah;
-                        }
-                     });
+                      if (dataunit == item.unit && datasekolah == item.sekolah) {
+                        resultunit_sekolah = item.kepala_sekolah;
+                      }
+                   });
 
-                     document.getElementById('nama_kepala_sekolah').value=result ;               
-                     
-                }
+                   document.getElementById('nama_kepala_sekolah').value=resultunit_sekolah ;
+
+                  })
+   
+              
+              }
             })
+
+         
 
           }
         });

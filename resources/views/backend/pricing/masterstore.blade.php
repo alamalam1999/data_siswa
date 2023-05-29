@@ -50,9 +50,25 @@
                 <!--begin::Label-->
                 <label class="form-label fw-bolder text-dark">Kelas Utama</label>
                 <!--end::Label-->
-
-                <!--begin::Input-->
-                <input type="text" name="kategori_kelas" class="form-control mb-4" value="">
+                    <select class="form-control mb-4" name="kategori_kelas" required>
+                        <option value="">Pilih Kelas</option>
+                        <option value="TK-A">TK-A</option>
+                        <option value="TK-B">TK-B</option>
+                        <option value="KB-A">KB-A</option>
+                        <option value="KB-B">KB-B</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
                 <!--end::Input-->
                 </div>
                 <!--end::Input group-->

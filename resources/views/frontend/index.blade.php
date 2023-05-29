@@ -74,21 +74,21 @@ background: linear-gradient(
                                     <label>
                                         <b>Nama Siswa</b>
                                     </label>
-                                    <input name="nama" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan Nama Siswa" type="text" value="" autocomplete="false">
+                                    <input name="nama" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan Nama Siswa" type="text" value="" autocomplete="false" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>
                                         <b>Nomor NISN</b>
                                     </label>
-                                    <input name="nisn" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan NISN Siswa" type="text" value="" autocomplete="false">
+                                    <input name="nisn" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan NISN Siswa" type="text" value="" autocomplete="false" required>
                                 </div>
     
                                 <div class="form-group">
                                     <label>
                                         <b>Kode Siswa</b>
                                     </label>
-                                    <input name="kode_siswa" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan Kode Siswa" type="text" value="" autocomplete="false">
+                                    <input name="kode_siswa" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan Kode Siswa" type="text" value="" autocomplete="false" required>
                                 </div>
 
                                 <!-- footer -->

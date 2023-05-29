@@ -91,7 +91,7 @@ class PricingController extends Controller
 
     public function master() {
 
-         $master = MasterKelas::all();
+         $master = MasterKelas::orderBy('sekolah', 'ASC')->get();
 
         $data = [
             'master' => $master
