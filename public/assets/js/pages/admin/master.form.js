@@ -29,87 +29,87 @@ $(document).ready(function() {
           dataType: "json",
           success: function (response) {
 
-            $.each(response.masterkelas, function (key, item) {                
-               $('#nama_kelas').append(
-                    '<option value="'+ item.id +'">'+item.kelas+'</option>'
-               ); 
-            }); 
-
-            $('#nama_kelas').change(function(){
-
-                var datatest = $(this).val();
-                if (datatest != null) {
-
-                    var result = "";
-
-                    $.each(response.masterkelas, function (key, item) {                
-                        if (datatest == item.id) {
-                            result = item.wali_kelas;
-                        }
-                     });
-
-                     document.getElementById('nama_wali_kelas').value=result ;               
-                     
-                }
-            })
-
             $('#unit').change(function() {           
 
               var dataunit = $(this).val();
-              if (dataunit != null) {
-                
+              if (dataunit != null) {             
                 var resultunit_sekolah = "";
-
-
                 if (dataunit == 'SD') {
-
                   $('#kelas_utama').empty();
-
+                  $('#kelas_utama').append(                
+                    '<option value="">Pilih</option>'    
+                  ); 
                   for(let i = 1; i <= 6; i++) {
                     $('#kelas_utama').append(                
                         '<option value="'+i+'">'+i+'</option>'    
                     ); 
                   }
                 } else if (dataunit == 'SMP') {
-
                   $('#kelas_utama').empty();
-
+                  $('#kelas_utama').append(                
+                    '<option value="">Pilih</option>'    
+                  ); 
                   for(let i = 7; i <= 9; i++) {
                     $('#kelas_utama').append(                
                         '<option value="'+i+'">'+i+'</option>'    
                     ); 
                   }
                 } else if (dataunit == 'SMA') {
-
                   $('#kelas_utama').empty();
-
+                  $('#kelas_utama').append(                
+                    '<option value="">Pilih</option>'    
+                  ); 
                   for(let i = 10; i <= 12; i++) {
                     $('#kelas_utama').append(                
                         '<option value="'+i+'">'+i+'</option>'    
                     ); 
                   }
                 }
-
-                  
+              
                   $('#sekolah').change(function() {
-
                     var datasekolah = $(this).val();
-
                     $.each(response.masterkelas, function (key, item) {                
                       if (dataunit == item.unit && datasekolah == item.sekolah) {
                         resultunit_sekolah = item.kepala_sekolah;
                       }
                    });
-
                    document.getElementById('nama_kepala_sekolah').value=resultunit_sekolah ;
-
-                  })
-   
-              
+                  })          
               }
             })
 
-         
+            $('#kelas_utama').change(function() {               
+              var kelasutama = $(this).val();
+              $('#nama_kelas').empty();
+              alert("masuk"+ kelasutama);      
+              $.each(response.masterkelas, function(key, item) {                
+                    if(kelasutama == item.kategori) {
+                        $('#nama_kelas').append(
+                          '<option value="'+item.kelas+'">'+item.kelas+'</option>'
+                        );            
+                    }
+                    
+              });
+
+           })
+
+           $('#nama_kelas').change(function(){
+
+            var datatest = $(this).val();
+            if (datatest != null) {
+
+                var result = "";
+
+                $.each(response.masterkelas, function (key, item) {                
+                    if (datatest == item.id) {
+                        result = item.wali_kelas;
+                    }
+                 });
+
+                 document.getElementById('nama_wali_kelas').value=result ;               
+                 
+            }
+        })
 
           }
         });
