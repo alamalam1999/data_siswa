@@ -36,7 +36,7 @@
             <div class="card-header bg-light">
                 <!--begin::Title-->
                 <h1 class="card-title card-body align-items-center d-flex justify-content-center">
-                    <span class="card-label fw-bolder text-dark">DATA PELAJAR</span>
+                    <span class="card-label fw-bolder text-dark fs-5">DATA PELAJAR SEKOLAH AVICENNA</span>
                 </h1>
                 <!--end::Title-->
             </div>

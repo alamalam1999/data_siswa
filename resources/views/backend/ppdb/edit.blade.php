@@ -473,18 +473,23 @@
                                 <input id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="nama_kepala_sekolah" autocomplete="off" />
                           </div>
                          <!--end::Col-->
+
                          <!--begin::Col-->
                          <div class="col-xl-6">
+                          <div class="btndowninfo">
                                 <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
+                                <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
+                          </div>
                                 <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
-                                <div class="mt-3 mb-3" id='input-cont1'>
-                                  <!--Input container-->
-                                </div>
+                                <div class="informasiinfo">
+                                  <div class="" id='input-cont1'>
+                                  </div>
                                 <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">+Tambah input</button> <button class="btn btn-danger btn-sm fs-9" onclick="kurangInput()">-Kurang input</button>
-                         </div>
+                                </div>
+                              </div>
                          <!--end::Col-->
                          </div>
-
+                        
                               <!--begin::Input group-->
                               <div class="row fv-row mb-10">
                                 <!--begin::Col-->
@@ -514,7 +519,7 @@
                                           <option value="">Pilih Status</option>
                                           <option value="">Aktif</option>
                                           <option value="">Tidak Aktif</option>
-                                          <option value="">Alum</option>
+                                          <option value="">Alumni</option>
                                           </select>
                                         </div>
                                         <!--end::Switch-->
@@ -1851,7 +1856,7 @@
                                   <div class="btndown1 card-header bg-light mb-6">
                                       <!--begin::Title-->
                                       <h3 class="card-title align-items-start flex-column mb-1">
-                                          <span class="card-label fw-bolder mb-1">FORMULIR PESERTA DIDIDK</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
+                                          <span class="card-label fw-bolder mb-1">FORMULIR PESERTA DIDIK (KEBUTUHAN DATA DAPODIK)</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
                                         </h3>
                                       </h3>
                                       <!--end::Title-->

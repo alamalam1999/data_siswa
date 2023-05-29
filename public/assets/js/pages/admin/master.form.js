@@ -147,6 +147,7 @@ $(document).ready(function() {
     $('.informasites').hide();
     $('.informasiupspp').hide();
     $('.informasiformulir').hide();
+    $('.informasiinfo').hide();
   
   $('.btndown1').click( function() {
 
@@ -239,6 +240,9 @@ $(document).ready(function() {
     $('.informasiformulir').toggle();
   })
   
+  $('.btndowninfo').click( function() {
+    $('.informasiinfo').toggle();
+  })
   
   
   
