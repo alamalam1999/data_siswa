@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
+use App\Models\Data_kelas;
 use App\Models\Data_siswa;
 use App\Models\MasterKelas;
 
@@ -39,18 +40,14 @@ class PPDBController extends Controller
         View::share('js', ['faqs']);
     }
 
-    public function fetchstudents() {
+    public function fetchstudents() {     
 
-        
             $masterkelas = MasterKelas::all();
-
 
             return response()->json([
                 'masterkelas'=> $masterkelas
-            ]);
-
-
-            
+            ]); 
+                    
     }
 
     /**
@@ -421,6 +418,8 @@ class PPDBController extends Controller
             $slip_gaji_parent      =json_decode($ppdb_testing->slip_gaji_parent);
         }
 
+        $data_kelas = Data_kelas::where('ppdb_id',$ppdb->id)->first();
+
         return new ViewResponse('backend.ppdb.edit', [
             'ppdb'              => $ppdb,
             'user_account'      => $user_account,
@@ -467,6 +466,7 @@ class PPDBController extends Controller
             'file_additional_lima'      => $file_additional_lima,
             'slip_gaji_parent'          => $slip_gaji_parent,
             'data_siswa'                => $data_siswa,
+            'data_kelas'                => $data_kelas
         ]);
     }
 
@@ -481,6 +481,37 @@ class PPDBController extends Controller
         $this->repository->update($ppdb, $request->except(['_token', '_method']));
 
         return new RedirectResponse(route('admin.ppdb.index'), ['flash_success' => __('alerts.backend.ppdb.updated')]);
+    }
+
+
+    /**
+     * @param \App\Models\PPDB $ppdb
+     * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
+     *
+     * @return \App\Http\Responses\RedirectResponse
+     */
+    public function addClasses(PPDBPermissionRequest $request) {
+
+                $ppdb = PPDB::where('id', $request->id)->first();
+    
+                $data_kelas = new Data_kelas;
+                $data_kelas->ppdb_id              = $ppdb->id;
+                $data_kelas->kode_registrasi      = $ppdb->document_no;
+                $data_kelas->unit                 = $request->unit;
+                $data_kelas->sekolah              = $request->sekolah;
+                $data_kelas->kelas_utama          = $request->kelas_utama;
+                $data_kelas->sub_kelas            = $request->sub_kelas;
+                $data_kelas->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
+                $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
+                $data_kelas->nisn                 = $request->nisn;
+                $data_kelas->nik_siswa            = $request->nik_siswa;
+                $data_kelas->status_siswa         = $request->status_siswa;
+                $data_kelas->keterangan           = $request->keterangan;
+                $data_kelas->save();
+
+                debug($ppdb);
+
+                return "masuk semua";
     }
 
 

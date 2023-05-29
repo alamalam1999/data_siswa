@@ -9,6 +9,7 @@ Route::group(['namespace' => 'ppdb'], function () {
     // Route::get('ppdb/{id}', [PPDBController::class, 'edit'])->name('ppdb.edit');
     Route::resource('ppdb', 'PPDBController', ['except' => ['show']]);
     Route::post('ppdb/discount', [PPDBController::class, 'updateDiscountCode'])->name('ppdb.discount'); 
+    Route::post('ppdb/addclasses', [PPDBController::class, 'addClasses'])->name('ppdb.addclasses');
 
     Route::post('ppdb/add_information_school', [PPDBController::class, 'addInformation'])->name('ppdb.information');
 

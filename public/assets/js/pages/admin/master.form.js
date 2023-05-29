@@ -81,7 +81,11 @@ $(document).ready(function() {
             $('#kelas_utama').change(function() {               
               var kelasutama = $(this).val();
               $('#nama_kelas').empty();
-              alert("masuk"+ kelasutama);      
+              alert("masuk"+ kelasutama);  
+              
+              $('#nama_kelas').append(                
+                '<option value="">Pilih</option>'    
+              );              
               $.each(response.masterkelas, function(key, item) {                
                     if(kelasutama == item.kategori) {
                         $('#nama_kelas').append(
@@ -96,12 +100,15 @@ $(document).ready(function() {
            $('#nama_kelas').change(function(){
 
             var datatest = $(this).val();
+
+
+            alert(datatest);
             if (datatest != null) {
 
                 var result = "";
 
                 $.each(response.masterkelas, function (key, item) {                
-                    if (datatest == item.id) {
+                    if (datatest == item.kelas) {
                         result = item.wali_kelas;
                     }
                  });
