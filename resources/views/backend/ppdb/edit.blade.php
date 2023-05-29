@@ -495,7 +495,7 @@
                          </div>
                         
                               <!--begin::Input group-->
-                              <div class="row fv-row mb-10">
+                              <div class="row fv-row mb-9">
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">NISN</label>
@@ -513,7 +513,7 @@
                                   <!--end::Col-->
                               </div>
                                       <!--begin::Input group-->
-                                      <div class="row fv-row mb-10">
+                                      <div class="row fv-row mb-5">
                                         <!--begin::Col-->
                                           <div class="col-xl-6">
                                               <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
@@ -560,7 +560,7 @@
                                   <div class="card-header bg-light">
                                     <!--begin::Title-->
                                       <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bolder text-dark">DATA PRESTASI</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
+                                        <span class="card-label fw-bolder text-dark">DATA PRESTASI SEKOLAH ASAL</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
                                       </h3>
                                     <!--end::Title-->
                                   </div>
@@ -599,6 +599,37 @@
                                   </div>
                                 </div>
 
+                                <div class="mt-5">
+                                  <div class="card-header bg-light">
+                                    <!--begin::Title-->
+                                      <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label fw-bolder text-dark">DATA PRESTASI SEKOLAH AVICENNA</span>
+                                    <!--end::Title-->
+                                  </div>
+                                </div>
+                                
+                                <div class="card-body">
+                                  <div class="table-responsive">
+                                      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                                          <thead>
+                                              <tr class="fw-bolder fs-9 text-gray-800">
+                                                  <th class="min-w-50px">Nama Prestasi</th>
+                                                  <th class="min-w-50px">Nama Event</th>
+                                                  <th class="min-w-50px">Penyelenggara</th>
+                                                  <th class="min-w-50px">Negara</th>
+                                                  <th class="min-w-50px">Penghargaan</th>
+                                                  <th class="min-w-50px">Tingkat</th>
+                                                  <th class="min-w-50px">Bidang</th>
+                                                  <th class="w-50px text-end">Tanggal</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                             
+
+                                          </tbody>
+                                      </table>
+                                  </div>
+                                </div>
 
                                 </div>
                             </div>
