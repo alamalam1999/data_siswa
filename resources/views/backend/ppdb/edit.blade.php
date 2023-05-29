@@ -486,7 +486,7 @@
                           </div>
                                 <input id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
                                 <div class="informasiinfo">
-                                  <div class="" id='input-cont1'>
+                                  <div class="mt-3 mb-3" id='input-cont1'>
                                   </div>
                                 <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">+Tambah input</button> <button class="btn btn-danger btn-sm fs-9" onclick="kurangInput()">-Kurang input</button>
                                 </div>
