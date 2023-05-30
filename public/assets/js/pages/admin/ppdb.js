@@ -228,19 +228,10 @@ FTX.Utils.documentReady(function() {
             targets: 7,
             orderable: false,
             render: function(data, type, row) {
-                console.log(row);
-
-                var status = '';
-
-                if(row.status_siswa == 1) {
-                    status = 'Peserta didik Baru';
-                } else {
-                    status = 'Peserta didik Pindahan';
-                }
-
+                console.log(row);               
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ status +`</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">null</span>
                     </div>
                 `;
             }
