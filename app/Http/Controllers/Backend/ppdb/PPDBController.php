@@ -516,6 +516,38 @@ class PPDBController extends Controller
                 return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);;
     }
 
+    /**
+     * @param \App\Models\PPDB $ppdb
+     * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
+     *
+     * @return \App\Http\Responses\RedirectResponse
+     */
+    public function showClasses(PPDBPermissionRequest $request) {
+
+        $data_kelas_update = Data_kelas::where('id',$request->id_classes)->first();      
+        $data_kelas_update->show_table = 1;
+        if($request->aktivasi == false)
+        {
+            $data_kelas_update->show_table = 0;
+        }
+
+        $data_kelas_update->unit                 = $request->unit;
+        $data_kelas_update->sekolah              = $request->sekolah;
+        $data_kelas_update->kelas_utama          = $request->kelas_utama;
+        $data_kelas_update->sub_kelas            = $request->sub_kelas;
+        $data_kelas_update->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
+        $data_kelas_update->nama_wali_kelas      = $request->nama_wali_kelas;
+        $data_kelas_update->nama_wali_kelas_2      = $request->nama_wali_kelas_2;
+        $data_kelas_update->nisn                 = $request->nisn;
+        $data_kelas_update->nik_siswa            = $request->nik_siswa;
+        $data_kelas_update->status_siswa         = $request->status_siswa;
+        $data_kelas_update->keterangan           = $request->keterangan;
+        $data_kelas_update->save();
+
+        return redirect()->back()->with(['flash_success' => 'cek testing']);;
+
+    }
+
      /**
      * @param \App\Models\PPDB $ppdb
      * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
@@ -524,11 +556,15 @@ class PPDBController extends Controller
      */
     public function cekHistory($id) {
 
-        $ppdb = PPDB::where('id', $id)->first();
+        $ppdb       = PPDB::where('id', $id)->first();
+        $data_kelas = Data_kelas::where('ppdb_id', $id)->first();
+        $data_kelas_for = Data_kelas::where('ppdb_id', $id)->get();
 
         return new ViewResponse('backend.ppdb.cekhistory', 
         [
-            'ppdb'  => $ppdb
+            'data_kelas'            => $data_kelas,
+            'ppdb'                  => $ppdb,
+            'data_kelas_for'        => $data_kelas_for
         ]);
     }
 

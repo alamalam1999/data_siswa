@@ -13,6 +13,8 @@ Route::group(['namespace' => 'ppdb'], function () {
     Route::get('ppdb/cekHistory/{id}', [PPDBController::class, 'cekHistory'])->name('ppdb.cekhistory');
     Route::post('ppdb/addclasses', [PPDBController::class, 'addClasses'])->name('ppdb.addclasses');
 
+    Route::post('ppdb/showclasses', [PPDBController::class, 'showClasses'])->name('ppdb.showclasses');
+
 
     Route::post('ppdb/add_information_school', [PPDBController::class, 'addInformation'])->name('ppdb.information');
 
