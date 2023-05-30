@@ -50,11 +50,11 @@
                 </div>
             </div>
             @guest
-                <div class="simple-link text-right col-md-2" style="padding-top: 14px;left: 100px;">
+                <div class="text-right col-md-2" style="padding-top: 14px;left: 100px;">
                     
                     <h5><b><a href="{{ route('frontend.auth.login') }}" style="padding-right: 30px;padding-bottom: 50px">
-                        <span style="color:rgb(42, 42, 135);bottom: 50px"><i class="fas fa-user"></span></i>
-                        <span style="color:rgb(42, 42, 135);bottom: 50pxs">Login Admin</span></b></a></h5>
+                        <span style="color:rgb(152, 6, 123);bottom: 50px"><i class="fas fa-user"></span></i>
+                        <span style="color:rgb(152, 6, 123);bottom: 50pxs">Login Admin</span></b></a></h5>
                 </div>
             @else
                 <div class="simple-link text-right col-md-5">

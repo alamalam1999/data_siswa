@@ -473,7 +473,7 @@ input {
 }
 
 .bg-dark {
-  background: #43e9d3 none repeat scroll 0 0;
+  background: #ffffff none repeat scroll 0 0;
 }
 
 .bg-gradient {
@@ -7132,10 +7132,10 @@ footer .footer-bottom p a {
 }
 
 footer .footer-bottom {
-  background: #03173d none repeat scroll 0 0;
+  background: #ffffff none repeat scroll 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 80px;
-  padding: 20px 0;
+  margin-top: -27px;
+  padding: 9px 0;
 }
 
 footer .footer-bottom.bg-light {
@@ -7149,7 +7149,7 @@ footer .footer-bottom.bg-transparent {
 }
 
 footer .footer-bottom p {
-  color: #ffffff;
+  color: #b6236d;
   margin: 0;
   text-transform: capitalize;
   line-height: 40px;

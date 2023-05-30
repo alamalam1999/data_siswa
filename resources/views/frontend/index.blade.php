@@ -8,8 +8,8 @@
 style="
 background: linear-gradient(
     90deg,
-    rgba(237, 245, 255, 1) 0%,
-    rgba(204, 223, 247, 1) 100%
+    rgba(255, 255, 255, 1) 0%,
+    rgba(243, 225, 244, 1) 100%
   );">
     
 
@@ -43,17 +43,17 @@ background: linear-gradient(
 <!-- Start Banner 
     ============================================= -->
 
-<div style="margin-top: 25px">
+<div style="margin-top: 0px">
 
                     <div class="row item-flex center">
 
-                        <div class="col-md-7" style="padding-left: 70px">
+                        <div class="col-md-7" style="padding-left: 130px;padding-bottom: 30px">
                           
-                            <img src="{{ asset('assets/media/logos/pak tomz.png') }}" width="700" height="470" style="vertical-align:middle;margin:-25px 0px">
+                            <img src="{{ asset('assets/media/logos/background2.png') }}" width="520" height="520" style="vertical-align:middle;margin:-25px 0px">
                         </div>
 
                        
-                        <div class="col-md-4" style="right: 20px">
+                        <div class="col-md-4" style="right:40px">
                             <form action="{{ route('frontend.auth.carisiswa') }}" method="post">
                                 {{ csrf_field() }}
                             <h3 class="card-title">Pencarian Data Siswa</h3>
@@ -104,18 +104,22 @@ background: linear-gradient(
                             </form>
                         </div>
                     </div>
-                    <div class="footer-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12" style="top: 30px">
-                                    <div class="text-center">
-                                        <b><p>© Copyright 2023. All Rights Reserved by <a href="https://sekolah-avicenna.sch.id/">Dept. Transformasi Digital BPS YPAP</a></p></b>
+                    <footer class="">
+                        
+                        <!-- Start Footer Bottom -->
+                        <div class="footer-bottom">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="text-center">
+                                            <p>© Copyright 2022. All Rights Reserved by Dept. Transformasi Digital BPS YPAP</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-               
+                        <!-- End Footer Bottom -->
+                    </footer>
 </div>
             
 
