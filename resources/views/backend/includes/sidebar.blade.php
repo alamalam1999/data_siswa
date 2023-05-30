@@ -148,7 +148,7 @@
  <!--begin:Menu item-->
  <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link {{active_class_url(route('admin.ppdb.index'))}}" href="{{ route('admin.ppdb.index') }}">
+    <a class="menu-link " href="">
         <span class="menu-icon">
             <span class="svg-icon svg-icon-2"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Clothes/Shirt.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                 <g stroke="none" fill="none">
@@ -167,7 +167,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link {{active_class_url(route('admin.ppdb.index'))}}" href="{{ route('admin.ppdb.index') }}">
+    <a class="menu-link " href="">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Code/Error-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -188,7 +188,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link {{active_class_url(route('admin.ppdb.index'))}}" href="{{ route('admin.ppdb.index') }}">
+    <a class="menu-link " href="">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

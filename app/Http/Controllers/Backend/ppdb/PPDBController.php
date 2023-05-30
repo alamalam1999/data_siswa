@@ -418,7 +418,9 @@ class PPDBController extends Controller
             $slip_gaji_parent      =json_decode($ppdb_testing->slip_gaji_parent);
         }
 
-        $data_kelas = Data_kelas::where('ppdb_id',$ppdb->id)->first();
+        $data_kelas = Data_kelas::where([['ppdb_id',$ppdb->id],
+                                        ['show_table', 1]    
+                                        ])->first();
 
         return new ViewResponse('backend.ppdb.edit', [
             'ppdb'              => $ppdb,
@@ -511,7 +513,23 @@ class PPDBController extends Controller
 
                 debug($ppdb);
 
-                return "masuk semua";
+                return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);;
+    }
+
+     /**
+     * @param \App\Models\PPDB $ppdb
+     * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
+     *
+     * @return \App\Http\Responses\RedirectResponse
+     */
+    public function cekHistory($id) {
+
+        $ppdb = PPDB::where('id', $id)->first();
+
+        return new ViewResponse('backend.ppdb.cekhistory', 
+        [
+            'ppdb'  => $ppdb
+        ]);
     }
 
 

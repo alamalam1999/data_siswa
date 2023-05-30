@@ -549,10 +549,11 @@
                                       </div>
 
                                       <div class="container-flex justify-content-end">
-                                        <button class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">Submit</button>
-                                      
-                                </form>
-                                        <button class="btn btn-success btn-sm fs-9" onclick="kurangInput()">Edit</button>
+                                        <button class="btn btn-primary btn-sm fs-9" >Submit</button>                     
+                                       </form>
+                                       <a href="{{ route('admin.ppdb.cekhistory', $ppdb->id) }}">
+                                        <div class="btn btn-success btn-sm fs-9">Edit</div>
+                                      </a>
                                       </div>
                                 </div>
 
