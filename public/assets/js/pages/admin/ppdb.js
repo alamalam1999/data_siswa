@@ -209,7 +209,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.kelas_utama+`</span>
                 </div>
                 `;
             }
@@ -220,7 +220,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.sub_kelas+`</span>
                     </div>
                 `;
             }
@@ -231,7 +231,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);               
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">null</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.status_siswa+`</span>
                     </div>
                 `;
             }
@@ -242,7 +242,7 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">Null</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.keterangan+`</span>
                     </div>
                 `;
             }

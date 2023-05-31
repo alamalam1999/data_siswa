@@ -120,12 +120,19 @@ class PPDBTableController extends Controller
             registration_schedules.description AS schedule,
             schools.school_name AS school,
             ppdb.*,
-            data_siswa.nisn
+            data_siswa.nisn,
+            data_siswa_2.sekolah,
+            data_siswa_2.unit,
+            data_siswa_2.kelas_utama,
+            data_siswa_2.sub_kelas,
+            data_siswa_2.status_siswa,
+            data_siswa_2.keterangan
         FROM ppdb
         INNER JOIN schools ON ppdb.school_site = schools.school_code
         INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
         INNER JOIN data_siswa ON data_siswa.ppdb_id = ppdb.id
+        INNER JOIN data_siswa_2 ON data_siswa_2.ppdb_id = ppdb.id
         '.implode(' ', $innerCondition).'
         WHERE
         ppdb.document_status = 7

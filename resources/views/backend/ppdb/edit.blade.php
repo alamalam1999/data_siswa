@@ -478,20 +478,42 @@
                           </div>
                          <!--end::Col-->
 
+
+                         @if(empty($data_kelas->nama_wali_kelas_2))
                          <!--begin::Col-->
-                         <div class="col-xl-6">
-                          <div class="btndowninfo">
-                                <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
-                                <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
-                          </div>
-                                <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
-                                <div class="informasiinfo">
-                                  <div class="mt-3 mb-3" id='input-cont1'>
-                                  </div>
-                                <div class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">+Tambah input</div> <div class="btn btn-danger btn-sm fs-9" onclick="kurangInput()">-Kurang input</div>
+                              <div class="col-xl-6">
+                                <div class="btndowninfo">
+                                      <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
+                                      <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
                                 </div>
+                                      <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
+                                      <div class="informasiinfo">
+                                        <div class="mt-3 mb-3" id='input-cont1'>
+                                        </div>
+                                      <div class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">+Tambah input</div> <div class="btn btn-danger btn-sm fs-9" onclick="kurangInput()">-Kurang input</div>
+                                      </div>
                               </div>
                          <!--end::Col-->
+
+
+                          @else
+                          <!--begin::Col-->
+                          <div class="col-xl-6">
+                            <div class="btndowninfo">
+                                  <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
+                                  <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
+                            </div>
+                                  <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid mb-4" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
+                                  <input value="{{ !empty($data_kelas->nama_wali_kelas_2) ? $data_kelas->nama_wali_kelas_2 : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas_2" autocomplete="off" />
+                                  <div class="informasiinfo">
+                                    <div class="mt-3 mb-3" id='input-cont1'>
+                                    </div>
+                                  <div class="btn btn-primary btn-sm fs-9" onclick="tambahInput()">+Tambah input</div> <div class="btn btn-danger btn-sm fs-9" onclick="kurangInput()">-Kurang input</div>
+                                  </div>
+                          </div>
+                          <!--end::Col-->
+                          @endif
+
                          </div>
                         
                               <!--begin::Input group-->
@@ -499,7 +521,7 @@
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">NISN</label>
-                                      <input value="{{ !empty($data_kelas->nisn) ? $data_kelas->nisn : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nisn" autocomplete="off">
+                                      <input value="{{ !empty($data_siswa->nisn) ? $data_siswa->nisn : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nisn" autocomplete="off">
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
 

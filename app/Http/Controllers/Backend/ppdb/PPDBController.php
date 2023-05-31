@@ -22,6 +22,7 @@ use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
 use App\Models\Data_kelas;
 use App\Models\Data_siswa;
+use App\Models\Data_siswa2;
 use App\Models\MasterKelas;
 
 class PPDBController extends Controller
@@ -42,12 +43,19 @@ class PPDBController extends Controller
 
     public function fetchstudents() {     
 
-            $masterkelas = MasterKelas::all();
+        $masterkelas = MasterKelas::all();
+        return response()->json([
+            'masterkelas'=> $masterkelas
+        ]);               
+    }
 
-            return response()->json([
-                'masterkelas'=> $masterkelas
-            ]); 
-                    
+    public function fetchdatakelas() {
+
+        $data_kelas = Data_kelas::all();
+        return response()->json([
+            'data_kelas' => $data_kelas
+        ]);
+
     }
 
     /**
@@ -495,6 +503,29 @@ class PPDBController extends Controller
     public function addClasses(PPDBPermissionRequest $request) {
 
                 $ppdb = PPDB::where('id', $request->id)->first();
+
+                $data_siswa = Data_siswa::where('ppdb_id', $ppdb->id)->first();
+
+                $data_siswa->nisn                  = $request->nisn;
+                $data_siswa->save();
+
+                $data_siswa2 = Data_siswa2::where('ppdb_id', $ppdb->id)->first();    
+                
+                $data_siswa2->kode_registrasi      = $ppdb->document_no;
+                $data_siswa2->unit                 = $request->unit;
+                $data_siswa2->sekolah              = $request->sekolah;
+                $data_siswa2->kelas_utama          = $request->kelas_utama;
+                $data_siswa2->sub_kelas            = $request->sub_kelas;
+                $data_siswa2->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
+                $data_siswa2->nama_wali_kelas      = $request->nama_wali_kelas;
+
+                $data_siswa2->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
+
+                $data_siswa2->nisn                 = $request->nisn;
+                $data_siswa2->nik_siswa            = $request->nik_siswa;
+                $data_siswa2->status_siswa         = $request->status_siswa;
+                $data_siswa2->keterangan           = $request->keterangan;
+                $data_siswa2->save();
     
                 $data_kelas = new Data_kelas;
                 $data_kelas->ppdb_id              = $ppdb->id;
@@ -505,6 +536,9 @@ class PPDBController extends Controller
                 $data_kelas->sub_kelas            = $request->sub_kelas;
                 $data_kelas->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
                 $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
+
+                $data_kelas->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
+
                 $data_kelas->nisn                 = $request->nisn;
                 $data_kelas->nik_siswa            = $request->nik_siswa;
                 $data_kelas->status_siswa         = $request->status_siswa;
@@ -513,7 +547,10 @@ class PPDBController extends Controller
 
                 debug($ppdb);
 
-                return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);;
+                debug($data_siswa);
+
+                return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);
+
     }
 
     /**
@@ -537,7 +574,7 @@ class PPDBController extends Controller
         $data_kelas_update->sub_kelas            = $request->sub_kelas;
         $data_kelas_update->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
         $data_kelas_update->nama_wali_kelas      = $request->nama_wali_kelas;
-        $data_kelas_update->nama_wali_kelas_2      = $request->nama_wali_kelas_2;
+        $data_kelas_update->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
         $data_kelas_update->nisn                 = $request->nisn;
         $data_kelas_update->nik_siswa            = $request->nik_siswa;
         $data_kelas_update->status_siswa         = $request->status_siswa;

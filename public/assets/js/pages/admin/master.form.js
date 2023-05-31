@@ -6,7 +6,7 @@
         let input = document.createElement('input');
         input.placeholder = 'Menambahkan Wali Sesuka Mu';
         input.id = 'input-cont';
-        input.name = 'nama_wali_kelas_'+ no++;
+        input.name = 'nama_wali_kelas_2';
         input.classList = 'form-control form-control-lg form-control-solid mb-3';
         container.appendChild(input);
     }
@@ -116,7 +116,7 @@ $(document).ready(function() {
                  document.getElementById('nama_wali_kelas').value=result ;               
                  
             }
-        })
+          })
 
           }
         });

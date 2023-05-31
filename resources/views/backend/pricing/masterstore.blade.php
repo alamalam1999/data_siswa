@@ -96,7 +96,7 @@
                     <!--end::Label-->
 
                      <!--begin::Select-->
-                        <select id="" class="form-select form-select mb-4">
+                        <select id="" class="form-select form-select mb-4" name="unit">
                         <option value="">Pilih Unit</option>
                         <option value="KB">KB</option>
                         <option value="TK">TK</option>
@@ -116,7 +116,7 @@
                     <!--end::Label-->
 
                 <!--begin::Select-->
-                <select id="" class="form-select form-select mb-4">
+                <select id="" class="form-select form-select mb-4" name="sekolah">
                     <option value="">Pilih Wilayah</option>
                     <option value="Jagakarsa">Jagakarsa</option>
                     <option value="Cinere">Cinere</option>

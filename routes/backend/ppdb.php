@@ -20,7 +20,9 @@ Route::group(['namespace' => 'ppdb'], function () {
 
     //For DataTables
     Route::post('ppdb/get',  [PPDBTableController::class, '__invoke'])->name('ppdb.get');
+    Route::get('ppdb/datakelas', [PPDBTableController::class, '__invoke_datakelas'])->name('ppdb.datakelas');
     Route::get('fetch-students', [PPDBController::class, 'fetchstudents']);
+    Route::get('fetch-datakelas', [PPDBController::class, 'fetchdatakelas']);
 
 
     Route::post('upload_fhoto', [PPDBController::class, 'upload_fhoto'])->name('upload_fhoto.get');
