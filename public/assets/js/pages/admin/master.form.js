@@ -68,8 +68,9 @@ $(document).ready(function() {
               
                   $('#sekolah').change(function() {
                     var datasekolah = $(this).val();
-                    $.each(response.masterkelas, function (key, item) {                
-                      if (dataunit == item.unit && datasekolah == item.sekolah) {
+                    $.each(response.masterkelas, function (key, item) {               
+          
+                      if (dataunit == item.unit.toUpperCase() && datasekolah == item.sekolah.toUpperCase()) {
                         resultunit_sekolah = item.kepala_sekolah;
                       }
                    });
@@ -81,7 +82,6 @@ $(document).ready(function() {
             $('#kelas_utama').change(function() {               
               var kelasutama = $(this).val();
               $('#nama_kelas').empty();
-              alert("masuk"+ kelasutama);  
               
               $('#nama_kelas').append(                
                 '<option value="">Pilih</option>'    
@@ -102,7 +102,6 @@ $(document).ready(function() {
             var datatest = $(this).val();
 
 
-            alert(datatest);
             if (datatest != null) {
 
                 var result = "";
