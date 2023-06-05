@@ -136,6 +136,8 @@ class PPDBTableController extends Controller
         '.implode(' ', $innerCondition).'
         WHERE
         ppdb.document_status = 7
+        AND
+        data_siswa_2.status_siswa is null
         AND      
         '.implode(' AND ', $whereCondition).' 
         ORDER BY ppdb.created_at DESC';
