@@ -474,7 +474,7 @@
                           <!--begin::Col-->
                           <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Nama Kepala Sekolah</label>
-                                <input value="{{ !empty($data_kelas->nama_kepala_sekolah) ? $data_kelas->nama_kepala_sekolah : '' }}" id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih kelas utama, unit dan wiayah sekolah" name="nama_kepala_sekolah" autocomplete="off" />
+                                <input value="{{ !empty($data_kelas->nama_kepala_sekolah) ? $data_kelas->nama_kepala_sekolah : '' }}" id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nama_kepala_sekolah" autocomplete="off" />
                           </div>
                          <!--end::Col-->
 
@@ -486,7 +486,7 @@
                                       <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
                                       <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
                                 </div>
-                                      <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
+                                      <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nama_wali_kelas" autocomplete="off" />
                                       <div class="informasiinfo">
                                         <div class="mt-3 mb-3" id='input-cont1'>
                                         </div>
@@ -543,9 +543,9 @@
                                         <div>
                                           <select id="" class="form-select form-select-solid" name="status_siswa">
                                           <option value="{{ !empty($data_kelas->status_siswa) ? $data_kelas->status_siswa : '' }}">{{ !empty($data_kelas->status_siswa) ? $data_kelas->status_siswa : 'Pilih Status' }}</option>
-                                          <option value="aktif">Aktif</option>
-                                          <option value="tidak aktif">Tidak Aktif</option>
-                                          <option value="alumni">Alumni</option>
+                                          <option value="Aktif">Aktif</option>
+                                          <option value="Tidak aktif">Tidak Aktif</option>
+                                          <option value="Alumni">Alumni</option>
                                           </select>
                                         </div>
                                         <!--end::Switch-->
@@ -558,11 +558,11 @@
                                         <div>
                                           <select id="" class="form-select form-select-solid" name="keterangan">
                                           <option value="{{ !empty($data_kelas->keterangan) ? $data_kelas->keterangan : '' }}">{{ !empty($data_kelas->keterangan) ? $data_kelas->keterangan : 'Pilih Keterangan' }}</option>
-                                          <option value="siswa avicenna">Siswa Avicenna</option>
-                                          <option value="lulus">Lulus</option>
-                                          <option value="pindah sekolah">Pindah Sekolah</option>
-                                          <option value="tidak naik kelas">Tidak Naik Kelas</option>
-                                          <option value="drop out">Drop Out</option>
+                                          <option value="Aktif">Aktif</option>
+                                          <option value="Lulus">Lulus</option>
+                                          <option value="Pindah sekolah">Pindah Sekolah</option>
+                                          <option value="Tidak naik kelas">Tidak Naik Kelas</option>
+                                          <option value="Drop Out">Drop Out</option>
                                           </select>
                                         </div>
                                         <!--end::Switch-->

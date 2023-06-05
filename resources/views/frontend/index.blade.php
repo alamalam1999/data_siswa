@@ -112,7 +112,7 @@ background: linear-gradient(
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-center" style="padding-bottom: 200px">
-                                            <p>© Copyright 2022. All Rights Reserved by Dept. Transformasi Digital BPS YPAP</p>
+                                            <p>© Copyright 2023. All Rights Reserved by Dept. Transformasi Digital BPS YPAP</p>
                                         </div>
                                     </div>
                                 </div>

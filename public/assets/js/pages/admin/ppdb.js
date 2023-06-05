@@ -187,64 +187,126 @@ FTX.Utils.documentReady(function() {
             targets: 3,
             orderable: false,
             render: function(data, type, row) {
+                if(row.sekolah !=null){
                 return `
                     <div>
                         <span class="text-hover-primary d-block fs-8">` + row.sekolah + `</span>
                     </div>
-                `;
+            `;
+        } else{
+
+            return `
+                    <div>
+                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.sekolah + `</span>
+                    </div>
+               
+            `;
+        }
+
             }
         }, {
             targets: 4,
             orderable: false,
             render: function(data, type, row) {
+                if(row.unit !=null){
                 return `
                 <div>
                 <span class="text-hover-primary d-block fs-8">` + row.unit + `</span>
             </div>
                 `;
+            } else{
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.unit + `</span>
+                        </div>
+                   
+                `;
+        }
             }
         }, {
             targets: 5,
             orderable: false,
             render: function(data, type, row) {
+                if(row.kelas_utama !=null){
                 return `
                 <div>
-                <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.kelas_utama+`</span>
+                <span class="text-hover-primary d-block fs-8">`+row.kelas_utama+`</span>
                 </div>
                 `;
+            } else{
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.kelas_utama + `</span>
+                        </div>
+                   
+                `;
+        }
             }
         },  {
             targets: 6,
             orderable: false,
             render: function(data, type, row) {
+                if(row.sub_kelas !=null){
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.sub_kelas+`</span>
+                        <span class="text-hover-primary d-block fs-8s">`+row.sub_kelas+`</span>
                     </div>
                 `;
+            } else{
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>
+                        </div>
+                   
+                `;
+        }
             }
         },  {
             targets: 7,
             orderable: false,
             render: function(data, type, row) {
+                if (row.status_siswa !=null){
                 console.log(row);               
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.status_siswa+`</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-success">`+row.status_siswa+`</span>
                     </div>
                 `;
+            } else{
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>
+                        </div>
+                   
+                `;
+        }
             }
         },  {
             targets: 8,
             orderable: false,
             render: function(data, type, row) {
+                if (row.keterangan !=null){
                 console.log(row);
                 return `
                      <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+row.keterangan+`</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-success">`+row.keterangan+`</span>
                     </div>
                 `;
+            } else{
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>
+                        </div>
+                   
+                `;
+        }
+
             }
         },  {
             targets: 9,
