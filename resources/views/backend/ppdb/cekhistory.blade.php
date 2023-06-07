@@ -15,7 +15,7 @@
                         <div class="card-header bg-light">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder text-dark">BIODATA SISWA</span><span style="color:#5a595a">diisi pada saat pendaftaraan</span>
+                                <span class="card-label fw-bolder text-dark">HISTORY SISWA</span><span style="color:#5a595a">History perpindahan kelas siswa</span>
                             </h3>
                             <!--end::Title-->
                         </div>
@@ -32,16 +32,16 @@
                                     <th scope="col">Kode Registrasi</th>
                                     <th scope="col">Unit</th>
                                     <th scope="col">Sekolah</th>
-                                    <th scope="col">kelas utama</th>
-                                    <th scope="col">sub kelas</th>
-                                    <th scope="col">nama kepala sekolah</th>
-                                    <th scope="col">nama wali kelas</th>
-                                    <th scope="col">nama wali kelas 2</th>
-                                    <th scope="col">nisn</th>
-                                    <th scope="col">nik siswa</th>
-                                    <th scope="col">status siswa</th>
-                                    <th scope="col">keterangan</th>
-                                    <th scope="col">show table</th>
+                                    <th scope="col">Kelas Utama</th>
+                                    <th scope="col">Sub Kelas</th>
+                                    <th scope="col">Kepala Sekolah</th>
+                                    <th scope="col">Wali Kelas</th>
+                                    <th scope="col">Wali Kelas 2</th>
+                                    <th scope="col">Nisn</th>
+                                    <th scope="col">Nik Siswa</th>
+                                    <th scope="col">Status Siswa</th>
+                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">Show Table</th>
                                     <th scope="col">Action</th>
                              
                                   </tr>

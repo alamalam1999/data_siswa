@@ -411,7 +411,7 @@
                        <form action="{{ route('admin.ppdb.addclasses') }}" method="POST" >
                         <?php echo e(csrf_field()); ?>
                         <!--begin::Input group-->
-                        <div class="row fv-row mb-10">
+                        <div class="row fv-row mb-5">
                           <input type="hidden" name="id" value="<?php echo e($ppdb->id); ?>" />
                           <!--begin::Col-->
                             <div class="col-xl-6">
@@ -448,7 +448,7 @@
                          </div>
 
                       <!--begin::Input group-->
-                          <div class="row fv-row mb-10">
+                          <div class="row fv-row mb-5">
                             <!--begin::Col-->
                                <div class="col-xl-6">
                                    <label class="form-label fw-bolder text-dark fs-6">Kelas Utama</label>
@@ -470,7 +470,7 @@
                      
 
                           <!--begin::Input group-->
-                          <div class="row fv-row mb-10">
+                          <div class="row fv-row mb-5">
                           <!--begin::Col-->
                           <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Nama Kepala Sekolah</label>
@@ -517,15 +517,30 @@
                          </div>
                         
                               <!--begin::Input group-->
-                              <div class="row fv-row mb-9">
+                              <div class="row fv-row mb-5">
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
-                                      <label class="form-label fw-bolder text-dark fs-6">NISN</label>
+                                      <label class="form-label fw-bolder text-dark fs-6">Nomor Induk Nasional</label>
                                       <input value="{{ !empty($data_siswa->nisn) ? $data_siswa->nisn : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nisn" autocomplete="off">
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                  <div class="col-xl-6">
+                                        <label class="form-label fw-bolder text-dark fs-6">Nomor Induk Sekolah</label>
+                                        <input value="{{ !empty($data_kelas->niss) ? $data_kelas->niss : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nik_siswa" autocomplete="off" />
+                                  </div>
+                                  <!--end::Col-->
+                              </div>
 
-
+                              <!--begin::Input group-->
+                              <div class="row fv-row mb-5">
+                                <!--begin::Col-->
+                                  <div class="col-xl-6">
+                                      <label class="form-label fw-bolder text-dark fs-6">No. Ijazah</label>
+                                      <input value="{{ !empty($data_siswa->no_seri_ijazah) ? $data_siswa->no_seri_ijazah : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nisn" autocomplete="off">
+                                      <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                   <div class="col-xl-6">
@@ -534,6 +549,8 @@
                                   </div>
                                   <!--end::Col-->
                               </div>
+
+
                                       <!--begin::Input group-->
                                       <div class="row fv-row mb-5">
                                         <!--begin::Col-->
