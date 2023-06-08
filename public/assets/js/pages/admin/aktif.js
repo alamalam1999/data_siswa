@@ -149,7 +149,7 @@ FTX.Utils.documentReady(function() {
                 $(row).addClass("bg-white");
                 return `
                 <div>
-                    <span class="text-hover-primary d-block fw-bolder fs-8">` + row.document_no + `</span>
+                    <span class="text d-block fw-bolder fs-8">` + row.document_no + `</span>
                 </div>`;
             }
         }, {
@@ -158,7 +158,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                    <span class="text-dark fw-bolder fs-8 text-hover-primary d-block">` + row.fullname + `</span>
+                    <span class="text-dark fw-bolder fs-8 text d-block">` + row.fullname + `</span>
                 </div>
                    
                 `;
@@ -170,14 +170,14 @@ FTX.Utils.documentReady(function() {
             if(row.nisn != null){
                 return `
                 <div>
-                    <span class="text-red fw-bolder fs-8 text-hover-danger d-block">`+ row.nisn + `</span>
+                    <span class="text-dark fw-bolder fs-8 text d-block">`+ row.nisn + `</span>
                 </div>
         `;
             } else{
 
             return `
                     <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.nisn + `</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.nisn + `</span>
                     </div>
                
             `;
@@ -190,14 +190,14 @@ FTX.Utils.documentReady(function() {
                 if(row.sekolah !=null){
                 return `
                     <div>
-                        <span class="text-hover-primary d-block fs-8">` + row.sekolah + `</span>
+                        <span class="text d-block fs-8">` + row.sekolah + `</span>
                     </div>
             `;
         } else{
 
             return `
                     <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.sekolah + `</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sekolah + `</span>
                     </div>
                
             `;
@@ -211,14 +211,14 @@ FTX.Utils.documentReady(function() {
                 if(row.unit !=null){
                 return `
                 <div>
-                <span class="text-hover-primary d-block fs-8">` + row.unit + `</span>
+                <span class="text d-block fs-8">` + row.unit + `</span>
             </div>
                 `;
             } else{
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.unit + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.unit + `</span>
                         </div>
                    
                 `;
@@ -231,14 +231,14 @@ FTX.Utils.documentReady(function() {
                 if(row.kelas_utama !=null){
                 return `
                 <div>
-                <span class="text-hover-primary d-block fs-8">`+row.kelas_utama+`</span>
+                <span class="text d-block fs-8">`+row.kelas_utama+`</span>
                 </div>
                 `;
             } else{
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.kelas_utama + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.kelas_utama + `</span>
                         </div>
                    
                 `;
@@ -252,14 +252,14 @@ FTX.Utils.documentReady(function() {
                 console.log(row);
                 return `
                      <div>
-                        <span class="text-hover-primary d-block fs-8s">`+row.sub_kelas+`</span>
+                        <span class="text d-block fs-8s">`+row.sub_kelas+`</span>
                     </div>
                 `;
             } else{
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>
                         </div>
                    
                 `;
@@ -280,7 +280,7 @@ FTX.Utils.documentReady(function() {
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>
                         </div>
                    
                 `;
@@ -301,7 +301,7 @@ FTX.Utils.documentReady(function() {
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-info-status ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>
                         </div>
                    
                 `;

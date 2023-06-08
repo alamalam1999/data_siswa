@@ -517,7 +517,7 @@
                          </div>
                         
                               <!--begin::Input group-->
-                              <div class="row fv-row mb-5">
+                              <div class="row fv-row mb-3">
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">Nomor Induk Nasional</label>
@@ -534,7 +534,7 @@
                               </div>
 
                               <!--begin::Input group-->
-                              <div class="row fv-row mb-5">
+                              <div class="row fv-row mb-3">
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">No. Ijazah</label>
