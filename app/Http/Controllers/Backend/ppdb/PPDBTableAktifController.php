@@ -125,7 +125,7 @@ class PPDBTableAktifController extends Controller
             data_siswa_2.unit,
             data_siswa_2.kelas_utama,
             data_siswa_2.sub_kelas,
-            data_siswa_2.status_siswa,
+            data_siswa_2.status_siswas,
             data_siswa_2.keterangan
         FROM ppdb
         INNER JOIN schools ON ppdb.school_site = schools.school_code
