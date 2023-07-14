@@ -120,7 +120,7 @@
                         <!--begin::Col-->
                         <div class="col-xl-6">
                               <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 280px">NIS</label>
-                              <input  class="form-control form-control-lg form-control-solid" type="text" value="{{ $kode_siswa }}"  name="nama_kepala_sekolah" autocomplete="off">
+                              <input  class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_search->nis }}"  name="nama_kepala_sekolah" autocomplete="off">
                         </div>
                        <!--end::Col-->
                        <!--begin::Col-->

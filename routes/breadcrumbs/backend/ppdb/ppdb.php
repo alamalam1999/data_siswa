@@ -14,6 +14,11 @@ Breadcrumbs::for('admin.ppdb.edit', function ($trail, $id) {
     $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.edit', $id));
 });
 
+Breadcrumbs::for('admin.ppdb.editaktif', function ($trail, $id) {
+    $trail->parent('admin.ppdb.index');
+    $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.editaktif', $id));
+});
+
 Breadcrumbs::for('admin.ppdb.cekhistory', function ($trail, $id) {
     
     $trail->parent('admin.ppdb.index');

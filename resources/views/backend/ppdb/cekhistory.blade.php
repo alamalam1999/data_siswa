@@ -5,13 +5,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-   
-
-        <div class="app-wrapper flex-column flex-row-fluid">
-            <div class="row mb-4">
-              
-                <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
-                    <div class="card border shadow-sm">
+            <div class="card border shadow-sm">
                         <div class="card-header bg-light">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
@@ -19,82 +13,62 @@
                             </h3>
                             <!--end::Title-->
                         </div>
-                <div class="card-body">
-                    <div class="w-100">  
-                    <div class="card-body" >  
-
-                        <div class="card-body" >
-
-                            <table id="myTable" class="display table text-center">
-                                <thead class="bg-secondary text-white">
-                                  <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Kode Registrasi</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Sekolah</th>
-                                    <th scope="col">Kelas Utama</th>
-                                    <th scope="col">Sub Kelas</th>
-                                    <th scope="col">Kepala Sekolah</th>
-                                    <th scope="col">Wali Kelas</th>
-                                    <th scope="col">Wali Kelas 2</th>
-                                    <th scope="col">Nisn</th>
-                                    <th scope="col">Nik Siswa</th>
-                                    <th scope="col">Status Siswa</th>
-                                    <th scope="col">Keterangan</th>
-                                    <th scope="col">Show Table</th>
-                                    <th scope="col">Action</th>
-                             
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                   <?php $no = 1 ?>
-                                    @foreach($data_kelas_for as $item) 
-                                  <tr>
-                                    <form action="{{ route('admin.ppdb.showclasses') }}" method="POST">
-                                        <?php echo e(csrf_field()); ?>
-                                        <th scope="row">{{ $no++ }}</th>
-                                        <td><input type="text" name="kode_registrasi" size="20" value="{{ $item->kode_registrasi}}"></td>
-                                        <td><input type="text" name="unit" size="4" value="{{ $item->unit }}"></td>
-                                        <td><input type="text" name="sekolah" size="6" value="{{ $item->sekolah }}"></td>
-                                        <td><input type="text" name="kelas_utama" size="4" value="{{ $item->kelas_utama }}"></td>
-                                        <td><input type="text" name="sub_kelas" size="4" value="{{ $item->sub_kelas }}"></td>
-                                        <td><input type="text" name="nama_kepala_sekolah" size="20" value="{{ $item->nama_kepala_sekolah }}"></td>
-                                        <td><input type="text" name="nama_wali_kelas" size="20" value="{{ $item->nama_wali_kelas }}"></td>
-                                        <td><input type="text" name="nama_wali_kelas_2" size="20" value="{{ $item->nama_wali_kelas_2 }}"></td>
-                                        <td><input type="text" name="nisn" size="4" value="{{ $item->nisn }}"></td>
-                                        <td><input type="text" name="nik_siswa" size="4" value="{{ $item->nik_siswa }}"></td>
-                                        <td><input type="text" name="status_siswa" size="4" value="{{ $item->status_siswa }}"></td>
-                                        <td><input type="text" name="keterangan" size="4" value="{{ $item->keterangan }}"></td>
-                                        <td>
-                                            <input type="hidden" name="id_classes" value="{{ $item->id }}">
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" name="aktivasi" id="flexSwitchCheckDefault" {{  $item->show_table == 1 ? "checked" : '' }}>
-                                                </div>
-                                        </td>
-                                        <td><Button class="submit">Show Up</Button></td>
-                                    </form>
-                                  </tr>
-                                  @endforeach
-                                 
-                                </tbody>
-                              </table>
-
-                           
-                        </div>
-                    
-                    </div>
-
-
-
-                    </div>
-                </div>
-              </div>
-            </div><!-- row -->
-            
-        </div>
-      
-
-        
+                                    <div class="card-body" >
+                                        <table id="myTable" class="table table-rounded border gy-2 gs-4 align-middle table-row-dashed fs-7 gy-5 dataTable no-footer">
+                                            <thead class="bg-secondary text-white">
+                                            <tr class="text-start text-gray-400 fw-bolder fs-9 text-uppercase gs-0">
+                                                <th scope="col">No</th>
+                                                <th scope="col">Kode Registrasi</th>
+                                                <th scope="col">Unit</th>
+                                                <th scope="col">Sekolah</th>
+                                                <th scope="col">Kelas Utama</th>
+                                                <th scope="col">Sub Kelas</th>
+                                                <th scope="col">Kepala Sekolah</th>
+                                                <th scope="col">Wali Kelas</th>
+                                                <th scope="col">Wali Kelas 2</th>
+                                                <th scope="col">Nisn</th>
+                                                <th scope="col">Nis</th>
+                                                <th scope="col">Nik Siswa</th>
+                                                <th scope="col">Status Siswa</th>
+                                                <th scope="col">Keterangan</th>
+                                                <th scope="col">Show Table</th>
+                                                <th scope="col">Action</th>                    
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php $no = 1 ?>
+                                                @foreach($data_kelas_for as $item) 
+                                            <tr>
+                                                <form action="{{ route('admin.ppdb.showclasses') }}" method="POST">
+                                                    <?php echo e(csrf_field()); ?>
+                                                    <td scope="row">{{ $no++ }}</td>
+                                                    <td><input type="text" name="kode_registrasi" size="20" value="{{ $item->kode_registrasi}}"></td>
+                                                    <td><input type="text" name="unit" size="4" value="{{ $item->unit }}"></td>
+                                                    <td><input type="text" name="sekolah" size="6" value="{{ $item->sekolah }}"></td>
+                                                    <td><input type="text" name="kelas_utama" size="4" value="{{ $item->kelas_utama }}"></td>
+                                                    <td><input type="text" name="sub_kelas" size="4" value="{{ $item->sub_kelas }}"></td>
+                                                    <td><input type="text" name="nama_kepala_sekolah" size="20" value="{{ $item->nama_kepala_sekolah }}"></td>
+                                                    <td><input type="text" name="nama_wali_kelas" size="20" value="{{ $item->nama_wali_kelas }}"></td>
+                                                    <td><input type="text" name="nama_wali_kelas_2" size="20" value="{{ $item->nama_wali_kelas_2 }}"></td>
+                                                    <td><input type="text" name="nisn" size="4" value="{{ $item->nisn }}"></td>
+                                                    <td><input type="text" name="nis" size="4" value="{{ $item->nis }}"></td>
+                                                    <td><input type="text" name="nik_siswa" size="4" value="{{ $item->nik_siswa }}"></td>
+                                                    <td><input type="text" name="status_siswa" size="4" value="{{ $item->status_siswa }}"></td>
+                                                    <td><input type="text" name="keterangan" size="4" value="{{ $item->keterangan }}"></td>
+                                                    <td>
+                                                        <input type="hidden" name="id_classes" value="{{ $item->id }}">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" name="aktivasi" id="flexSwitchCheckDefault" {{  $item->show_table == 1 ? "checked" : '' }}>
+                                                            </div>
+                                                    </td>
+                                                    <td><Button class="submit">Show Up</Button></td>
+                                                </form>
+                                            </tr>
+                                            @endforeach                                     
+                                            </tbody>
+                                        </table>                              
+                                    </div>                             
+              </div>     
 
    
 <?php $__env->stopSection(); ?>

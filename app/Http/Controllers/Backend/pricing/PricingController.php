@@ -34,6 +34,8 @@ use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use Symfony\Component\VarDumper\Cloner\Data;
 use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
+use App\Imports\UserImport;
+use App\Models\Users_system;
 
 class PricingController extends Controller
 {
@@ -283,7 +285,7 @@ class PricingController extends Controller
 
             foreach ($ppdb_siswa[0] as $ppdb_siswas) {
                 array_push($ppdb_insert, [        
-                        'id'                         => $ppdb_siswas['ppdb_id'],  
+                        'ppdb_id'                    => $ppdb_siswas['ppdb_id'],  
                         'registration_schedule_id'   => $ppdb_siswas['registration_schedule_id'],      
                         'document_no'                => $ppdb_siswas['document_no'],
                         'document_status'            => $ppdb_siswas['document_status'],
@@ -584,6 +586,48 @@ class PricingController extends Controller
     
                 Data_siswa3::insert($data_siswa3_insert);
 
+                //USERS
+                $users_systems = [];
+                $users_systems = Excel::toArray(new UserImport, $request->file('file_pricing'));
+
+                $users_system_insert = [];
+
+                foreach ($users_systems[6] as $users_system) {
+                    array_push($users_system_insert, [
+                        'id'                                  => $users_system['id'],
+                        'user_id'                             => $users_system['user_id'],
+                        'uuid'                                => $users_system['uuid'],
+                        'first_name'                          => $users_system['first_name'],
+                        'last_name'                           => $users_system['last_name'],
+                        'email'                               => $users_system['email'],
+                        'phone'                               => $users_system['phone'],  
+                        'avatar_type'                         => $users_system['avatar_type'],
+                        'avatar_location'                     => $users_system['avatar_location'],
+                        'password'                            => $users_system['password'],
+                        'password_changed_at'                 => $users_system['password_changed_at'],
+                        'active'                              => $users_system['active'],
+                        'confirmation_code'                   => $users_system['confirmation_code'],
+                        'confirmed'                           => $users_system['confirmed'],
+                        'timezone'                            => $users_system['timezone'],
+                        'last_login_at'                       => $users_system['last_login_at'],
+                        'last_login_ip'                       => $users_system['last_login_ip'],
+                        'to_be_logged_out'                    => $users_system['to_be_logged_out'],
+                        'status'                              => $users_system['status'],
+                        'created_by'                          => $users_system['created_by'],
+                        'updated_by'                          => $users_system['updated_by'],
+                        'is_term_accept'                      => $users_system['is_term_accept'],
+                        'remember_token'                      => $users_system['remember_token'],
+                        'created_at'                          => $users_system['created_at'],
+                        'updated_at'                          => $users_system['updated_at'],
+                        'deleted_at'                          => $users_system['deleted_at']                      
+                    ]);
+                }
+
+                debug($users_system_insert);
+    
+                Users_system::query()->truncate();
+    
+                Users_system::insert($users_system_insert);
 
                 //DATASISWA_4
                 $data_siswa4 = [];      

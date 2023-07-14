@@ -529,7 +529,7 @@
                                     <!--begin::Col-->
                                   <div class="col-xl-6">
                                         <label class="form-label fw-bolder text-dark fs-6">Nomor Induk Sekolah</label>
-                                        <input value="{{ !empty($data_kelas->nis) ? $data_kelas->nis : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nis" autocomplete="off" />
+                                        <input value="{{ !empty($ppdb_system->nis) ? $ppdb_system->nis : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nis" autocomplete="off" />
                                   </div>
                                   <!--end::Col-->
                               </div>
@@ -1050,7 +1050,7 @@
                                 <?php echo e(csrf_field()); ?>
 
                                 <input type="hidden" name="id" value="<?php echo e($ppdb->id); ?>" />
-                               
+                                
                                 <div class="w-100">
   
                                   <div class="row fv-row mb-7 fv-plugins-icon-container p-5 border">
@@ -1647,16 +1647,31 @@
                   <div class="flex-lg-row-fluid mb-5 mb-xl-0  me-xl-10">
                       <!--begin::Invoice 2 content-->
                       <div class="mt-n1">
-                          <!--begin::Wrapper-->
+                        <!--begin::Wrapper-->
 
-                          <!--end::Wrapper-->
+                        <!--end::Wrapper-->
 
-                          <div class="m-0">
-                              <a href="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_up_spp->image_confirmation); ?>" target="_blank">
-                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_up_spp->image_confirmation); ?>" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
-                              </a>
-                          </div>
-                      </div>
+                        <div class="m-0">
+                            <a href="{{ asset($payment_up_spp->image_confirmation) }}" target="_blank">
+                                <img id="payment-image_confirmation" src="{{ asset($payment_up_spp->image_confirmation) }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                            </a>
+                        </div>
+                        @if($fee_up_pengajuan != '')
+                        <div class="m-0">
+                            <a href="{{ asset($fee_up_pengajuan->image_confirmation) }}" target="_blank">
+                                <img id="payment-image_confirmation" src="{{ asset($fee_up_pengajuan->image_confirmation) }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                            </a>
+                        </div>
+                        @endif
+
+                        @if($diskon_pengajuan != '')
+                        <div class="m-0">
+                            <a href="{{ asset($diskon_pengajuan->image_confirmation) }}" target="_blank">
+                                <img id="payment-image_confirmation" src="{{ asset($diskon_pengajuan->image_confirmation) }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                            </a>
+                        </div>
+                        @endif
+                    </div>
                       <!--end::Invoice 2 content-->
                   </div>
 
@@ -1683,12 +1698,19 @@
                               }
                           ?>
 
-                          <div class="mb-3">
-                              <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal <?php echo e($up); ?>
-
-                              </div>
-                              <div class="fw-bold fs-6 text-gray-800">Rp. <?php echo number_format($fee_up->cost,0,',','.'); ?></div>
-                          </div>
+                            @if($fee_up_pengajuan == '')
+                            <div class="mb-3">
+                                <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal {{ $up }}
+                                </div>
+                                <div class="fw-bold fs-6 text-gray-800">@currency($fee_up->cost)</div>
+                            </div>
+                            @else 
+                            <div class="mb-3">
+                                <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal Pengajuan
+                                </div>
+                                <div class="fw-bold fs-6 text-gray-800">@currency($fee_up_pengajuan->cost)</div>
+                            </div>
+                            @endif
 
                           <div class="mb-3">
                               <div class="fw-semibold text-gray-600 fs-7">Uang SPP <?php echo e($spp); ?>
@@ -1696,6 +1718,34 @@
                               </div>
                               <div class="fw-bold fs-6 text-gray-800">Rp. <?php echo number_format($fee_spp->cost,0,',','.'); ?></div>
                           </div>
+
+                          @if ($diskon_pengajuan != '')
+                          <div class="mb-3">
+                              <div class="fw-semibold text-gray-600 fs-7">Pengajuan Diskon
+                              </div>
+                              <div class="fw-bold fs-6 text-gray-800">@currency($diskon_pengajuan->cost)</div>
+                          </div>
+                          @endif
+                        
+                          <h6 class="mt-10 mb-5 fw-bolder text-gray-800 text-hover-primary border-bottom py-3">
+                              INFORMASI
+                              DETAIL
+                          </h6>
+                        
+                        <div>
+                            <div>Bukti Upload Transfer</div>
+                            <div class="fw-bold fs-6 text-gray-800" id="bukti_upload_transfer"> <a href="{{ asset($payment_up_spp->image_confirmation) }}" target="_blank">view</a> </div>
+                            
+                            @if($diskon_pengajuan != '')
+                            <div>Bukti Upload Surat Persetujuan Diskon</div>
+                            <div class="fw-bold fs-6 text-gray-800" id="bukti_upload_surat_pengajuan_diskon"> <a href="{{ asset($diskon_pengajuan->image_confirmation) }}" target="_blank">view</a> </div>
+                            @endif
+
+                            @if($fee_up_pengajuan != '')
+                            <div>Bukti Upload Surat Persetujuan Pembayaran UP Diluar Nominal</div>
+                            <div class="fw-bold fs-6 text-gray-800" id="bukti_upload_surat_pengajuan_cicilan"> <a href="{{ asset($fee_up_pengajuan->image_confirmation) }}" target="_blank">view</a> </div>
+                            @endif
+                        </div>
 
                           <h6 class="mt-10 mb-5 fw-bolder text-gray-800 text-hover-primary border-bottom py-3">
                               INFORMASI

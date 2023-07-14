@@ -79,7 +79,7 @@ background: linear-gradient(
 
                                 <div class="form-group">
                                     <label>
-                                        <b>Nomor Induk Nasional (NISN)</b>
+                                        <b>Nomor Induk Sekolah Nasional (NISN)</b>
                                     </label>
                                     <input name="nisn" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan NISN Siswa" type="text" value="" autocomplete="false" required>
                                 </div>
@@ -88,7 +88,7 @@ background: linear-gradient(
                                     <label>
                                         <b>Nomor Induk Sekolah (NIS)</b>
                                     </label>
-                                    <input name="kode_siswa" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan NIS Siswa" type="text" value="" autocomplete="false" required>
+                                    <input name="nis" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan NIS Siswa" type="text" value="" autocomplete="false" required>
                                 </div>
 
                                 <!-- footer -->

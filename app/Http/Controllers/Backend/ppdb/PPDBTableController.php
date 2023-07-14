@@ -34,7 +34,7 @@ class PPDBTableController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $ppdb = PPDB::where('id', '>=', 0);
+        $ppdb = PPDB::where('ppdb_id', '>=', 0);
 
         $ppdb = $ppdb->orderBy('created_at', 'desc')->get();
 
@@ -131,8 +131,8 @@ class PPDBTableController extends Controller
         INNER JOIN schools ON ppdb.school_site = schools.school_code
         INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
-        INNER JOIN data_siswa ON data_siswa.ppdb_id = ppdb.id
-        INNER JOIN data_siswa_2 ON data_siswa_2.ppdb_id = ppdb.id
+        INNER JOIN data_siswa ON data_siswa.ppdb_id = ppdb.ppdb_id
+        INNER JOIN data_siswa_2 ON data_siswa_2.ppdb_id = ppdb.ppdb_id
         '.implode(' ', $innerCondition).'
         WHERE
         ppdb.document_status = 7
