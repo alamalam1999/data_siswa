@@ -20,6 +20,10 @@
 $(document).ready(function() {
 
       fetchstudent();
+
+      setInterval(function(){ 
+        fetchstudent();
+       }, 1000);
   
       function fetchstudent()
       {

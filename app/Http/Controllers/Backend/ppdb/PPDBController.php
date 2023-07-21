@@ -25,6 +25,7 @@ use App\Models\Payment_system;
 use App\Models\ReRegistration;
 use App\Models\datasiswa_system;
 use App\Models\Data_siswa_system;
+use Illuminate\Support\Facades\DB;
 use App\Models\Data_siswa_system_2;
 use App\Models\Data_siswa_system_3;
 use App\Models\Data_siswa_system_4;
@@ -38,6 +39,8 @@ use App\Models\Ppdb_interviews_system;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
+use App\Models\Register;
+use Illuminate\Support\Facades\Redirect;
 
 class PPDBController extends Controller
 {
@@ -626,6 +629,10 @@ class PPDBController extends Controller
      */
     public function addClasses(PPDBPermissionRequest $request) {
 
+        $users_check = PPDB::where('ppdb_id', $request->ppdb_id)->first();
+
+        $users = Users::where('user_id', $users_check->id_user)->first();
+        if($users == null && $users == "" && empty($users)) {
      
                 $ppdb_system = PPDB_system::where('ppdb_id', $request->ppdb_id)->first();
                 $ppdb = PPDB::where('ppdb_id', $request->ppdb_id)->first();
@@ -1087,7 +1094,7 @@ class PPDBController extends Controller
 
             }
                   
-                $users = Users::where('user_id', $ppdb->id_user)->first();
+                
 
                 if ( $users == null && $users == "" && empty($users)) {
 
@@ -1150,6 +1157,22 @@ class PPDBController extends Controller
                 debug($data_siswa);
 
                 return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);
+
+        }else {
+            Users_system::where('user_id',$users_check->id_user)->delete();
+            PPDB::where('ppdb_id',$users_check->ppdb_id)->delete();
+            PPDBInterview::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Payment::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Register::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Data_siswa::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Data_siswa2::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Data_siswa3::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Data_siswa4::where('ppdb_id',$users_check->ppdb_id)->delete();
+            //return redirect()->back()->with(['flash_danger' => 'Data Sudah tersedia di DATA SISWA']);
+            // return Redirect::to($request->request->get('http_referrer'));
+            return new RedirectResponse(route('admin.ppdb.index'), ['flash_warning' => 'Data Sudah Pernah di Input']);
+
+        }
 
     }
 
@@ -1630,7 +1653,7 @@ class PPDBController extends Controller
             'no_seri_ijazah'                => $request->no_seri_ijazah
          ]);
 
-        $data_siswa2 = Data_siswa2::where('ppdb_id', $ppdb->ppdb_id)
+        Data_siswa_system_2::where('ppdb_id', $ppdb->ppdb_id)
         ->update([
             'kode_registrasi'               => $ppdb->document_no,
             'unit'                          => $request->unit,
@@ -1667,6 +1690,29 @@ class PPDBController extends Controller
         return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);
 
 }
+
+        public function indextest() {
+            $ppdb = PPDB_system::all();
+
+            $SQLQuery =  "SELECT registration_schedules.description AS schedule, 
+            schools.school_name AS school, ppdb_system.fullname, data_siswa_system.nisn, 
+            data_siswa_system_2.sekolah, data_siswa_system_2.unit, data_siswa_system_2.kelas_utama, 
+            data_siswa_system_2.sub_kelas, data_siswa_system_2.status_siswa, data_siswa_system_2.keterangan 
+            FROM ppdb_system 
+            INNER JOIN schools ON ppdb_system.school_site = schools.school_code 
+            INNER JOIN registration_schedules ON ppdb_system.registration_schedule_id = registration_schedules.id 
+            INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id 
+            INNER JOIN data_siswa_system ON data_siswa_system.ppdb_id = ppdb_system.ppdb_id 
+            INNER JOIN data_siswa_system_2 ON data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id 
+            WHERE ppdb_system.document_status = 7 AND data_siswa_system_2.status_siswa = 'aktif'
+            AND academic_years.id = 1 AND schools.school_code IN ('JGK','CNR','PML') 
+            AND ppdb_system.stage IN ('TK','TK','TK','TK','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','KB','KB','KB','KB') 
+            ORDER BY ppdb_system.created_at DESC";
+
+            $ppdb = DB::select($SQLQuery);
+
+            return response()->json(['data' => $ppdb]);
+        }
 }
 
 

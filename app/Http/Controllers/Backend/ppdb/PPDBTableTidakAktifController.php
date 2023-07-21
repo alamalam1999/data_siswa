@@ -34,7 +34,7 @@ class PPDBTableTidakAktifController extends Controller
      */
     public function __Invoke_tidak_aktif(Request $request)
     {
-        $ppdb = PPDB::where('id', '>=', 0);
+        $ppdb = PPDB::where('ppdb_id', '>=', 0);
 
         $ppdb = $ppdb->orderBy('created_at', 'desc')->get();
 
@@ -74,7 +74,7 @@ class PPDBTableTidakAktifController extends Controller
         }
 
         if ($stage != 'ALL') {
-            array_push($whereCondition, "ppdb.stage = '".$stage."'");
+            array_push($whereCondition, "ppdb_system.stage = '".$stage."'");
         } else {
             $stages = siteAccess();
             $stageCodes = [];
@@ -83,11 +83,11 @@ class PPDBTableTidakAktifController extends Controller
                     array_push($stageCodes, $item->enum_value);
                 }
             }
-            array_push($whereCondition, "ppdb.stage IN ('".implode("','", $stageCodes)."')");
+            array_push($whereCondition, "ppdb_system.stage IN ('".implode("','", $stageCodes)."')");
         }
     
         if (!empty($search_general) && $search_general != '') {
-            array_push($whereCondition, "(ppdb.document_no LIKE '%".$search_general."%' OR ppdb.fullname LIKE '%".$search_general."%')");
+            array_push($whereCondition, "(ppdb_system.document_no LIKE '%".$search_general."%' OR ppdb_system.fullname LIKE '%".$search_general."%')");
         }
 
         if ($search_status != '' && $search_status != null ) {
@@ -96,51 +96,51 @@ class PPDBTableTidakAktifController extends Controller
 
         if ($diskon != '' && !empty($diskon)) {
             if($diskon == 'all check') {
-                array_push($whereCondition, "ppdb.medco_employee != ''");
-                array_push($whereCondition, "ppdb.medco_employee_file != ''");
+                array_push($whereCondition, "ppdb_system.medco_employee != ''");
+                array_push($whereCondition, "ppdb_system.medco_employee_file != ''");
             } else if($diskon == 'Sudah Validasi') {
-                array_push($whereCondition, "ppdb.ppdb_discount != ''");
+                array_push($whereCondition, "ppdb_system.ppdb_discount != ''");
             } else if($diskon == 'Belum Validasi') {
-                //array_push($whereCondition, "ppdb.ppdb_discount = ''");
-                array_push($whereCondition, "(ppdb.ppdb_discount is null or ppdb.ppdb_discount = '')");
-                array_push($whereCondition, "ppdb.medco_employee != ''");   
-                array_push($whereCondition, "ppdb.medco_employee_file != ''");   
+                //array_push($whereCondition, "ppdb_system.ppdb_discount = ''");
+                array_push($whereCondition, "(ppdb_system.ppdb_discount is null or ppdb_system.ppdb_discount = '')");
+                array_push($whereCondition, "ppdb_system.medco_employee != ''");   
+                array_push($whereCondition, "ppdb_system.medco_employee_file != ''");   
             }
         }
 
         if($status_siswa != '' && !empty($status_siswa)) {
             if ($status_siswa == 'siswa dalam') {
-                array_push($whereCondition, "ppdb.status_siswa = 'siswa dalam'");
+                array_push($whereCondition, "ppdb_system.status_siswa = 'siswa dalam'");
             } else if ($status_siswa == 'siswa luar') {
-                array_push($whereCondition, "ppdb.status_siswa = 'siswa luar'");
+                array_push($whereCondition, "ppdb_system.status_siswa = 'siswa luar'");
             }
         }
 
         $SQLQuery = 'SELECT
             registration_schedules.description AS schedule,
             schools.school_name AS school,
-            ppdb.*,
-            data_siswa.nisn,
-            data_siswa_2.sekolah,
-            data_siswa_2.unit,
-            data_siswa_2.kelas_utama,
-            data_siswa_2.sub_kelas,
-            data_siswa_2.status_siswa,
-            data_siswa_2.keterangan
-        FROM ppdb
-        INNER JOIN schools ON ppdb.school_site = schools.school_code
-        INNER JOIN registration_schedules ON ppdb.registration_schedule_id = registration_schedules.id
+            ppdb_system.*,
+            data_siswa_system.nisn,
+            data_siswa_system_2.sekolah,
+            data_siswa_system_2.unit,
+            data_siswa_system_2.kelas_utama,
+            data_siswa_system_2.sub_kelas,
+            data_siswa_system_2.status_siswa,
+            data_siswa_system_2.keterangan
+        FROM ppdb_system
+        INNER JOIN schools ON ppdb_system.school_site = schools.school_code
+        INNER JOIN registration_schedules ON ppdb_system.registration_schedule_id = registration_schedules.id
         INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
-        INNER JOIN data_siswa ON data_siswa.ppdb_id = ppdb.id
-        INNER JOIN data_siswa_2 ON data_siswa_2.ppdb_id = ppdb.id
+        INNER JOIN data_siswa_system ON data_siswa_system.ppdb_id = ppdb_system.ppdb_id
+        INNER JOIN data_siswa_system_2 ON data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id
         '.implode(' ', $innerCondition).'
         WHERE
-        ppdb.document_status = 7
+        ppdb_system.document_status = 7
         AND
-        data_siswa_2.status_siswa = "tidak aktif"
+        data_siswa_system_2.status_siswa = "tidak aktif"
         AND      
         '.implode(' AND ', $whereCondition).' 
-        ORDER BY ppdb.created_at DESC';
+        ORDER BY ppdb_system.created_at DESC';
 
         debug($SQLQuery);
 

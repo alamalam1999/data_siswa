@@ -3,7 +3,7 @@
         'name' => 'ftx/laravel-adminpanel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '39789ce09061dfde6f9bac5320d882b5930779ce',
+        'reference' => '4a52b5303afed64bcbc253730fb156f3ba42ee23',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -529,7 +529,7 @@
         'ftx/laravel-adminpanel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '39789ce09061dfde6f9bac5320d882b5930779ce',
+            'reference' => '4a52b5303afed64bcbc253730fb156f3ba42ee23',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1465,8 +1465,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0',
-                1 => '1.0.0',
+                0 => '1.0.0',
+                1 => '1.0',
             ),
         ),
         'psr/simple-cache' => array(

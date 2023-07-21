@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="card">
+{{-- <div class="card">
     <div class="card-header pt-7 pb-7">
 
         <div class="row">
@@ -59,26 +59,37 @@
             </div>
           </div>      
     </div>
-</div>
+</div> --}}
 <div id="page-formulir">
     
     <div class="card">
         <form action="{{ route('admin.pricing.upload') }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="card-header pt-7">
-                <!--begin::Title-->
-                <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold text-gray-800">Data Siswa</span>
-                    <span class="text-gray-400 mt-1 fw-semibold fs-6">List Data Pembayaran</span>
-                </h3>
-                <!--end::Title-->
+            <div class="card-header">
                 <!--begin::Toolbar-->
                 <div class="card-toolbar">
                     <a href="#" class="btn btn-light-success"><i class="bi bi-file-earmark-spreadsheet fs-4 me-2"></i> Download Template</a>
                     <div class="d-flex align-items-center position-relative my-1 ms-15">
                         <input name="file_pricing" class="form-control" type="file" id="formFile">
                     </div>
-                    <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
+                    <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa PPDB<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
+                    </button>
+                </div>
+                <!--end::Toolbar-->
+            </div>
+        </form>
+
+        <form action="{{ route('admin.pricing.dapodik') }}" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="card-header">
+                <!--begin::Toolbar-->
+
+                <div class="card-toolbar">
+                    <a href="#" class="btn btn-light-success"><i class="bi bi-file-earmark-spreadsheet fs-4 me-2"></i> Download Template</a>
+                    <div class="d-flex align-items-center position-relative my-1 ms-15">
+                        <input name="file_dapodik" class="form-control" type="file" id="formFile">
+                    </div>
+                    <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa DAPODIK<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
                     </button>
                 </div>
                 <!--end::Toolbar-->

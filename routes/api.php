@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Backend\ppdb\PPDBController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,18 @@ use Illuminate\Http\Request;
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
+
+// Route::get('/postsss',function() {
+//     dd('tes API');
+// });
+
+Route::post('/loginhype',[AuthenticationController::class, 'loginhype']);
+
+Route::group(['middleware' => 'auth:api'] , function () {
+    Route::get('/posts',[PPDBController::class, 'indextest']);
+});
+
+// Route::post('/loginhype',[AuthenticationController::class, 'loginhype']);
 
 Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::group(['prefix' => 'auth', 'middleware' => ['guest']], function () {

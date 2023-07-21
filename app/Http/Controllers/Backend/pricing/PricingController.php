@@ -34,7 +34,9 @@ use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use Symfony\Component\VarDumper\Cloner\Data;
 use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
+use App\Imports\DapodikImport;
 use App\Imports\UserImport;
+use App\Models\Dapodik;
 use App\Models\Users_system;
 
 class PricingController extends Controller
@@ -165,7 +167,7 @@ class PricingController extends Controller
      *
      * @return ViewResponse
      */
-    public function uploadPricing(PricingPermissionRequest $request)
+    public function uploadDatasiswa(PricingPermissionRequest $request)
     {
 
         //PPDB DAFTAR ULANG
@@ -685,6 +687,97 @@ class PricingController extends Controller
                return redirect()->route('admin.pricing.index');    
          
 
+    }
+
+    public function uploadDapodik(PricingPermissionRequest $request) {
+
+            //PPDB DAFTAR ULANG
+            $dapodik_siswa = [];      
+                        
+            $dapodik_siswa = Excel::toArray(new DapodikImport, $request->file('file_dapodik'));
+            //return $dapodik_siswa[0][6][0];
+            // dd($dapodik_siswa[0]);
+            $dapodik_insert = [];     
+            foreach(  array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) {
+             array_push($dapodik_insert, [                                          
+                    'nama'                     => $dapodik_siswas[1],
+                    'nipd'                     => $dapodik_siswas[2],
+                    'jk'                       => $dapodik_siswas[3],
+                    'nisn'                     => $dapodik_siswas[4],
+                    'tempat_lahir'             => $dapodik_siswas[5], 
+                    'tanggal_lahir'            => $dapodik_siswas[6],
+                    'nik'                      => $dapodik_siswas[7],
+                    'agama'                    => $dapodik_siswas[8],   
+                    'alamat'                   => $dapodik_siswas[9],
+                    'rt'                       => $dapodik_siswas[10],
+                    'rw'                       => $dapodik_siswas[11],
+                    'dusun'                    => $dapodik_siswas[12],
+                    'kelurahan'                => $dapodik_siswas[13],
+                    'kecamatan'                => $dapodik_siswas[14],
+                    'kode_pos'                 => $dapodik_siswas[15],
+                    'jenis_tinggal'            => $dapodik_siswas[16],
+                    'alat_transportasi'        => $dapodik_siswas[17],
+                    'telepon'                  => $dapodik_siswas[18],
+                    'hp'                       => $dapodik_siswas[19],
+                    'email'                    => $dapodik_siswas[20],
+                    'skhun'                    => $dapodik_siswas[21],
+                    'Penerima_kps'             => $dapodik_siswas[22],
+                    'no_kps'                   => $dapodik_siswas[23],
+                    'nama_ayah'                => $dapodik_siswas[24],
+                    'tahun_lahir_ayah'         => $dapodik_siswas[25],
+                    'pendidikan_ayah'          => $dapodik_siswas[26],
+                    'pekerjaan_ayah'           => $dapodik_siswas[27],
+                    'penghasilan_ayah'         => $dapodik_siswas[28],
+                    'nik_ayah'                 => $dapodik_siswas[29],
+                    'nama_ibu'                 => $dapodik_siswas[30],
+                    'tahun_lahir_ibu'          => $dapodik_siswas[31],
+                    'pendidikan_ibu'           => $dapodik_siswas[32],
+                    'pekerjaan_ibu'            => $dapodik_siswas[33],
+                    'penghasilan_ibu'          => $dapodik_siswas[34],
+                    'nik_ibu'                  => $dapodik_siswas[35],
+                    'nama_wali'                => $dapodik_siswas[36],
+                    'tahun_lahir_wali'         => $dapodik_siswas[37],
+                    'pendidikan_wali'          => $dapodik_siswas[38],
+                    'pekerjaan_wali'           => $dapodik_siswas[39],
+                    'penghasilan_wali'         => $dapodik_siswas[40],
+                    'nik_wali'                 => $dapodik_siswas[41],
+                    'rombel_saat_ini'          => $dapodik_siswas[42],
+                    'no_peserta_un'            => $dapodik_siswas[43],
+                    'no_seri_ijazah'           => $dapodik_siswas[44],
+                    'penerima_kip'             => $dapodik_siswas[45],
+                    'nomor_kip'                => $dapodik_siswas[46],
+                    'nama_di_kip'              => $dapodik_siswas[47],
+                    'nomor_kks'                => $dapodik_siswas[48],
+                    'no_regist_akta_lahir'     => $dapodik_siswas[49],
+                    'bank'                     => $dapodik_siswas[50],
+                    'nomor_rekening_bank'      => $dapodik_siswas[51],
+                    'rekening_atas_nama'       => $dapodik_siswas[52],
+                    'layak_pip_usulan_sekolah' => $dapodik_siswas[53],
+                    'alasan_layak_pip'         => $dapodik_siswas[54],
+                    'kebutuhan_khusus'         => $dapodik_siswas[55],
+                    'sekolah_asal'             => $dapodik_siswas[56],
+                    'anak_ke_berapa'           => $dapodik_siswas[57],
+                    'lintang'                  => $dapodik_siswas[58],
+                    'bujur'                    => $dapodik_siswas[59],
+                    'no_kk'                    => $dapodik_siswas[60],
+                    'berat_badan'              => $dapodik_siswas[61],
+                    'tinggi_badan'             => $dapodik_siswas[62],
+                    'lingkar_kepala'           => $dapodik_siswas[63],
+                    'jml_saudara_kandung'      => $dapodik_siswas[64],
+                    'jarak_rumah_ke_sekolah_km'=> $dapodik_siswas[65],
+                ]);
+            }
+
+             //debug($dapodik_insert);
+             //dd($dapodik_insert);
+             Dapodik::query()->truncate();
+
+             
+             Dapodik::insert($dapodik_insert);
+
+             return redirect()->route('admin.pricing.index');  
+
+            
     }
 
 
