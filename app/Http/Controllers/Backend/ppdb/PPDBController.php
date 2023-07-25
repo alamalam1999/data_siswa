@@ -118,6 +118,43 @@ class PPDBController extends Controller
      *
      * @return ViewResponse
      */
+    public function dapodik(Request $request)
+    {
+        if ($request->has('site')) {
+            error_log($request->input('site'));
+        }
+
+        if ($request->has('stage')) {
+            error_log($request->input('stage'));
+        }
+
+        $academic_years = AcademicYear::all();
+        $registration_schedules = RegistrationSchedule::all();
+        $enum_datas = EnumData::where('enum_group', 'SCHOOL_INFO')->orderBy('enum_order')->get();
+        $ppdbs = '';
+
+        $schools = schoolAccess();
+        $site_access = siteAccess();
+
+        debug($schools);
+
+        $data = [
+            'academic_years' => $academic_years,
+            'registration_schedules' => $registration_schedules,
+            'ppdbs' => $ppdbs,
+            'enum_datas' => $enum_datas,
+            'schools' => $schools,
+            'site_access' => $site_access,
+        ];
+
+        return new ViewResponse('backend.ppdb.dapodik', $data);
+    }
+
+     /**
+     * @param \App\Http\Requests\Backend\Faqs\ManageFaqsRequest $request
+     *
+     * @return ViewResponse
+     */
     public function data_siswa(Request $request) {
 
         if ($request->has('site')) {

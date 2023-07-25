@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ppdb\PPDBTableTidakAktifController;
 Route::group(['namespace' => 'ppdb'], function () {
     // Route::get('ppdb', [PPDBController::class, 'index'])->name('ppdb.index');
     // Route::get('ppdb/{id}', [PPDBController::class, 'edit'])->name('ppdb.edit');
+    Route::get('dapodik', [PPDBController::class, 'dapodik'])->name('ppdb.dapodik');
     Route::get('admin/ppdb/{ppdb}/editaktif', [PPDBController::class, 'editaktif'])->name('ppdb.editaktif');
     Route::resource('ppdb', 'PPDBController', ['except' => ['show']]);
     Route::post('ppdb/discount', [PPDBController::class, 'updateDiscountCode'])->name('ppdb.discount'); 
@@ -29,6 +30,7 @@ Route::group(['namespace' => 'ppdb'], function () {
 
     //For DataTables
     Route::post('ppdb/get',  [PPDBTableController::class, '__invoke'])->name('ppdb.get');
+    Route::post('ppdb/get_dapodik', [PPDBTableController::class, '__Invoke_dapodik'])->name('ppdb.getdapodik');
     Route::post('ppdb/aktif',  [PPDBTableAktifController::class, '__invoke_aktif'])->name('ppdb.aktif');
     Route::post('ppdb/tidak_aktif', [PPDBTableTidakAktifController::class, '__Invoke_tidak_aktif'])->name('ppdb.tidak_aktif');
     Route::post('ppdb/alumni', [PPDBTableAlumniController::class, '__Invoke_alumni'])->name('ppdb.alumni');

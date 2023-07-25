@@ -4,6 +4,10 @@ Breadcrumbs::for('admin.ppdb.index', function ($trail) {
     $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.index'));
 });
 
+Breadcrumbs::for('admin.ppdb.dapodik', function ($trail) {
+    $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.dapodik'));
+});
+
 Breadcrumbs::for('admin.ppdb.create', function ($trail) {
     $trail->parent('admin.ppdb.index');
     $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.create'));
