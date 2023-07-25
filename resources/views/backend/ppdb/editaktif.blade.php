@@ -65,7 +65,13 @@
                                                   
                                           <div class="image-input image-input-outline image-input-placeholder mb-3 image-input-changed" data-kt-image-input="true">
                                               <!--begin::Preview existing avatar-->
-                                                <div class="image-input-wrapper w-165px h-200px" style="background-image: url(&quot;data:image/png;base64,{{ $ppdb->fhoto_siswa }}&quot;);"></div>                                                          <!--end::Preview existing avatar-->
+                                              <?php
+                                                  $foto = "";
+                                                  if($foto_siswa != null && $foto_siswa != "" && !empty($foto_siswa)) {
+                                                      $foto = $foto_siswa->fhoto_siswa;
+                                                  }
+                                              ?>
+                                                <div class="image-input-wrapper w-165px h-200px" style="background-image: url(&quot;data:image/png;base64,{{ $foto }}&quot;);"></div>                                                          <!--end::Preview existing avatar-->
                                   
                                               <!--begin::Label-->
                                               <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar" data-bs-original-title="Change avatar" data-kt-initialized="1">
@@ -92,7 +98,7 @@
                                           <!--begin::Description-->
                                           <div class="text-muted fs-7">Set the phot thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                                           <!--end::Description-->                                   
-                                        <button class="btn btn-primary btn-sm fs-9" value="{{ $ppdb->id }}" name="id_ppdb" >Submit</button>                                    
+                                        <button class="btn btn-primary btn-sm fs-9" value="{{ $ppdb->ppdb_id }}" name="id_ppdb" >Submit</button>                                    
                                         </form>
                                       </div>
                                       <!--end::Card body-->

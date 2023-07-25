@@ -58,7 +58,13 @@
                             
                     <div class="image-input image-input-outline image-input-placeholder image-input-changed" data-kt-image-input="true">
                         <!--begin::Preview existing avatar-->
-                          <div class="image-input-wrapper w-165px h-200px" style="background-image: url(&quot;data:image/png;base64,{{ $data_search->fhoto_siswa }}&quot;);"></div>                                                         
+                        <?php
+                        $foto = "";
+                            if($foto_siswa != null && $foto_siswa != "" && !empty($foto_siswa)) {
+                                $foto = $foto_siswa->fhoto_siswa;
+                            }
+                        ?>
+                          <div class="image-input-wrapper w-165px h-200px" style="background-image: url(&quot;data:image/png;base64,{{ $foto }}&quot;);"></div>                                                         
                            <!--end::Preview existing avatar-->
             
                         <!--begin::Label-->
@@ -177,7 +183,7 @@
                         <!--begin::Col-->
                         <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-7"  style="padding-right: 200px">Status Siswa</label>
-                              <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_search->status }}" autocomplete="off">
+                              <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $data_siswa_system_2->status_siswa }}" autocomplete="off">
                           </div>
                         <!--end::Col-->
                         </div>

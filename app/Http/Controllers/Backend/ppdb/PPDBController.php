@@ -39,6 +39,7 @@ use App\Models\Ppdb_interviews_system;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
+use App\Models\Foto_siswa;
 use App\Models\Register;
 use Illuminate\Support\Facades\Redirect;
 
@@ -250,17 +251,13 @@ class PPDBController extends Controller
      * @return ViewResponse
      */
     public function upload_fhoto(Request $request){
-
-        $savefhoto = PPDB::where('id',$request->id_ppdb)->first();
-
-        $image = base64_encode(file_get_contents($request->file('fhoto_siswa')));
-
-
-        $savefhoto->fhoto_siswa = $image;
-
-        $savefhoto->save();
-
-        return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Upload']);;
+        $image = base64_encode(file_get_contents($request->file('fhoto_siswa')));        
+            $foto_siswa = new Foto_siswa();
+            $foto_siswa->fhoto_siswa = $image;
+            $foto_siswa->ppdb_id = $request->id_ppdb;
+            $foto_siswa->updated_by = auth()->user()->id;
+            $foto_siswa->save();
+            return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Upload']);
     }
 
     /**
@@ -555,6 +552,8 @@ class PPDBController extends Controller
 
         $data_siswa_system = Data_siswa_system::where('ppdb_id',$ppdb->ppdb_id)->first();
 
+        $foto_siswa = Foto_siswa::where('ppdb_id',$ppdb->ppdb_id)->first();
+
         return new ViewResponse('backend.ppdb.edit', [
             'ppdb'              => $ppdb,
             'user_account'      => $user_account,
@@ -603,7 +602,8 @@ class PPDBController extends Controller
             'data_siswa'                => $data_siswa,
             'data_kelas'                => $data_kelas,
             'ppdb_system'               => $ppdb_system,
-            'data_siswa_system'         => $data_siswa_system
+            'data_siswa_system'         => $data_siswa_system,
+            'foto_siswa'                => $foto_siswa
         ]);
     }
 
@@ -1571,6 +1571,8 @@ class PPDBController extends Controller
 
         debug($user_account);
 
+        $foto_siswa = Foto_siswa::where('ppdb_id',$ppdb->ppdb_id)->first();
+
         return new ViewResponse('backend.ppdb.editaktif', [
             'ppdb'                      => $ppdb,
             'user_account'              => $user_account,
@@ -1621,7 +1623,8 @@ class PPDBController extends Controller
             'diskon_pengajuan'          => $diskon_pengajuan,
             'fee_up_pengajuan'          => $fee_up_pengajuan,
             'ppdb_system'               => $ppdb_system,
-            'data_siswa_system'         => $data_siswa_system
+            'data_siswa_system'         => $data_siswa_system,
+            'foto_siswa'                => $foto_siswa
         ]);
 
        

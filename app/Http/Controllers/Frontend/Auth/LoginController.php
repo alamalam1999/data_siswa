@@ -12,6 +12,8 @@ use App\Events\Frontend\Auth\UserLoggedIn;
 use App\Events\Frontend\Auth\UserLoggedOut;
 use App\Models\Data_siswa;
 use App\Models\Data_siswa_system;
+use App\Models\Data_siswa_system_2;
+use App\Models\Foto_siswa;
 use App\Models\PPDB_system;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
@@ -39,28 +41,21 @@ class LoginController extends Controller
      */
     public function search(Request $request) {
 
-        // $data_search = PPDB::where([['document_no','=',$request->kode_siswa],
-        //                            ['fullname','like', '%'.$request->nama.'%']])
-        //                             ->select('ppdb.id', 'ppdb.classes','ppdb.stage', 'ppdb.fullname', 'ppdb.fhoto_siswa', 'ppdb.status_siswa as status')->first();
-
-        $data_search = PPDB_system::where([
-        ['fullname','like', '%'.$request->nama.'%']])
-         ->select('ppdb_system.id', 'ppdb_system.classes','ppdb_system.stage', 'ppdb_system.fullname', 'ppdb_system.fhoto_siswa','ppdb_system.nis', 'ppdb_system.status_siswa as status')->first();
-
-
-        $data_siswa  = Data_siswa_system::where([['ppdb_id',$data_search->id],
-                                         ['nisn', $request->nisn]
-                                        ])->first();
-
+        $data_search = PPDB_system::where([['fullname','like', '%'.$request->nama.'%']])
+         ->select('ppdb_system.ppdb_id', 'ppdb_system.classes','ppdb_system.stage', 'ppdb_system.fullname', 'ppdb_system.fhoto_siswa','ppdb_system.nis', 'ppdb_system.status_siswa as status')->first();
+        $data_siswa  = Data_siswa_system::where([['ppdb_id',$data_search->ppdb_id],['nisn', $request->nisn]])->first();
+        $data_siswa_system_2 = Data_siswa_system_2::where([['ppdb_id',$data_search->ppdb_id]])->first();
+        $foto_siswa = Foto_siswa::where('ppdb_id',$data_search->ppdb_id)->first();
         $data = [
-            'nis'               => $request->nis,
-            'nisn'              => $request->nisn,
-            'nama'              => $request->nama,
-            'kode_siswa'        => $request->kode_siswa,
-            'data_siswa'        => $data_siswa,
-            'data_search'       => $data_search
+            'nis'                   => $request->nis,
+            'nisn'                  => $request->nisn,
+            'nama'                  => $request->nama,
+            'kode_siswa'            => $request->kode_siswa,
+            'data_siswa'            => $data_siswa,
+            'data_search'           => $data_search,
+            'data_siswa_system_2'   => $data_siswa_system_2,
+            'foto_siswa'            => $foto_siswa
         ];
-
         return view('frontend.auth.carisiswa',$data);
     }
 
