@@ -206,13 +206,13 @@
                             <thead>
                                 <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-9 text-uppercase gs-0">
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(0)">Kode Siswa</th>
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(1)">Nama Siswa</th>
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(2)">NISN</th>
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(3)">Sekolah</th>
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(4)">Unit</th>
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(5)">Kelas Utama</th>
-                                <th class="min-w-80px w-100px sorting" onclick="sortTable(6)">Sub Kelas</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(0)">Kode Siswa</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(1)">Nama Siswa</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(2)">NISN</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(3)">Sekolah</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(4)">Unit</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(5)">Kelas Utama</th>
+                                <th class="min-w-80px w-100px sorting"  onclick="sortTable(6)">Sub Kelas</th>
                                 <th class="min-w-80px mw-100px sorting" onclick="sortTable(7)">Status Siswa</th>
                                 <th class="min-w-80px mw-100px sorting" onclick="sortTable(8)">Keterangan</th>
                                 <th class="text-end min-w-80px sorting_disabled w-100px" rowspan="1" colspan="1" aria-label="Actions" style="width: 141.766px;"></th>
@@ -295,7 +295,7 @@
         </div>
     </div>
 
-    <input type="hidden" name="uri_edit" value="{{ route('admin.ppdb.edit', '::target::') }}" />
+    <input type="hidden" name="uri_edit" value="{{ route('admin.ppdb.editdapodik', '::target::') }}" />
 @endsection
 
 @section('pagescript')

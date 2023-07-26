@@ -12,6 +12,7 @@ Route::group(['namespace' => 'ppdb'], function () {
     // Route::get('ppdb/{id}', [PPDBController::class, 'edit'])->name('ppdb.edit');
     Route::get('dapodik', [PPDBController::class, 'dapodik'])->name('ppdb.dapodik');
     Route::get('admin/ppdb/{ppdb}/editaktif', [PPDBController::class, 'editaktif'])->name('ppdb.editaktif');
+    Route::get('admin/ppdb/{ppdb}/editdapodik', [PPDBController::class, 'editdapodik'])->name('ppdb.editdapodik');
     Route::resource('ppdb', 'PPDBController', ['except' => ['show']]);
     Route::post('ppdb/discount', [PPDBController::class, 'updateDiscountCode'])->name('ppdb.discount'); 
 
