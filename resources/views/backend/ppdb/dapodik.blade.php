@@ -309,6 +309,6 @@
         // FTX.PPDB.list.init();
     </script>
 
-    <script src="{{ asset('assets/js/pages/admin/ppdb.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/admin/dapodik.js') }}"></script>
 
 @stop

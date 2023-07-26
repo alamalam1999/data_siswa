@@ -148,7 +148,13 @@
                                         ?>
                                         <i class="fas fa-envelope"></i> <?php echo e($email); ?><br />
                                         <i class="fas fa-calendar-check"></i> <?php echo app('translator')->get('strings.frontend.general.joined'); ?>
-                                        <?php echo e(timezone()->convertToLocal($user_account->created_at, 'F jS, Y')); ?>
+                                        <?php
+                                            $created_at = "2022-10-21 21:26:24";
+                                            if($user_account != null && $user_account != "" && !empty($user_account)) {
+                                                $created_at = $user_account->created_at;
+                                            }
+                                        ?>
+                                        <?php //echo e(timezone()->convertToLocal($created_at, 'F jS, Y')); ?>
 
                                     </small>
                                 </p>
@@ -173,7 +179,13 @@
                                     <!--begin::Info-->
                                     <div class="m-0">
                                         <span class="fw-semibold d-block fs-8"> Whatsapp / Call</span>
-                                        <span class="fw-bold text-gray-800 text-hover-success fs-7"><?php echo e($user_account->phone); ?></span>
+                                        <?php
+                                        $phone = "";
+                                          if($user_account != null && $user_account != "" && !empty($user_account)) {
+                                              $phone = $user_account->phone;
+                                          }
+                                        ?>
+                                        <span class="fw-bold text-gray-800 text-hover-success fs-7"><?php echo e($phone); ?></span>
                                     </div>
                                     <!--end::Info-->
                                 </a>
@@ -292,7 +304,13 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="fullname" value="<?php echo e($ppdb->fullname); ?>" readonly>
+                                                  <?php
+                                                    $fullname = "";
+                                                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                        $fullname = $ppdb->fullname;
+                                                    }
+                                                  ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="fullname" value="<?php echo e($fullname); ?>" readonly>
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -310,7 +328,13 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="gender" value="<?php echo e($ppdb->gender); ?>" readonly>
+                                                  <?php
+                                                      $gender = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $gender = $ppdb->gender;
+                                                      }
+                                                  ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="gender" value="<?php echo e($gender); ?>" readonly>
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -331,7 +355,13 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="place_of_birth" value="<?php echo e($ppdb->place_of_birth); ?>" readonly />
+                                                  <?php
+                                                      $place_of_birth = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $place_of_birth = $ppdb->place_of_birth;
+                                                      }
+                                                  ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="place_of_birth" value="<?php echo e($place_of_birth); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -349,7 +379,13 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="date_of_birth" value="<?php echo e($ppdb->date_of_birth); ?>" readonly />
+                                                  <?php
+                                                      $date_of_birth = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $date_of_birth = $ppdb->date_of_birth;
+                                                      }
+                                                  ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="date_of_birth" value="<?php echo e($date_of_birth); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -366,7 +402,13 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="religion" value="<?php echo e($ppdb->religion); ?>" readonly />
+                                                  <?php
+                                                      $religion = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $religion = $ppdb->religion;
+                                                      }
+                                                  ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="religion" value="<?php echo e($religion); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -383,7 +425,13 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="nationality" value="<?php echo e($ppdb->nationality); ?>" readonly />
+                                                  <?php
+                                                      $nationality = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $nationality = $ppdb->nationality;
+                                                      }
+                                                  ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="nationality" value="<?php echo e($nationality); ?>" readonly />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -402,7 +450,13 @@
                                           <div class="row fv-row fv-plugins-icon-container">
                                               <!--begin::Col-->
                                               <div class="col-12">
-                                                  <textarea name="address" class="form-control form-control-transparent border-bottom" rows="5" required="required" readonly><?php echo e($ppdb->address); ?></textarea>
+                                                <?php
+                                                      $address = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $address = $ppdb->address;
+                                                      }
+                                                  ?>
+                                                  <textarea name="address" class="form-control form-control-transparent border-bottom" rows="5" required="required" readonly><?php echo e($address); ?></textarea>
                                               </div>
                                               <!--end::Col-->
                                           </div>
@@ -421,7 +475,13 @@
                                         <div class="row fv-row">
                                             <!--begin::Col-->
                                             <div class="col-12">
-                                                <input type="text" class="form-control form-control-transparent border-bottom" name="home_phone" value="<?php echo e($ppdb->home_phone); ?>" readonly />
+                                              <?php
+                                                      $home_phone = "";
+                                                      if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                          $home_phone = $ppdb->home_phone;
+                                                      }
+                                                  ?>
+                                                <input type="text" class="form-control form-control-transparent border-bottom" name="home_phone" value="<?php echo e($home_phone); ?>" readonly />
                                             </div>
                                             <!--end::Col-->
                                         </div>
@@ -447,15 +507,33 @@
                         <?php echo e(csrf_field()); ?>
                         <!--begin::Input group-->
                         <div class="row fv-row mb-5">
-                          <input type="hidden" name="id" value="<?php echo e($ppdb->id); ?>" />
+                          <?php
+                              $id = "";
+                                if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                    $id = $ppdb->id;
+                                }
+                          ?>
+                          <input type="hidden" name="id" value="<?php echo e($id); ?>" />
                           <!--begin::Col-->
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Unit</label>
                                 <!--begin::Switch-->
                           <div>
-                            <input type="text" name="ppdb_id" value="<?php echo e($ppdb->ppdb_id); ?>" />
+                            <?php
+                                $ppdb_id = "";
+                                  if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                      $ppdb_id = $ppdb->ppdb_id;
+                                  }
+                            ?>
+                            <input type="text" name="ppdb_id" value="<?php echo e($ppdb_id); ?>" />
                             <select id="unit" class="form-select form-select-solid" name="unit">
-                            <option value="{{ !empty($data_kelas->unit) ? $data_kelas->unit : '' }}">{{ !empty($data_kelas->unit)  ? $data_kelas->unit : 'Pilih Unit' }}</option>
+                              <?php
+                                  $unit = "";
+                                    if($data_kelas != null && $data_kelas != "" && !empty($data_kelas)) {
+                                        $unit = $data_kelas->unit;
+                                    }
+                              ?>
+                            <option value="{{ !empty($unit) ? $unit : '' }}">{{ !empty($unit)  ? $unit : 'Pilih Unit' }}</option>
                             <option value="KB">KB</option>
                             <option value="TK">TK</option>
                             <option value="SD">SD</option>
@@ -626,7 +704,13 @@
                                       <div class="container-flex justify-content-end">
                                         <button class="btn btn-primary btn-sm fs-9" >Submit</button>                     
                                        </form>
-                                       <a href="{{ route('admin.ppdb.cekhistory', $ppdb->ppdb_id) }}">
+                                       <?php
+                                          $ppdb_id = "";
+                                            if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                $ppdb_id = $ppdb->ppdb_id;
+                                            }
+                                      ?>
+                                       <a href="{{ route('admin.ppdb.cekhistory', $ppdb_id) }}">
                                         <div class="btn btn-success btn-sm fs-9">Edit</div>
                                       </a>
                                       </div>
@@ -652,11 +736,11 @@
                                                   <th class="w-50px text-end">File</th>
                                               </tr>
                                           </thead>
+                                         
+                                           @if(is_array($file_additional) || is_object($file_additional))
+                                          
                                           <tbody>
-                                              <?php
-                                              $file_download = '#';
-                                              ?>
-                                              <?php $__currentLoopData = $file_additional; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            @foreach($file_add as $file)
                                               <tr>
                                                   <td><?php echo e($file->deskripsi); ?></td>
                                                   <td><?php echo e($file->tingkat); ?></td>
@@ -668,9 +752,9 @@
                                                           <!--end::Svg Icon-->
                                                       </a></td>
                                               </tr>
-                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                                            @endforeach
                                           </tbody>
+                                          @endif
                                       </table>
                                   </div>
                                 </div>
@@ -1082,9 +1166,14 @@
                           <div class="card-body">
                             <div class="row fv-row mb-10">
                             <form action="<?php echo e(route('admin.ppdb.discount')); ?>" method="POST">
-                                <?php echo e(csrf_field()); ?>
-
-                                <input type="hidden" name="id" value="<?php echo e($ppdb->id); ?>" />
+                                @csrf
+                                <?php
+                                  $id = "";
+                                  if ($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                      $id = $ppdb->id;
+                                  }
+                                ?>
+                                <input type="hidden" name="id" value="<?php echo e($id); ?>" />
                                
                                 <div class="w-100">
   
@@ -1102,7 +1191,13 @@
                                     <div id="box-employee-medco" class="mt-10">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <label class="form-label fw-bold text-dark fs-6">Tempat Bekerja &amp; Nama Posisi</label>
-                                            <input name="medco_employee" value="<?php echo e($ppdb->medco_employee); ?>" class="form-control form-control-lg form-control-solid" type="text" placeholder="Keterangan Pekerjaan" autocomplete="off" readonly>
+                                            <?php
+                                              $medco_employee = "";
+                                              if ($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                                  $medco_employee = $ppdb->medco_employee;
+                                              }
+                                            ?>
+                                            <input name="medco_employee" value="<?php echo e($medco_employee); ?>" class="form-control form-control-lg form-control-solid" type="text" placeholder="Keterangan Pekerjaan" autocomplete="off" readonly>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <div class="fv-row mb-2 fv-plugins-icon-container">
@@ -1144,9 +1239,11 @@
                                             <label class="required fs-6 fw-bold form-label mb-2">Pekerjaan di Medco Group sebagai</label>
                                             <select name="discount_code" class="form-select">
                                                 <option value="">Pilih</option>
-                                                <?php $__currentLoopData = $discount_groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($item->enum_value); ?>" <?php echo e(($ppdb->ppdb_discount == $item->enum_value) ? "selected":""); ?>><?php echo e($item->enum_label); ?></option>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                @if (is_array($discount_groups) || is_object($discount_groups))
+                                                @foreach($discount_groups as $item)
+                                                  <option value="<?php echo e($item->enum_value); ?>" <?php echo e(($ppdb->ppdb_discount == $item->enum_value) ? "selected":""); ?>><?php echo e($item->enum_label); ?></option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         <!--end::Col-->
@@ -1206,7 +1303,13 @@
 
             
               <label class="form-label fw-bolder text-muted fs-6">Gelombang Daftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo ($ppdb->registration_schedule_id == 5 ? "Gelombang 1" : "Gelombang 2"); ?>" readonly autocomplete="off">
+              <?php
+                $registration_schedule_id = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $registration_schedule_id = $ppdb->registration_schedule_id;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo ($registration_schedule_id == 5 ? "Gelombang 1" : "Gelombang 2"); ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1218,7 +1321,13 @@
           <div class="col-xl-6">
             
               <label class="form-label fw-bolder text-muted fs-6">Waktu Daftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->created_at; ?>" readonly autocomplete="off">
+              <?php
+                $created_at = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $created_at = $ppdb->created_at;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $created_at; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1227,7 +1336,13 @@
           <div class="col-xl-6">
            
               <label class="form-label fw-bolder text-muted fs-6">Status Mendaftar</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->student_status; ?>" readonly autocomplete="off">
+              <?php
+                $student_status = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $student_status = $ppdb->student_status;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $student_status; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1241,7 +1356,13 @@
           <div class="col-xl-6">
             
               <label class="form-label fw-bolder text-muted fs-6">Tujuan Sekolah</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->school_site; ?>" readonly autocomplete="off">
+              <?php
+                $school_site = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $school_site = $ppdb->school_site;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $school_site; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1250,7 +1371,13 @@
           <div class="col-xl-6">
             
               <label class="form-label fw-bolder text-muted fs-6">Jenjang & Kelas</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->stage."-";  echo $ppdb->classes; ?>" readonly autocomplete="off">
+              <?php
+                  $stage_classes = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $stage_classes = $ppdb->stage. "_".$ppdb->classes;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $stage_classes ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1264,7 +1391,13 @@
           <div class="col-xl-6">
             
               <label class="form-label fw-bolder text-muted fs-6">Status Kesiswaan</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->status_siswa; ?>" readonly autocomplete="off">
+              <?php
+                  $status_siswa = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $status_siswa = $ppdb->status_siswa;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $status_siswa; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1273,7 +1406,13 @@
           <div class="col-xl-6">
            
               <label class="form-label fw-bolder text-muted fs-6">Asal Sekolah</label>
-              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $ppdb->school_origin; ?>" readonly autocomplete="off">
+              <?php
+                  $school_origin = "";
+                    if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                        $school_origin = $ppdb->school_origin;
+                       }
+                ?>
+              <input class="form-control form-control-transparent border-bottom" type="text" value="<?php echo $school_origin; ?>" readonly autocomplete="off">
               <div class="fv-plugins-message-container invalid-feedback"></div>
           </div>
           <!--end::Col-->
@@ -1296,37 +1435,38 @@
 <div class="informasites">
 
 <div class="card rounded-0">
-                                            <div class="card-body">
+    <div class="card-body">
                                     
-                                                <div class="table-responsive mb-5">
-                                                    <table class="table table-rounded table-striped border gy-4 gs-4">
-                                                        <thead>
-                                                            <tr class="fw-semibold fs-4 bg-dark text-white border-bottom border-gray-200">
-                                                                <th>Deskripsi</th>
-                                                                <th>File</th>
-                                                                <th class="w-100px">Nilai</th>
-                                                                <th style="text-align: center;" class="w-150px">Keputusan</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if($ppdb->stage=="SD")
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">Tes Kesiapan Sekolah</div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="mt-4 fw-bold fs-5">
-                                                                      <?php                                                              
-                                                                            $array= ($kesiapan_file->{'file_path'} ?? '');
-                                                                            if ($array != '' && $array != null) {
+      <div class="table-responsive mb-5">
+            <table class="table table-rounded table-striped border gy-4 gs-4">
+                <thead>
+                    <tr class="fw-semibold fs-4 bg-dark text-white border-bottom border-gray-200">
+                         <th>Deskripsi</th>
+                         <th>File</th>
+                         <th class="w-100px">Nilai</th>
+                         <th style="text-align: center;" class="w-150px">Keputusan</th>
+                    </tr>
+                </thead>
+                                              <tbody>
+                                                @if($ppdb != null && $ppdb != "" && !empty($ppdb))
+                                                  @if($ppdb->stage=="SD")
+                                                      <tr>
+                                                          <td>
+                                                            <div class="mt-4 fw-bold fs-5">Tes Kesiapan Sekolah</div>
+                                                          </td>
+                                                          <td>
+                                                              <div class="mt-4 fw-bold fs-5">
+                                                                <?php                                                              
+                                                                    $array= ($kesiapan_file->{'file_path'} ?? '');
+                                                                        if ($array != '' && $array != null) {
                                                                               $result = $array;
-                                                                            } else {
+                                                                              } else {
                                                                               $result = '';
-                                                                            }
-                                                                        ?>
-                                                                        <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref3">view</a>
-                                                                    </div>
-                                                                </td>
+                                                                              }
+                                                                ?>
+                                                                    <a href="{{ ($result =='' && $result == null) ? '' : $result }}" target="_blank" class="linkhref3">view</a>
+                                                                </div>
+                                                          </td>
 
                                                                 <td>
                                                                   <?php if (!empty($ppdb_interview->kesiapan_value)) { ?>
@@ -1530,6 +1670,7 @@
                                                             </tr>
                                                             @endif
                                                         </tbody>
+                                                    @endif
                                                     </table>
                                                 </div>
                       
@@ -1899,9 +2040,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $__currentLoopData = $file_uploaded; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                              @if(is_array($file_uploaded) || is_object($file_uploaded))
+                                              @foreach($file_uploaded as $file)
                                                 <?php
-                                                $file_download = '#';
+                                                  $file_download = '#';
                                                 ?>
                                                 <tr>
                                                     <td>
@@ -1966,7 +2108,8 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                              @endforeach
+                                              @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -1981,10 +2124,10 @@
                                   </div>
 
                                 <div class="btnregister1 mb-4 mt-6" style="background-color: #EBEBEB;"> <h5>1. Formulir Peserta Didik</h5> </div>
+                                @if(is_array($file_additionaldua) || is_object($file_additionaldua))
                                 <div class="register1">
                                   <div style="color:rgb(255, 255, 255); background-color: #caaf35; text-align:center;" class="mb-4 mt-3">FORMULIR PESERTA DIDIK</div>
-                    
-                                    <div class="form-group mb-4">
+                                    <div class="form-group mb-4">  
                                       <?php
                                           $array= array_column($file_additionaldua, 'data1');
                                           if ($array != '' && $array != null) {
@@ -1993,10 +2136,10 @@
                                             $data1 = '';
                                           }
                                       ?>
-                                      <label for="exampleFormControlInput1">No Formulir</label>
+                                        <label for="exampleFormControlInput1">No Formulir</label>
                                       <input name="data1" type="text" class="form-control" id="noformulir" placeholder="Masukkan No Formulir" value="<?php echo e(($data1 =='' && $data1 == null) ? '' : $data1[0]); ?>">
                                     </div>
-                    
+                                  
                                     <div class="form-group mb-4">
                                       <?php
                                           $array= array_column($file_additionaldua, 'data2');
@@ -4346,7 +4489,6 @@
                                      <span class="fw-border" style="color:#9b389b"> Title Formulir</span> 
                                   </div>
                                   <div class="formulircheckisi"> TITLE </div>
-                                  <div></div>
 
                                   <div class="btndowncheck1">
                                   
@@ -4708,11 +4850,13 @@
                                             </select>
                                           </div>
                                         </div>
+                                        
                                         <p style="color: #c003ff" class="fs-8">Kebutuhan khusus yang disandang oleh peserta didik, Dapat dipilih lebih dari satu</p>
                                       </div>
                                     </div>
                                   
                                   </div>
+                                  @endif
 
 
                                   <div class="btndown2 card-header bg-light mb-6">
@@ -4724,6 +4868,7 @@
                                       <!--end::Title-->
                                   </div>
 
+                                  @if(is_array($file_additionalsatu) || is_object($file_additionalsatu))
                                   <div class="informasi2">
                                   
                                     <div class="form-group mb-4">
@@ -6780,6 +6925,7 @@
                                   </div>
                                                              
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             

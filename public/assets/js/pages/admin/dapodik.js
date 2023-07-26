@@ -158,7 +158,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 return `
                 <div>
-                    <span class="text-dark fw-bolder fs-8 text d-block">` + row.fullname + `</span>
+                    <span class="text-dark fw-bolder fs-8 text d-block">` + row.nama + `</span>
                 </div>
                    
                 `;
