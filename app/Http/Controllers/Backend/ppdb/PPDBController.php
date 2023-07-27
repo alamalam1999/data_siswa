@@ -7,11 +7,14 @@ use Carbon\Carbon;
 use App\Models\PPDB;
 use App\Models\Users;
 use App\Models\School;
+use App\Models\Dapodik;
 use App\Models\Payment;
 use App\Models\EnumData;
+use App\Models\Register;
 use App\Models\Auth\User;
 use App\Models\Data_kelas;
 use App\Models\Data_siswa;
+use App\Models\Foto_siswa;
 use App\Models\Data_siswa2;
 use App\Models\Data_siswa3;
 use App\Models\Data_siswa4;
@@ -37,11 +40,9 @@ use App\Models\RegistrationSchedule;
 use Illuminate\Support\Facades\View;
 use App\Models\Ppdb_interviews_system;
 use App\Http\Responses\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
-use App\Models\Foto_siswa;
-use App\Models\Register;
-use Illuminate\Support\Facades\Redirect;
 
 class PPDBController extends Controller
 {
@@ -1754,7 +1755,7 @@ class PPDBController extends Controller
             return response()->json(['data' => $ppdb]);
         }
 
-        public function editdapodik(PPDB $ppdb, PPDBPermissionRequest $request) {
+        public function editdapodik(Dapodik $ppdb, PPDBPermissionRequest $request) {
 
 
             $ppdb = "";
@@ -1808,59 +1809,59 @@ class PPDBController extends Controller
             $foto_siswa = "";
 
 
-            return new ViewResponse('backend.ppdb.editdapodik', [
-                'ppdb'              => $ppdb,
-                'user_account'      => $user_account,
-                'schools'           => $schools,
-                'enum_datas'        => $enum_datas,
-                'discount_groups'   => $discount_groups,
-                'file_uploaded'     => $file_uploaded,
-                'file_additional'   => $file_additional,
-                'payment_formulir'  => $payment_formulir,
-                'payment_up_spp'    => $payment_up_spp,
-                'school_stage'      => $school_stage,
-                'reregistration'    => $reregistration,
-                'file_additionalsatu' => $file_additionalsatu,
-                'medco_employee_file' => $medco_employee_file,
-                'brand'               => $brand,
-                'kegiatan_sekolah'    => $kegiatan_sekolah,
-                'media_cetak'         => $media_cetak,
-                'media_elektronik'    => $media_elektronik,
-                'media_sosial'        => $media_sosial,
-                'internet'            => $internet,
-                'ppdb_interview'      => $ppdb_interview,
-                'is_enabled_form'     => $is_enabled_form,
-                'is_enabled_rnd'      => $is_enabled_rnd,
-                'is_enabled_submit'   => $is_enabled_submit,
-                'is_interviewer'      => $is_interviewer,
-                'is_rnd'              => $is_rnd,
-                'is_rnd_edit'         => $is_rnd_edit,
-                'result_interview'    => $result_interview,
-                'fee_up'              => $fee_up,
-                'fee_spp'             => $fee_spp,
-                'file_additionaldua'  => $file_additionaldua,
-                'kesiapan_file'             => $kesiapan_file,
-                'school_recomendation_file' => $school_recomendation_file,
-                'interview_result_file'     => $interview_result_file,
-                'psikotest_file'            => $psikotest_file,
-                'academic_file'             => $academic_file,
-                'interview_parent_file'     => $interview_parent_file,
-                'interview_student_file'    => $interview_student_file,
-                'observasi_file'            => $observasi_file,
-                'file_additional_satu'      => $file_additional_satu,
-                'file_additional_dua'       => $file_additional_dua,
-                'file_additional_tiga'      => $file_additional_tiga,
-                'file_additional_empat'     => $file_additional_empat,
-                'file_additional_lima'      => $file_additional_lima,
-                'slip_gaji_parent'          => $slip_gaji_parent,
-                'data_siswa'                => $data_siswa,
-                'data_kelas'                => $data_kelas,
-                'ppdb_system'               => $ppdb_system,
-                'data_siswa_system'         => $data_siswa_system,
-                'foto_siswa'                => $foto_siswa
-            ]);
+            // return new ViewResponse('backend.ppdb.editdapodik', [
+            //     'ppdb'              => $ppdb,
+            //     'user_account'      => $user_account,
+            //     'schools'           => $schools,
+            //     'enum_datas'        => $enum_datas,
+            //     'discount_groups'   => $discount_groups,
+            //     'file_uploaded'     => $file_uploaded,
+            //     'file_additional'   => $file_additional,
+            //     'payment_formulir'  => $payment_formulir,
+            //     'payment_up_spp'    => $payment_up_spp,
+            //     'school_stage'      => $school_stage,
+            //     'reregistration'    => $reregistration,
+            //     'file_additionalsatu' => $file_additionalsatu,
+            //     'medco_employee_file' => $medco_employee_file,
+            //     'brand'               => $brand,
+            //     'kegiatan_sekolah'    => $kegiatan_sekolah,
+            //     'media_cetak'         => $media_cetak,
+            //     'media_elektronik'    => $media_elektronik,
+            //     'media_sosial'        => $media_sosial,
+            //     'internet'            => $internet,
+            //     'ppdb_interview'      => $ppdb_interview,
+            //     'is_enabled_form'     => $is_enabled_form,
+            //     'is_enabled_rnd'      => $is_enabled_rnd,
+            //     'is_enabled_submit'   => $is_enabled_submit,
+            //     'is_interviewer'      => $is_interviewer,
+            //     'is_rnd'              => $is_rnd,
+            //     'is_rnd_edit'         => $is_rnd_edit,
+            //     'result_interview'    => $result_interview,
+            //     'fee_up'              => $fee_up,
+            //     'fee_spp'             => $fee_spp,
+            //     'file_additionaldua'  => $file_additionaldua,
+            //     'kesiapan_file'             => $kesiapan_file,
+            //     'school_recomendation_file' => $school_recomendation_file,
+            //     'interview_result_file'     => $interview_result_file,
+            //     'psikotest_file'            => $psikotest_file,
+            //     'academic_file'             => $academic_file,
+            //     'interview_parent_file'     => $interview_parent_file,
+            //     'interview_student_file'    => $interview_student_file,
+            //     'observasi_file'            => $observasi_file,
+            //     'file_additional_satu'      => $file_additional_satu,
+            //     'file_additional_dua'       => $file_additional_dua,
+            //     'file_additional_tiga'      => $file_additional_tiga,
+            //     'file_additional_empat'     => $file_additional_empat,
+            //     'file_additional_lima'      => $file_additional_lima,
+            //     'slip_gaji_parent'          => $slip_gaji_parent,
+            //     'data_siswa'                => $data_siswa,
+            //     'data_kelas'                => $data_kelas,
+            //     'ppdb_system'               => $ppdb_system,
+            //     'data_siswa_system'         => $data_siswa_system,
+            //     'foto_siswa'                => $foto_siswa
+            // ]);
 
-            // return response()->json($ppdb);
+             return response()->json($ppdb);
         }
 }
 

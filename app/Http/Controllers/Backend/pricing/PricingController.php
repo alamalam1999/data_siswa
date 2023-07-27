@@ -38,6 +38,7 @@ use App\Imports\DapodikImport;
 use App\Imports\UserImport;
 use App\Models\Dapodik;
 use App\Models\Users_system;
+use Illuminate\Support\Facades\Date;
 
 class PricingController extends Controller
 {
@@ -171,13 +172,9 @@ class PricingController extends Controller
     {
 
         //PPDB DAFTAR ULANG
-
-        $reregister_siswa = [];      
-            
+        $reregister_siswa = [];             
         $reregister_siswa = Excel::toArray(new ReregisterImport, $request->file('file_pricing'));
-
         $reregister_insert = [];
-
         foreach ($reregister_siswa[5] as $reregister_siswas) {
             array_push($reregister_insert, [        
                 'id'                             => $reregister_siswas['id'],
@@ -193,18 +190,12 @@ class PricingController extends Controller
 
         debug($reregister_insert);
         register::query()->truncate();
-
         register::insert($reregister_insert);
 
-
         //PPDB INTERVIEW
-
-        $interview_siswa = [];      
-            
+        $interview_siswa = [];           
         $interview_siswa = Excel::toArray(new InterviewImport, $request->file('file_pricing'));
-
         $interview_insert = [];
-
         foreach ($interview_siswa[4] as $interview_siswas) {
             array_push($interview_insert, [        
                 'id'                                => $interview_siswas['id'],
@@ -241,17 +232,12 @@ class PricingController extends Controller
 
         debug($interview_insert);
         PPDBInterview::query()->truncate();
-
         PPDBInterview::insert($interview_insert);
 
         //PAYMENT
-
-        $payment_siswa = [];      
-            
+        $payment_siswa = [];             
         $payment_siswa = Excel::toArray(new PaymentImport, $request->file('file_pricing'));
-
         $payment_insert = [];
-
         foreach ($payment_siswa[3] as $payment_siswas) {
             array_push($payment_insert, [        
                     'id'                         => $payment_siswas['id'],  
@@ -273,19 +259,14 @@ class PricingController extends Controller
 
         debug($payment_insert);
         Payment::query()->truncate();
-
         Payment::insert($payment_insert);
 
         //PPDB 
-        $ppdb_siswa = [];      
-            
-            $ppdb_siswa = Excel::toArray(new PPDBImport, $request->file('file_pricing'));
-
-            var_dump($ppdb_siswa[0]);  //cek data sudah masuk
-
-            $ppdb_insert = [];
-
-            foreach ($ppdb_siswa[0] as $ppdb_siswas) {
+        $ppdb_siswa = [];        
+        $ppdb_siswa = Excel::toArray(new PPDBImport, $request->file('file_pricing'));
+        // var_dump($ppdb_siswa[0]);  //cek data sudah masuk
+        $ppdb_insert = [];
+        foreach ($ppdb_siswa[0] as $ppdb_siswas) {
                 array_push($ppdb_insert, [        
                         'ppdb_id'                    => $ppdb_siswas['ppdb_id'],  
                         'registration_schedule_id'   => $ppdb_siswas['registration_schedule_id'],      
@@ -344,16 +325,12 @@ class PricingController extends Controller
 
             debug($ppdb_insert);
             PPDB::query()->truncate();
-
             PPDB::insert($ppdb_insert);
 
         //DATASISWA_1
-            $data_siswa = [];      
-            
-            $data_siswa = Excel::toArray(new DataImport, $request->file('file_pricing'));
-
-            $data_siswa_insert = [];
-
+        $data_siswa = [];      
+        $data_siswa = Excel::toArray(new DataImport, $request->file('file_pricing'));
+        $data_siswa_insert = [];
             foreach ($data_siswa[1] as $datasiswa) {
                 array_push($data_siswa_insert, [
                         'no_formulir'               => $datasiswa['no_formulir'],           
@@ -478,17 +455,13 @@ class PricingController extends Controller
             }
 
             debug($data_siswa_insert);
-
             Data_siswa::query()->truncate();
-
             Data_siswa::insert($data_siswa_insert);
 
 
                //DATASISWA_2
                $data_siswa2 = [];      
-            
                $data_siswa2 = Excel::toArray(new DataImport2, $request->file('file_pricing'));
-   
                $data_siswa2_insert = [];
    
                foreach ($data_siswa2[2] as $data_siswas2) {
@@ -531,17 +504,13 @@ class PricingController extends Controller
                }
    
                debug($data_siswa2_insert);
-   
                Data_siswa2::query()->truncate();
-   
                Data_siswa2::insert($data_siswa2_insert);
 
 
                 //DATASISWA_3
                 $data_siswa3 = [];      
-            
                 $data_siswa3 = Excel::toArray(new DataImport3, $request->file('file_pricing'));
-    
                 $data_siswa3_insert = [];
     
                 foreach ($data_siswa3[2] as $data_siswas3) {
@@ -583,15 +552,12 @@ class PricingController extends Controller
                 }
     
                 debug($data_siswa3_insert);
-    
                 Data_siswa3::query()->truncate();
-    
                 Data_siswa3::insert($data_siswa3_insert);
 
                 //USERS
                 $users_systems = [];
                 $users_systems = Excel::toArray(new UserImport, $request->file('file_pricing'));
-
                 $users_system_insert = [];
 
                 foreach ($users_systems[6] as $users_system) {
@@ -626,16 +592,12 @@ class PricingController extends Controller
                 }
 
                 debug($users_system_insert);
-    
                 Users_system::query()->truncate();
-    
                 Users_system::insert($users_system_insert);
 
                 //DATASISWA_4
-                $data_siswa4 = [];      
-            
+                $data_siswa4 = [];         
                 $data_siswa4 = Excel::toArray(new DataImport4, $request->file('file_pricing'));
-    
                 $data_siswa4_insert = [];
     
                 foreach ($data_siswa4[2] as $data_siswas4) {
@@ -678,12 +640,9 @@ class PricingController extends Controller
                 }
     
                 debug($data_siswa4_insert);
-    
                 Data_siswa4::query()->truncate();
-    
                 Data_siswa4::insert($data_siswa4_insert);
 
-      
                return redirect()->route('admin.pricing.index');    
          
 
@@ -692,90 +651,116 @@ class PricingController extends Controller
     public function uploadDapodik(PricingPermissionRequest $request) {
 
             //PPDB DAFTAR ULANG
-            $dapodik_siswa = [];      
-                        
+            $dapodik_siswa = [];   
+            date_default_timezone_set('Asia/Jakarta');
+            
             $dapodik_siswa = Excel::toArray(new DapodikImport, $request->file('file_dapodik'));
-            //return $dapodik_siswa[0][6][0];
-            // dd($dapodik_siswa[0]);
-            $dapodik_insert = [];     
+            $dapodik_insert = [];   
+            
+            $stag = "";
+            if (str_contains($dapodik_siswa[0][1][0], 'SD')) {
+                $stag = "SD";
+            } else if (str_contains($dapodik_siswa[0][1][0], 'SMP')) {
+                $stag = "SMP";
+            } else if (str_contains($dapodik_siswa[0][1][0], 'SMAS')) {
+                $stag = "SMA";
+            }
+            
+            $unit = "";
+            if (str_contains(strtolower($dapodik_siswa[0][2][0]), 'jagakarsa')) {
+                $unit = "JGK";
+            } else if (str_contains(strtolower($dapodik_siswa[0][2][0]), 'cinere')) {
+                $unit = "CNR";
+            } else if (str_contains(strtolower($dapodik_siswa[0][2][0]), 'pamulang')) {
+                $unit = "PML";
+            } else {
+                $unit = "kosong";
+            }
+
             foreach(  array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) {
-             array_push($dapodik_insert, [                                          
-                    'nama'                     => $dapodik_siswas[1],
-                    'nipd'                     => $dapodik_siswas[2],
-                    'jk'                       => $dapodik_siswas[3],
-                    'nisn'                     => $dapodik_siswas[4],
-                    'tempat_lahir'             => $dapodik_siswas[5], 
-                    'tanggal_lahir'            => $dapodik_siswas[6],
-                    'nik'                      => $dapodik_siswas[7],
-                    'agama'                    => $dapodik_siswas[8],   
-                    'alamat'                   => $dapodik_siswas[9],
-                    'rt'                       => $dapodik_siswas[10],
-                    'rw'                       => $dapodik_siswas[11],
-                    'dusun'                    => $dapodik_siswas[12],
-                    'kelurahan'                => $dapodik_siswas[13],
-                    'kecamatan'                => $dapodik_siswas[14],
-                    'kode_pos'                 => $dapodik_siswas[15],
-                    'jenis_tinggal'            => $dapodik_siswas[16],
-                    'alat_transportasi'        => $dapodik_siswas[17],
-                    'telepon'                  => $dapodik_siswas[18],
-                    'hp'                       => $dapodik_siswas[19],
-                    'email'                    => $dapodik_siswas[20],
-                    'skhun'                    => $dapodik_siswas[21],
-                    'Penerima_kps'             => $dapodik_siswas[22],
-                    'no_kps'                   => $dapodik_siswas[23],
-                    'nama_ayah'                => $dapodik_siswas[24],
-                    'tahun_lahir_ayah'         => $dapodik_siswas[25],
-                    'pendidikan_ayah'          => $dapodik_siswas[26],
-                    'pekerjaan_ayah'           => $dapodik_siswas[27],
-                    'penghasilan_ayah'         => $dapodik_siswas[28],
-                    'nik_ayah'                 => $dapodik_siswas[29],
-                    'nama_ibu'                 => $dapodik_siswas[30],
-                    'tahun_lahir_ibu'          => $dapodik_siswas[31],
-                    'pendidikan_ibu'           => $dapodik_siswas[32],
-                    'pekerjaan_ibu'            => $dapodik_siswas[33],
-                    'penghasilan_ibu'          => $dapodik_siswas[34],
-                    'nik_ibu'                  => $dapodik_siswas[35],
-                    'nama_wali'                => $dapodik_siswas[36],
-                    'tahun_lahir_wali'         => $dapodik_siswas[37],
-                    'pendidikan_wali'          => $dapodik_siswas[38],
-                    'pekerjaan_wali'           => $dapodik_siswas[39],
-                    'penghasilan_wali'         => $dapodik_siswas[40],
-                    'nik_wali'                 => $dapodik_siswas[41],
-                    'rombel_saat_ini'          => $dapodik_siswas[42],
-                    'no_peserta_un'            => $dapodik_siswas[43],
-                    'no_seri_ijazah'           => $dapodik_siswas[44],
-                    'penerima_kip'             => $dapodik_siswas[45],
-                    'nomor_kip'                => $dapodik_siswas[46],
-                    'nama_di_kip'              => $dapodik_siswas[47],
-                    'nomor_kks'                => $dapodik_siswas[48],
-                    'no_regist_akta_lahir'     => $dapodik_siswas[49],
-                    'bank'                     => $dapodik_siswas[50],
-                    'nomor_rekening_bank'      => $dapodik_siswas[51],
-                    'rekening_atas_nama'       => $dapodik_siswas[52],
-                    'layak_pip_usulan_sekolah' => $dapodik_siswas[53],
-                    'alasan_layak_pip'         => $dapodik_siswas[54],
-                    'kebutuhan_khusus'         => $dapodik_siswas[55],
-                    'sekolah_asal'             => $dapodik_siswas[56],
-                    'anak_ke_berapa'           => $dapodik_siswas[57],
-                    'lintang'                  => $dapodik_siswas[58],
-                    'bujur'                    => $dapodik_siswas[59],
-                    'no_kk'                    => $dapodik_siswas[60],
-                    'berat_badan'              => $dapodik_siswas[61],
-                    'tinggi_badan'             => $dapodik_siswas[62],
-                    'lingkar_kepala'           => $dapodik_siswas[63],
-                    'jml_saudara_kandung'      => $dapodik_siswas[64],
-                    'jarak_rumah_ke_sekolah_km'=> $dapodik_siswas[65],
+
+            $class = "";
+            if (str_contains($dapodik_siswas[42], '10')) {
+                $class = '10';
+            } else if (str_contains($dapodik_siswas[42], '11')) {
+                $class = '11';
+            } else if (str_contains($dapodik_siswas[42], '12')) {
+                $class = '12';
+            }
+
+            $data_parent = [];     
+                    array_push($data_parent, [
+                        'name_father'      => $dapodik_siswas[24],
+                        'name_mother'      => $dapodik_siswas[30],
+                        'wali'             => $dapodik_siswas[36]
+                    ]);
+            
+            $work_parent = [];
+                    array_push($work_parent, [
+                        'name_work_father'  => $dapodik_siswas[27],
+                        'name_work_mother'  => $dapodik_siswas[33],
+                        'name_work_wali'    => $dapodik_siswas[39]
+                    ]);            
+                
+            $place_work_parent = [];
+                    array_push($place_work_parent, [
+                        'place_work_father' => 'kosong',
+                        'place_work_mother' => 'kosong',
+                        'place_work_wali'   => 'kosong'
+                    ]);   
+                    
+            $title_work_parent = [];
+                    array_push($title_work_parent, [
+                        'title_work_father' => 'kosong',
+                        'title_work_mother' => 'kosong',
+                        'title_work_wali'   => 'kosong'
+                    ]);
+                    
+            $income_work_parent = [];
+                    array_push($income_work_parent, [
+                        'income_work_father' => 'kosong',
+                        'income_work_mother' => 'kosong',
+                        'income_work_mother' => 'kosong',
+                        'gaji_tetap_ayah'    => $dapodik_siswas[28],
+                        'gaji_tetap_ibu'     => $dapodik_siswas[34],
+                        'gaji_tetap_wali'    => $dapodik_siswas[40]
+                    ]);        
+            
+            $gender_check = '';
+            if ($dapodik_siswas[3] == 'L') {
+                $gender_check = 'Laki-Laki';
+            } else {
+                $gender_check = 'Perempuan';
+            }
+                    
+
+             array_push($dapodik_insert, [     
+                    'school_site'              => $unit,                                               
+                    'fullname'                 => $dapodik_siswas[1],
+                    'nis'                      => $dapodik_siswas[2],
+                    'gender'                   => $gender_check,
+                    'place_of_birth'           => $dapodik_siswas[5], 
+                    'date_of_birth'            => $dapodik_siswas[6],
+                    'religion'                 => $dapodik_siswas[8],   
+                    'address'                  => $dapodik_siswas[9],
+                    'home_phone'               => $dapodik_siswas[18],
+                    'hand_phone'               => $dapodik_siswas[19],
+                    'stage'                    => $stag,
+                    'classes'                  => $class,
+                    'file_additional_satu'     => json_encode($data_parent),
+                    'file_additional_dua'      => json_encode($work_parent),
+                    'file_additional_tiga'     => json_encode($place_work_parent),
+                    'file_additional_empat'    => json_encode($title_work_parent),
+                    'file_additional_lima'     => json_encode($income_work_parent),
+                    'studied_before'           => $dapodik_siswas[56],
+                    'created_at'               => date("Y-m-d H:i:s")
                 ]);
             }
 
-             //debug($dapodik_insert);
-             //dd($dapodik_insert);
-             Dapodik::query()->truncate();
+             Dapodik::query()->truncate();     
+             $test = Dapodik::insert($dapodik_insert);
 
-             
-             Dapodik::insert($dapodik_insert);
-
-             return redirect()->route('admin.pricing.index');  
+             return response()->json($test);  
 
             
     }
