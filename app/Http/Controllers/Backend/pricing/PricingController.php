@@ -37,6 +37,7 @@ use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
 use App\Imports\DapodikImport;
 use App\Imports\UserImport;
 use App\Models\Dapodik;
+use App\Models\Dapodik_system;
 use App\Models\Users_system;
 use Illuminate\Support\Facades\Date;
 
@@ -656,6 +657,7 @@ class PricingController extends Controller
             
             $dapodik_siswa = Excel::toArray(new DapodikImport, $request->file('file_dapodik'));
             $dapodik_insert = [];   
+            $users_insert   = [];
             
             $stag = "";
             if (str_contains($dapodik_siswa[0][1][0], 'SD')) {
@@ -664,6 +666,10 @@ class PricingController extends Controller
                 $stag = "SMP";
             } else if (str_contains($dapodik_siswa[0][1][0], 'SMAS')) {
                 $stag = "SMA";
+            } else if (str_contains($dapodik_siswa[0][1][0], 'TK')) {
+                $stag = "TK";
+            } else if (str_contains($dapodik_siswa[0][1][0], 'KB')) {
+                $stag = "KB";
             }
             
             $unit = "";
@@ -733,32 +739,91 @@ class PricingController extends Controller
                 $gender_check = 'Perempuan';
             }
                     
+            array_push($users_insert, [
+                
+                'first_name'               => $dapodik_siswas[24],
+                'phone'                    => $dapodik_siswas[19],
+                'password'                 => '$2a$12$6OxTbMRjrx7lEOj6tmNlbeaUGKuZdQJXpOke4QCiQbyWtACrH3ZpK',
+                'confirmed'                => '1',
+            ]);
 
-             array_push($dapodik_insert, [     
-                    'school_site'              => $unit,                                               
-                    'fullname'                 => $dapodik_siswas[1],
-                    'nis'                      => $dapodik_siswas[2],
-                    'gender'                   => $gender_check,
-                    'place_of_birth'           => $dapodik_siswas[5], 
-                    'date_of_birth'            => $dapodik_siswas[6],
-                    'religion'                 => $dapodik_siswas[8],   
-                    'address'                  => $dapodik_siswas[9],
-                    'home_phone'               => $dapodik_siswas[18],
-                    'hand_phone'               => $dapodik_siswas[19],
-                    'stage'                    => $stag,
-                    'classes'                  => $class,
-                    'file_additional_satu'     => json_encode($data_parent),
-                    'file_additional_dua'      => json_encode($work_parent),
-                    'file_additional_tiga'     => json_encode($place_work_parent),
-                    'file_additional_empat'    => json_encode($title_work_parent),
-                    'file_additional_lima'     => json_encode($income_work_parent),
-                    'studied_before'           => $dapodik_siswas[56],
-                    'created_at'               => date("Y-m-d H:i:s")
-                ]);
+            array_push($dapodik_insert, [                                          
+                'nama'                     => $dapodik_siswas[1],
+                'stage'                    => $stag,
+                'classes'                  => $class,
+                'unit'                     => $unit,
+                'nipd'                     => $dapodik_siswas[2],
+                'jk'                       => $dapodik_siswas[3],
+                'nisn'                     => $dapodik_siswas[4],
+                'tempat_lahir'             => $dapodik_siswas[5], 
+                'tanggal_lahir'            => $dapodik_siswas[6],
+                'nik'                      => $dapodik_siswas[7],
+                'agama'                    => $dapodik_siswas[8],   
+                'alamat'                   => $dapodik_siswas[9],
+                'rt'                       => $dapodik_siswas[10],
+                'rw'                       => $dapodik_siswas[11],
+                'dusun'                    => $dapodik_siswas[12],
+                'kelurahan'                => $dapodik_siswas[13],
+                'kecamatan'                => $dapodik_siswas[14],
+                'kode_pos'                 => $dapodik_siswas[15],
+                'jenis_tinggal'            => $dapodik_siswas[16],
+                'alat_transportasi'        => $dapodik_siswas[17],
+                'telepon'                  => $dapodik_siswas[18],
+                'hp'                       => $dapodik_siswas[19],
+                'email'                    => $dapodik_siswas[20],
+                'skhun'                    => $dapodik_siswas[21],
+                'Penerima_kps'             => $dapodik_siswas[22],
+                'no_kps'                   => $dapodik_siswas[23],
+                'nama_ayah'                => $dapodik_siswas[24],
+                'tahun_lahir_ayah'         => $dapodik_siswas[25],
+                'pendidikan_ayah'          => $dapodik_siswas[26],
+                'pekerjaan_ayah'           => $dapodik_siswas[27],
+                'penghasilan_ayah'         => $dapodik_siswas[28],
+                'nik_ayah'                 => $dapodik_siswas[29],
+                'nama_ibu'                 => $dapodik_siswas[30],
+                'tahun_lahir_ibu'          => $dapodik_siswas[31],
+                'pendidikan_ibu'           => $dapodik_siswas[32],
+                'pekerjaan_ibu'            => $dapodik_siswas[33],
+                'penghasilan_ibu'          => $dapodik_siswas[34],
+                'nik_ibu'                  => $dapodik_siswas[35],
+                'nama_wali'                => $dapodik_siswas[36],
+                'tahun_lahir_wali'         => $dapodik_siswas[37],
+                'pendidikan_wali'          => $dapodik_siswas[38],
+                'pekerjaan_wali'           => $dapodik_siswas[39],
+                'penghasilan_wali'         => $dapodik_siswas[40],
+                'nik_wali'                 => $dapodik_siswas[41],
+                'rombel_saat_ini'          => $dapodik_siswas[42],
+                'no_peserta_un'            => $dapodik_siswas[43],
+                'no_seri_ijazah'           => $dapodik_siswas[44],
+                'penerima_kip'             => $dapodik_siswas[45],
+                'nomor_kip'                => $dapodik_siswas[46],
+                'nama_di_kip'              => $dapodik_siswas[47],
+                'nomor_kks'                => $dapodik_siswas[48],
+                'no_regist_akta_lahir'     => $dapodik_siswas[49],
+                'bank'                     => $dapodik_siswas[50],
+                'nomor_rekening_bank'      => $dapodik_siswas[51],
+                'rekening_atas_nama'       => $dapodik_siswas[52],
+                'layak_pip_usulan_sekolah' => $dapodik_siswas[53],
+                'alasan_layak_pip'         => $dapodik_siswas[54],
+                'kebutuhan_khusus'         => $dapodik_siswas[55],
+                'sekolah_asal'             => $dapodik_siswas[56],
+                'anak_ke_berapa'           => $dapodik_siswas[57],
+                'lintang'                  => $dapodik_siswas[58],
+                'bujur'                    => $dapodik_siswas[59],
+                'no_kk'                    => $dapodik_siswas[60],
+                'berat_badan'              => $dapodik_siswas[61],
+                'tinggi_badan'             => $dapodik_siswas[62],
+                'lingkar_kepala'           => $dapodik_siswas[63],
+                'jml_saudara_kandung'      => $dapodik_siswas[64],
+                'jarak_rumah_ke_sekolah_km'=> $dapodik_siswas[65],
+            ]);
             }
 
-             Dapodik::query()->truncate();     
-             $test = Dapodik::insert($dapodik_insert);
+             Dapodik_system::query()->truncate();   
+             Users_system::insert($users_insert);  
+             $test = Dapodik_system::insert($dapodik_insert);
+
+             
 
              return response()->json($test);  
 
