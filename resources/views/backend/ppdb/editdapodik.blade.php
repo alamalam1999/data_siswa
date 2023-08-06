@@ -521,11 +521,14 @@
                           <div>
                             <?php
                                 $ppdb_id = "";
+                                $dapodik_id = "";
                                   if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
-                                      $ppdb_id = $ppdb->ppdb_id;
-                                  }
+                                      $ppdb_id    = $ppdb->ppdb_id;
+                                      $dapodik_id = $ppdb->dapodik_id;
+                                  }    
                             ?>
                             <input type="text" name="ppdb_id" value="<?php echo e($ppdb_id); ?>" />
+                            <input type="text" name="dapodik_id" value="{{ $dapodik_id }}" />
                             <select id="unit" class="form-select form-select-solid" name="unit">
                               <?php
                                   $unit = "";
@@ -706,10 +709,12 @@
                                        </form>
                                        <?php
                                           $ppdb_id = "";
-                                            if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
+                                            if($ppdb->ppdb_id != null && $ppdb->ppdb_id != "" && !empty($ppdb->ppdb_id)) {
                                                 $ppdb_id = $ppdb->ppdb_id;
+                                            }else {
+                                                $ppdb_id = $ppdb->dapodik_id;
                                             }
-                                      ?>
+                                        ?>
                                        <a href="{{ route('admin.ppdb.cekhistory', $ppdb_id) }}">
                                         <div class="btn btn-success btn-sm fs-9">Edit</div>
                                       </a>
@@ -740,7 +745,7 @@
                                            @if(is_array($file_additional) || is_object($file_additional))
                                           
                                           <tbody>
-                                            @foreach($file_add as $file)
+                                            @foreach($file_additional as $file)
                                               <tr>
                                                   <td><?php echo e($file->deskripsi); ?></td>
                                                   <td><?php echo e($file->tingkat); ?></td>
@@ -2186,6 +2191,8 @@
                                       <label for="exampleFormControlInput1">Status Siswa</label>
                                       <select name="data4" id="statussiswa" class="form-control">
                                         <option value="<?php echo e(($data4 =='' && $data4 == null) ? '' : $data4[0]); ?>"><?php echo e(($data4 =='' && $data4 == null) ? 'Pilih' : $data4[0]); ?></option>
+                                        <option value="1">Peserta didik Baru</option>
+                                        <option value="2">Peserta didik Pindahan</option>
                                       </select>
                                     </div>
                     
@@ -2225,6 +2232,8 @@
                                       <label for="exampleFormControlInput1">Jenis Kelamin</label>
                                       <select name="data6" id="statussiswa" class="form-control">
                                         <option value="<?php echo e(($data6 =='' && $data6 == null) ? '' : $data6[0]); ?>"><?php echo e(($data6 =='' && $data6 == null) ? 'Pilih' : $data6[0]); ?></option>
+                                        <option value="1">Perempuan</option>
+                                        <option value="2">Laki - Laki</option>
                                       </select>
                                     </div>
                     
@@ -2332,6 +2341,14 @@
                                       <label for="exampleFormControlInput1">Agama & Kepercayaan</label>
                                       <select name="data12" id="agamadankepercayaan" class="form-control">
                                         <option value="<?php echo e(($data12 =='' && $data12 == null) ? '' : $data12[0]); ?>"><?php echo e(($data12 =='' && $data12 == null) ? 'Pilih' : $data12[0]); ?></option>
+                                        <option value="1">Islam</option>
+                                        <option value="2">Kristen / Protestan</option>
+                                        <option value="3">Katholik</option>
+                                        <option value="4">Hindu</option>
+                                        <option value="5">Budha</option>
+                                        <option value="6">Khong Hu Chu</option>
+                                        <option value="7">Kepercayaan Kpd Tuhan YME</option>
+                                        <option value="8">Lainnya</option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Agama atau kepercayaan yang dianut oleh peserta didik. apabila peserta didik adalah penghayat kepercayaan (misanya pada daerah tertentu yang masih memiliki penganut kepercayaan), dapat memilih opsi Kepercayaan kpd Tuhan YME</a> </p>
                                     </div>
@@ -2356,6 +2373,8 @@
                                       <label for="exampleFormControlInput1">Kewarganegaraan</label>
                                       <select name="data13" id="agamadankepercayaan" class="form-control">
                                         <option value="<?php echo e(($data13 =='' && $data13 == null) ? '' : $data13[0]); ?>"><?php echo e(($data13 =='' && $data13 == null) ? 'Pilih' : $data13[0]); ?></option>
+                                        <option value="1">Indonesia</option>
+                                        <option value="2">Asing (WNA)</option>
                                       </select>
                                     </div>
                                     <div class="form-group mb-4">
@@ -2426,6 +2445,24 @@
                                         <div class="col-sm">
                                           <select name="data15" id="berkebutuhankhusus1" class="form-control">
                                             <option value="<?php echo e(($data15 =='' && $data15 == null) ? '' : $data15[0]); ?>"><?php echo e(($data15 =='' && $data15 == null) ? 'Pilih' : $data15[0]); ?></option>
+                                            <option value="1">Tidak</option>
+                                            <option value="2">Netra</option>
+                                            <option value="3">Rungu</option>
+                                            <option value="4">Grahita Ringan</option>
+                                            <option value="5">Grahita Sedang</option>
+                                            <option value="6">Daksa Ringan</option>
+                                            <option value="7">Daksa Sedang</option>
+                                            <option value="8">Laras</option>
+                                            <option value="9">Wicara F</option>
+                                            <option value="10">Tuna Ganda</option>
+                                            <option value="11">Hiper Aktif</option>
+                                            <option value="12">Cerdas Istimewa</option>
+                                            <option value="13">Bakat Istimewa</option>
+                                            <option value="14">Kesulitan Belajar</option>
+                                            <option value="15">Narkoba</option>
+                                            <option value="16">Indigo</option>
+                                            <option value="17">Down Sindrome</option>
+                                            <option value="18">Autis</option>
                                           </select>
                                         </div>
                                         <?php
@@ -2478,6 +2515,24 @@
                                         <div class="col-sm">
                                           <select name="data16" id="berkebutuhankhusus2" class="form-control">
                                             <option value="<?php echo e(($data16 =='' && $data16 == null) ? '' : $data16[0]); ?>"><?php echo e(($data16 =='' && $data16 == null) ? 'Pilih' : $data16[0]); ?></option>
+                                            <option value="1">Tidak</option>
+                                            <option value="2">Netra</option>
+                                            <option value="3">Rungu</option>
+                                            <option value="4">Grahita Ringan</option>
+                                            <option value="5">Grahita Sedang</option>
+                                            <option value="6">Daksa Ringan</option>
+                                            <option value="7">Daksa Sedang</option>
+                                            <option value="8">Laras</option>
+                                            <option value="9">Wicara F</option>
+                                            <option value="10">Tuna Ganda</option>
+                                            <option value="11">Hiper Aktif</option>
+                                            <option value="12">Cerdas Istimewa</option>
+                                            <option value="13">Bakat Istimewa</option>
+                                            <option value="14">Kesulitan Belajar</option>
+                                            <option value="15">Narkoba</option>
+                                            <option value="16">Indigo</option>
+                                            <option value="17">Down Sindrome</option>
+                                            <option value="18">Autis</option>
                                           </select>
                                         </div>
                                       </div>
@@ -2633,6 +2688,13 @@
                                       <label for="">Tempat Tinggal</label>
                                       <select name="data25" id="tempattinggal" class="form-control">
                                         <option value="<?php echo e(($data25 =='' && $data25 == null) ? '' : $data25[0]); ?>"><?php echo e(($data25 =='' && $data25 == null) ? 'pilih' : $data25[0]); ?></option>
+                                        <option value="1">Bersama Orang Tua</option>
+                                        <option value="2">Wali</option>
+                                        <option value="3">Kos</option>
+                                        <option value="4">Asrama</option>
+                                        <option value="5">Panti Asuhan</option>
+                                        <option value="6">Pesantren</option>
+                                        <option value="7">Lainnya</option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Kepemilikan tempat tinggal peserta didik saat ini(yang telah di isi pada kolom-kolom sebelumnya diatas)</p>
                                     </div>
@@ -2669,6 +2731,14 @@
                                       <label for="">Moda Transportasi</label>
                                       <select name="data26" id="modatransportasi" class="form-control">
                                         <option value="<?php echo e(($data26 =='' && $data26 == null) ? '' : $data26[0]); ?>"><?php echo e(($data26 =='' && $data26 == null) ? 'pilih' : $data26[0]); ?></option>
+                                        <option value="1">Jalan Kaki</option>
+                                        <option value="2">Kendaraan Pribadi</option>
+                                        <option value="3">Kendaraan Umum/angkot/pete-pete</option>
+                                        <option value="4">Jemputan Sekolah</option>
+                                        <option value="5">Kereta Api</option>
+                                        <option value="6">Ojek</option>
+                                        <option value="7">Andong/Bendi/Sado/Dokar/Delman/Beca</option>
+                                        <option value="8">Lainnya</option>
                                       </select>
                                       <p style="color: #c003ff" class="fs-8">Jenis transportasi utama atau yang paling sering digunakan peserta didik untuk berangkat ke sekolah</p>
                                     </div>
@@ -2721,7 +2791,9 @@
                                        <label for="">Penerima KPS/PKH</label>
                                        <select name="data29" id="penerimakpspkh" class="form-control">
                                         <option value="<?php echo e(($data29 =='' && $data29 == null) ? '' : $data29[0]); ?>"><?php echo e(($data29 =='' && $data29 == null) ? 'Pilih' : $data29[0]); ?></option>
-                                       </select>
+                                          <option value="1">Ya</option>
+                                          <option value="2">TIdak</option>
+                                      </select>
                                        <p style="color: #c003ff" class="fs-8">Status peserta didik sebagai penerima manfaat KPS (Kartu Perlindungan Sosial)/PKH(Program Keluarga Harapan).
                                         Peserta didik dinyatakan sebagai penerima KPS/PKH apabila tercantum di dalam kartu keluarga dengan kepala keluarga pemegang KPS/PKH Sebagai
                                         contoh, peserta didik tercantum pada KK dengan kepada keluarganya adalah kakek. Apabila kakek didik peserta didik disebut pemegang KPS/PKH,
@@ -2768,7 +2840,9 @@
                                           <div class="col-sm">
                                             <label for="">Usulan dari Sekolah (layak PIP)</label>
                                             <select name="data31" id="penerimakpspkh" class="form-control">
-                                            <option value="<?php echo e(($data31 =='' && $data31 == null) ? '' : $data31[0]); ?>"><?php echo e(($data31 =='' && $data31 == null) ? 'Pilih' : $data31[0]); ?></option>
+                                              <option value="<?php echo e(($data31 =='' && $data31 == null) ? '' : $data31[0]); ?>"><?php echo e(($data31 =='' && $data31 == null) ? 'Pilih' : $data31[0]); ?></option>
+                                              <option value="1">Ya</option>
+                                              <option value="2">Tidak</option>
                                             </select>
                                             <p style="color: #c003ff" class="fs-8">Pilih Ya apabila peserta didik layak diajukan sebagai penerima manfaat Program Indonesia Pintar .Pilih tidak jika tidak memenuhi kriteria Opsi ini khusus bagi peserta didik yang tidak memiliki KIP.Peserta didik yang memiliki KIP silahkan pilih Tidak</p>
                                           </div>
@@ -2791,7 +2865,9 @@
                                               ?>
                                             <label for="">Penerima KIP (Kartu Indonesia Pintar)</label>
                                             <select name="data32" id="penerimakip" class="form-control">
-                                            <option value="<?php echo e(($data32 =='' && $data32 == null) ? '' : $data32[0]); ?>"><?php echo e(($data32 =='' && $data32 == null) ? 'Pilih' : $data32[0]); ?></option>
+                                              <option value="<?php echo e(($data32 =='' && $data32 == null) ? '' : $data32[0]); ?>"><?php echo e(($data32 =='' && $data32 == null) ? 'Pilih' : $data32[0]); ?></option>
+                                              <option value="1">Ya</option>
+                                              <option value="2">TIdak</option>
                                             </select>
                                             <p style="color: #c003ff" class="fs-8">Pilih Ya apabila peserta didik memiliki Kartu Indonesia Pintar (KIP) .Pilih Tidak jika tidak memiliki</p>
                                           </div>
@@ -2846,7 +2922,9 @@
                                               ?>
                                         <label for="">Terima fisik Kartu (KIP)</label>
                                         <select name="data35" id="terimakip" class="form-control">
-                                        <option value="<?php echo e(($data35 =='' && $data35 == null) ? '' : $data35[0]); ?>"><?php echo e(($data35 =='' && $data35 == null) ? 'Pilih' : $data35[0]); ?></option>
+                                          <option value="<?php echo e(($data35 =='' && $data35 == null) ? '' : $data35[0]); ?>"><?php echo e(($data35 =='' && $data35 == null) ? 'Pilih' : $data35[0]); ?></option>
+                                          <option value="1">Ya</option>
+                                          <option value="2">TIdak</option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Status bahwa peserta didik sudah menerima atau belum menerima Kartu Indonesia Pintar secara fisik</p>
                                       </div>
@@ -2886,6 +2964,15 @@
                                         <label for="">Alasan layak PIP</label>
                                         <select name="data36" id="layakpip" class="form-control">
                                           <option value="<?php echo e(($data36 =='' && $data36 == null) ? '' : $data36[0]); ?>"><?php echo e(($data36 =='' && $data36 == null) ? 'Pilih' : $data36[0]); ?></option>
+                                          <option value="1">Pemegang PKH/LPS/KIP</option>
+                                          <option value="2">Penerima BSM 2014 </option>
+                                          <option value="3">Yatim Piatu/ Panti Asuhan/ Panti Sosial</option>
+                                          <option value="4">Dampak Bencana</option>
+                                          <option value="5">Pernah Drop Out</option>
+                                          <option value="6">Siswa Miskin/Rentan Miskin</option>
+                                          <option value="7">Daerah Konflik</option>
+                                          <option value="8">Keluarga Terpidana</option>
+                                          <option value="9">Kelainan Fisik</option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Alasan utama peserta didik jika layak menerima mamfaat PIP. kolom ini akan muncul apabila dipilih Ya untuk mengisi kolom Usulan dari Sekolah (Layak PIP)</p>
                                       </div>
@@ -3022,6 +3109,18 @@
                                           <label for="">Pendidikan</label>
                                           <select name="data43" id="pendidikanayah" class="form-control">
                                             <option value="<?php echo e(($data43 =='' && $data43 == null) ? '' : $data43[0]); ?>"><?php echo e(($data43 =='' && $data43 == null) ? 'Pilih' : $data43[0]); ?></option>
+                                            <option value="1">Tidak Sekolah</option>
+                                            <option value="2">Putus SD</option>
+                                            <option value="3">SD Sederajat</option>
+                                            <option value="4">SMP Sederajat</option>
+                                            <option value="5">SMA Sederajat</option>
+                                            <option value="6">D1</option>
+                                            <option value="7">D2</option>
+                                            <option value="8">D3</option>
+                                            <option value="9">D4/S1</option>
+                                            <option value="10">S2</option>
+                                            <option value="11">S3</option>
+                                            <option value="12">S4</option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Pendidikan terakhir ayah kandung peserta didik</p>
                                         </div>
@@ -3070,6 +3169,20 @@
                                           <label for="">Pekerjaan</label>
                                           <select name="data44" id="pekerjaanayah" class="form-control">
                                             <option value="<?php echo e(($data44 =='' && $data44 == null) ? '' : $data44[0]); ?>"><?php echo e(($data44 =='' && $data44 == null) ? 'Pilih' : $data44[0]); ?></option>
+                                            <option value="1">Tidak Bekerja</option>
+                                            <option value="2">Nelayan</option>
+                                            <option value="3">Petani</option>
+                                            <option value="4">Peternak</option>
+                                            <option value="5">PNS/TNI/POLRI</option>
+                                            <option value="6">Karyawan Swasta</option>
+                                            <option value="7">Pedagang Kecil</option>
+                                            <option value="8">Pedagang Besar</option>
+                                            <option value="9">Wiraswasta</option>
+                                            <option value="10">Wirausaha</option>
+                                            <option value="11">Buruh</option>
+                                            <option value="12">Pensiunan</option>
+                                            <option value="13">Meninggal Dunia</option>
+                                            <option value="14">Lain - Lain</option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Pekerjaan utama ayah kandung peserta didik, Pilih Meninggal Dunia apabila didik telah meninggal dunia</p>
                                         </div>
@@ -3098,6 +3211,10 @@
                                           <label for="">Penghasilan bulanan</label>
                                           <select name="data45" id="penghasilanayah" class="form-control">
                                             <option value="<?php echo e(($data45 =='' && $data45 == null) ? '' : $data45[0]); ?>"><?php echo e(($data45 =='' && $data45 == null) ? 'Pilih' : $data45[0]); ?></option>
+                                            <option value="1">2 juta - 5 juta</option>
+                                            <option value="2">5 juta - 10 juta</option>
+                                            <option value="3">10 juta - 20 juta</option>
+                                            <option value="4">lebih dari 20 juta</option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Rentang penghasilan ayah kandung peserta didik, Kosongkan kolom ini apabila ayah kandung peserta didik telah meninggal</p>
                                         </div>
@@ -3154,6 +3271,24 @@
                                           <label for="">Berkebutuhan Khusus</label>
                                           <select name="data46" id="berkebutuhankhusus3" class="form-control">
                                             <option value="<?php echo e(($data46 =='' && $data46 == null) ? '' : $data46[0]); ?>"><?php echo e(($data46 =='' && $data46 == null) ? 'Pilih' : $data46[0]); ?></option>
+                                            <option value="1">Tidak</option>
+                                            <option value="2">Netra</option>
+                                            <option value="3">Rungu</option>
+                                            <option value="4">Grahita Ringan</option>
+                                            <option value="5">Grahita Sedang</option>
+                                            <option value="6">Daksa Ringan</option>
+                                            <option value="7">Daksa Sedang</option>
+                                            <option value="8">Laras</option>
+                                            <option value="9">Wicara F</option>
+                                            <option value="10">Tuna Ganda</option>
+                                            <option value="11">Hiper Aktif</option>
+                                            <option value="12">Cerdas Istimewa</option>
+                                            <option value="13">Bakat Istimewa</option>
+                                            <option value="14">Kesulitan Belajar</option>
+                                            <option value="15">Narkoba</option>
+                                            <option value="16">Indigo</option>
+                                            <option value="17">Down Sindrome</option>
+                                            <option value="18">Autis</option>
                                           </select>
                                           <p style="color: #c003ff" class="fs-8">Kebutuhan khusus yang disandang oleh ayah peserta didik . Dapat dipilih lebih dari satu</p>
                                         </div>
@@ -3249,6 +3384,18 @@
                                         <label for="">Pendidikan</label>
                                         <select name="data50" id="pendidikanibu" class="form-control">
                                           <option value="<?php echo e(($data50 =='' && $data50 == null) ? '' : $data50[0]); ?>"><?php echo e(($data50 =='' && $data50 == null) ? 'Pilih' : $data50[0]); ?></option>
+                                          <option value="1">Tidak Sekolah</option>
+                                          <option value="2">Putus SD</option>
+                                          <option value="3">SD Sederajat</option>
+                                          <option value="4">SMP Sederajat</option>
+                                          <option value="5">SMA Sederajat</option>
+                                          <option value="6">D1</option>
+                                          <option value="7">D2</option>
+                                          <option value="8">D3</option>
+                                          <option value="9">D4/S1</option>
+                                          <option value="10">S2</option>
+                                          <option value="11">S3</option>
+                                          <option value=“12”>S4</option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Pendidikan terakhir ibu kandung peserta didik</p>
                                       </div>
@@ -3297,6 +3444,20 @@
                                         <label for="">Pekerjaan</label>
                                         <select name="data51" id="pekerjaanibu" class="form-control" >
                                           <option value="<?php echo e(($data51 =='' && $data51 == null) ? '' : $data51[0]); ?>"><?php echo e(($data51 =='' && $data51 == null) ? 'Pilih' : $data51[0]); ?></option>
+                                          <option value="1">Tidak Bekerja</option>
+                                          <option value="2">Nelayan</option>
+                                          <option value="3">Petani</option>
+                                          <option value="4">Peternak</option>
+                                          <option value="5">PNS/TNI/POLRI</option>
+                                          <option value="6">Karyawan Swasta</option>
+                                          <option value="7">Pedagang Kecil</option>
+                                          <option value="8">Pedagang Besar</option>
+                                          <option value="9">Wiraswasta</option>
+                                          <option value="10">Wirausaha</option>
+                                          <option value="11">Buruh</option>
+                                          <option value="12">Pensiunan</option>
+                                          <option value="13">Meninggal Dunia</option>
+                                          <option value="14">Lain - Lain</option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Pekerjaan utama ibu kandung peserta didik, Pilih Meninggal Dunia apabila didik telah meninggal dunia</p>
                                       </div>
@@ -3325,6 +3486,10 @@
                                         <label for="">Penghasilan bulanan</label>
                                         <select name="data52" id="penghasilanibu" class="form-control">
                                           <option value="<?php echo e(($data52 =='' && $data52 == null) ? '' : $data52[0]); ?>"><?php echo e(($data52 =='' && $data52 == null) ? 'Pilih' : $data52[0]); ?></option>
+                                          <option value="1">2 juta - 5 juta</option>
+                                          <option value="2">5 juta - 10 juta</option>
+                                          <option value="3">10 juta - 20 juta</option>
+                                          <option value="4">lebih dari 20 juta</option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Rentang penghasilan ibu kandung peserta didik, Kosongkan kolom ini apabila ibu kandung peserta didik telah meninggal</p>
                                       </div>
@@ -3381,6 +3546,24 @@
                                         <label for="">Berkebutuhan Khusus</label>
                                         <select name="data53" id="berkebutuhankhusus4" class="form-control">
                                           <option value="<?php echo e(($data53 =='' && $data53 == null) ? '' : $data53[0]); ?>"><?php echo e(($data53 =='' && $data53 == null) ? 'Pilih' : $data53[0]); ?></option>
+                                          <option value="1">Tidak</option>
+                                          <option value="2">Netra</option>
+                                          <option value="3">Rungu</option>
+                                          <option value="4">Grahita Ringan</option>
+                                          <option value="5">Grahita Sedang</option>
+                                          <option value="6">Daksa Ringan</option>
+                                          <option value="7">Daksa Sedang</option>
+                                          <option value="8">Laras</option>
+                                          <option value="9">Wicara F</option>
+                                          <option value="10">Tuna Ganda</option>
+                                          <option value="11">Hiper Aktif</option>
+                                          <option value="12">Cerdas Istimewa</option>
+                                          <option value="13">Bakat Istimewa</option>
+                                          <option value="14">Kesulitan Belajar</option>
+                                          <option value="15">Narkoba</option>
+                                          <option value="16">Indigo</option>
+                                          <option value="17">Down Sindrome</option>
+                                          <option value="18">Autis</option>
                                         </select>
                                         <p style="color: #c003ff" class="fs-8">Kebutuhan khusus yang disandang oleh ibu peserta didik . Dapat dipilih lebih dari satu</p>
                                       </div>
@@ -3474,6 +3657,18 @@
                                     <label for="">Pendidikan</label>
                                     <select name="data57" id="pendidikanwali" class="form-control" >
                                       <option value="<?php echo e(($data57 =='' && $data57 == null) ? '' : $data57[0]); ?>"><?php echo e(($data57 =='' && $data57 == null) ? 'Pilih' : $data57[0]); ?></option>
+                                      <option value="1">Tidak Sekolah</option>
+                                      <option value="2">Putus SD</option>
+                                      <option value="3">SD Sederajat</option>
+                                      <option value="4">SMP Sederajat</option>
+                                      <option value="5">SMA Sederajat</option>
+                                      <option value="6">D1</option>
+                                      <option value="7">D2</option>
+                                      <option value="8">D3</option>
+                                      <option value="9">D4/S1</option>
+                                      <option value="10">S2</option>
+                                      <option value="11">S3</option>
+                                      <option value="12">S4</option>
                                     </select>
                                     <p style="color: #c003ff" class="fs-8">Pendidikan terakhir wali peserta didik</p>
                                   </div>
@@ -3522,6 +3717,20 @@
                                     <label for="">Pekerjaan</label>
                                     <select name="data58" id="pekerjaanwali" class="form-control">
                                       <option value="<?php echo e(($data58 =='' && $data58 == null) ? '' : $data58[0]); ?>"><?php echo e(($data58 =='' && $data58 == null) ? 'Pilih' : $data58[0]); ?></option>
+                                      <option value="1">Tidak Bekerja</option>
+                                      <option value="2">Nelayan</option>
+                                      <option value="3">Petani</option>
+                                      <option value="4">Peternak</option>
+                                      <option value="5">PNS/TNI/POLRI</option>
+                                      <option value="6">Karyawan Swasta</option>
+                                      <option value="7">Pedagang Kecil</option>
+                                      <option value="8">Pedagang Besar</option>
+                                      <option value="9">Wiraswasta</option>
+                                      <option value="10">Wirausaha</option>
+                                      <option value="11">Buruh</option>
+                                      <option value="12">Pensiunan</option>
+                                      <option value="13">Meninggal Dunia</option>
+                                      <option value="14">Lain - Lain</option>
                                     </select>
                                     <p style="color: #c003ff" class="fs-8">Pekerjaan utama wali kandung peserta didik, Pilih Meninggal Dunia apabila didik telah meninggal dunia</p>
                                   </div>
@@ -3550,6 +3759,10 @@
                                     <label for="">Penghasilan bulanan</label>
                                     <select name="data59" id="penghasilanwali" class="form-control">
                                       <option value="<?php echo e(($data59 =='' && $data59 == null) ? '' : $data59[0]); ?>"><?php echo e(($data59 =='' && $data59 == null) ? 'Pilih' : $data59[0]); ?></option>
+                                      <option value="1">2 juta - 5 juta</option>
+                                      <option value="2">5 juta - 10 juta</option>
+                                      <option value="3">10 juta - 20 juta</option>
+                                      <option value="4">lebih dari 20 juta</option>
                                     </select>
                                     <p style="color: #c003ff" class="fs-8">Rentang penghasilan wali kandung peserta didik, Kosongkan kolom ini apabila wali kandung peserta didik telah meninggal</p>
                                   </div>
@@ -3646,6 +3859,22 @@
                                     <label for="">Jenis Ekstrakulikuler</label>
                                     <select name="data63" id="ekstrakulikuler" class="form-control">
                                       <option value="<?php echo e(($data63 =='' && $data63 == null) ? '' : $data63[0]); ?>"><?php echo e(($data63 =='' && $data63 == null) ? 'Pilih' : $data63[0]); ?></option>
+                                      <option value="1">Bahasa</option>
+                                      <option value="2">Karya Ilmiah Remaja/Sains KIR</option>
+                                      <option value="3">Kerohanian</option>
+                                      <option value="4">Komputer dan teknologi</option>
+                                      <option value="5">Olahraga / Beladiri</option>
+                                      <option value="6">Otomotif / Bengkel / Bikers</option>
+                                      <option value="7">Palang Merah Remaja(PMR)</option>
+                                      <option value="8">Paskibra</option>
+                                      <option value="9">Palang Keamanan Sekolah (PKS)</option>
+                                      <option value="10">Pencipta Alam</option>
+                                      <option value="11">Pramuka</option>
+                                      <option value="12">Seni Media, Jurnalistik</option>
+                                      <option value="13">Seni Musik</option>
+                                      <option value="14">Seni Tari dan Peran</option>
+                                      <option value="15">Unit Kesehatan Sekolah (UKS)</option>
+                                      <option value="16">Wirausaha/Koperasi/Keterampilan produktif</option>
                                     </select>
                                   </div>
                     
@@ -3781,6 +4010,10 @@
                                           ?>
                                           <select name="data81" id="tingkat" class="form-control">
                                             <option value="<?php echo e(($data81 =='' && $data81 == null) ? '' : $data81[0]); ?>"><?php echo e(($data81 =='' && $data81 == null) ? 'Pilih' : $data81[0]); ?></option>
+                                            <option value="1">Sains</option>
+                                            <option value="2">Seni</option>
+                                            <option value="3">Olahraga</option>
+                                            <option value="4">Lain - Lain</option>
                                           </select>
                                         </div>
                                         <div class="col-sm">
@@ -3810,6 +4043,12 @@
                                           ?>
                                           <select name="data82" id="namaprestasi" class="form-control">
                                             <option value="<?php echo e(($data82 =='' && $data82 == null) ? '' : $data82[0]); ?>"><?php echo e(($data82 =='' && $data82 == null) ? 'Pilih' : $data82[0]); ?></option>
+                                            <option value="1">Sekolah</option>
+                                            <option value="2">Kecamatan</option>
+                                            <option value="3">Kabupaten</option>
+                                            <option value="4">Provinsi</option>
+                                            <option value="5">Nasional</option>
+                                            <option value="6">Internasional</option>
                                           </select>
                                         </div>
                                         <div class="col-sm">
@@ -3873,6 +4112,10 @@
                                             ?>
                                         <select name="data86" id="tingkat" class="form-control">
                                           <option value="<?php echo e(($data86 =='' && $data86 == null) ? '' : $data86[0]); ?>"><?php echo e(($data86 =='' && $data86 == null) ? 'Pilih' : $data86[0]); ?></option>
+                                          <option value="1">Sains</option>
+                                          <option value="2">Seni</option>
+                                          <option value="3">Olahraga</option>
+                                          <option value="4">Lain - Lain</option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -3902,6 +4145,12 @@
                                         ?>
                                         <select name="data87" id="namaprestasi" class="form-control">
                                           <option value="<?php echo e(($data87 =='' && $data87 == null) ? '' : $data87[0]); ?>"><?php echo e(($data87 =='' && $data87 == null) ? 'Pilih' : $data87[0]); ?></option>
+                                          <option value="1">Sekolah</option>
+                                          <option value="2">Kecamatan</option>
+                                          <option value="3">Kabupaten</option>
+                                          <option value="4">Provinsi</option>
+                                          <option value="5">Nasional</option>
+                                          <option value="6">Internasional</option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -3966,6 +4215,10 @@
                                         ?>
                                       <select name="data91" id="tingkat" class="form-control" >
                                         <option value="<?php echo e(($data91 =='' && $data91 == null) ? '' : $data91[0]); ?>"><?php echo e(($data91 =='' && $data91 == null) ? 'Pilih' : $data91[0]); ?></option>
+                                        <option value="1">Sains</option>
+                                        <option value="2">Seni</option>
+                                        <option value="3">Olahraga</option>
+                                        <option value="4">Lain - Lain</option>
                                       </select>
                                     </div>
                                     <div class="col-sm">
@@ -3995,6 +4248,12 @@
                                         ?>
                                       <select name="data92" id="namaprestasi" class="form-control">
                                         <option value="<?php echo e(($data92 =='' && $data92 == null) ? '' : $data92[0]); ?>"><?php echo e(($data92 =='' && $data92 == null) ? 'Pilih' : $data92[0]); ?></option>
+                                        <option value="1">Sekolah</option>
+                                        <option value="2">Kecamatan</option>
+                                        <option value="3">Kabupaten</option>
+                                        <option value="4">Provinsi</option>
+                                        <option value="5">Nasional</option>
+                                        <option value="6">Internasional</option>
                                       </select>
                                     </div>
                                     <div class="col-sm">
@@ -4087,6 +4346,11 @@
                                         ?>
                                           <select name="data96" id="tingkat" class="form-control">
                                             <option value="<?php echo e(($data96 =='' && $data96 == null) ? '' : $data96[0]); ?>"><?php echo e(($data96 =='' && $data96 == null) ? 'Pilih' : $data96[0]); ?></option>
+                                            <option value="1">Anak Berprestasi</option>
+                                            <option value="2">Kurang Mampu</option>
+                                            <option value="3">Pendidikan</option>
+                                            <option value="4">Unggulan</option>
+                                            <option value="5">Lain - Lain</option>
                                           </select>
                                         </div>
                                         <div class="col-sm">
@@ -4150,6 +4414,11 @@
                                           ?>
                                         <select name="data100" id="tingkat" class="form-control" >
                                           <option value="<?php echo e(($data100 =='' && $data100 == null) ? '' : $data100[0]); ?>"><?php echo e(($data100 =='' && $data100 == null) ? 'Pilih' : $data100[0]); ?></option>
+                                          <option value="1">Anak Berprestasi</option>
+                                          <option value="2">Kurang Mampu</option>
+                                          <option value="3">Pendidikan</option>
+                                          <option value="4">Unggulan</option>
+                                          <option value="5">Lain - Lain</option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -4213,6 +4482,11 @@
                                         ?>
                                         <select name="data104" id="tingkat" class="form-control" >
                                           <option value="<?php echo e(($data104 =='' && $data104 == null) ? '' : $data104[0]); ?>"><?php echo e(($data104 =='' && $data104 == null) ? 'Pilih' : $data104[0]); ?></option>
+                                          <option value="1">Anak Berprestasi</option>
+                                          <option value="2">Kurang Mampu</option>
+                                          <option value="3">Pendidikan</option>
+                                          <option value="4">Unggulan</option>
+                                          <option value="5">Lain - Lain</option>
                                         </select>
                                       </div>
                                       <div class="col-sm">
@@ -5368,7 +5642,7 @@
                                                 }
                                                 ?>
                                             <?php if($ppdb->stage == "SD"): ?>
-                                            <select name="data14" id="">
+                                            <select name="data14" id="" class="form-control">
                                               <option value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>"><?php echo e(!empty($result[0]) ? $result[0] : 'Pilih'); ?></option>
                                               <option value="1">1</option>
                                               <option value="2">2</option>
@@ -5381,7 +5655,7 @@
                   
                   
                                             <?php if($ppdb->stage == "TK" || $ppdb->stage == "KB"): ?>
-                                            <select name="data14" id="">
+                                            <select name="data14" id="" class="form-control">
                                               <option value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>"><?php echo e(!empty($result[0]) ? $result[0] : 'Pilih'); ?></option>
                                               <option value="<?php echo e($ppdb->stage == "KB" ? 'KB-A' : 'TK-A'); ?>"><?php echo e($ppdb->stage == "KB" ? 'KB-A' : 'TK-A'); ?></option>
                                               <option value="<?php echo e($ppdb->stage == "KB" ? 'KB-B' : 'TK-B'); ?>"><?php echo e($ppdb->stage == "KB" ? 'KB-B' : 'TK-B'); ?></option>
@@ -5389,7 +5663,7 @@
                                             <?php endif; ?>
                   
                                             <?php if($ppdb->stage == "SMP" || $ppdb->stage == "SMA"): ?>
-                                            <select name="data14" id="">
+                                            <select name="data14" id="" class="form-control">
                                               <option value="<?php echo e(!empty($result[0]) ? $result[0] :  $result); ?>"><?php echo e(!empty($result[0]) ? $result[0] : 'Pilih'); ?></option>
                                               <option value="1">1</option>
                                               <option value="2">2</option>
@@ -6290,8 +6564,11 @@
                                                 }
                                                 ?>
                   
-                                            <select name="data56" id="">
-                                              <option value="<?php echo e($brand); ?>"><?php echo e($brand); ?></option>
+                                            <select name="data56" id="" class="form-control">
+                                              <option value="<?php echo e($brand); ?>"><?php echo e($brand); ?></option><option value="1">Keluarga</option>
+                                              <option value="2">Tetangga</option>
+                                              <option value="3">Teman</option>
+                                              <option value="4">Tidak Melalui Brand</option>
                                             </select>
                   
                                       </div>
@@ -6319,10 +6596,12 @@
                                                 } 
                                                 ?>
                   
-                                            <select name="data57" id="">
+                                            <select name="data57" id="" class="form-control">
                                               <option value="<?php echo e($kegiatan_sekolah); ?>"><?php echo e($kegiatan_sekolah); ?></option>
-                                            </select>
-                  
+                                              <option value="1">Open House</option>
+                                              <option value="2">Lomba antar Sekolah</option>
+                                              <option value="3">Tidak Melalui Kegiatan Sekolah</option>
+                                            </select>  
                                       </div>
                                     </div>
                   
@@ -6350,8 +6629,12 @@
                                                 }
                                                 ?>
                   
-                                            <select name="data58" id="">
+                                            <select name="data58" id="" class="form-control">
                                               <option value="<?php echo e($media_cetak); ?>"><?php echo e($media_cetak); ?></option>
+                                              <option value="1">Spanduk</option>
+                                              <option value="2">Brosur</option>
+                                              <option value="3">Koran</option>
+                                              <option value="4">Tidak Melalui Media Cetak</option>
                                             </select>
                   
                                       </div>
@@ -6381,8 +6664,12 @@
                                                 }
                                                 ?>
                   
-                                            <select name="data59" id="">
+                                            <select name="data59" id="" class="form-control">
                                               <option value="<?php echo e($media_elektronik); ?>"><?php echo e($media_elektronik); ?></option>
+                                              <option value="1">Televisi</option>
+                                              <option value="2">Radio</option>
+                                              <option value="3">SMS</option>
+                                              <option value="4">Tidak Melalui Media Elektronik</option>
                                             </select>
                   
                                       </div>
@@ -6415,8 +6702,12 @@
                                                 }
                                                 ?>
                   
-                                            <select name="data60" id="">
-                                              <option value="<?php echo e($media_sosial); ?>"><?php echo e($media_sosial); ?></option>
+                                            <select name="data60" id="" class="form-control">
+                                              <option value="<?php echo e($media_sosial); ?>"><?php echo e($media_sosial); ?></option><option value="1">Instagram</option>
+                                              <option value="2">Facebook</option>
+                                              <option value="3">Twitter</option>
+                                              <option value="4">Linkedin</option>
+                                              <option value="5">Tidak Melalui Media Sosial</option>
                                             </select>
                   
                                       </div>
@@ -6436,7 +6727,7 @@
                                                 }
                                                 ?>
                   
-                                            <select name="data61" id="">
+                                            <select name="data61" id="" class="form-control">
                                               <option value="<?php echo e($internet); ?>"><?php echo e($internet); ?></option>
                                               <option value="1">Website</option>
                                               <option value="2">Google</option>

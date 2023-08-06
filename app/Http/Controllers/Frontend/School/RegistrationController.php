@@ -185,15 +185,7 @@ class RegistrationController extends Controller
 
                 $reregistration->save();
 
-                // return response()->json([
-                //     'is_success' => true,
-                //     'message' => 'DAFTAR BERHASIL' .$ppdb
-                // ]);
-
                 return new RedirectResponse(route('frontend.user.reregistration', $ppdb->id), ['flash_success' => ' Lanjut Tahap Berikutnya']);
-
-                // return redirect()->with('alert','hello');
-
 
             } catch(\Exception $e) {
                     debug($e->getMessage());

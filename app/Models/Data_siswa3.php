@@ -11,6 +11,8 @@ class Data_siswa3 extends Model
 
     protected $table = 'data_siswa_3';
 
+    public $timestamps = false;
+
     protected $primaryKey = 'id';
 
     protected $fillable = [

@@ -5,9 +5,9 @@ namespace App\Models;
 use App\Models\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 
-class PPDB extends Model
+class PPDBdapodik extends Model
 {
-    protected $table = 'ppdb';
+    protected $table = 'ppdb_system';
 
     public $incrementing = false;
 
@@ -22,7 +22,7 @@ class PPDB extends Model
         'stage',
         'classes',
         'student_status',
-        'dapodik_id',
+
         'fullname',
         'gender',
         'place_of_birth',

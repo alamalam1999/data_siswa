@@ -98,7 +98,7 @@
                                           <!--begin::Description-->
                                           <div class="text-muted fs-7">Set the phot thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                                           <!--end::Description-->                                   
-                                        <button class="btn btn-primary btn-sm fs-9" value="{{ $ppdb->ppdb_id }}" name="id_ppdb" >Submit</button>                                    
+                                        <button class="btn btn-primary btn-sm fs-9" value="{{ ($ppdb->ppdb_id == null) ? $ppdb->dapodik_id : $ppdb->ppdb_id }}" name="id_ppdb" >Submit</button>                                    
                                         </form>
                                       </div>
                                       <!--end::Card body-->
@@ -424,7 +424,7 @@
                                 <label class="form-label fw-bolder text-dark fs-6">Unit</label>
                                 <!--begin::Switch-->
                           <div>
-                            <input type="text" name="ppdb_id" value="<?php echo e($ppdb->ppdb_id); ?>" />
+                            <input type="text" name="ppdb_id" value="{{ ($ppdb->ppdb_id == null) ? $ppdb->dapodik_id : $ppdb->ppdb_id }}" />
                             <select id="unit" class="form-select form-select-solid" name="unit">
                             <option value="{{ !empty($data_kelas->unit) ? $data_kelas->unit : '' }}">{{ !empty($data_kelas->unit)  ? $data_kelas->unit : 'Pilih Unit' }}</option>
                             <option value="KB">KB</option>
@@ -597,7 +597,7 @@
                                       <div class="container-flex justify-content-end">
                                         <button class="btn btn-primary btn-sm fs-9" >Submit</button>                     
                                        </form>
-                                       <a href="{{ route('admin.ppdb.cekhistory', $ppdb->ppdb_id) }}">
+                                       <a href="{{ route('admin.ppdb.cekhistory',($ppdb->ppdb_id == null) ? $ppdb->dapodik_id : $ppdb->ppdb_id) }}">
                                         <div class="btn btn-success btn-sm fs-9">Edit</div>
                                       </a>
                                       </div>
