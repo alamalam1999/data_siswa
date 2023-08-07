@@ -2582,28 +2582,13 @@ class PPDBController extends Controller
      *
      * @return ViewResponse
      */
-    public function addClass(PPDBPermissionRequest $request) {
-      
+    public function addClass(PPDBPermissionRequest $request) {     
+        if($request->ppdb_id != null) {
         $ppdb = PPDB::where('ppdb_id', $request->ppdb_id)->first();
-
-
-        PPDB_system::where('ppdb_id', $ppdb->ppdb_id)
-       ->update([
-           'nis' => $request->nis
-        ]);
-
-        Data_siswa::where('ppdb_id', $ppdb->ppdb_id)
-        ->update([
-           'nisn' => $request->nisn
-        ]);
-
-        Data_siswa_system::where('ppdb_id', $ppdb->ppdb_id)
-        ->update([
-            'no_seri_ijazah'                => $request->no_seri_ijazah
-         ]);
-
-        Data_siswa_system_2::where('ppdb_id', $ppdb->ppdb_id)
-        ->update([
+        PPDB_system::where('ppdb_id', $ppdb->ppdb_id)->update(['nis' => $request->nis]);
+        Data_siswa::where('ppdb_id', $ppdb->ppdb_id)->update(['nisn' => $request->nisn]);
+        Data_siswa_system::where('ppdb_id', $ppdb->ppdb_id)->update(['no_seri_ijazah' => $request->no_seri_ijazah]);
+        Data_siswa_system_2::where('ppdb_id', $ppdb->ppdb_id)->update([
             'kode_registrasi'               => $ppdb->document_no,
             'unit'                          => $request->unit,
             'sekolah'                       => $request->sekolah,
@@ -2615,9 +2600,7 @@ class PPDBController extends Controller
             'nisn'                          => $request->nisn,
             'nik_siswa'                     => $request->nik_siswa,
             'status_siswa'                  => $request->status_siswa,
-            'keterangan'                    => $request->keterangan
-         ]);
-
+            'keterangan'                    => $request->keterangan]);
         $data_kelas = new Data_kelas;
         $data_kelas->ppdb_id              = $ppdb->ppdb_id;
         $data_kelas->kode_registrasi      = $ppdb->document_no;
@@ -2635,7 +2618,42 @@ class PPDBController extends Controller
         $data_kelas->status_siswa         = $request->status_siswa;
         $data_kelas->keterangan           = $request->keterangan;
         $data_kelas->save();
-
+        } else {
+            $ppdb = PPDB::where('dapodik_id', $request->dapodik_id)->first();
+            PPDB_system::where('dapodik_id', $ppdb->dapodik_id)->update(['nis' => $request->nis]);
+            Data_siswa::where('dapodik_id', $ppdb->dapodik_id)->update(['nisn' => $request->nisn]);
+            Data_siswa_system::where('dapodik_id', $ppdb->dapodik_id)->update(['no_seri_ijazah' => $request->no_seri_ijazah]);
+            Data_siswa_system_2::where('dapodik_id', $ppdb->dapodik_id)->update([
+                'kode_registrasi'               => $ppdb->document_no,
+                'unit'                          => $request->unit,
+                'sekolah'                       => $request->sekolah,
+                'kelas_utama'                   => $request->kelas_utama,
+                'sub_kelas'                     => $request->sub_kelas,
+                'nama_kepala_sekolah'           => $request->nama_kepala_sekolah,
+                'nama_wali_kelas'               => $request->nama_wali_kelas,
+                'nama_wali_kelas_2'             => $request->nama_wali_kelas_2,
+                'nisn'                          => $request->nisn,
+                'nik_siswa'                     => $request->nik_siswa,
+                'status_siswa'                  => $request->status_siswa,
+                'keterangan'                    => $request->keterangan]);
+            $data_kelas = new Data_kelas;
+            $data_kelas->dapodik_id              = $ppdb->dapodik_id;
+            $data_kelas->kode_registrasi      = $ppdb->document_no;
+            $data_kelas->unit                 = $request->unit;
+            $data_kelas->sekolah              = $request->sekolah;
+            $data_kelas->kelas_utama          = $request->kelas_utama;
+            $data_kelas->sub_kelas            = $request->sub_kelas;
+            $data_kelas->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
+            $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
+            $data_kelas->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
+            $data_kelas->nisn                 = $request->nisn;
+            $data_kelas->nis                  = $request->nis;
+            $data_kelas->no_seri_ijazah       = $request->no_seri_ijazah;
+            $data_kelas->nik_siswa            = $request->nik_siswa;
+            $data_kelas->status_siswa         = $request->status_siswa;
+            $data_kelas->keterangan           = $request->keterangan;
+            $data_kelas->save(); 
+        }
         return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);
 
     }
