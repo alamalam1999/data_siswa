@@ -296,7 +296,8 @@
     </div>
 
     <input type="hidden" name="uri_edit" value="{{ route('admin.ppdb.editaktif', '::target::') }}" />
-@endsection
+    <input type="hidden" name="uri_edit_dapodik" value="{{ route('admin.ppdb.editaktifdapodik', '::target::') }}" />
+    @endsection
 
 @section('pagescript')
     <script>

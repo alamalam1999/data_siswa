@@ -55,12 +55,6 @@ class PPDBTableTidakAktifController extends Controller
         $innerCondition = [];
         $whereCondition = [];
 
-        // BUILD CRITERIA
-        array_push($whereCondition, 'academic_years.id = '.$academic_year);
-
-        if ($registration_schedule != 'ALL') {
-            array_push($whereCondition, 'registration_schedules.id = '.$registration_schedule);
-        }
 
         if ($school != 'ALL') {
             array_push($whereCondition, "schools.school_code = '".$school."'");
@@ -116,8 +110,7 @@ class PPDBTableTidakAktifController extends Controller
             }
         }
 
-        $SQLQuery = 'SELECT
-            registration_schedules.description AS schedule,
+        $SQLQuery = 'SELECT 
             schools.school_name AS school,
             ppdb_system.*,
             data_siswa_system.nisn,
@@ -129,14 +122,10 @@ class PPDBTableTidakAktifController extends Controller
             data_siswa_system_2.keterangan
         FROM ppdb_system
         INNER JOIN schools ON ppdb_system.school_site = schools.school_code
-        INNER JOIN registration_schedules ON ppdb_system.registration_schedule_id = registration_schedules.id
-        INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id
-        INNER JOIN data_siswa_system ON data_siswa_system.ppdb_id = ppdb_system.ppdb_id
-        INNER JOIN data_siswa_system_2 ON data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id
+        INNER JOIN data_siswa_system ON (data_siswa_system.dapodik_id = ppdb_system.dapodik_id or data_siswa_system.ppdb_id = ppdb_system.ppdb_id)
+        INNER JOIN data_siswa_system_2 ON (data_siswa_system_2.dapodik_id = ppdb_system.dapodik_id or data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id)
         '.implode(' ', $innerCondition).'
         WHERE
-        ppdb_system.document_status = 7
-        AND
         data_siswa_system_2.status_siswa = "tidak aktif"
         AND      
         '.implode(' AND ', $whereCondition).' 
