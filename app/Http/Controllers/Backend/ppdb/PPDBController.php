@@ -1744,15 +1744,15 @@ class PPDBController extends Controller
                 return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);
 
         }else {
-            Users_system::where('user_id',$users_check->id_user)->delete();
-            PPDB::where('ppdb_id',$users_check->ppdb_id)->delete();
-            PPDBInterview::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Payment::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Register::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Data_siswa::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Data_siswa2::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Data_siswa3::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Data_siswa4::where('ppdb_id',$users_check->ppdb_id)->delete();
+            Users_system::where('status_data',$users_check->status_data)->delete();
+            PPDB::where('dapodik_id',$users_check->dapodik_id)->delete();
+            PPDBInterview::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Payment::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Register::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Data_siswa::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Data_siswa2::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Data_siswa3::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Data_siswa4::where('dapodik_id',$users_check->dapodik_id)->delete();
             //return redirect()->back()->with(['flash_danger' => 'Data Sudah tersedia di DATA SISWA']);
             // return Redirect::to($request->request->get('http_referrer'));
 
@@ -2687,19 +2687,16 @@ class PPDBController extends Controller
      *
      * @return ViewResponse
      */
-        public function editdapodik(Dapodik_id $ppdb, PPDBPermissionRequest $request) {
-
-
-           
+        public function editdapodik(Dapodik_id $ppdb, PPDBPermissionRequest $request) {     
             $schools = School::All();
             $enum_datas = EnumData::where('enum_group', 'SCHOOL_INFO')->orderBy('enum_order')->get();
             $discount_groups = EnumData::where('enum_group', 'DISCOUNT_GROUP')->orderBy('enum_order')->get();
-            $ppdb_interview = Ppdb_interviews_system::where('ppdb_id', $ppdb->ppdb_id)->first();
+            $ppdb_interview = Ppdb_interviews_system::where('dapodik_id', $ppdb->dapodik_id)->first();
     
             // $ppdb_testing = PPDB_system::where('id_user', $ppdb->id)->first();
             $ppdb_testing = $ppdb;
     
-            $data_siswa = Data_siswa_system::where('ppdb_id', $ppdb->ppdb_id)->first();
+            $data_siswa = Data_siswa_system::where('dapodik_id', $ppdb->dapodik_id)->first();
     
             $is_interviewer = false;
             $is_interviewer_edit = false;
@@ -2769,34 +2766,34 @@ class PPDBController extends Controller
                 $file_additional = json_decode($ppdb->file_additional);
             }
     
-            $user_account = Users::where('user_id', $ppdb->id_user)->first();
+            $user_account = Users::where('status_data', $ppdb->status_data)->first();
             $payment_formulir = Payment_system::where([
-                ['ppdb_id', '=', $ppdb->ppdb_id],
+                ['dapodik_id', '=', $ppdb->dapodik_id],
                 ['payment_type', '=', 'FEE_FORMULIR']
             ])->first();
     
             $payment_up_spp = Payment_system::where([ 
-                ['ppdb_id', '=', $ppdb->ppdb_id],
+                ['dapodik_id', '=', $ppdb->dapodik_id],
                 ['payment_type', '=', 'FEE_TOTAL']
             ])->first();
     
             $fee_up = Payment_system::where([ 
-                ['ppdb_id', '=', $ppdb->ppdb_id],
+                ['dapodik_id', '=', $ppdb->dapodik_id],
                 ['payment_type', '=', 'FEE_UP']
             ])->first();
     
             $fee_up_pengajuan = Payment_system::where([ 
-                ['ppdb_id', '=', $ppdb->ppdb_id],
+                ['dapodik_id', '=', $ppdb->dapodik_id],
                 ['payment_type', '=', 'FEE_UP DILUAR NOMINAL']
             ])->first();
     
             $diskon_pengajuan = Payment_system::where([
-                ['ppdb_id', '=', $ppdb->ppdb_id],
+                ['dapodik_id', '=', $ppdb->dapodik_id],
                 ['payment_type', '=', 'FEE_PENGAJUAN']
             ])->first();
     
             $fee_spp = Payment_system::where([ 
-                ['ppdb_id', '=', $ppdb->ppdb_id],
+                ['dapodik_id', '=', $ppdb->dapodik_id],
                 ['payment_type', '=', 'FEE_SPP']
             ])->first();
             $school_stage = "";
@@ -2811,7 +2808,7 @@ class PPDBController extends Controller
                 ];
             }
     
-            $reregistration = Reregistrasi_system::where('ppdb_id', $ppdb->ppdb_id)->first();
+            $reregistration = Reregistrasi_system::where('dapodik_id', $ppdb->dapodik_id)->first();
     
             $file_additionalsatu = [];
             $file_additionaldua = [];
@@ -2974,17 +2971,17 @@ class PPDBController extends Controller
                 $slip_gaji_parent      =json_decode($ppdb_testing->slip_gaji_parent);
             }
     
-            $data_kelas = Data_kelas::where([['ppdb_id',$ppdb->ppdb_id],
+            $data_kelas = Data_kelas::where([['dapodik_id',$ppdb->dapodik_id],
                                             ['show_table', 1]    
                                             ])->first();
     
-            $ppdb_system = PPDB_system::where('ppdb_id',$ppdb->ppdb_id)->first();
+            $ppdb_system = PPDB_system::where('dapodik_id',$ppdb->dapodik_id)->first();
     
-            $data_siswa_system = Data_siswa_system::where('ppdb_id',$ppdb->ppdb_id)->first();
+            $data_siswa_system = Data_siswa_system::where('dapodik_id',$ppdb->dapodik_id)->first();
     
             debug($user_account);
     
-            $foto_siswa = Foto_siswa::where('ppdb_id',$ppdb->ppdb_id)->first();
+            $foto_siswa = Foto_siswa::where('dapodik_id',$ppdb->dapodik_id)->first();
     
 
 
