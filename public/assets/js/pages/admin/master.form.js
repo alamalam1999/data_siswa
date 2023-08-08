@@ -83,23 +83,25 @@ $(document).ready(function() {
               }
             })
 
-            $('#kelas_utama').change(function() {               
-              var kelasutama = $(this).val();
-              $('#nama_kelas').empty();
-              
-              $('#nama_kelas').append(                
-                '<option value="">Pilih</option>'    
-              );              
-              $.each(response.masterkelas, function(key, item) {                
-                    if(kelasutama == item.kategori) {
-                        $('#nama_kelas').append(
-                          '<option value="'+item.kelas+'">'+item.kelas+'</option>'
-                        );            
-                    }
+            $('#kelas_utama').click(function() {
+                  $('#kelas_utama').change(function() {               
+                    var kelasutama = $(this).val();
+                    $('#nama_kelas').empty();
                     
-              });
-
-           })
+                    $('#nama_kelas').append(                
+                      '<option value="">Pilih</option>'    
+                    );              
+                    $.each(response.masterkelas, function(key, item) {  
+                      var sekolahcheck = $('#sekolah').val();
+                      //console.log(test);
+                          if(kelasutama == item.kategori && sekolahcheck == item.sekolah.toUpperCase()) {
+                              $('#nama_kelas').append(
+                                '<option value="'+item.kelas+'">'+item.kelas+'</option>'
+                              );            
+                          }                  
+                    });
+                });
+            })
 
            $('#nama_kelas').change(function(){
 
