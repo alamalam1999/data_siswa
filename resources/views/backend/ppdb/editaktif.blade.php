@@ -418,13 +418,13 @@
                         <?php echo e(csrf_field()); ?>
                         <!--begin::Input group-->
                         <div class="row fv-row mb-5">
-                          <input type="text" {{ $ppdb->ppdb_id != null ? 'name=id value='.$ppdb->id : 'name=dapodik_id value='.$ppdb->dapodik_id }} >
+                          <input type="hidden" {{ $ppdb->ppdb_id != null ? 'name=id value='.$ppdb->id : 'name=dapodik_id value='.$ppdb->dapodik_id }} >
                           <!--begin::Col-->
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Unit</label>
                                 <!--begin::Switch-->
                           <div>
-                            <input type="text" {{ ($ppdb->ppdb_id == null) ? 'name=dapodik_id value='.$ppdb->dapodik_id : 'name=ppdb_id value='.$ppdb->ppdb_id }} />
+                            <input type="hidden" {{ ($ppdb->ppdb_id == null) ? 'name=dapodik_id value='.$ppdb->dapodik_id : 'name=ppdb_id value='.$ppdb->ppdb_id }} />
                             <select id="unit" class="form-select form-select-solid" name="unit">
                             <option value="{{ !empty($data_kelas->unit) ? $data_kelas->unit : '' }}">{{ !empty($data_kelas->unit)  ? $data_kelas->unit : 'Pilih Unit' }}</option>
                             <option value="KB">KB</option>

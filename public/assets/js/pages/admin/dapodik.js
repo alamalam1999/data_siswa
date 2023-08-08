@@ -187,17 +187,17 @@ FTX.Utils.documentReady(function() {
             targets: 3,
             orderable: false,
             render: function(data, type, row) {
-                if(row.sekolah !=null){
+                if(row.school_site !=null){
                 return `
                     <div>
-                        <span class="text d-block fs-8">` + row.sekolah + `</span>
+                        <span class="text d-block fs-8">` + row.school_site + `</span>
                     </div>
             `;
         } else{
 
             return `
                     <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sekolah + `</span>
+                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.school_site + `</span>
                     </div>
                
             `;
@@ -208,17 +208,17 @@ FTX.Utils.documentReady(function() {
             targets: 4,
             orderable: false,
             render: function(data, type, row) {
-                if(row.unit !=null){
+                if(row.stage !=null){
                 return `
                 <div>
-                <span class="text d-block fs-8">` + row.unit + `</span>
+                <span class="text d-block fs-8">` + row.stage + `</span>
             </div>
                 `;
             } else{
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.unit + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.stage + `</span>
                         </div>
                    
                 `;
@@ -314,7 +314,6 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 var uri_target = uri_edit.replace("::target::", row.dapodik_id);
                 return `
-                <input type="hidden" name="dapodik_id" value="2">
                 <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-60 w-100">
                 
                     <span class="svg-icon icon-size-2x ms-0 me-0">

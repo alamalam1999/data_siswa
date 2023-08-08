@@ -527,8 +527,8 @@
                                       $dapodik_id = $ppdb->dapodik_id;
                                   }    
                             ?>
-                            <input type="text" name="ppdb_id" value="<?php echo e($ppdb_id); ?>" />
-                            <input type="text" name="dapodik_id" value="{{ $dapodik_id }}" />
+                            <input type="hidden" name="ppdb_id" value="<?php echo e($ppdb_id); ?>" />
+                            <input type="hidden" name="dapodik_id" value="{{ $dapodik_id }}" />
                             <select id="unit" class="form-select form-select-solid" name="unit">
                               <?php
                                   $unit = "";
