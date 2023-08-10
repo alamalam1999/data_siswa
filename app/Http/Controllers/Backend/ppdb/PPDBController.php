@@ -41,6 +41,7 @@ use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
 use App\Models\Dapodik_id;
 use App\Models\Foto_siswa;
+use App\Models\PPDB_check;
 use App\Models\PPDBdapodik;
 use App\Models\Register;
 use Illuminate\Support\Facades\Redirect;
@@ -646,6 +647,358 @@ class PPDBController extends Controller
         ]);
     }
 
+    public function editppdb(PPDB_check $ppdb, PPDBPermissionRequest $request) {
+         // debug($ppdb);
+         $schools = School::All();
+         $enum_datas = EnumData::where('enum_group', 'SCHOOL_INFO')->orderBy('enum_order')->get();
+         $discount_groups = EnumData::where('enum_group', 'DISCOUNT_GROUP')->orderBy('enum_order')->get();
+         $ppdb_interview = PPDBInterview::where('ppdb_id', $ppdb->ppdb_id)->first();
+         $user_ppdb = Users_system::where('user_id', $ppdb->id_user)->first();
+ 
+         $ppdb_testing = PPDB::where('id_user', $user_ppdb->user_id)->first();
+         $ppdb_testing = $ppdb;
+ 
+         $data_siswa = Data_siswa::where('ppdb_id', $ppdb->ppdb_id)->first();
+ 
+ 
+         $is_interviewer = false;
+         $is_interviewer_edit = false;
+         $is_rnd = false;
+         $is_rnd_edit = false;
+ 
+         $interview_code = 'interview-'.strtolower($ppdb->school_site).'-'.strtolower($ppdb->stage);
+         $rnd_code = 'rnd-'.strtolower($ppdb->school_site).'-'.strtolower($ppdb->stage);
+ 
+         if(access()->allow($interview_code)) {
+             $is_interviewer = true;
+ 
+             if(!empty($ppdb_interview->school_recomendation_result) < 1) $is_interviewer_edit = true;
+         }
+ 
+         if(access()->allow($rnd_code)) {
+             $is_rnd = true;
+         }
+ 
+         $is_enabled_form = ($ppdb_interview->school_recomendation_result ?? '0') < 1 && $is_interviewer;
+         $is_enabled_rnd = (($ppdb_interview->school_recomendation_result ?? '1') > 0 && ($ppdb_interview->interview_result ?? '0') < 1) && $is_rnd;
+         $is_enabled_submit = (($ppdb_interview->school_recomendation_result ?? '1') > 0 && ($ppdb_interview->interview_result ?? '1') > 0 && ($ppdb_interview->is_submited ?? '0') < 1) && $is_interviewer;
+ 
+         debug($is_enabled_form);
+ 
+         if(($ppdb->stage)=="SD")
+         {
+             $result_interview = [
+                 '',
+                 '',
+                 '',
+                 'Siap sekolah',
+                 'Belum Siap Sekolah',
+                 'Ragu (masih perlu dikembangkan)'
+             ];
+ 
+             $result_interview_parent_sd = [
+                 'Direkomendasikan',
+                 'Tidak Direkomendasikan',
+                 'Dipertimbangkan dengan cacatan'
+             ];
+         }else {
+             $result_interview = [
+                 'Direkomendasikan',
+                 'Tidak Direkomendasikan',
+                 'Dipertimbangkan dengan cacatan'
+             ];
+ 
+             $result_interview_parent_sd = [
+                 'Direkomendasikan',
+                 'Tidak Direkomendasikan',
+                 'Dipertimbangkan dengan cacatan'
+             ];
+         }
+ 
+         $file_uploaded = [
+             ['name' => 'family_card', 'label' => 'Kartu Keluarga'],
+             ['name' => 'birth_certificate', 'label' => 'Akte Kelahiran'],
+             ['name' => 'last_report', 'label' => 'Raport Terakhir'],
+             ['name' => 'academic_certificate', 'label' => 'Sertifikat Akademik'],
+             ['name' => 'kia_book', 'label' => 'Buku KIA'],
+         ];
+ 
+         $file_additional = [];
+ 
+         if(!empty($ppdb->file_additional) && $ppdb->file_additional != "" && $ppdb->file_additional != "[]"){
+             $file_additional = json_decode($ppdb->file_additional);
+         }
+ 
+         $user_account = Users_system::where('user_id', $ppdb->id_user)->first();
+         $payment_formulir = Payment::where([
+             ['ppdb_id', '=', $ppdb->ppdb_id],
+             ['payment_type', '=', 'FEE_FORMULIR']
+         ])->first();
+ 
+         $payment_up_spp = Payment::where([ 
+             ['ppdb_id', '=', $ppdb->ppdb_id],
+             ['payment_type', '=', 'FEE_TOTAL']
+         ])->first();
+ 
+         $fee_up = Payment::where([ 
+             ['ppdb_id', '=', $ppdb->ppdb_id],
+             ['payment_type', '=', 'FEE_UP']
+         ])->first();
+ 
+         $fee_spp = Payment::where([ 
+             ['ppdb_id', '=', $ppdb->ppdb_id],
+             ['payment_type', '=', 'FEE_SPP']
+         ])->first();
+         $school_stage = "";
+
+         $fee_up_pengajuan = Payment_system::where([ 
+            ['ppdb_id', '=', $ppdb->ppdb_id],
+            ['payment_type', '=', 'FEE_UP DILUAR NOMINAL']
+        ])->first();
+
+        $diskon_pengajuan = Payment_system::where([
+            ['ppdb_id', '=', $ppdb->ppdb_id],
+            ['payment_type', '=', 'FEE_PENGAJUAN']
+        ])->first();
+ 
+         if ($ppdb->stage == "TK" || $ppdb->stage == "KB") {
+             $school_stage = [
+                 'Rp.200.000.-',      
+             ];
+         } else  {
+             $school_stage = [
+                 'Rp.300.000.-',
+             ];
+         }
+ 
+         $reregistration = ReRegistration::where('ppdb_id', $ppdb->ppdb_id)->first();
+ 
+         $file_additionalsatu = [];
+         $file_additionaldua = [];
+         $medco_employee_file = [];
+ 
+         
+         $school_recomendation_file = [];
+         $interview_result_file = [];
+         $kesiapan_file = [];
+         $psikotest_file = [];
+         $academic_file = [];
+         $interview_parent_file = [];
+         $interview_student_file = [];
+         $observasi_file = [];
+ 
+         if (!empty($ppdb_interview->school_recomendation_file) && $ppdb_interview->school_recomendation_file != "" && $ppdb_interview->school_recomendation_file != "[]") {
+             $school_recomendation_file = json_decode($ppdb_interview->school_recomendation_file);
+         }
+ 
+         if (!empty($ppdb_interview->interview_result_file) && $ppdb_interview->interview_result_file != "" && $ppdb_interview->interview_result_file != "[]") {
+             $interview_result_file = json_decode($ppdb_interview->interview_result_file);
+         } 
+ 
+         if (!empty($ppdb_interview->kesiapan_file) && $ppdb_interview->kesiapan_file != "" && $ppdb_interview->kesiapan_file != "[]") {
+             $kesiapan_file = json_decode($ppdb_interview->kesiapan_file);
+         }
+ 
+         if (!empty($ppdb_interview->psikotest_file) && $ppdb_interview->psikotest_file != "" && $ppdb_interview->psikotest_file != "[]") {
+             $psikotest_file = json_decode($ppdb_interview->psikotest_file);
+         }
+         
+         if (!empty($ppdb_interview->academic_file) && $ppdb_interview->academic_file != "" && $ppdb_interview->academic_file != "[]") {
+             $academic_file = json_decode($ppdb_interview->academic_file);
+         }
+         
+         if (!empty($ppdb_interview->interview_parent_file) && $ppdb_interview->interview_parent_file != "" && $ppdb_interview->interview_parent_file != "[]") {
+             $interview_parent_file = json_decode($ppdb_interview->interview_parent_file);
+         }
+         
+         if (!empty($ppdb_interview->interview_student_file) && $ppdb_interview->interview_student_file != "" && $ppdb_interview->interview_student_file != "[]") {
+             $interview_student_file = json_decode($ppdb_interview->interview_student_file);
+         }
+         
+         if (!empty($ppdb_interview->observasi_file) && $ppdb_interview->observasi_file != "" && $ppdb_interview->observasi_file != "[]") {
+             $observasi_file = json_decode($ppdb_interview->observasi_file);
+         }
+ 
+         if (!empty($reregistration->file_additionalsatu) && $reregistration->file_additionalsatu != "" && $reregistration->file_additionalsatu != "[]") {
+             $file_additionalsatu = json_decode($reregistration->file_additionalsatu);
+         }
+ 
+         if (!empty($reregistration->medco_employee_file) && $reregistration->medco_employee_file != "" && $reregistration->medco_employee_file != "[]") {
+             $medco_employee_file = json_decode($reregistration->medco_employee_file);
+         }
+ 
+         if (!empty($reregistration->file_additionaldua) && $reregistration->file_additionaldua !="" && $reregistration->file_additionaldua != "[]") {
+             $file_additionaldua = json_decode($reregistration->file_additionaldua);
+         }
+ 
+         if (!empty($reregistration->file_additionaldua) && $reregistration->file_additionaldua !="" && $reregistration->file_additional != "[]") {
+             $file_additionaldua = json_decode($reregistration->file_additionaldua);
+         }
+ 
+         $data56= array_column($file_additionalsatu, 'data56');
+ 
+         $brand = '';
+         if ($data56[0] ?? $data56 == 1) {
+             $brand = "Keluarga";
+         } else if ($data56[0] ?? $data56 == 2) {
+             $brand = "Tetangga";
+         } else if ($data56[0] ?? $data56 == 3) {
+             $brand = "Teman";
+         } else {
+             $brand = "Tidak Melalui Brand";
+         }
+ 
+         $data57= array_column($file_additionalsatu, 'data57');
+ 
+         $kegiatan_sekolah = '';
+         if ($data57[0] ?? $data57 == 1) {
+             $kegiatan_sekolah = "Open House";
+         } else if ($data57[0] ?? $data57 == 2) {
+             $kegiatan_sekolah = "Lomba Antar Sekolah";
+         } else if ($data57[0] ?? $data57 == 3) {
+             $kegiatan_sekolah = "Tidak Melalui Kegiatan Sekolah";
+         } else {
+             $kegiatan_sekolah = "No Input";
+         }
+ 
+         $data58= array_column($file_additionalsatu, 'data58');
+ 
+         $media_cetak = '';
+         if ($data58[0] ?? $data58 == 1) {
+             $media_cetak = "Spanduk";
+         } else if ($data58[0] ?? $data58 == 2) {
+             $media_cetak = "Brosur";
+         } else if ($data58[0] ?? $data58 == 3) {
+             $media_cetak = "Koran";
+         } else {
+             $media_cetak = "Tidak Melalui Media Cetak";
+         }
+ 
+         $data59= array_column($file_additionalsatu, 'data59');
+ 
+         $media_elektronik = '';
+         if ($data59[0] ?? $data59 == 1) {
+             $media_elektronik = "Televisi";
+         } else if ($data59[0] ?? $data59 == 2) {
+             $media_elektronik = "Radio";
+         } else if ($data59[0] ?? $data59 == 3) {
+             $media_elektronik = "SMS";
+         } else {
+             $media_elektronik = "Tidak Melalui Media Elektronik";
+         }
+ 
+         $data60= array_column($file_additionalsatu, 'data60');
+ 
+         $media_sosial = '';
+         if ($data60[0] ?? $data60 == 1) {
+             $media_sosial = "Instagram";
+         } else if ($data60[0] ?? $data60 == 2) {
+             $media_sosial = "Facebook";
+         } else if ($data60[0] ?? $data60 == 3) {
+             $media_sosial = "Twitter";
+         } else {
+             $media_sosial = "Tidak Melalui Media Sosial";
+         }
+ 
+         $data61= array_column($file_additionalsatu, 'data61');
+ 
+         $internet = '';
+         if ($data61[0] ?? $data61 == 1) {
+             $internet = "Website";
+         } else if ($data61[0] ?? $data61 == 2) {
+             $internet = "Google";
+         } else if ($data61[0] ?? $data61 == 3) {
+             $internet = "Forum";
+         } else {
+             $internet = "Tidak Melalui Internet";
+         }
+ 
+         $file_additional_satu = '';
+         $file_additional_dua = '';
+         $file_additional_tiga = '';
+         $file_additional_empat = '';
+         $file_additional_lima = '';
+         $slip_gaji_parent = '';
+ 
+         if (!empty($ppdb_testing->file_additional_satu != "[]") 
+             || !empty($ppdb_testing->file_additional_dua != "[]")
+             || !empty($ppdb_testing->file_additional_tiga != "[]")
+             || !empty($ppdb_testing->file_additional_empat != "[]")
+             || !empty($ppdb_testing->file_additional_lima != "[]")
+             || !empty($ppdb_testing->slip_gaji_parent != "[]")) {
+             $file_additional_satu = json_decode($ppdb_testing->file_additional_satu);
+             $file_additional_dua   = json_decode($ppdb_testing->file_additional_dua);
+             $file_additional_tiga  = json_decode($ppdb_testing->file_additional_tiga);
+             $file_additional_empat = json_decode($ppdb_testing->file_additional_empat);
+             $file_additional_lima  = json_decode($ppdb_testing->file_additional_lima);
+             $slip_gaji_parent      =json_decode($ppdb_testing->slip_gaji_parent);
+         }
+ 
+         $data_kelas  = Data_kelas::where([['ppdb_id',$ppdb->ppdb_id],
+                                         ['show_table', 1]    
+                                         ])->first();
+ 
+         $ppdb_system = PPDB_system::where('ppdb_id',$ppdb->ppdb_id)->first();
+ 
+         $data_siswa_system = Data_siswa_system::where('ppdb_id',$ppdb->ppdb_id)->first();
+ 
+         $foto_siswa = Foto_siswa::where('ppdb_id',$ppdb->ppdb_id)->first();
+ 
+         return new ViewResponse('backend.ppdb.edit', [
+             'ppdb'              => $ppdb,
+             'user_account'      => $user_account,
+             'schools'           => $schools,
+             'enum_datas'        => $enum_datas,
+             'discount_groups'   => $discount_groups,
+             'file_uploaded'     => $file_uploaded,
+             'file_additional'   => $file_additional,
+             'payment_formulir'  => $payment_formulir,
+             'payment_up_spp'    => $payment_up_spp,
+             'school_stage'      => $school_stage,
+             'reregistration'    => $reregistration,
+             'file_additionalsatu' => $file_additionalsatu,
+             'medco_employee_file' => $medco_employee_file,
+             'brand'               => $brand,
+             'kegiatan_sekolah'    => $kegiatan_sekolah,
+             'media_cetak'         => $media_cetak,
+             'media_elektronik'    => $media_elektronik,
+             'media_sosial'        => $media_sosial,
+             'internet'            => $internet,
+             'ppdb_interview'      => $ppdb_interview,
+             'is_enabled_form'     => $is_enabled_form,
+             'is_enabled_rnd'      => $is_enabled_rnd,
+             'is_enabled_submit'   => $is_enabled_submit,
+             'is_interviewer'      => $is_interviewer,
+             'is_rnd'              => $is_rnd,
+             'is_rnd_edit'         => $is_rnd_edit,
+             'result_interview'    => $result_interview,
+             'fee_up'              => $fee_up,
+             'fee_spp'             => $fee_spp,
+             'file_additionaldua'  => $file_additionaldua,
+             'kesiapan_file'             => $kesiapan_file,
+             'school_recomendation_file' => $school_recomendation_file,
+             'interview_result_file'     => $interview_result_file,
+             'psikotest_file'            => $psikotest_file,
+             'academic_file'             => $academic_file,
+             'interview_parent_file'     => $interview_parent_file,
+             'interview_student_file'    => $interview_student_file,
+             'observasi_file'            => $observasi_file,
+             'file_additional_satu'      => $file_additional_satu,
+             'file_additional_dua'       => $file_additional_dua,
+             'file_additional_tiga'      => $file_additional_tiga,
+             'file_additional_empat'     => $file_additional_empat,
+             'file_additional_lima'      => $file_additional_lima,
+             'slip_gaji_parent'          => $slip_gaji_parent,
+             'data_siswa'                => $data_siswa,
+             'data_kelas'                => $data_kelas,
+             'ppdb_system'               => $ppdb_system,
+             'data_siswa_system'         => $data_siswa_system,
+             'foto_siswa'                => $foto_siswa,
+             'fee_up_pengajuan'          => $fee_up_pengajuan,
+             'diskon_pengajuan'          => $diskon_pengajuan
+         ]);
+    }
+
     /**
      * @param \App\Models\PPDB $ppdb
      * @param \App\Http\Requests\Backend\PPDB\PPDBPermissionRequest $request
@@ -669,17 +1022,12 @@ class PPDBController extends Controller
     public function addClasses(PPDBPermissionRequest $request) {
 
         if(!empty($request->ppdb_id) && $request->ppdb_id != "" && $request->ppdb_id != null) {
-
-        $users_check = PPDB::where('ppdb_id', $request->ppdb_id)->first();
-
-        $users = Users::where('user_id', $users_check->id_user)->first();
+            $users_check = PPDB::where('ppdb_id', $request->ppdb_id)->first();
+            $users = Users::where('user_id', $users_check->id_user)->first();
         if($users == null && $users == "" && empty($users)) {
-     
                 $ppdb_system = PPDB_system::where('ppdb_id', $request->ppdb_id)->first();
                 $ppdb = PPDB::where('ppdb_id', $request->ppdb_id)->first();
-
                 if ($ppdb_system == null && $ppdb_system == "" && empty($ppdb_system)) {
-      
                         //ppdb system
                 $ppdb_system = new  PPDB_system;
                 $ppdb_system->ppdb_id = $ppdb->ppdb_id;
@@ -723,7 +1071,6 @@ class PPDBController extends Controller
                 $ppdb_system->file_additional_lima = $ppdb->file_additional_lima;
                 $ppdb_system->nis = $request->nis;
                 $ppdb_system->save();
-
                 } else {
                     $ppdb_system = new  PPDB_system;
                     $ppdb_system->nis = $request->nis;
@@ -731,142 +1078,135 @@ class PPDBController extends Controller
                     $ppdb_system->save();
                 }
 
-
                 $data_siswa = Data_siswa::where('ppdb_id', $ppdb->ppdb_id)->first();
                 //data siswa
                 $data_siswa->nisn                           = $request->nisn;
                 $data_siswa->save();
-
                 $data_siswa_system = Data_siswa_system::where('ppdb_id', $request->ppdb_id)->first();
-
                 if ($data_siswa_system == null && $data_siswa_system == "" && empty($data_siswa_system)) {
-
-                $no_seri_ijazah = '';
-                $datasiswa_system = new Data_siswa_system;
-                $datasiswa_system->nama_lengkap              = $data_siswa->nama_lengkap;
-                $datasiswa_system->jenis_kelamin             = $data_siswa->jenis_kelamin;
-                $datasiswa_system->nisn                      = $data_siswa->nisn;
-                $datasiswa_system->tempat_lahir              = $data_siswa->tempat_lahir;
-                $datasiswa_system->tanggal_lahir             = $data_siswa->tanggal_lahir;
-                $datasiswa_system->ppdb_id                   = $data_siswa->ppdb_id; 
-                $datasiswa_system->agama                     = $data_siswa->agama;
-                $datasiswa_system->alamat_jalan              = $data_siswa->alamat_jalan;
-                $datasiswa_system->rt                        = $data_siswa->rt;
-                $datasiswa_system->rw                        = $data_siswa->rw;
-                $datasiswa_system->nama_dusun                = $data_siswa->nama_dusun;
-                $datasiswa_system->nama_kelurahan            = $data_siswa->nama_kelurahan;
-                $datasiswa_system->kecamatan                 = $data_siswa->kecamatan;
-                $datasiswa_system->kode_pos                  = $data_siswa->kode_pos;
-                $datasiswa_system->tempat_tinggal            = $data_siswa->tempat_tinggal;
-                $datasiswa_system->moda_transportasi         = $data_siswa->moda_transportasi;
-                $datasiswa_system->telepon_rumah             = $data_siswa->telepon_rumah;
-                $datasiswa_system->nomor_hp                  = $data_siswa->nomor_hp;
-                $datasiswa_system->email                     = $data_siswa->email;
-                $datasiswa_system->no_seri_skhun             = $data_siswa->no_seri_skhun;
-                $datasiswa_system->nama_ayah                 = $data_siswa->nama_ayah;
-                $datasiswa_system->tahun_lahir_ayah          = $data_siswa->tahun_lahir_ayah;
-                $datasiswa_system->pendidikan_ayah           = $data_siswa->pendidikan_ayah;
-                $datasiswa_system->pekerjaan_ayah            = $data_siswa->pekerjaan_ayah;
-                $datasiswa_system->penghasilan_bulanan_ayah  = $data_siswa->penghasilan_bulanan_ayah;
-                $datasiswa_system->nik_ayah                  = $data_siswa->nik_ayah;
-                $datasiswa_system->nama_Ibu                  = $data_siswa->nama_Ibu;
-                $datasiswa_system->tahun_lahir_ibu           = $data_siswa->tahun_lahir_ibu;
-                $datasiswa_system->pendidikan_ibu            = $data_siswa->pendidikan_ibu;
-                $datasiswa_system->pekerjaan_ibu             = $data_siswa->pekerjaan_ibu;
-                $datasiswa_system->penghasilan_bulanan_ibu   = $data_siswa->penghasilan_bulanan_ibu;
-                $datasiswa_system->nik_Ibu                   = $data_siswa->nik_Ibu;
-                $datasiswa_system->nama_wali                 = $data_siswa->nama_wali;
-                $datasiswa_system->tahun_lahir_wali          = $data_siswa->tahun_lahir_wali;
-                $datasiswa_system->pendidikan_wali           = $data_siswa->pendidikan_wali;
-                $datasiswa_system->pekerjaan_wali            = $data_siswa->pekerjaan_wali;
-                $datasiswa_system->penghasilan_bulanan_wali  = $data_siswa->penghasilan_bulanan_wali;
-                $datasiswa_system->nik_wali                  = $data_siswa->nik_wali;
-
+                    $no_seri_ijazah = '';
+                    $datasiswa_system = new Data_siswa_system;
+                    $datasiswa_system->nama_lengkap              = $data_siswa->nama_lengkap;
+                    $datasiswa_system->jenis_kelamin             = $data_siswa->jenis_kelamin;
+                    $datasiswa_system->nisn                      = $data_siswa->nisn;
+                    $datasiswa_system->tempat_lahir              = $data_siswa->tempat_lahir;
+                    $datasiswa_system->tanggal_lahir             = $data_siswa->tanggal_lahir;
+                    $datasiswa_system->ppdb_id                   = $data_siswa->ppdb_id; 
+                    $datasiswa_system->agama                     = $data_siswa->agama;
+                    $datasiswa_system->alamat_jalan              = $data_siswa->alamat_jalan;
+                    $datasiswa_system->rt                        = $data_siswa->rt;
+                    $datasiswa_system->rw                        = $data_siswa->rw;
+                    $datasiswa_system->nama_dusun                = $data_siswa->nama_dusun;
+                    $datasiswa_system->nama_kelurahan            = $data_siswa->nama_kelurahan;
+                    $datasiswa_system->kecamatan                 = $data_siswa->kecamatan;
+                    $datasiswa_system->kode_pos                  = $data_siswa->kode_pos;
+                    $datasiswa_system->tempat_tinggal            = $data_siswa->tempat_tinggal;
+                    $datasiswa_system->moda_transportasi         = $data_siswa->moda_transportasi;
+                    $datasiswa_system->telepon_rumah             = $data_siswa->telepon_rumah;
+                    $datasiswa_system->nomor_hp                  = $data_siswa->nomor_hp;
+                    $datasiswa_system->email                     = $data_siswa->email;
+                    $datasiswa_system->no_seri_skhun             = $data_siswa->no_seri_skhun;
+                    $datasiswa_system->nama_ayah                 = $data_siswa->nama_ayah;
+                    $datasiswa_system->tahun_lahir_ayah          = $data_siswa->tahun_lahir_ayah;
+                    $datasiswa_system->pendidikan_ayah           = $data_siswa->pendidikan_ayah;
+                    $datasiswa_system->pekerjaan_ayah            = $data_siswa->pekerjaan_ayah;
+                    $datasiswa_system->penghasilan_bulanan_ayah  = $data_siswa->penghasilan_bulanan_ayah;
+                    $datasiswa_system->nik_ayah                  = $data_siswa->nik_ayah;
+                    $datasiswa_system->nama_Ibu                  = $data_siswa->nama_Ibu;
+                    $datasiswa_system->tahun_lahir_ibu           = $data_siswa->tahun_lahir_ibu;
+                    $datasiswa_system->pendidikan_ibu            = $data_siswa->pendidikan_ibu;
+                    $datasiswa_system->pekerjaan_ibu             = $data_siswa->pekerjaan_ibu;
+                    $datasiswa_system->penghasilan_bulanan_ibu   = $data_siswa->penghasilan_bulanan_ibu;
+                    $datasiswa_system->nik_Ibu                   = $data_siswa->nik_Ibu;
+                    $datasiswa_system->nama_wali                 = $data_siswa->nama_wali;
+                    $datasiswa_system->tahun_lahir_wali          = $data_siswa->tahun_lahir_wali;
+                    $datasiswa_system->pendidikan_wali           = $data_siswa->pendidikan_wali;
+                    $datasiswa_system->pekerjaan_wali            = $data_siswa->pekerjaan_wali;
+                    $datasiswa_system->penghasilan_bulanan_wali  = $data_siswa->penghasilan_bulanan_wali;
+                    $datasiswa_system->nik_wali                  = $data_siswa->nik_wali;
                 if($data_siswa->no_seri_ijazah == "" && $data_siswa->no_seri_ijazah == null && empty($data_siswa->no_seri_ijazah)) {
                     $no_seri_ijazah = $request->no_seri_ijazah;
                 }
-                $datasiswa_system->no_seri_ijazah            = $no_seri_ijazah;
-                $datasiswa_system->kip                       = $data_siswa->kip;
-                $datasiswa_system->nomor_kip                 = $data_siswa->nomor_kip;
-                $datasiswa_system->nama_kip                  = $data_siswa->nama_kip;
-                $datasiswa_system->nomor_kks                 = $data_siswa->nomor_kks;
-                $datasiswa_system->akta_kelahiran            = $data_siswa->akta_kelahiran;
-                $datasiswa_system->bank                      = $data_siswa->bank;
-                $datasiswa_system->no_rekening               = $data_siswa->no_rekening;
-                $datasiswa_system->rekening_atas_nama        = $data_siswa->rekening_atas_nama;
-                $datasiswa_system->alasan_layak_pip          = $data_siswa->alasan_layak_pip;
-                $datasiswa_system->berkebutuhan_khusus       = $data_siswa->berkebutuhan_khusus;
-                $datasiswa_system->asal_sekolah              = $data_siswa->asal_sekolah;
-                $datasiswa_system->anak_keberapa             = $data_siswa->anak_keberapa;
-                $datasiswa_system->berat_badan               = $data_siswa->berat_badan;
-                $datasiswa_system->tinggi_badan              = $data_siswa->tinggi_badan;
-                $datasiswa_system->saudara_kandung           = $data_siswa->saudara_kandung;
-                $datasiswa_system->jarak_tempat              = $data_siswa->jarak_tempat;
-                $datasiswa_system->penerima_kps_pkh          = $data_siswa->penerima_kps_pkh;
-                $datasiswa_system->tahun_ajaran              = $data_siswa->tahun_ajaran;
-                $datasiswa_system->tanggal_pendaftaran       = $data_siswa->tanggal_pendaftaran;
-                $datasiswa_system->status_siswa              = $data_siswa->status_siswa;
-                $datasiswa_system->no_formulir               = $data_siswa->no_formulir;
-                $datasiswa_system->kitas                     = $data_siswa->kitas;
-                $datasiswa_system->kewarganegaraan           = $data_siswa->kewarganegaraan;
-                $datasiswa_system->nama_negara               = $data_siswa->nama_negara;
-                $datasiswa_system->no_kph_pkh                = $data_siswa->no_kph_pkh;
-                $datasiswa_system->usulan_dari_sekolah       = $data_siswa->usulan_dari_sekolah;
-                $datasiswa_system->kartu_KIP                 = $data_siswa->kartu_KIP;
-                $datasiswa_system->berkebutuhan_khusus_ayah  = $data_siswa->berkebutuhan_khusus_ayah;
-                $datasiswa_system->berkebutuhan_khusus_ibu   = $data_siswa->berkebutuhan_khusus_ibu;
-                $datasiswa_system->jenis_ekstrakulikuler     = $data_siswa->jenis_ekstrakulikuler;
-                $datasiswa_system->waktu_tempuh              = $data_siswa->waktu_tempuh;
-                $datasiswa_system->berkebutuhan_khusus_2     = $data_siswa->berkebutuhan_khusus_2;
-                $datasiswa_system->nama_kelurahan_2          = $data_siswa->nama_kelurahan_2;
-                $datasiswa_system->jurusan                   = $data_siswa->jurusan;
-                $datasiswa_system->jenis_pendaftaran         = $data_siswa->jenis_pendaftaran;
-                $datasiswa_system->nis                       = $data_siswa->nis;
-                $datasiswa_system->tanggal_masuk_sekolah     = $data_siswa->tanggal_masuk_sekolah;
-                $datasiswa_system->nomor_peserta_ujian       = $data_siswa->nomor_peserta_ujian;
-                $datasiswa_system->keluar_karena             = $data_siswa->keluar_karena;
-                $datasiswa_system->tanggal_keluar            = $data_siswa->tanggal_keluar;
-                $datasiswa_system->alasan                    = $data_siswa->alasan;
-                $datasiswa_system->persetujuan               = $data_siswa->persetujuan;
-                $datasiswa_system->jenis_1                   = $data_siswa->jenis_1;
-                $datasiswa_system->tingkat_1                 = $data_siswa->tingkat_1;
-                $datasiswa_system->nama_prestasi_1           = $data_siswa->nama_prestasi_1;
-                $datasiswa_system->tahun_1                   = $data_siswa->tahun_1;
-                $datasiswa_system->penyelenggara_1           = $data_siswa->penyelenggara_1;
-                $datasiswa_system->jenis_2                   = $data_siswa->jenis_2;
-                $datasiswa_system->tingkat_2                 = $data_siswa->tingkat_2;
-                $datasiswa_system->nama_prestasi_2           = $data_siswa->nama_prestasi_2;
-                $datasiswa_system->tahun_2                   = $data_siswa->tahun_2;
-                $datasiswa_system->penyelenggara_2           = $data_siswa->penyelenggara_2;
-                $datasiswa_system->jenis_3                   = $data_siswa->jenis_3;
-                $datasiswa_system-> tingkat_3                = $data_siswa->tingkat_3;
-                $datasiswa_system->nama_prestasi_3           = $data_siswa->nama_prestasi_3;
-                $datasiswa_system->tahun_3                   = $data_siswa->tahun_3;
-                $datasiswa_system->penyelenggara_3           = $data_siswa->penyelenggara_3;
-                $datasiswa_system->jenis_1_0                 = $data_siswa->jenis_1_0;
-                $datasiswa_system->keterangan_1              = $data_siswa->keterangan_1;
-                $datasiswa_system->tahun_mulai_1             = $data_siswa->tahun_mulai_1;
-                $datasiswa_system->tahun_selesai_1           = $data_siswa->tahun_selesai_1;
-                $datasiswa_system->jenis_2_0                 = $data_siswa->jenis_2_0;
-                $datasiswa_system->keterangan_2              = $data_siswa->keterangan_2;
-                $datasiswa_system->tahun_mulai_2             = $data_siswa->tahun_mulai_2;
-                $datasiswa_system->tahun_selesai_2           = $data_siswa->tahun_selesai_2;
-                $datasiswa_system->jenis_3_0                 = $data_siswa->jenis_3_0;
-                $datasiswa_system->keterangan_3              = $data_siswa->keterangan_3;
-                $datasiswa_system->tahun_mulai_3             = $data_siswa->tahun_mulai_3;
-                $datasiswa_system->tahun_selesai_3           = $data_siswa->tahun_selesai_3;
-                $datasiswa_system->sekolah                   = $data_siswa->sekolah;
-                $datasiswa_system->unit                      = $data_siswa->unit;
-                $datasiswa_system->input_by                  = $data_siswa->input_by;
-                $datasiswa_system->created_at                = $data_siswa->created_at;
-                $datasiswa_system->updated_at                = $data_siswa->updated_at;
-                $datasiswa_system->save();
-                }
-                
-
+                    $datasiswa_system->no_seri_ijazah            = $no_seri_ijazah;
+                    $datasiswa_system->kip                       = $data_siswa->kip;
+                    $datasiswa_system->nomor_kip                 = $data_siswa->nomor_kip;
+                    $datasiswa_system->nama_kip                  = $data_siswa->nama_kip;
+                    $datasiswa_system->nomor_kks                 = $data_siswa->nomor_kks;
+                    $datasiswa_system->akta_kelahiran            = $data_siswa->akta_kelahiran;
+                    $datasiswa_system->bank                      = $data_siswa->bank;
+                    $datasiswa_system->no_rekening               = $data_siswa->no_rekening;
+                    $datasiswa_system->rekening_atas_nama        = $data_siswa->rekening_atas_nama;
+                    $datasiswa_system->alasan_layak_pip          = $data_siswa->alasan_layak_pip;
+                    $datasiswa_system->berkebutuhan_khusus       = $data_siswa->berkebutuhan_khusus;
+                    $datasiswa_system->asal_sekolah              = $data_siswa->asal_sekolah;
+                    $datasiswa_system->anak_keberapa             = $data_siswa->anak_keberapa;
+                    $datasiswa_system->berat_badan               = $data_siswa->berat_badan;
+                    $datasiswa_system->tinggi_badan              = $data_siswa->tinggi_badan;
+                    $datasiswa_system->saudara_kandung           = $data_siswa->saudara_kandung;
+                    $datasiswa_system->jarak_tempat              = $data_siswa->jarak_tempat;
+                    $datasiswa_system->penerima_kps_pkh          = $data_siswa->penerima_kps_pkh;
+                    $datasiswa_system->tahun_ajaran              = $data_siswa->tahun_ajaran;
+                    $datasiswa_system->tanggal_pendaftaran       = $data_siswa->tanggal_pendaftaran;
+                    $datasiswa_system->status_siswa              = $data_siswa->status_siswa;
+                    $datasiswa_system->no_formulir               = $data_siswa->no_formulir;
+                    $datasiswa_system->kitas                     = $data_siswa->kitas;
+                    $datasiswa_system->kewarganegaraan           = $data_siswa->kewarganegaraan;
+                    $datasiswa_system->nama_negara               = $data_siswa->nama_negara;
+                    $datasiswa_system->no_kph_pkh                = $data_siswa->no_kph_pkh;
+                    $datasiswa_system->usulan_dari_sekolah       = $data_siswa->usulan_dari_sekolah;
+                    $datasiswa_system->kartu_KIP                 = $data_siswa->kartu_KIP;
+                    $datasiswa_system->berkebutuhan_khusus_ayah  = $data_siswa->berkebutuhan_khusus_ayah;
+                    $datasiswa_system->berkebutuhan_khusus_ibu   = $data_siswa->berkebutuhan_khusus_ibu;
+                    $datasiswa_system->jenis_ekstrakulikuler     = $data_siswa->jenis_ekstrakulikuler;
+                    $datasiswa_system->waktu_tempuh              = $data_siswa->waktu_tempuh;
+                    $datasiswa_system->berkebutuhan_khusus_2     = $data_siswa->berkebutuhan_khusus_2;
+                    $datasiswa_system->nama_kelurahan_2          = $data_siswa->nama_kelurahan_2;
+                    $datasiswa_system->jurusan                   = $data_siswa->jurusan;
+                    $datasiswa_system->jenis_pendaftaran         = $data_siswa->jenis_pendaftaran;
+                    $datasiswa_system->nis                       = $data_siswa->nis;
+                    $datasiswa_system->tanggal_masuk_sekolah     = $data_siswa->tanggal_masuk_sekolah;
+                    $datasiswa_system->nomor_peserta_ujian       = $data_siswa->nomor_peserta_ujian;
+                    $datasiswa_system->keluar_karena             = $data_siswa->keluar_karena;
+                    $datasiswa_system->tanggal_keluar            = $data_siswa->tanggal_keluar;
+                    $datasiswa_system->alasan                    = $data_siswa->alasan;
+                    $datasiswa_system->persetujuan               = $data_siswa->persetujuan;
+                    $datasiswa_system->jenis_1                   = $data_siswa->jenis_1;
+                    $datasiswa_system->tingkat_1                 = $data_siswa->tingkat_1;
+                    $datasiswa_system->nama_prestasi_1           = $data_siswa->nama_prestasi_1;
+                    $datasiswa_system->tahun_1                   = $data_siswa->tahun_1;
+                    $datasiswa_system->penyelenggara_1           = $data_siswa->penyelenggara_1;
+                    $datasiswa_system->jenis_2                   = $data_siswa->jenis_2;
+                    $datasiswa_system->tingkat_2                 = $data_siswa->tingkat_2;
+                    $datasiswa_system->nama_prestasi_2           = $data_siswa->nama_prestasi_2;
+                    $datasiswa_system->tahun_2                   = $data_siswa->tahun_2;
+                    $datasiswa_system->penyelenggara_2           = $data_siswa->penyelenggara_2;
+                    $datasiswa_system->jenis_3                   = $data_siswa->jenis_3;
+                    $datasiswa_system-> tingkat_3                = $data_siswa->tingkat_3;
+                    $datasiswa_system->nama_prestasi_3           = $data_siswa->nama_prestasi_3;
+                    $datasiswa_system->tahun_3                   = $data_siswa->tahun_3;
+                    $datasiswa_system->penyelenggara_3           = $data_siswa->penyelenggara_3;
+                    $datasiswa_system->jenis_1_0                 = $data_siswa->jenis_1_0;
+                    $datasiswa_system->keterangan_1              = $data_siswa->keterangan_1;
+                    $datasiswa_system->tahun_mulai_1             = $data_siswa->tahun_mulai_1;
+                    $datasiswa_system->tahun_selesai_1           = $data_siswa->tahun_selesai_1;
+                    $datasiswa_system->jenis_2_0                 = $data_siswa->jenis_2_0;
+                    $datasiswa_system->keterangan_2              = $data_siswa->keterangan_2;
+                    $datasiswa_system->tahun_mulai_2             = $data_siswa->tahun_mulai_2;
+                    $datasiswa_system->tahun_selesai_2           = $data_siswa->tahun_selesai_2;
+                    $datasiswa_system->jenis_3_0                 = $data_siswa->jenis_3_0;
+                    $datasiswa_system->keterangan_3              = $data_siswa->keterangan_3;
+                    $datasiswa_system->tahun_mulai_3             = $data_siswa->tahun_mulai_3;
+                    $datasiswa_system->tahun_selesai_3           = $data_siswa->tahun_selesai_3;
+                    $datasiswa_system->sekolah                   = $data_siswa->sekolah;
+                    $datasiswa_system->unit                      = $data_siswa->unit;
+                    $datasiswa_system->input_by                  = $data_siswa->input_by;
+                    $datasiswa_system->created_at                = $data_siswa->created_at;
+                    $datasiswa_system->updated_at                = $data_siswa->updated_at;
+                    $datasiswa_system->save();
+                    }
+                    
                 $data_siswa2 = Data_siswa2::where('ppdb_id', $ppdb->ppdb_id)->first(); 
-                        //data siswa 2   
-                
+                        //data siswa 2         
                 $data_siswa2->kode_registrasi      = $ppdb->document_no;
                 $data_siswa2->unit                 = $request->unit;
                 $data_siswa2->sekolah              = $request->sekolah;
@@ -874,15 +1214,12 @@ class PPDBController extends Controller
                 $data_siswa2->sub_kelas            = $request->sub_kelas;
                 $data_siswa2->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
                 $data_siswa2->nama_wali_kelas      = $request->nama_wali_kelas;
-
                 $data_siswa2->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
-
                 $data_siswa2->nisn                 = $request->nisn;
                 $data_siswa2->nik_siswa            = $request->nik_siswa;
                 $data_siswa2->status_siswa         = $request->status_siswa;
                 $data_siswa2->keterangan           = $request->keterangan;
-                $data_siswa2->save();
-    
+                $data_siswa2->save();  
                 $data_kelas = new Data_kelas;
                 $data_kelas->ppdb_id              = $ppdb->ppdb_id;
                 $data_kelas->kode_registrasi      = $ppdb->document_no;
@@ -892,9 +1229,7 @@ class PPDBController extends Controller
                 $data_kelas->sub_kelas            = $request->sub_kelas;
                 $data_kelas->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
                 $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
-
                 $data_kelas->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
-
                 $data_kelas->nisn                 = $request->nisn;
                 $data_kelas->nik_siswa            = $request->nik_siswa;
                 $data_kelas->status_siswa         = $request->status_siswa;
@@ -902,11 +1237,8 @@ class PPDBController extends Controller
                 $data_kelas->save();
 
                 $data_siswa_system_2 = Data_siswa_system_2::where('ppdb_id', $request->ppdb_id)->first();
-
                 if ($data_siswa_system_2 == '' && $data_siswa_system_2 == null && empty($data_siswa_system_2) ) {
-
                 $data_siswa_system_2 = new Data_siswa_system_2();
-
                 $data_siswa_system_2->ppdb_id                           = $data_siswa2->ppdb_id;
                 $data_siswa_system_2->email                             = $data_siswa2->email;
                 $data_siswa_system_2->nama_orang_tua                    = $data_siswa2->nama_orang_tua;
@@ -957,15 +1289,11 @@ class PPDBController extends Controller
                 $data_siswa_system_2->updated_by                        = $data_siswa2->updated_by;
                 $data_siswa_system_2->created_at                        = $data_siswa2->created_at;
                 $data_siswa_system_2->save();
-
                 }
 
                 $data_siswa_system_3 = Data_siswa_system_3::where('ppdb_id', $request->ppdb_id)->first();
-
-                $data_siswa3 = Data_siswa3::where('ppdb_id', $ppdb->ppdb_id)->first(); 
-                
+                $data_siswa3 = Data_siswa3::where('ppdb_id', $ppdb->ppdb_id)->first();   
                 if ($data_siswa_system_3 == '' && $data_siswa_system_3 == null && empty($data_siswa_system_3) ) {
-
                 $data_siswa_system_3                                = new Data_siswa_system_3();
                 $data_siswa_system_3->ppdb_id                       = $data_siswa3->ppdb_id;
                 $data_siswa_system_3->yang_lain                     = $data_siswa3->yang_lain;
@@ -1002,21 +1330,17 @@ class PPDBController extends Controller
                 }
 
                 $data_siswa4 = Data_siswa4::where('ppdb_id', $ppdb->ppdb_id)->first();
-
                 $jarak_satu                     = Data_siswa4::select(['1km_jarak as jarak_satu'])->where('ppdb_id', $ppdb->ppdb_id)->first();   
                 $jarak_dua                      = Data_siswa4::select(['1_sampai_5km as jarak_dua'])->where('ppdb_id', $ppdb->ppdb_id)->first(); 
                 $jarak_tiga                     = Data_siswa4::select(['6_sampai_10km as jarak_tiga'])->where('ppdb_id', $ppdb->ppdb_id)->first();
                 $jarak_empat                    = Data_siswa4::select(['11_sampai_20km as jarak_empat'])->where('ppdb_id', $ppdb->ppdb_id)->first();
                 $jarak_lima                     = Data_siswa4::select(['21_sampai_30km as jarak_lima'])->where('ppdb_id', $ppdb->ppdb_id)->first();
-
                 $jarak1 = ($jarak_satu->jarak_satu   == null ? 'kosong' : $jarak_satu->jarak_satu);
                 $jarak2 = ($jarak_dua->jarak_dua     == null ? 'kosong' : $jarak_dua->jarak_dua);
                 $jarak3 = ($jarak_tiga->jarak_tiga   == null ? 'kosong' : $jarak_tiga->jarak_tiga);
                 $jarak4 = ($jarak_empat->jarak_empat == null ? 'kosong' : $jarak_empat->jarak_empat);
                 $jarak5 = ($jarak_lima->jarak_lima   == null ? 'kosong' : $jarak_lima->jarak_lima);
-
-                $values = array(
-                 
+                $values = array(           
                     'ppdb_id'                           =>  $data_siswa4->ppdb_id,
                     'media_sosial_2'                    =>  $data_siswa4->media_sosial_2,
                     'program_sekolah'                   =>  $data_siswa4->program_sekolah,
@@ -1054,67 +1378,55 @@ class PPDBController extends Controller
                     'created_at'                        =>  $data_siswa4->created_at           
                 );
 
-                $data_siswa_system_4 = Data_siswa_system_4::where('ppdb_id', $request->ppdb_id)->first();
-                
+                $data_siswa_system_4 = Data_siswa_system_4::where('ppdb_id', $request->ppdb_id)->first();       
                 if ($data_siswa_system_4 == '' && $data_siswa_system_4 == null && empty($data_siswa_system_4) ) {
-
                 $data_siswa_system_4  = new Data_siswa_system_4();
                 $data_siswa_system_4->insert($values);
-
                 }
 
-
-                $ppdb_interviews_system = Ppdb_interviews_system::where('ppdb_id', $request->ppdb_id)->first();
-
-                $ppdb_interviews_check                      =  PPDBInterview::where('ppdb_id', $ppdb->ppdb_id)->first();
-
-                if ($ppdb_interviews_system == '' && $ppdb_interviews_system == null && empty($ppdb_interviews_system) ) {
-
-                $ppdb_interviews_system                                 = new Ppdb_interviews_system();
-                $ppdb_interviews_system->ppdb_id                        = $ppdb_interviews_check->ppdb_id;
-                $ppdb_interviews_system->school_recomendation_result    = $ppdb_interviews_check->school_recomendation_result;
-                $ppdb_interviews_system->school_recomendation_file      = $ppdb_interviews_check->school_recomendation_file;
-                $ppdb_interviews_system->school_recomendation_note      = $ppdb_interviews_check->school_recomendation_note;
-                $ppdb_interviews_system->is_submited                    = $ppdb_interviews_check->is_submited;
-                $ppdb_interviews_system->interview_result               = $ppdb_interviews_check->interview_result;
-                $ppdb_interviews_system->interview_result_note          = $ppdb_interviews_check->interview_result_note;
-                $ppdb_interviews_system->interview_result_file          = $ppdb_interviews_check->interview_result_file;
-                $ppdb_interviews_system->kesiapan_value                 = $ppdb_interviews_check->kesiapan_value;
-                $ppdb_interviews_system->kesiapan_file                  = $ppdb_interviews_check->kesiapan_file;
-                $ppdb_interviews_system->kesiapan_result                = $ppdb_interviews_check->kesiapan_result;
-                $ppdb_interviews_system->kesiapan_result_note           = $ppdb_interviews_check->kesiapan_result_note;
-                $ppdb_interviews_system->psikotest_value                = $ppdb_interviews_check->psikotest_value;
-                $ppdb_interviews_system->psikotest_file                 = $ppdb_interviews_check->psikotest_file;
-                $ppdb_interviews_system->psikotest_result               = $ppdb_interviews_check->psikotest_result;
-                $ppdb_interviews_system->psikotest_result_note          = $ppdb_interviews_check->psikotest_result_note;
-                $ppdb_interviews_system->academic_value                 = $ppdb_interviews_check->academic_value;
-                $ppdb_interviews_system->academic_file                  = $ppdb_interviews_check->academic_file;
-                $ppdb_interviews_system->academic_result                = $ppdb_interviews_check->academic_result;
-                $ppdb_interviews_system->academic_result_note           = $ppdb_interviews_check->academic_result_note;
-                $ppdb_interviews_system->interview_parent_summary       = $ppdb_interviews_check->interview_parent_summary;
-                $ppdb_interviews_system->interview_parent_file          = $ppdb_interviews_check->interview_parent_file;
-                $ppdb_interviews_system->interview_parent_result        = $ppdb_interviews_check->interview_parent_result;
-                $ppdb_interviews_system->interview_parent_result_note   = $ppdb_interviews_check->interview_parent_result_note;
-                $ppdb_interviews_system->interview_student_summary      = $ppdb_interviews_check->interview_student_summary;
-                $ppdb_interviews_system->interview_student_file         = $ppdb_interviews_check->interview_student_file;
-                $ppdb_interviews_system->interview_student_result       = $ppdb_interviews_check->interview_student_result;
-                $ppdb_interviews_system->interview_student_result_note  = $ppdb_interviews_check->interview_student_result_note;
-                $ppdb_interviews_system->observasi_value                = $ppdb_interviews_check->observasi_value;
-                $ppdb_interviews_system->observasi_summary              = $ppdb_interviews_check->observasi_summary;
-                $ppdb_interviews_system->observasi_file                 = $ppdb_interviews_check->observasi_file;
-                $ppdb_interviews_system->observasi_result               = $ppdb_interviews_check->observasi_result;
-                $ppdb_interviews_system->observasi_result_note          = $ppdb_interviews_check->observasi_result_note;
-                $ppdb_interviews_system->save();
-
+                    $ppdb_interviews_system = Ppdb_interviews_system::where('ppdb_id', $request->ppdb_id)->first();
+                    $ppdb_interviews_check                      =  PPDBInterview::where('ppdb_id', $ppdb->ppdb_id)->first();
+                    if ($ppdb_interviews_system == '' && $ppdb_interviews_system == null && empty($ppdb_interviews_system) ) {
+                    $ppdb_interviews_system                                 = new Ppdb_interviews_system();
+                    $ppdb_interviews_system->ppdb_id                        = $ppdb_interviews_check->ppdb_id;
+                    $ppdb_interviews_system->school_recomendation_result    = $ppdb_interviews_check->school_recomendation_result;
+                    $ppdb_interviews_system->school_recomendation_file      = $ppdb_interviews_check->school_recomendation_file;
+                    $ppdb_interviews_system->school_recomendation_note      = $ppdb_interviews_check->school_recomendation_note;
+                    $ppdb_interviews_system->is_submited                    = $ppdb_interviews_check->is_submited;
+                    $ppdb_interviews_system->interview_result               = $ppdb_interviews_check->interview_result;
+                    $ppdb_interviews_system->interview_result_note          = $ppdb_interviews_check->interview_result_note;
+                    $ppdb_interviews_system->interview_result_file          = $ppdb_interviews_check->interview_result_file;
+                    $ppdb_interviews_system->kesiapan_value                 = $ppdb_interviews_check->kesiapan_value;
+                    $ppdb_interviews_system->kesiapan_file                  = $ppdb_interviews_check->kesiapan_file;
+                    $ppdb_interviews_system->kesiapan_result                = $ppdb_interviews_check->kesiapan_result;
+                    $ppdb_interviews_system->kesiapan_result_note           = $ppdb_interviews_check->kesiapan_result_note;
+                    $ppdb_interviews_system->psikotest_value                = $ppdb_interviews_check->psikotest_value;
+                    $ppdb_interviews_system->psikotest_file                 = $ppdb_interviews_check->psikotest_file;
+                    $ppdb_interviews_system->psikotest_result               = $ppdb_interviews_check->psikotest_result;
+                    $ppdb_interviews_system->psikotest_result_note          = $ppdb_interviews_check->psikotest_result_note;
+                    $ppdb_interviews_system->academic_value                 = $ppdb_interviews_check->academic_value;
+                    $ppdb_interviews_system->academic_file                  = $ppdb_interviews_check->academic_file;
+                    $ppdb_interviews_system->academic_result                = $ppdb_interviews_check->academic_result;
+                    $ppdb_interviews_system->academic_result_note           = $ppdb_interviews_check->academic_result_note;
+                    $ppdb_interviews_system->interview_parent_summary       = $ppdb_interviews_check->interview_parent_summary;
+                    $ppdb_interviews_system->interview_parent_file          = $ppdb_interviews_check->interview_parent_file;
+                    $ppdb_interviews_system->interview_parent_result        = $ppdb_interviews_check->interview_parent_result;
+                    $ppdb_interviews_system->interview_parent_result_note   = $ppdb_interviews_check->interview_parent_result_note;
+                    $ppdb_interviews_system->interview_student_summary      = $ppdb_interviews_check->interview_student_summary;
+                    $ppdb_interviews_system->interview_student_file         = $ppdb_interviews_check->interview_student_file;
+                    $ppdb_interviews_system->interview_student_result       = $ppdb_interviews_check->interview_student_result;
+                    $ppdb_interviews_system->interview_student_result_note  = $ppdb_interviews_check->interview_student_result_note;
+                    $ppdb_interviews_system->observasi_value                = $ppdb_interviews_check->observasi_value;
+                    $ppdb_interviews_system->observasi_summary              = $ppdb_interviews_check->observasi_summary;
+                    $ppdb_interviews_system->observasi_file                 = $ppdb_interviews_check->observasi_file;
+                    $ppdb_interviews_system->observasi_result               = $ppdb_interviews_check->observasi_result;
+                    $ppdb_interviews_system->observasi_result_note          = $ppdb_interviews_check->observasi_result_note;
+                    $ppdb_interviews_system->save();
                 }
-
-                
-                $payment_system = Payment_system::where('ppdb_id', $request->ppdb_id)->first();
-                          
+              
+                $payment_system = Payment_system::where('ppdb_id', $request->ppdb_id)->first();                      
                 $payment = Payment::where('ppdb_id', $ppdb->ppdb_id)->get();      
-
                 if ($payment_system == '' && $payment_system == null && empty($payment_system) ) {
-
                 foreach ($payment as $object) {
                     $payment_system                         = new Payment_system();
                     $payment_system->ppdb_id                = $object->ppdb_id;
@@ -1134,15 +1446,9 @@ class PPDBController extends Controller
                 }
 
             }
-                  
-                
-
                 if ( $users == null && $users == "" && empty($users)) {
-
                 $users = Users_system::where('user_id', $ppdb->id_user)->first();
-
                 $user                               = new Users();          
-
                 $user->user_id                      = $users->user_id;
                 $user->uuid                         = $users->uuid;
                 $user->first_name                   = $users->first_name;
@@ -1169,17 +1475,12 @@ class PPDBController extends Controller
                 $user->updated_at                   = $users->updated_at;
                 $user->deleted_at                   = $users->deleted_at;
                 $user->save();
-
             }
 
-
             $reregistrasi_system = Reregistrasi_system::where('ppdb_id', $request->id)->first();
-
             if ( $reregistrasi_system == null && $reregistrasi_system == "" && empty($reregistrasi_system)) {
-
                 $reregister = ReRegistration::where('ppdb_id', $ppdb->ppdb_id)->first(); 
-                $reregister_system = new Reregistrasi_system();
-       
+                $reregister_system = new Reregistrasi_system();  
                 $reregister_system->file_additionalsatu     = $reregister->file_additionalsatu;
                 $reregister_system->file_additionaldua      = $reregister->file_additionaldua;
                 $reregister_system->ppdb_id                 = $reregister->ppdb_id;
@@ -1187,18 +1488,14 @@ class PPDBController extends Controller
                 $reregister_system->created_at              = $reregister->created_at;
                 $reregister_system->updated_at              = $reregister->updated_at;
                 $reregister_system->save();
-
             }
-
                 debug($ppdb_interviews_system);
                 debug($ppdb_interviews_system);
                 debug($payment_system);
                 debug($data_siswa_system_4);
                 debug($ppdb);
                 debug($data_siswa);
-
                 return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Edit di Master']);
-
         }else {
             Users_system::where('user_id',$users_check->id_user)->delete();
             PPDB::where('ppdb_id',$users_check->ppdb_id)->delete();
@@ -1208,16 +1505,11 @@ class PPDBController extends Controller
             Data_siswa::where('ppdb_id',$users_check->ppdb_id)->delete();
             Data_siswa2::where('ppdb_id',$users_check->ppdb_id)->delete();
             Data_siswa3::where('ppdb_id',$users_check->ppdb_id)->delete();
-            Data_siswa4::where('ppdb_id',$users_check->ppdb_id)->delete();
-            //return redirect()->back()->with(['flash_danger' => 'Data Sudah tersedia di DATA SISWA']);
-            // return Redirect::to($request->request->get('http_referrer'));
-
-            
+            Data_siswa4::where('ppdb_id',$users_check->ppdb_id)->delete();       
             return new RedirectResponse(route('admin.ppdb.index'), ['flash_warning' => 'Data Sudah Pernah di Input']);
-
         }
 
-     }else {
+     } else {
 
         $users_check = PPDB::where('dapodik_id', $request->dapodik_id)->first();
 
@@ -1773,6 +2065,13 @@ class PPDBController extends Controller
      */
     public function showClasses(PPDBPermissionRequest $request) {
 
+        $check_pk = "ppdb_id";
+
+        if (str_contains($request->id_check, '-')) { 
+            $check_pk = "dapodik_id";
+        }
+
+        Data_kelas::where($check_pk,$request->id_check)->update(['show_table' => 0]);
         $data_kelas_update = Data_kelas::where('id',$request->id_classes)->first();      
         $data_kelas_update->show_table = 1;
         if($request->aktivasi == false)
@@ -2660,20 +2959,30 @@ class PPDBController extends Controller
 
         public function indextest() {
             $ppdb = PPDB_system::all();
-
-            $SQLQuery =  "SELECT registration_schedules.description AS schedule, 
-            schools.school_name AS school, ppdb_system.fullname, data_siswa_system.nisn, 
-            data_siswa_system_2.sekolah, data_siswa_system_2.unit, data_siswa_system_2.kelas_utama, 
-            data_siswa_system_2.sub_kelas, data_siswa_system_2.status_siswa, data_siswa_system_2.keterangan 
-            FROM ppdb_system 
-            INNER JOIN schools ON ppdb_system.school_site = schools.school_code 
-            INNER JOIN registration_schedules ON ppdb_system.registration_schedule_id = registration_schedules.id 
-            INNER JOIN academic_years ON registration_schedules.academic_year_id = academic_years.id 
-            INNER JOIN data_siswa_system ON data_siswa_system.ppdb_id = ppdb_system.ppdb_id 
-            INNER JOIN data_siswa_system_2 ON data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id 
-            WHERE ppdb_system.document_status = 7 AND data_siswa_system_2.status_siswa = 'aktif'
-            AND academic_years.id = 1 AND schools.school_code IN ('JGK','CNR','PML') 
-            AND ppdb_system.stage IN ('TK','TK','TK','TK','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','KB','KB','KB','KB') 
+            $SQLQuery =  "SELECT
+            schools.school_name AS school,
+            ppdb_system.*,
+            data_siswa_system.nisn,
+            data_siswa_system_2.sekolah,
+            data_siswa_system_2.unit,
+            data_siswa_system_2.kelas_utama,
+            data_siswa_system_2.sub_kelas,
+            data_siswa_system_2.status_siswa,
+            data_siswa_system_2.keterangan,
+            data_siswa_system.nama_ayah,
+            data_siswa_system.pekerjaan_ayah,
+            data_siswa_system.nama_ibu,
+            data_siswa_system.pekerjaan_ibu,
+            data_siswa_system.nama_wali,
+            data_siswa_system.pekerjaan_wali
+            FROM ppdb_system
+            INNER JOIN schools ON ppdb_system.school_site = schools.school_code
+            INNER JOIN data_siswa_system ON (data_siswa_system.dapodik_id = ppdb_system.dapodik_id or data_siswa_system.ppdb_id = ppdb_system.ppdb_id)
+            INNER JOIN data_siswa_system_2 ON (data_siswa_system_2.dapodik_id = ppdb_system.dapodik_id or data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id)
+            WHERE
+            data_siswa_system_2.status_siswa = 'aktif'
+            AND
+            schools.school_code IN ('JGK','CNR','PML') AND ppdb_system.stage IN ('TK','TK','TK','TK','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','KB','KB','KB','KB')
             ORDER BY ppdb_system.created_at DESC";
 
             $ppdb = DB::select($SQLQuery);

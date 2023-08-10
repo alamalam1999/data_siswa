@@ -18,6 +18,11 @@ Breadcrumbs::for('admin.ppdb.edit', function ($trail, $id) {
     $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.edit', $id));
 });
 
+Breadcrumbs::for('admin.ppdb.editppdb', function ($trail, $id) {
+    $trail->parent('admin.ppdb.index');
+    $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.editppdb', $id));
+});
+
 Breadcrumbs::for('admin.ppdb.editdapodik', function ($trail, $id) {
     $trail->parent('admin.ppdb.dapodik');
     $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.editdapodik', $id));

@@ -1658,10 +1658,25 @@
                           <!--end::Wrapper-->
 
                           <div class="m-0">
-                              <a href="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_up_spp->image_confirmation); ?>" target="_blank">
-                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/<?php echo e($payment_up_spp->image_confirmation); ?>" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                              <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $payment_up_spp->image_confirmation}}" target="_blank">
+                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ $payment_up_spp->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
                               </a>
                           </div>
+                          @if($fee_up_pengajuan != '')
+                          <div class="m-0">
+                              <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $fee_up_pengajuan->image_confirmation }}" target="_blank">
+                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ $fee_up_pengajuan->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                              </a>
+                          </div>
+                          @endif
+
+                          @if($diskon_pengajuan != '')
+                          <div class="m-0">
+                              <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $diskon_pengajuan->image_confirmation }}" target="_blank">
+                                  <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ $diskon_pengajuan->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                              </a>
+                          </div>
+                          @endif
                       </div>
                       <!--end::Invoice 2 content-->
                   </div>
@@ -1688,13 +1703,21 @@
                                 $spp = 'Normal';
                               }
                           ?>
-
+                          
+                          @if($fee_up_pengajuan == '')
                           <div class="mb-3">
                               <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal <?php echo e($up); ?>
 
                               </div>
                               <div class="fw-bold fs-6 text-gray-800">Rp. <?php echo number_format($fee_up->cost,0,',','.'); ?></div>
                           </div>
+                          @else 
+                            <div class="mb-3">
+                                <div class="fw-semibold text-gray-600 fs-7">Uang Pangkal Pengajuan
+                                </div>
+                                <div class="fw-bold fs-6 text-gray-800">Rp. <?php echo number_format($fee_up_pengajuan->cost,0,',','.'); ?></div>
+                            </div>
+                            @endif
 
                           <div class="mb-3">
                               <div class="fw-semibold text-gray-600 fs-7">Uang SPP <?php echo e($spp); ?>

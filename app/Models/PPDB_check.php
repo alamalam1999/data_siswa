@@ -5,13 +5,13 @@ namespace App\Models;
 use App\Models\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 
-class PPDB extends Model
+class PPDB_check extends Model
 {
     protected $table = 'ppdb';
 
     public $incrementing = false;
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'ppdb_id';
 
     protected $fillable = [
         'registration_schedule_id',

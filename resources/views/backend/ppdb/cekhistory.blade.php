@@ -57,11 +57,12 @@
                                                     <td><input type="text" name="keterangan" size="4" value="{{ $item->keterangan }}"></td>
                                                     <td>
                                                         <input type="hidden" name="id_classes" value="{{ $item->id }}">
+                                                        <input type="hidden" name="id_check" value="{{ ($item->dapodik_id == null) ? $item->ppdb_id : $item->dapodik_id }}">
                                                             <div class="form-check form-switch">
                                                                 <input class="form-check-input" type="checkbox" name="aktivasi" id="flexSwitchCheckDefault" {{  $item->show_table == 1 ? "checked" : '' }}>
                                                             </div>
                                                     </td>
-                                                    <td><Button class="submit">Show Up</Button></td>
+                                                    <td><Button class="btn btn-primary fs-9 submit ">Show Up</Button></td>
                                                 </form>
                                             </tr>
                                             @endforeach                                     

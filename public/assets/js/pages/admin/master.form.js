@@ -83,7 +83,7 @@ $(document).ready(function() {
               }
             })
 
-            $('#kelas_utama').click(function() {
+            
                   $('#kelas_utama').change(function() {               
                     var kelasutama = $(this).val();
                     $('#nama_kelas').empty();
@@ -101,7 +101,7 @@ $(document).ready(function() {
                           }                  
                     });
                 });
-            })
+            
 
            $('#nama_kelas').change(function(){
 

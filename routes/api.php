@@ -29,8 +29,6 @@ Route::group(['middleware' => 'auth:api'] , function () {
     Route::get('/posts',[PPDBController::class, 'indextest']);
 });
 
-// Route::post('/loginhype',[AuthenticationController::class, 'loginhype']);
-
 Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::group(['prefix' => 'auth', 'middleware' => ['guest']], function () {
         // Route::post('register', 'RegisterController@register');

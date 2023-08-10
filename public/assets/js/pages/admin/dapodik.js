@@ -228,17 +228,17 @@ FTX.Utils.documentReady(function() {
             targets: 5,
             orderable: false,
             render: function(data, type, row) {
-                if(row.kelas_utama !=null){
+                if(row.classes !=null){
                 return `
                 <div>
-                <span class="text d-block fs-8">`+row.kelas_utama+`</span>
+                <span class="text d-block fs-8">`+row.classes+`</span>
                 </div>
                 `;
             } else{
 
                 return `
                         <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.kelas_utama + `</span>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.classes + `</span>
                         </div>
                    
                 `;

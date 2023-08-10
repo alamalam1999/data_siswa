@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ppdb\PPDBTableTidakAktifController;
 Route::group(['namespace' => 'ppdb'], function () {
     // Route::get('ppdb', [PPDBController::class, 'index'])->name('ppdb.index');
     // Route::get('ppdb/{id}', [PPDBController::class, 'edit'])->name('ppdb.edit');
+    Route::get('ppdbedit/{ppdb}', [PPDBController::class, 'editppdb'])->name('ppdb.editppdb');
     Route::get('dapodik', [PPDBController::class, 'dapodik'])->name('ppdb.dapodik');
     Route::get('admin/ppdb/{ppdb}/editaktif', [PPDBController::class, 'editaktif'])->name('ppdb.editaktif');
     Route::get('admin/ppdb/{ppdb}/editaktifdapodik', [PPDBController::class, 'editaktifdapodik'])->name('ppdb.editaktifdapodik');
