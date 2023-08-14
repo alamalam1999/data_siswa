@@ -42,7 +42,7 @@ use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
 use App\Models\Dapodik_id;
 use App\Models\Foto_siswa;
 use App\Models\PPDB_check;
-use App\Models\PPDBdapodik;
+use App\Models\PPDBDapodik;
 use App\Models\Register;
 use Illuminate\Support\Facades\Redirect;
 
@@ -2524,7 +2524,7 @@ class PPDBController extends Controller
        
     }
     
-    public function editaktifdapodik(PPDBdapodik $ppdb, PPDBPermissionRequest $request) {
+    public function editaktifdapodik(PPDBDapodik $ppdb, PPDBPermissionRequest $request) {
         // debug($ppdb);
         $schools = School::All();
         $enum_datas = EnumData::where('enum_group', 'SCHOOL_INFO')->orderBy('enum_order')->get();

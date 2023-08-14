@@ -1673,7 +1673,7 @@
                         @if($diskon_pengajuan != '')
                         <div class="m-0">
                             <a href="https://ppdb.sekolah-avicenna.sch.id/{{ $diskon_pengajuan->image_confirmation }}" target="_blank">
-                                <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ asset($diskon_pengajuan->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
+                                <img id="payment-image_confirmation" src="https://ppdb.sekolah-avicenna.sch.id/{{ $diskon_pengajuan->image_confirmation }}" class="img-fluid zoom border shadow w-100" alt="Bukti Pembayaran">
                             </a>
                         </div>
                         @endif
