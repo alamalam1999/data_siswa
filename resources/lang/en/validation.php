@@ -162,6 +162,7 @@ return [
                     'first_name' => 'First Name',
                     'last_name' => 'Last Name',
                     'system' => 'System',
+                    'import' => 'Import Management'
                 ],
 
                 'roles' => [

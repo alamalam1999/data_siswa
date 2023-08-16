@@ -129,6 +129,7 @@ return [
             'pages' => 'Pages Management',
             'faqs' => 'Faq Management',
             'email-templates' => 'Email Templates',
+            'import' => 'Import Management'
         ],
     ],
 

@@ -708,7 +708,7 @@
                                                 $ppdb_id = $ppdb->dapodik_id;
                                             }
                                         ?>
-                                       <a href="{{ route('admin.ppdb.cekhistory', $ppdb_id) }}">
+                                       {{-- <a href="{{ route('admin.ppdb.cekhistory', $ppdb_id) }}"> --}}
                                         <div class="btn btn-success btn-sm fs-9">Edit</div>
                                       </a>
                                       </div>

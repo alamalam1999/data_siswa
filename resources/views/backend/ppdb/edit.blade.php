@@ -424,7 +424,7 @@
                                 <label class="form-label fw-bolder text-dark fs-6">Unit</label>
                                 <!--begin::Switch-->
                           <div>
-                            <input type="text" name="ppdb_id" value="<?php echo e($ppdb->ppdb_id); ?>" />
+                            <input type="hidden" name="ppdb_id" value="<?php echo e($ppdb->ppdb_id); ?>" />
                             <select id="unit" class="form-select form-select-solid" name="unit">
                             <option value="{{ !empty($data_kelas->unit) ? $data_kelas->unit : '' }}">{{ !empty($data_kelas->unit)  ? $data_kelas->unit : 'Pilih Unit' }}</option>
                             <option value="KB">KB</option>

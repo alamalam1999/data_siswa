@@ -312,8 +312,7 @@ FTX.Utils.documentReady(function() {
         },  {
             targets: 9, 
             orderable: false,
-            render: function(data, type, row) {
-                if(row.dapodik_id == null) {
+            render: function(data, type, row) {        
                     var uri_target = uri_edit_ppdb.replace("::target::", row.ppdb_id);
                     return `
                     <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-60 w-100"><span class="svg-icon icon-size-2x ms-0 me-0">
@@ -322,9 +321,6 @@ FTX.Utils.documentReady(function() {
                             <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="blue"></path>
                             <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="blue"></path>
                         </svg></span></a>`;
-                } else {
-
-                }
             }
         }],
         order: [

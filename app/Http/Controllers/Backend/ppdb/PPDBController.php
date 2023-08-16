@@ -7,16 +7,22 @@ use Carbon\Carbon;
 use App\Models\PPDB;
 use App\Models\Users;
 use App\Models\School;
+use App\Models\Dapodik;
 use App\Models\Payment;
 use App\Models\EnumData;
+use App\Models\Register;
 use App\Models\Auth\User;
+use App\Models\Dapodik_id;
 use App\Models\Data_kelas;
 use App\Models\Data_siswa;
+use App\Models\Foto_siswa;
+use App\Models\PPDB_check;
 use App\Models\Data_siswa2;
 use App\Models\Data_siswa3;
 use App\Models\Data_siswa4;
 use App\Models\MasterKelas;
 use App\Models\PPDB_system;
+use App\Models\PPDBDapodik;
 use App\Models\AcademicYear;
 use App\Models\Users_system;
 use Illuminate\Http\Request;
@@ -37,14 +43,9 @@ use App\Models\RegistrationSchedule;
 use Illuminate\Support\Facades\View;
 use App\Models\Ppdb_interviews_system;
 use App\Http\Responses\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
-use App\Models\Dapodik_id;
-use App\Models\Foto_siswa;
-use App\Models\PPDB_check;
-use App\Models\PPDBDapodik;
-use App\Models\Register;
-use Illuminate\Support\Facades\Redirect;
 
 class PPDBController extends Controller
 {
@@ -1511,13 +1512,13 @@ class PPDBController extends Controller
 
      } else {
 
-        $users_check = PPDB::where('dapodik_id', $request->dapodik_id)->first();
+        $users_check = Dapodik::where('dapodik_id', $request->dapodik_id)->first();
 
         $users = Users::where('status_data', $users_check->dapodik_id)->first();
         if($users == null && $users == "" && empty($users)) {
      
                 $ppdb_system = PPDB_system::where('dapodik_id', $request->dapodik_id)->first();
-                $ppdb = PPDB::where('dapodik_id', $request->dapodik_id)->first();
+                $ppdb = Dapodik::where('dapodik_id', $request->dapodik_id)->first();
 
                 if ($ppdb_system == null && $ppdb_system == "" && empty($ppdb_system)) {
       
@@ -2037,7 +2038,7 @@ class PPDBController extends Controller
 
         }else {
             Users_system::where('status_data',$users_check->status_data)->delete();
-            PPDB::where('dapodik_id',$users_check->dapodik_id)->delete();
+            Dapodik::where('dapodik_id',$users_check->dapodik_id)->delete();
             PPDBInterview::where('dapodik_id',$users_check->dapodik_id)->delete();
             Payment::where('dapodik_id',$users_check->dapodik_id)->delete();
             Register::where('dapodik_id',$users_check->dapodik_id)->delete();
@@ -2045,11 +2046,8 @@ class PPDBController extends Controller
             Data_siswa2::where('dapodik_id',$users_check->dapodik_id)->delete();
             Data_siswa3::where('dapodik_id',$users_check->dapodik_id)->delete();
             Data_siswa4::where('dapodik_id',$users_check->dapodik_id)->delete();
-            //return redirect()->back()->with(['flash_danger' => 'Data Sudah tersedia di DATA SISWA']);
-            // return Redirect::to($request->request->get('http_referrer'));
-
             
-            return new RedirectResponse(route('admin.ppdb.index'), ['flash_warning' => 'Data Sudah Pernah di Input']);
+            return new RedirectResponse(route('admin.ppdb.dapodik'), ['flash_warning' => 'Data Sudah Pernah di Input']);
 
         }
 
@@ -2110,8 +2108,12 @@ class PPDBController extends Controller
         if (str_contains($id, '-')) { 
             $check_id = "dapodik_id";
         }
-
-        $ppdb           = PPDB::where($check_id, $id)->first();
+        $ppdb = '';
+        if (str_contains($id, '-')) {
+            $ppdb           = Dapodik::where($check_id, $id)->first();
+        }else {
+            $ppdb           = PPDB::where($check_id, $id)->first();
+        }
         $data_kelas     = Data_kelas::where($check_id, $id)->first();
         $data_kelas_for = Data_kelas::where($check_id, $id)->get();
 
@@ -2996,24 +2998,23 @@ class PPDBController extends Controller
      *
      * @return ViewResponse
      */
-        public function editdapodik(Dapodik_id $ppdb, PPDBPermissionRequest $request) {     
+        public function editdapodik(Dapodik $dapodik, PPDBPermissionRequest $request) {     
             $schools = School::All();
             $enum_datas = EnumData::where('enum_group', 'SCHOOL_INFO')->orderBy('enum_order')->get();
             $discount_groups = EnumData::where('enum_group', 'DISCOUNT_GROUP')->orderBy('enum_order')->get();
-            $ppdb_interview = Ppdb_interviews_system::where('dapodik_id', $ppdb->dapodik_id)->first();
+            $ppdb_interview = PPDBInterview::where('dapodik_id', $dapodik->dapodik_id)->first();
     
-            // $ppdb_testing = PPDB_system::where('id_user', $ppdb->id)->first();
-            $ppdb_testing = $ppdb;
+            $ppdb_testing = $dapodik;
     
-            $data_siswa = Data_siswa_system::where('dapodik_id', $ppdb->dapodik_id)->first();
+            $data_siswa = Data_siswa::where('dapodik_id', $dapodik->dapodik_id)->first();
     
             $is_interviewer = false;
             $is_interviewer_edit = false;
             $is_rnd = false;
             $is_rnd_edit = false;
     
-            $interview_code = 'interview-'.strtolower($ppdb->school_site).'-'.strtolower($ppdb->stage);
-            $rnd_code = 'rnd-'.strtolower($ppdb->school_site).'-'.strtolower($ppdb->stage);
+            $interview_code = 'interview-'.strtolower($dapodik->school_site).'-'.strtolower($dapodik->stage);
+            $rnd_code = 'rnd-'.strtolower($dapodik->school_site).'-'.strtolower($dapodik->stage);
     
             if(access()->allow($interview_code)) {
                 $is_interviewer = true;
@@ -3031,7 +3032,7 @@ class PPDBController extends Controller
     
             debug($is_enabled_form);
     
-            if(($ppdb->stage)=="SD")
+            if(($dapodik->stage)=="SD")
             {
                 $result_interview = [
                     '',
@@ -3071,43 +3072,44 @@ class PPDBController extends Controller
     
             $file_additional = [];
     
-            if(!empty($ppdb->file_additional) && $ppdb->file_additional != "" && $ppdb->file_additional != "[]"){
-                $file_additional = json_decode($ppdb->file_additional);
+            if(!empty($dapodik->file_additional) && $dapodik->file_additional != "" && $dapodik->file_additional != "[]"){
+                $file_additional = json_decode($dapodik->file_additional);
             }
     
-            $user_account = Users::where('status_data', $ppdb->status_data)->first();
-            $payment_formulir = Payment_system::where([
-                ['dapodik_id', '=', $ppdb->dapodik_id],
+            $user_account = Users_system::where('status_data', $dapodik->id_user)->first();
+            debug($user_account);
+            $payment_formulir = Payment::where([
+                ['dapodik_id', '=', $dapodik->dapodik_id],
                 ['payment_type', '=', 'FEE_FORMULIR']
             ])->first();
     
-            $payment_up_spp = Payment_system::where([ 
-                ['dapodik_id', '=', $ppdb->dapodik_id],
+            $payment_up_spp = Payment::where([ 
+                ['dapodik_id', '=', $dapodik->dapodik_id],
                 ['payment_type', '=', 'FEE_TOTAL']
             ])->first();
     
-            $fee_up = Payment_system::where([ 
-                ['dapodik_id', '=', $ppdb->dapodik_id],
+            $fee_up = Payment::where([ 
+                ['dapodik_id', '=', $dapodik->dapodik_id],
                 ['payment_type', '=', 'FEE_UP']
             ])->first();
     
-            $fee_up_pengajuan = Payment_system::where([ 
-                ['dapodik_id', '=', $ppdb->dapodik_id],
+            $fee_up_pengajuan = Payment::where([ 
+                ['dapodik_id', '=', $dapodik->dapodik_id],
                 ['payment_type', '=', 'FEE_UP DILUAR NOMINAL']
             ])->first();
     
-            $diskon_pengajuan = Payment_system::where([
-                ['dapodik_id', '=', $ppdb->dapodik_id],
+            $diskon_pengajuan = Payment::where([
+                ['dapodik_id', '=', $dapodik->dapodik_id],
                 ['payment_type', '=', 'FEE_PENGAJUAN']
             ])->first();
     
-            $fee_spp = Payment_system::where([ 
-                ['dapodik_id', '=', $ppdb->dapodik_id],
+            $fee_spp = Payment::where([ 
+                ['dapodik_id', '=', $dapodik->dapodik_id],
                 ['payment_type', '=', 'FEE_SPP']
             ])->first();
             $school_stage = "";
     
-            if ($ppdb->stage == "TK" || $ppdb->stage == "KB") {
+            if ($dapodik->stage == "TK" || $dapodik->stage == "KB") {
                 $school_stage = [
                     'Rp.200.000.-',      
                 ];
@@ -3117,7 +3119,7 @@ class PPDBController extends Controller
                 ];
             }
     
-            $reregistration = Reregistrasi_system::where('dapodik_id', $ppdb->dapodik_id)->first();
+            $reregistration = ReRegistration::where('dapodik_id', $dapodik->dapodik_id)->first();
     
             $file_additionalsatu = [];
             $file_additionaldua = [];
@@ -3280,22 +3282,22 @@ class PPDBController extends Controller
                 $slip_gaji_parent      =json_decode($ppdb_testing->slip_gaji_parent);
             }
     
-            $data_kelas = Data_kelas::where([['dapodik_id',$ppdb->dapodik_id],
+            $data_kelas = Data_kelas::where([['dapodik_id',$dapodik->dapodik_id],
                                             ['show_table', 1]    
                                             ])->first();
     
-            $ppdb_system = PPDB_system::where('dapodik_id',$ppdb->dapodik_id)->first();
+            $ppdb_system = PPDB::where('dapodik_id',$dapodik->dapodik_id)->first();
     
-            $data_siswa_system = Data_siswa_system::where('dapodik_id',$ppdb->dapodik_id)->first();
+            $data_siswa_system = Data_siswa::where('dapodik_id',$dapodik->dapodik_id)->first();
     
             debug($user_account);
     
-            $foto_siswa = Foto_siswa::where('dapodik_id',$ppdb->dapodik_id)->first();
+            $foto_siswa = Foto_siswa::where('dapodik_id',$dapodik->dapodik_id)->first();
     
 
 
             return new ViewResponse('backend.ppdb.editdapodik', [
-                'ppdb'              => $ppdb,
+                'ppdb'              => $dapodik,
                 'user_account'      => $user_account,
                 'schools'           => $schools,
                 'enum_datas'        => $enum_datas,

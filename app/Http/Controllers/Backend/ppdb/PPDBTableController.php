@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\PPDB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Dapodik;
 use Yajra\DataTables\Facades\DataTables;
 use App\Repositories\Backend\FaqsRepository;
 
@@ -168,9 +169,9 @@ class PPDBTableController extends Controller
 
 
     public function __Invoke_dapodik(Request $request) {
-        $ppdb = PPDB::where('dapodik_id', '>=', 0);
+        $dapodik = Dapodik::where('dapodik_id', '>=', 0);
 
-        $ppdb = $ppdb->orderBy('created_at', 'desc')->get();
+        $dapodik = $dapodik->orderBy('created_at', 'desc')->get();
 
         $search_general        = $request->get('search_general');
         $academic_year         = $request->get('academic_year');
@@ -207,7 +208,7 @@ class PPDBTableController extends Controller
         }
 
         if ($stage != 'ALL') {
-            array_push($whereCondition, "ppdb.stage = '".$stage."'");
+            array_push($whereCondition, "dapodik.stage = '".$stage."'");
         } else {
             $stages = siteAccess();
             $stageCodes = [];
@@ -216,11 +217,11 @@ class PPDBTableController extends Controller
                     array_push($stageCodes, $item->enum_value);
                 }
             }
-            array_push($whereCondition, "ppdb.stage IN ('".implode("','", $stageCodes)."')");
+            array_push($whereCondition, "dapodik.stage IN ('".implode("','", $stageCodes)."')");
         }
     
         if (!empty($search_general) && $search_general != '') {
-            array_push($whereCondition, "(ppdb.document_no LIKE '%".$search_general."%' OR ppdb.fullname LIKE '%".$search_general."%')");
+            array_push($whereCondition, "(dapodik.document_no LIKE '%".$search_general."%' OR dapodik.fullname LIKE '%".$search_general."%')");
         }
 
         if ($search_status != '' && $search_status != null ) {
@@ -229,28 +230,28 @@ class PPDBTableController extends Controller
 
         if ($diskon != '' && !empty($diskon)) {
             if($diskon == 'all check') {
-                array_push($whereCondition, "ppdb.medco_employee != ''");
-                array_push($whereCondition, "ppdb.medco_employee_file != ''");
+                array_push($whereCondition, "dapodik.medco_employee != ''");
+                array_push($whereCondition, "dapodik.medco_employee_file != ''");
             } else if($diskon == 'Sudah Validasi') {
-                array_push($whereCondition, "ppdb.ppdb_discount != ''");
+                array_push($whereCondition, "dapodik.ppdb_discount != ''");
             } else if($diskon == 'Belum Validasi') {
-                //array_push($whereCondition, "ppdb.ppdb_discount = ''");
-                array_push($whereCondition, "(ppdb.ppdb_discount is null or ppdb.ppdb_discount = '')");
-                array_push($whereCondition, "ppdb.medco_employee != ''");   
-                array_push($whereCondition, "ppdb.medco_employee_file != ''");   
+                //array_push($whereCondition, "dapodik.ppdb_discount = ''");
+                array_push($whereCondition, "(dapodik.ppdb_discount is null or dapodik.ppdb_discount = '')");
+                array_push($whereCondition, "dapodik.medco_employee != ''");   
+                array_push($whereCondition, "dapodik.medco_employee_file != ''");   
             }
         }
 
         if($status_siswa != '' && !empty($status_siswa)) {
             if ($status_siswa == 'siswa dalam') {
-                array_push($whereCondition, "ppdb.status_siswa = 'siswa dalam'");
+                array_push($whereCondition, "dapodik.status_siswa = 'siswa dalam'");
             } else if ($status_siswa == 'siswa luar') {
-                array_push($whereCondition, "ppdb.status_siswa = 'siswa luar'");
+                array_push($whereCondition, "dapodik.status_siswa = 'siswa luar'");
             }
         }
 
         $SQLQuery = 'SELECT
-            ppdb.*,
+            dapodik.*,
             data_siswa.nisn,
             data_siswa_2.sekolah,
             data_siswa_2.unit,
@@ -258,34 +259,34 @@ class PPDBTableController extends Controller
             data_siswa_2.sub_kelas,
             data_siswa_2.status_siswa,
             data_siswa_2.keterangan
-        FROM ppdb
-        INNER JOIN schools ON ppdb.school_site = schools.school_code
-        INNER JOIN data_siswa ON data_siswa.dapodik_id = ppdb.dapodik_id
-        INNER JOIN data_siswa_2 ON data_siswa_2.dapodik_id = ppdb.dapodik_id
+        FROM dapodik
+        INNER JOIN schools ON dapodik.school_site = schools.school_code
+        INNER JOIN data_siswa ON data_siswa.dapodik_id = dapodik.dapodik_id
+        INNER JOIN data_siswa_2 ON data_siswa_2.dapodik_id = dapodik.dapodik_id
         '.implode(' ', $innerCondition).'
         WHERE
         data_siswa_2.status_siswa is null
         AND      
         '.implode(' AND ', $whereCondition).' 
-        ORDER BY ppdb.created_at DESC';
+        ORDER BY dapodik.created_at DESC';
 
         debug($SQLQuery);
 
-        $ppdbs = DB::select($SQLQuery);
+        $dapodiks = DB::select($SQLQuery);
 
-        return Datatables::of($ppdbs)
+        return Datatables::of($dapodiks)
 
        // ->editColumn('schedule', function ($ppdbItem) {
             //     return $ppdbItem->schedule->description;
             // })
-            ->editColumn('ppdb_status_label', function ($ppdbItem) {
-                return ppdb_status_label($ppdbItem->document_status);
+            ->editColumn('ppdb_status_label', function ($dapodikItem) {
+                return ppdb_status_label($dapodikItem->document_status);
             })
-            ->editColumn('ppdb_status_css', function ($ppdbItem) {
-                return ppdb_status_css($ppdbItem->document_status);
+            ->editColumn('ppdb_status_css', function ($dapodikItem) {
+                return ppdb_status_css($dapodikItem->document_status);
             })
-            ->editColumn('created_at', function ($ppdbItem) {
-                return Carbon::parse($ppdbItem->created_at)->toDateString();
+            ->editColumn('created_at', function ($dapodikItem) {
+                return Carbon::parse($dapodikItem->created_at)->toDateString();
             })
             // ->addColumn('actions', function ($ppdbItem) {
             //     return $ppdbItem->action_buttons;
