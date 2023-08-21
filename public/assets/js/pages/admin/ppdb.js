@@ -188,10 +188,10 @@ FTX.Utils.documentReady(function() {
             targets: 3,
             orderable: false,
             render: function(data, type, row) {
-                if(row.sekolah !=null){
+                if(row.school_site !=null){
                 return `
                     <div>
-                        <span class="text d-block fs-8">` + row.sekolah + `</span>
+                        <span class="text d-block fs-8">` + row.school_site + `</span>
                     </div>
             `;
         } else{
@@ -209,10 +209,10 @@ FTX.Utils.documentReady(function() {
             targets: 4,
             orderable: false,
             render: function(data, type, row) {
-                if(row.unit !=null){
+                if(row.stage !=null){
                 return `
                 <div>
-                <span class="text d-block fs-8">` + row.unit + `</span>
+                <span class="text d-block fs-8">` + row.stage + `</span>
             </div>
                 `;
             } else{

@@ -14,12 +14,7 @@ class PricingPermissionRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return (
-            access()->allow('upload-pricing')
-        );
-    }
+
 
     /**
      * Get the validation rules that apply to the request.

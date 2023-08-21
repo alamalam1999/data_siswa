@@ -38,9 +38,11 @@ use App\Imports\DapodikImport;
 use App\Imports\UserImport;
 use App\Models\Dapodik;
 use App\Models\Dapodik_system;
+use App\Models\Data_siswa1;
 use App\Models\ReRegistration;
 use App\Models\Users_system;
 use Illuminate\Support\Facades\Date;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PricingController extends Controller
 {
@@ -171,479 +173,458 @@ class PricingController extends Controller
      * @return ViewResponse
      */
     public function uploadDatasiswa(PricingPermissionRequest $request)
-    {      
+    {          
+        try {
         //PPDB DAFTAR ULANG
-        $reregister_siswa = [];             
-        $reregister_siswa = Excel::toArray(new ReregisterImport, $request->file('file_pricing'));
+        $datasiswa_upload = [];             
+        $datasiswa_upload = Excel::toArray(new ReregisterImport, $request->file('file_pricing'));
         $reregister_insert = [];
-        foreach ($reregister_siswa[5] as $reregister_siswas) {
-            $existing_register = register::where('ppdb_id', $reregister_siswas['ppdb_id'])->first();
+        foreach ($datasiswa_upload[5] as $datasiswa_uploads) {
+            $existing_register = register::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
             if ( ! $existing_register) {
                 array_push($reregister_insert, [        
-                    'file_additionalsatu'            => $reregister_siswas['file_additionalsatu'],
-                    'file_additionaldua'             => $reregister_siswas['file_additionaldua'],
-                    'ppdb_id'                        => $reregister_siswas['ppdb_id'],
-                    'medco_employee_file'            => $reregister_siswas['medco_employee_file'],
-                    'created_at'                     => $reregister_siswas['created_at'],
-                    'updated_at'                     => $reregister_siswas['updated_at']
-                
+                    'file_additionalsatu'            => $datasiswa_uploads['file_additionalsatu'],
+                    'file_additionaldua'             => $datasiswa_uploads['file_additionaldua'],
+                    'ppdb_id'                        => $datasiswa_uploads['ppdb_id'],
+                    'medco_employee_file'            => $datasiswa_uploads['medco_employee_file'],
+                    'created_at'                     => $datasiswa_uploads['created_at'],
+                    'updated_at'                     => $datasiswa_uploads['updated_at'] 
                 ]);
             }
         }
-        debug($reregister_insert);
-        register::insert($reregister_insert);
-
+        
         //PPDB INTERVIEW
-        $interview_siswa = [];           
-        $interview_siswa = Excel::toArray(new InterviewImport, $request->file('file_pricing'));
         $interview_insert = [];
-        foreach ($interview_siswa[4] as $interview_siswas) {
-            $existing_interview = PPDBInterview::where('ppdb_id', $interview_siswas['ppdb_id'])->first();
+        foreach ($datasiswa_upload[4] as $datasiswa_uploads) {
+            $existing_interview = PPDBInterview::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
             if ( ! $existing_interview) {
                     array_push($interview_insert, [        
-                        'ppdb_id'                           => $interview_siswas['ppdb_id'],
-                        'school_recomendation_result'       => $interview_siswas['school_recomendation_result'],
-                        'school_recomendation_file'         => $interview_siswas['school_recomendation_file'],
-                        'school_recomendation_note'         => $interview_siswas['school_recomendation_note'],
-                        'is_submited'                       => $interview_siswas['is_submited'],
-                        'interview_result'                  => $interview_siswas['interview_result'],
-                        'interview_result_file'             => $interview_siswas['interview_result_file'],
-                        'interview_result_note'             => $interview_siswas['interview_result_note'],
-                        'kesiapan_file'                     => $interview_siswas['kesiapan_file'],
-                        'kesiapan_result'                   => $interview_siswas['kesiapan_result'],
-                        'kesiapan_result_note'              => $interview_siswas['kesiapan_result_note'],
-                        'academic_value'                    => $interview_siswas['academic_value'],
-                        'academic_file'                     => $interview_siswas['academic_file'],
-                        'academic_result'                   => $interview_siswas['academic_result'],
-                        'academic_result_note'              => $interview_siswas['academic_result_note'],
-                        'interview_parent_summary'          => $interview_siswas['interview_parent_summary'],
-                        'interview_parent_file'             => $interview_siswas['interview_parent_file'],
-                        'interview_parent_result_note'      => $interview_siswas['interview_parent_result_note'],
-                        'interview_student_summary'         => $interview_siswas['interview_student_summary'],
-                        'interview_student_result'          => $interview_siswas['interview_student_result'],
-                        'observasi_value'                   => $interview_siswas['observasi_value'],
-                        'observasi_summary'                 => $interview_siswas['observasi_summary'],
-                        'observasi_file'                    => $interview_siswas['observasi_file'],
-                        'observasi_result'                  => $interview_siswas['observasi_result'],
-                        'observasi_result_note'             => $interview_siswas['observasi_result_note'],
-                        'created_at'                        => $interview_siswas['created_at'],
-                        'updated_at'                        => $interview_siswas['updated_at'],
-                        'deleted_at'                        => $interview_siswas['deleted_at']               
+                        'ppdb_id'                           => $datasiswa_uploads['ppdb_id'],
+                        'school_recomendation_result'       => $datasiswa_uploads['school_recomendation_result'],
+                        'school_recomendation_file'         => $datasiswa_uploads['school_recomendation_file'],
+                        'school_recomendation_note'         => $datasiswa_uploads['school_recomendation_note'],
+                        'is_submited'                       => $datasiswa_uploads['is_submited'],
+                        'interview_result'                  => $datasiswa_uploads['interview_result'],
+                        'interview_result_file'             => $datasiswa_uploads['interview_result_file'],
+                        'interview_result_note'             => $datasiswa_uploads['interview_result_note'],
+                        'kesiapan_file'                     => $datasiswa_uploads['kesiapan_file'],
+                        'kesiapan_result'                   => $datasiswa_uploads['kesiapan_result'],
+                        'kesiapan_result_note'              => $datasiswa_uploads['kesiapan_result_note'],
+                        'academic_value'                    => $datasiswa_uploads['academic_value'],
+                        'academic_file'                     => $datasiswa_uploads['academic_file'],
+                        'academic_result'                   => $datasiswa_uploads['academic_result'],
+                        'academic_result_note'              => $datasiswa_uploads['academic_result_note'],
+                        'interview_parent_summary'          => $datasiswa_uploads['interview_parent_summary'],
+                        'interview_parent_file'             => $datasiswa_uploads['interview_parent_file'],
+                        'interview_parent_result_note'      => $datasiswa_uploads['interview_parent_result_note'],
+                        'interview_student_summary'         => $datasiswa_uploads['interview_student_summary'],
+                        'interview_student_result'          => $datasiswa_uploads['interview_student_result'],
+                        'observasi_value'                   => $datasiswa_uploads['observasi_value'],
+                        'observasi_summary'                 => $datasiswa_uploads['observasi_summary'],
+                        'observasi_file'                    => $datasiswa_uploads['observasi_file'],
+                        'observasi_result'                  => $datasiswa_uploads['observasi_result'],
+                        'observasi_result_note'             => $datasiswa_uploads['observasi_result_note'],
+                        'created_at'                        => $datasiswa_uploads['created_at'],
+                        'updated_at'                        => $datasiswa_uploads['updated_at'],
+                        'deleted_at'                        => $datasiswa_uploads['deleted_at']               
                     ]);
-            }
-        }
-        debug($interview_insert);
-        PPDBInterview::insert($interview_insert);
-
+                    }
+                }
+        
         //PAYMENT
-        $payment_siswa = [];             
-        $payment_siswa = Excel::toArray(new PaymentImport, $request->file('file_pricing'));
         $payment_insert = [];
-        foreach ($payment_siswa[3] as $payment_siswas) {
-                $existing_payment = Payment::where('ppdb_id', $payment_siswas['ppdb_id'])->first();
+        foreach ($datasiswa_upload[3] as $datasiswa_uploads) {
+                $existing_payment = Payment::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
                 if ( ! $existing_payment ) {
                     array_push($payment_insert, [        
-                            'ppdb_id'                    => $payment_siswas['ppdb_id'],      
-                            'payment_type'               => $payment_siswas['payment_type'],  
-                            'payment_code'               => $payment_siswas['payment_code'],  
-                            'confirmation_status'        => $payment_siswas['confirmation_status'],  
-                            'date_send'                  => $payment_siswas['date_send'],  
-                            'bank_owner_name'            => $payment_siswas['bank_owner_name'],  
-                            'bank_code'                  => $payment_siswas['bank_code'],  
-                            'account_number'             => $payment_siswas['account_number'],  
-                            'cost'                       => $payment_siswas['cost'],  
-                            'image_confirmation'         => $payment_siswas['image_confirmation'], 
-                            'created_at'                 => $payment_siswas['created_at'], 
-                            'updated_at'                 => $payment_siswas['updated_at']                    
+                            'ppdb_id'                    => $datasiswa_uploads['ppdb_id'],      
+                            'payment_type'               => $datasiswa_uploads['payment_type'],  
+                            'payment_code'               => $datasiswa_uploads['payment_code'],  
+                            'confirmation_status'        => $datasiswa_uploads['confirmation_status'],  
+                            'date_send'                  => $datasiswa_uploads['date_send'],  
+                            'bank_owner_name'            => $datasiswa_uploads['bank_owner_name'],  
+                            'bank_code'                  => $datasiswa_uploads['bank_code'],  
+                            'account_number'             => $datasiswa_uploads['account_number'],  
+                            'cost'                       => $datasiswa_uploads['cost'],  
+                            'image_confirmation'         => $datasiswa_uploads['image_confirmation'], 
+                            'created_at'                 => $datasiswa_uploads['created_at'], 
+                            'updated_at'                 => $datasiswa_uploads['updated_at']                    
                     ]);
+                    }
                 }
-        }
-        debug($payment_insert);
-        Payment::insert($payment_insert);
-
+        
             //PPDB 
-            $ppdb_siswa = [];        
-            $ppdb_siswa = Excel::toArray(new PPDBImport, $request->file('file_pricing'));
-            // var_dump($ppdb_siswa[0]);  //cek data sudah masuk
             $ppdb_insert = [];
-            foreach ($ppdb_siswa[0] as $ppdb_siswas) {
-                $existing_ppdb = PPDB::where('ppdb_id', $ppdb_siswas['ppdb_id'])->first();
+            foreach ($datasiswa_upload[0] as $datasiswa_uploads) {
+                $existing_ppdb = PPDB::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
                 if ( ! $existing_ppdb) {
                         array_push($ppdb_insert, [        
-                                'ppdb_id'                    => $ppdb_siswas['ppdb_id'],  
-                                'registration_schedule_id'   => $ppdb_siswas['registration_schedule_id'],      
-                                'document_no'                => $ppdb_siswas['document_no'],
-                                'document_status'            => $ppdb_siswas['document_status'],
-                                'id_user'                    => $ppdb_siswas['id_user'],
-                                'school_site'                => $ppdb_siswas['school_site'],
-                                'stage'                      => $ppdb_siswas['stage'],
-                                'classes'                    => $ppdb_siswas['classes'],
-                                'student_status'             => $ppdb_siswas['student_status'],
-                                'fullname'                   => $ppdb_siswas['fullname'],
-                                'gender'                     => $ppdb_siswas['gender'],
-                                'place_of_birth'             => $ppdb_siswas['place_of_birth'],
-                                'date_of_birth'              => $ppdb_siswas['date_of_birth'],
-                                'religion'                   => $ppdb_siswas['religion'],
-                                'nationality'                => $ppdb_siswas['nationality'],
-                                'address'                    => $ppdb_siswas['address'],
-                                'home_phone'                 => $ppdb_siswas['home_phone'],
-                                'hand_phone'                 => $ppdb_siswas['hand_phone'],
-                                'school_origin'              => $ppdb_siswas['school_origin'],
-                                'family_card'                => $ppdb_siswas['family_card'],
-                                'birth_certificate'          => $ppdb_siswas['birth_certificate'],
-                                'last_report'                => $ppdb_siswas['last_report'],
-                                'academic_certificate'       => $ppdb_siswas['academic_certificate'],
-                                'kia_book'                   => $ppdb_siswas['kia_book'],
-                                'file_additional'            => $ppdb_siswas['file_additional'],
-                                'medco_employee'             => $ppdb_siswas['medco_employee'],
-                                'medco_employee_file'        => $ppdb_siswas['medco_employee_file'],
-                                'ppdb_discount'              => $ppdb_siswas['ppdb_discount'],
-                                'studied_before'             => $ppdb_siswas['studied_before'],
-                                'file_additional_satu'       => $ppdb_siswas['file_additional_satu'],
-                                'file_additional_dua'        => $ppdb_siswas['file_additional_dua'],
-                                'file_additional_tiga'       => $ppdb_siswas['file_additional_tiga'],
-                                'file_additional_empat'      => $ppdb_siswas['file_additional_empat'],
-                                'file_additional_lima'       => $ppdb_siswas['file_additional_lima'],
-                                'tingkat_satu'               => $ppdb_siswas['tingkat_satu'],
-                                'tingkat_dua'                => $ppdb_siswas['tingkat_dua'],
-                                'tingkat_tiga'               => $ppdb_siswas['tingkat_tiga'],
-                                'tingkat_empat'              => $ppdb_siswas['tingkat_empat'],
-                                'tingkat_lima'               => $ppdb_siswas['tingkat_lima'],
-                                'deskripsi_satu'             => $ppdb_siswas['deskripsi_satu'],
-                                'deskripsi_dua'              => $ppdb_siswas['deskripsi_dua'],
-                                'deskripsi_tiga'             => $ppdb_siswas['deskripsi_tiga'],
-                                'deskripsi_empat'            => $ppdb_siswas['deskripsi_empat'],
-                                'deskripsi_lima'             => $ppdb_siswas['deskripsi_lima'],
-                                'status_siswa'               => $ppdb_siswas['status_siswa'],
-                                'gaji'                       => $ppdb_siswas['gaji'],
-                                'slip_gaji_parent'           => $ppdb_siswas['slip_gaji_parent'],
-                                'updated_by'                 => $ppdb_siswas['updated_by'],
-                                'created_at'                 => $ppdb_siswas['created_at'],
-                                'updated_at'                 => $ppdb_siswas['updated_at'],
-                                'rejected_at'                => $ppdb_siswas['rejected_at'],
-                                'rejected_by'                => $ppdb_siswas['rejected_by']              
+                                'ppdb_id'                    => $datasiswa_uploads['ppdb_id'],  
+                                'registration_schedule_id'   => $datasiswa_uploads['registration_schedule_id'],      
+                                'document_no'                => $datasiswa_uploads['document_no'],
+                                'document_status'            => $datasiswa_uploads['document_status'],
+                                'id_user'                    => $datasiswa_uploads['id_user'],
+                                'school_site'                => $datasiswa_uploads['school_site'],
+                                'stage'                      => $datasiswa_uploads['stage'],
+                                'classes'                    => $datasiswa_uploads['classes'],
+                                'student_status'             => $datasiswa_uploads['student_status'],
+                                'fullname'                   => $datasiswa_uploads['fullname'],
+                                'gender'                     => $datasiswa_uploads['gender'],
+                                'place_of_birth'             => $datasiswa_uploads['place_of_birth'],
+                                'date_of_birth'              => $datasiswa_uploads['date_of_birth'],
+                                'religion'                   => $datasiswa_uploads['religion'],
+                                'nationality'                => $datasiswa_uploads['nationality'],
+                                'address'                    => $datasiswa_uploads['address'],
+                                'home_phone'                 => $datasiswa_uploads['home_phone'],
+                                'hand_phone'                 => $datasiswa_uploads['hand_phone'],
+                                'school_origin'              => $datasiswa_uploads['school_origin'],
+                                'family_card'                => $datasiswa_uploads['family_card'],
+                                'birth_certificate'          => $datasiswa_uploads['birth_certificate'],
+                                'last_report'                => $datasiswa_uploads['last_report'],
+                                'academic_certificate'       => $datasiswa_uploads['academic_certificate'],
+                                'kia_book'                   => $datasiswa_uploads['kia_book'],
+                                'file_additional'            => $datasiswa_uploads['file_additional'],
+                                'medco_employee'             => $datasiswa_uploads['medco_employee'],
+                                'medco_employee_file'        => $datasiswa_uploads['medco_employee_file'],
+                                'ppdb_discount'              => $datasiswa_uploads['ppdb_discount'],
+                                'studied_before'             => $datasiswa_uploads['studied_before'],
+                                'file_additional_satu'       => $datasiswa_uploads['file_additional_satu'],
+                                'file_additional_dua'        => $datasiswa_uploads['file_additional_dua'],
+                                'file_additional_tiga'       => $datasiswa_uploads['file_additional_tiga'],
+                                'file_additional_empat'      => $datasiswa_uploads['file_additional_empat'],
+                                'file_additional_lima'       => $datasiswa_uploads['file_additional_lima'],
+                                'tingkat_satu'               => $datasiswa_uploads['tingkat_satu'],
+                                'tingkat_dua'                => $datasiswa_uploads['tingkat_dua'],
+                                'tingkat_tiga'               => $datasiswa_uploads['tingkat_tiga'],
+                                'tingkat_empat'              => $datasiswa_uploads['tingkat_empat'],
+                                'tingkat_lima'               => $datasiswa_uploads['tingkat_lima'],
+                                'deskripsi_satu'             => $datasiswa_uploads['deskripsi_satu'],
+                                'deskripsi_dua'              => $datasiswa_uploads['deskripsi_dua'],
+                                'deskripsi_tiga'             => $datasiswa_uploads['deskripsi_tiga'],
+                                'deskripsi_empat'            => $datasiswa_uploads['deskripsi_empat'],
+                                'deskripsi_lima'             => $datasiswa_uploads['deskripsi_lima'],
+                                'status_siswa'               => $datasiswa_uploads['status_siswa'],
+                                'gaji'                       => $datasiswa_uploads['gaji'],
+                                'slip_gaji_parent'           => $datasiswa_uploads['slip_gaji_parent'],
+                                'updated_by'                 => $datasiswa_uploads['updated_by'],
+                                'created_at'                 => $datasiswa_uploads['created_at'],
+                                'updated_at'                 => $datasiswa_uploads['updated_at'],
+                                'rejected_at'                => $datasiswa_uploads['rejected_at'],
+                                'rejected_by'                => $datasiswa_uploads['rejected_by']              
                         ]);
                     }
-            }
-            debug($ppdb_insert);
-            PPDB::insert($ppdb_insert);
-
-                    //DATASISWA_1
-                    $data_siswa = [];      
-                    $data_siswa = Excel::toArray(new DataImport, $request->file('file_pricing'));
+                }
+            
+                    //DATASISWA    
                     $data_siswa_insert = [];
-                    foreach ($data_siswa[1] as $datasiswa) {
-                    $existing_data_siswa = Data_siswa::where('ppdb_id', $datasiswa['ppdb_id'])->first();
+                    foreach ($datasiswa_upload[1] as $datasiswa_uploads) {
+                    $existing_data_siswa = Data_siswa::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
                             if( ! $existing_data_siswa ) {
                                     array_push($data_siswa_insert, [
-                                            'no_formulir'               => $datasiswa['no_formulir'],           
-                                            'ppdb_id'                   => $datasiswa['ppdb_id'],
-                                            'tahun_ajaran'              => $datasiswa['tahun_ajaran'],        
-                                            'tanggal_pendaftaran'       => $datasiswa['tanggal_pendaftaran'],   
-                                            'status_siswa'              => $datasiswa['status_siswa'],         
-                                            'nama_lengkap'              => $datasiswa['nama_lengkap'],       
-                                            'jenis_kelamin'             => $datasiswa['jenis_kelamin'],       
-                                            'nisn'                      => $datasiswa['nisn'],
-                                            'kitas'                     => $datasiswa['kitas'],
-                                            'tempat_lahir'              => $datasiswa['tempat_lahir'],
-                                            'tanggal_lahir'             => $datasiswa['tanggal_lahir'],
-                                            'akta_kelahiran'            => $datasiswa['akta_kelahiran'],
-                                            'agama'                     => $datasiswa['agama'],
-                                            'kewarganegaraan'           => $datasiswa['kewarganegaraan'],
-                                            'nama_negara'               => $datasiswa['nama_negara'],
-                                            'berkebutuhan_khusus'       => $datasiswa['berkebutuhan_khusus'],
-                                            'berkebutuhan_khusus_2'     => $datasiswa['berkebutuhan_khusus_2'],
-                                            'alamat_jalan'              => $datasiswa['alamat_jalan'],
-                                            'rt'                        => $datasiswa['rt'],
-                                            'rw'                        => $datasiswa['rw'],
-                                            'nama_dusun'                => $datasiswa['nama_dusun'],
-                                            'nama_kelurahan'            => $datasiswa['nama_kelurahan'],
-                                            'nama_kelurahan_2'          => $datasiswa['nama_kelurahan_2'],
-                                            'kecamatan'                 => $datasiswa['kecamatan'],
-                                            'kode_pos'                  => $datasiswa['kode_pos'],
-                                            'tempat_tinggal'            => $datasiswa['tempat_tinggal'],
-                                            'moda_transportasi'         => $datasiswa['moda_transportasi'],
-                                            'nomor_kks'                 => $datasiswa['nomor_kks'],
-                                            'anak_keberapa'             => $datasiswa['anak_keberapa'],
-                                            'penerima_kps_pkh'          => $datasiswa['penerima_kps_pkh'],
-                                            'no_kph_pkh'                => $datasiswa['no_kph_pkh'],
-                                            'usulan_dari_sekolah'       => $datasiswa['usulan_dari_sekolah'],
-                                            'kip'                       => $datasiswa['kip'],
-                                            'nomor_kip'                 => $datasiswa['nomor_kip'],
-                                            'nama_kip'                  => $datasiswa['nama_kip'],
-                                            'kartu_KIP'                 => $datasiswa['kartu_kip'],
-                                            'alasan_layak_pip'          => $datasiswa['alasan_layak_pip'],
-                                            'bank'                      => $datasiswa['bank'],
-                                            'no_rekening'               => $datasiswa['no_rekening'],
-                                            'rekening_atas_nama'        => $datasiswa['rekening_atas_nama'],
-                                            'nama_ayah'                 => $datasiswa['nama_ayah'],
-                                            'nik_ayah'                  => $datasiswa['nik_ayah'],
-                                            'tahun_lahir_ayah'          => $datasiswa['tahun_lahir_ayah'],
-                                            'pendidikan_ayah'           => $datasiswa['pendidikan_ayah'],
-                                            'pekerjaan_ayah'            => $datasiswa['pekerjaan_ayah'],
-                                            'penghasilan_bulanan_ayah'  => $datasiswa['penghasilan_bulanan_ayah'],
-                                            'berkebutuhan_khusus_ayah'  => $datasiswa['berkebutuhan_khusus_ayah'],
-                                            'nama_Ibu'                  => $datasiswa['nama_ibu'],
-                                            'nik_Ibu'                   => $datasiswa['nik_ibu'],
-                                            'tahun_lahir_ibu'           => $datasiswa['tahun_lahir_ibu'],
-                                            'pendidikan_ibu'            => $datasiswa['pendidikan_ibu'],
-                                            'pekerjaan_ibu'             => $datasiswa['pekerjaan_ibu'],
-                                            'penghasilan_bulanan_ibu'   => $datasiswa['penghasilan_bulanan_ibu'], 
-                                            'berkebutuhan_khusus_ibu'   => $datasiswa['berkebutuhan_khusus_ibu'],   
-                                            'nama_wali'                 => $datasiswa['nama_wali'],             
-                                            'nik_wali'                  => $datasiswa['nik_wali'],            
-                                            'tahun_lahir_wali'          => $datasiswa['tahun_lahir_wali'], 
-                                            'pendidikan_wali'           => $datasiswa['pendidikan_wali'],  
-                                            'pekerjaan_wali'            => $datasiswa['pekerjaan_wali'],   
-                                            'penghasilan_bulanan_wali'  => $datasiswa['penghasilan_bulanan_wali'], 
-                                            'telepon_rumah'             => $datasiswa['telepon_rumah'],
-                                            'nomor_hp'                  => $datasiswa['nomor_hp'],
-                                            'email'                     => $datasiswa['email'], 
-                                            'jenis_ekstrakulikuler'     => $datasiswa['jenis_ekstrakulikuler'],  
-                                            'tinggi_badan'              => $datasiswa['tinggi_badan'],  
-                                            'berat_badan'               => $datasiswa['berat_badan'], 
-                                            'jarak_tempat'              => $datasiswa['jarak_tempat'], 
-                                            'waktu_tempuh'              => $datasiswa['waktu_tempat'],  
-                                            'saudara_kandung'           => $datasiswa['saudara_kandung'],
-                                            'jurusan'                   => $datasiswa['jurusan'],                  
-                                            'jenis_pendaftaran'         => $datasiswa['jenis_pendaftaran'],
-                                            'nis'                       => $datasiswa['nis'],
-                                            'tanggal_masuk_sekolah'     => $datasiswa['tanggal_masuk_sekolah'],
-                                            'asal_sekolah'              => $datasiswa['asal_sekolah'],
-                                            'nomor_peserta_ujian'       => $datasiswa['nomor_peserta_ujian'],                       
-                                            'no_seri_ijazah'            => $datasiswa['no_seri_ijazah'],
-                                            'no_seri_skhun'             => $datasiswa['no_seri_skhun'],
-                                            'keluar_karena'             => $datasiswa['keluar_karena'],
-                                            'tanggal_keluar'            => $datasiswa['tanggal_keluar'],
-                                            'alasan'                    => $datasiswa['alasan'],
-                                            'persetujuan'               => $datasiswa['persetujuan'],                         
-                                            'jenis_1'                   => $datasiswa['jenis_1'],
-                                            'tingkat_1'                 => $datasiswa['tingkat_1'],
-                                            'nama_prestasi_1'           => $datasiswa['nama_prestasi_1'],
-                                            'tahun_1'                   => $datasiswa['tahun_1'],
-                                            'penyelenggara_1'           => $datasiswa['penyelenggara_1'],                   
-                                            'jenis_2'                   => $datasiswa['jenis_2'],
-                                            'tingkat_2'                 => $datasiswa['tingkat_2'],
-                                            'nama_prestasi_2'           => $datasiswa['nama_prestasi_2'],
-                                            'tahun_2'                   => $datasiswa['tahun_2'],
-                                            'penyelenggara_2'           => $datasiswa['penyelenggara_2'],               
-                                            'jenis_3'                   => $datasiswa['jenis_3'],
-                                            'tingkat_3'                 => $datasiswa['tingkat_3'],
-                                            'nama_prestasi_3'           => $datasiswa['nama_prestasi_3'],
-                                            'tahun_3'                   => $datasiswa['tahun_3'],
-                                            'penyelenggara_3'           => $datasiswa['penyelenggara_3'],                          
-                                            'jenis_1_0'                 => $datasiswa['jenis_1_0'],
-                                            'keterangan_1'              => $datasiswa['keterangan_1'],
-                                            'tahun_mulai_1'             => $datasiswa['tahun_mulai_1'],
-                                            'tahun_selesai_1'           => $datasiswa['tahun_selesai_1'],
-                                            'jenis_2_0'                 => $datasiswa['jenis_2_0'],                    
-                                            'keterangan_2'              => $datasiswa['keterangan_2'],
-                                            'tahun_mulai_2'             => $datasiswa['tahun_mulai_2'],
-                                            'tahun_selesai_2'           => $datasiswa['tahun_selesai_2'],                           
-                                            'jenis_3_0'                 => $datasiswa['jenis_3_0'],
-                                            'keterangan_3'              => $datasiswa['keterangan_3'],
-                                            'tahun_mulai_3'             => $datasiswa['tahun_mulai_3'],
-                                            'tahun_selesai_3'           => $datasiswa['tahun_selesai_3']
+                                        'nama_lengkap'      => $datasiswa_uploads['nama_lengkap'],   
+                                        'jenis_kelamin'     => $datasiswa_uploads['jenis_kelamin'],   
+                                        'nisn'              => $datasiswa_uploads['nisn'],   
+                                        'tempat_lahir'      => $datasiswa_uploads['tempat_lahir'],   
+                                        'tanggal_lahir'     => $datasiswa_uploads['tanggal_lahir'],   
+                                        'ppdb_id'           => $datasiswa_uploads['ppdb_id'],   
+                                        'agama'             => $datasiswa_uploads['agama'],   
+                                        'alamat_jalan'      => $datasiswa_uploads['alamat_jalan'],   
+                                        'rt'                => $datasiswa_uploads['rt'],   
+                                        'rw'                => $datasiswa_uploads['rw'],   
+                                        'nama_dusun'        => $datasiswa_uploads['nama_dusun'],   
+                                        'nama_kelurahan'    => $datasiswa_uploads['nama_kelurahan'],   
+                                        'kecamatan'         => $datasiswa_uploads['kecamatan'],   
+                                        'kode_pos'          => $datasiswa_uploads['kode_pos'],   
+                                        'tempat_tinggal'    => $datasiswa_uploads['tempat_tinggal'],   
+                                        'moda_transportasi' => $datasiswa_uploads['moda_transportasi'],   
+                                        'telepon_rumah'     => $datasiswa_uploads['telepon_rumah'],   
+                                        'nomor_hp'          => $datasiswa_uploads['nomor_hp'],   
+                                        'email'             => $datasiswa_uploads['email'],   
+                                        'no_seri_skhun'     => $datasiswa_uploads['no_seri_skhun'],   
+                                        'nama_ayah'         => $datasiswa_uploads['nama_ayah'],   
+                                        'tahun_lahir_ayah'  => $datasiswa_uploads['tahun_lahir_ayah'],   
+                                        'pendidikan_ayah'   => $datasiswa_uploads['pendidikan_ayah'],   
+                                        'pekerjaan_ayah'    => $datasiswa_uploads['pekerjaan_ayah'],   
+                                        'penghasilan_bulanan_ayah' => $datasiswa_uploads['penghasilan_bulanan_ayah'],   
+                                        'nik_ayah'          => $datasiswa_uploads['nik_ayah'],   
+                                        'nama_ibu'          => $datasiswa_uploads['nama_ibu'],   
+                                        'tahun_lahir_ibu'   => $datasiswa_uploads['tahun_lahir_ibu'],   
+                                        'pendidikan_ibu'    => $datasiswa_uploads['pendidikan_ibu'],   
+                                        'pekerjaan_ibu'     => $datasiswa_uploads['pekerjaan_ibu'],   
+                                        'penghasilan_bulanan_ibu' => $datasiswa_uploads['penghasilan_bulanan_ibu'],   
+                                        'nik_ibu'           => $datasiswa_uploads['nik_ibu'],   
+                                        'nama_wali'         => $datasiswa_uploads['nama_wali'],   
+                                        'tahun_lahir_wali'  => $datasiswa_uploads['tahun_lahir_wali'],   
+                                        'pendidikan_wali'   => $datasiswa_uploads['pendidikan_wali'],   
+                                        'pekerjaan_wali'    => $datasiswa_uploads['pekerjaan_wali'],   
+                                        'penghasilan_bulanan_wali' => $datasiswa_uploads['penghasilan_bulanan_wali'],   
+                                        'nik_wali'          => $datasiswa_uploads['nik_wali'],   
+                                        'no_seri_ijazah'    => $datasiswa_uploads['no_seri_ijazah'],   
+                                        'kip'               => $datasiswa_uploads['kip'],   
+                                        'nomor_kip'         => $datasiswa_uploads['nomor_kip'],   
+                                        'nama_kip'          => $datasiswa_uploads['nama_kip'],   
+                                        'nomor_kks'         => $datasiswa_uploads['nomor_kks'],   
+                                        'akta_kelahiran'    => $datasiswa_uploads['akta_kelahiran'],   
+                                        'bank'              => $datasiswa_uploads['bank'],   
+                                        'no_rekening'       => $datasiswa_uploads['no_rekening'],   
+                                        'rekening_atas_nama' => $datasiswa_uploads['rekening_atas_nama'],   
+                                        'alasan_layak_pip'  => $datasiswa_uploads['alasan_layak_pip'],   
+                                        'berkebutuhan_khusus' => $datasiswa_uploads['berkebutuhan_khusus'],   
+                                        'asal_sekolah'      => $datasiswa_uploads['asal_sekolah'],   
+                                        'anak_keberapa'     => $datasiswa_uploads['anak_keberapa']                          
                                     ]);
                                 }
                             }
+                
+                 //DATASISWA_1
+                 $data_siswa1_insert = [];
+                 foreach ($datasiswa_upload[1] as $datasiswa_uploads) {
+                 $existing_data_siswa1 = Data_siswa1::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
+                         if( ! $existing_data_siswa1 ) {
+                                 array_push($data_siswa1_insert, [
+                                    'ppdb_id' => $datasiswa_uploads['ppdb_id'],
+                                    'berat_badan' => $datasiswa_uploads['berat_badan'],
+                                    'tinggi_badan' => $datasiswa_uploads['tinggi_badan'],
+                                    'saudara_kandung' => $datasiswa_uploads['saudara_kandung'],
+                                    'jarak_tempat' => $datasiswa_uploads['jarak_tempat'],
+                                    'penerima_kps_pkh' => $datasiswa_uploads['penerima_kps_pkh'],
+                                    'tahun_ajaran' => $datasiswa_uploads['tahun_ajaran'],
+                                    'tanggal_pendaftaran' => $datasiswa_uploads['tanggal_pendaftaran'],
+                                    'status_siswa' => $datasiswa_uploads['status_siswa'],
+                                    'no_formulir' => $datasiswa_uploads['no_formulir'],
+                                    'kitas' => $datasiswa_uploads['kitas'],
+                                    'kewarganegaraan' => $datasiswa_uploads['kewarganegaraan'],
+                                    'nama_negara' => $datasiswa_uploads['nama_negara'],
+                                    'no_kph_pkh' => $datasiswa_uploads['no_kph_pkh'],
+                                    'usulan_dari_sekolah' => $datasiswa_uploads['usulan_dari_sekolah'],
+                                    'berkebutuhan_khusus_ayah' => $datasiswa_uploads['berkebutuhan_khusus_ayah'],
+                                    'berkebutuhan_khusus_ibu' => $datasiswa_uploads['berkebutuhan_khusus_ibu'],
+                                    'jenis_ekstrakulikuler' => $datasiswa_uploads['jenis_ekstrakulikuler'],
+                                    'berkebutuhan_khusus_2' => $datasiswa_uploads['berkebutuhan_khusus_2'],
+                                    'nama_kelurahan_2' => $datasiswa_uploads['nama_kelurahan_2'],
+                                    'jurusan' => $datasiswa_uploads['jurusan'],
+                                    'jenis_pendaftaran' => $datasiswa_uploads['jenis_pendaftaran'],
+                                    'nis' => $datasiswa_uploads['nis'],
+                                    'tanggal_masuk_sekolah' => $datasiswa_uploads['tanggal_masuk_sekolah'],
+                                    'nomor_peserta_ujian' => $datasiswa_uploads['nomor_peserta_ujian'],
+                                    'keluar_karena' => $datasiswa_uploads['keluar_karena'],
+                                    'tanggal_keluar' => $datasiswa_uploads['tanggal_keluar'],
+                                    'alasan' => $datasiswa_uploads['alasan'],
+                                    'persetujuan' => $datasiswa_uploads['persetujuan'],
+                                    'jenis_1' => $datasiswa_uploads['jenis_1'],
+                                    'tingkat_1' => $datasiswa_uploads['tingkat_1'],
+                                    'nama_prestasi_1' => $datasiswa_uploads['nama_prestasi_1'],
+                                    'tahun_1' => $datasiswa_uploads['tahun_1'],
+                                    'penyelenggara_1' => $datasiswa_uploads['penyelenggara_1'],
+                                    'jenis_2' => $datasiswa_uploads['jenis_2'],
+                                    'tingkat_2' => $datasiswa_uploads['tingkat_2'],
+                                    'nama_prestasi_2' => $datasiswa_uploads['nama_prestasi_2'],
+                                    'tahun_2' => $datasiswa_uploads['tahun_2'],
+                                    'penyelenggara_2' => $datasiswa_uploads['penyelenggara_2'],
+                                    'jenis_3' => $datasiswa_uploads['jenis_3'],
+                                    'tingkat_3' => $datasiswa_uploads['tingkat_3'],
+                                    'nama_prestasi_3' => $datasiswa_uploads['nama_prestasi_3'],
+                                    'tahun_3' => $datasiswa_uploads['tahun_3'],
+                                    'penyelenggara_3' => $datasiswa_uploads['penyelenggara_3'],
+                                    'jenis_1_0' => $datasiswa_uploads['jenis_1_0'],
+                                    'keterangan_1' => $datasiswa_uploads['keterangan_1'],
+                                    'tahun_mulai_1' => $datasiswa_uploads['tahun_mulai_1'],
+                                    'tahun_selesai_1' => $datasiswa_uploads['tahun_selesai_1'],
+                                    'jenis_2_0' => $datasiswa_uploads['jenis_2_0'],
+                                    'keterangan_2' => $datasiswa_uploads['keterangan_2'],
+                                    'tahun_mulai_2' => $datasiswa_uploads['tahun_mulai_2'],
+                                    'tahun_selesai_2' => $datasiswa_uploads['tahun_selesai_2'],
+                                    'jenis_3_0' => $datasiswa_uploads['jenis_3_0'],
+                                    'keterangan_3' => $datasiswa_uploads['keterangan_3'],
+                                    'tahun_mulai_3' => $datasiswa_uploads['tahun_mulai_3'],
+                                    'tahun_selesai_3' => $datasiswa_uploads['tahun_selesai_3']
+                                 ]);
+                             }
+                         }         
 
-                debug($data_siswa_insert);
-                Data_siswa::insert($data_siswa_insert);
-
-               //DATASISWA_2
-               $data_siswa2 = [];      
-               $data_siswa2 = Excel::toArray(new DataImport2, $request->file('file_pricing'));
+               //DATASISWA_2      
                $data_siswa2_insert = [];
-   
-               foreach ($data_siswa2[2] as $data_siswas2) {
-                $existing_data_siswa2 = Data_siswa2::where('ppdb_id', $data_siswas2['ppdb_id'])->first();
+               foreach ($datasiswa_upload[2] as $datasiswa_uploads) {
+                $existing_data_siswa2 = Data_siswa2::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
                 if ( ! $existing_data_siswa2) {
                         array_push($data_siswa2_insert, [
-                                'nama_orang_tua'                                             => $data_siswas2['nama_orang_tua'],           
-                                'alamat_orang_tua'                                           => $data_siswas2['alamat_orang_tua_atau_wali'],
-                                'uang_pangkal_up_2'                                          => $data_siswas2['membayar_uang_pangkal_up_2'],     
-                                'spp_bulan_juli_2023'                                        => $data_siswas2['pembayaran_spp_bulan_juli_2023'], 
-                                'spp_setiap_bulan'                                           => $data_siswas2['pembayaran_spp_setiap_bulannya_selambat'], 
-                                'sudah_melaksanakan_tes'                                     => $data_siswas2['jika_putra_putri_kami_sudah_melaksanakan_tes'], 
-                                'diterima_di_sekolah_negeri'                                 => $data_siswas2['jika_putra_putri_kami_diterima_di_sekolah_negeri'], 
-                                'sudah_bersekolah_di_avicenna'                               => $data_siswas2['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],    
-                                'sudah_bersekolah_di_avicenna_2'                             => $data_siswas2['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],  //tanda tanya
-                                'tata_tertib_sekolah'                                        => $data_siswas2['kami_akan_mematuhi_seluruh_tata_tertib_sekolah'], 
-                                'aktivitas_foto_video'                                       => $data_siswas2['seluruh_aktivitas_putra_putri_kami_dalam_photo_video'], 
-                                'didik_diijinkan'                                            => $data_siswas2['seluruh_hasil_karya_peserta_didik_diijinkan'], 
-                                'baca_dan_pahami'                                            => $data_siswas2['berdasarkan_apa_yang_telah_saya_baca_dan_pahami'], 
-                                'nama_calon_murid'                                           => $data_siswas2['nama_calon_murid'], 
-                                'kelas'                                                      => $data_siswas2['kelas'], 
-                                'persetujuan_tata_tertib'                                    => $data_siswas2['persetujuan_tata_tertib'], 
-                                'jasmani'                                                    => $data_siswas2['keadaan_jasmani'], 
-                                'laki_laki'                                                  => $data_siswas2['jenis_kelamin_laki'], 
-                                'perempuan'                                                  => $data_siswas2['jenis_kelamin_perempuan'], 
-                                'tempat_lahir'                                               => $data_siswas2['tempat_lahir'], 
-                                'tanggal_lahir'                                              => $data_siswas2['tanggal_lahir'], 
-                                'berat_badan'                                                => $data_siswas2['berat_badan'], 
-                                'tinggi_badan'                                               => $data_siswas2['tinggi_badan'], 
-                                'golongan_darah'                                             => $data_siswas2['golongan_darah'], 
-                                'catatan_imunisasi'                                          => $data_siswas2['memiliki_catatan_imunisasi'], 
-                                'imunisasi'                                                  => $data_siswas2['saat_bayi_mendapatkan_imunisasi'], 
-                                'imunisasi_lengkap'                                          => $data_siswas2['imunisasi_lengkap'], 
-                                'gangguan_dan_kelainan'                                      => $data_siswas2['ada_gangguan_dan_kelainan'], 
-                                'tidak_ada_gangguan'                                         => $data_siswas2['tidak_ada_gangguan_dan_kelainan'], 
-                                'berbahaya'                                                  => $data_siswas2['berbahaya'], 
-                                'tidak_berbahaya'                                            => $data_siswas2['tidak_berbahaya'], 
-                                'ppdb_id'                                                    => $data_siswas2['ppdb_id']    
+                                'nama_orang_tua'                                             => $datasiswa_uploads['nama_orang_tua'],           
+                                'alamat_orang_tua'                                           => $datasiswa_uploads['alamat_orang_tua_atau_wali'],
+                                'uang_pangkal_up_2'                                          => $datasiswa_uploads['membayar_uang_pangkal_up_2'],     
+                                'spp_bulan_juli_2023'                                        => $datasiswa_uploads['pembayaran_spp_bulan_juli_2023'], 
+                                'spp_setiap_bulan'                                           => $datasiswa_uploads['pembayaran_spp_setiap_bulannya_selambat'], 
+                                'sudah_melaksanakan_tes'                                     => $datasiswa_uploads['jika_putra_putri_kami_sudah_melaksanakan_tes'], 
+                                'diterima_di_sekolah_negeri'                                 => $datasiswa_uploads['jika_putra_putri_kami_diterima_di_sekolah_negeri'], 
+                                'sudah_bersekolah_di_avicenna'                               => $datasiswa_uploads['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],    
+                                'sudah_bersekolah_di_avicenna_2'                             => $datasiswa_uploads['apabila_putra_putri_kami_sudah_bersekolah_di_avicenna'],  //tanda tanya
+                                'tata_tertib_sekolah'                                        => $datasiswa_uploads['kami_akan_mematuhi_seluruh_tata_tertib_sekolah'], 
+                                'aktivitas_foto_video'                                       => $datasiswa_uploads['seluruh_aktivitas_putra_putri_kami_dalam_photo_video'], 
+                                'didik_diijinkan'                                            => $datasiswa_uploads['seluruh_hasil_karya_peserta_didik_diijinkan'], 
+                                'baca_dan_pahami'                                            => $datasiswa_uploads['berdasarkan_apa_yang_telah_saya_baca_dan_pahami'], 
+                                'nama_calon_murid'                                           => $datasiswa_uploads['nama_calon_murid'], 
+                                'kelas'                                                      => $datasiswa_uploads['kelas'], 
+                                'persetujuan_tata_tertib'                                    => $datasiswa_uploads['persetujuan_tata_tertib'], 
+                                'jasmani'                                                    => $datasiswa_uploads['keadaan_jasmani'], 
+                                'laki_laki'                                                  => $datasiswa_uploads['jenis_kelamin_laki'], 
+                                'perempuan'                                                  => $datasiswa_uploads['jenis_kelamin_perempuan'], 
+                                'tempat_lahir'                                               => $datasiswa_uploads['tempat_lahir'], 
+                                'tanggal_lahir'                                              => $datasiswa_uploads['tanggal_lahir'], 
+                                'berat_badan'                                                => $datasiswa_uploads['berat_badan'], 
+                                'tinggi_badan'                                               => $datasiswa_uploads['tinggi_badan'], 
+                                'golongan_darah'                                             => $datasiswa_uploads['golongan_darah'], 
+                                'catatan_imunisasi'                                          => $datasiswa_uploads['memiliki_catatan_imunisasi'], 
+                                'imunisasi'                                                  => $datasiswa_uploads['saat_bayi_mendapatkan_imunisasi'], 
+                                'imunisasi_lengkap'                                          => $datasiswa_uploads['imunisasi_lengkap'], 
+                                'gangguan_dan_kelainan'                                      => $datasiswa_uploads['ada_gangguan_dan_kelainan'], 
+                                'tidak_ada_gangguan'                                         => $datasiswa_uploads['tidak_ada_gangguan_dan_kelainan'], 
+                                'berbahaya'                                                  => $datasiswa_uploads['berbahaya'], 
+                                'tidak_berbahaya'                                            => $datasiswa_uploads['tidak_berbahaya'], 
+                                'ppdb_id'                                                    => $datasiswa_uploads['ppdb_id']    
                         ]);
                     }
                }
-               debug($data_siswa2_insert);
-               Data_siswa2::insert($data_siswa2_insert);
-
+               
                 //DATASISWA_3
-                $data_siswa3 = [];      
-                $data_siswa3 = Excel::toArray(new DataImport3, $request->file('file_pricing'));
                 $data_siswa3_insert = [];
-    
-                foreach ($data_siswa3[2] as $data_siswas3) {
-                    $existing_data_siswa3 = Data_siswa3::where('ppdb_id', $data_siswas3['ppdb_id'])->first();
+                foreach ($datasiswa_upload[2] as $datasiswa_uploads) {
+                    $existing_data_siswa3 = Data_siswa3::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
                     if ( ! $existing_data_siswa3) {
                             array_push($data_siswa3_insert, [
-                                'ppdb_id'                                                    => $data_siswas3['ppdb_id'],
-                                'yang_lain'                                                  => $data_siswas3['yang_lain'], 
-                                'normal_tidak_gangguan'                                      => $data_siswas3['normal_tidak_ada_gangguan'], 
-                                'kompilasi_ketika_melahirkan'                                => $data_siswas3['ada_kompilasi_ketika_melahirkan'], 
-                                'tidak_ada_cacat'                                            => $data_siswas3['normal_tidak_ada_cacat_bawaan'], 
-                                'cacat_bawaan'                                               => $data_siswas3['ada_cacat_bawaan'], 
-                                'normal_1'                                                   => $data_siswas3['normal_1'], 
-                                'terlambat_1'                                                => $data_siswas3['terlambat_1'], 
-                                'normal_2'                                                   => $data_siswas3['normal_2'], 
-                                'terlambat_2'                                                => $data_siswas3['terlambat_2'], 
-                                'normal_3'                                                   => $data_siswas3['normal_3'], 
-                                'terlambat_3'                                                => $data_siswas3['terlambat_3'], 
-                                'normal_4'                                                   => $data_siswas3['normal_4'], 
-                                'terlambat_4'                                                => $data_siswas3['terlambat_4'],
-                                'normal_5'                                                   => $data_siswas3['normal_5'], 
-                                'terlambat_5'                                                => $data_siswas3['terlambat_5'], 
-                                'ada'                                                        => $data_siswas3['ada'], 
-                                'tidak_ada'                                                  => $data_siswas3['tidak_ada'], 
-                                'ya_pernah'                                                  => $data_siswas3['ya_pernah'], 
-                                'tidak_pernah'                                               => $data_siswas3['tidak_pernah'], 
-                                'ya_riwayat_kejang'                                          => $data_siswas3['ya_riwayat_kejang_demam'], 
-                                'tidak_riwayat_kejang'                                       => $data_siswas3['tidak_riwayat_kejang_demam'], 
-                                'riwayat_penyakit_diderita'                                  => $data_siswas3['memiliki_riwayat_penyakit_diderita'], 
-                                'rawat_rumah_sakit'                                          => $data_siswas3['pernah_rawat_rumah_sakit'], 
-                                'catatan_lain'                                               => $data_siswas3['catatan_lain'], 
-                                'sekolah_asal'                                               => $data_siswas3['sekolah_asal'], 
-                                'brand'                                                      => $data_siswas3['brand'], 
-                                'kegiatan_sekolah'                                           => $data_siswas3['kegiatan_sekolah'], 
-                                'media_cetak'                                                => $data_siswas3['media_cetak'], 
-                                'media_elektronik'                                           => $data_siswas3['media_elektronik'], 
-                                'media_sosial'                                               => $data_siswas3['media_sosial']     
+                                'ppdb_id'                                                    => $datasiswa_uploads['ppdb_id'],
+                                'yang_lain'                                                  => $datasiswa_uploads['yang_lain'], 
+                                'normal_tidak_gangguan'                                      => $datasiswa_uploads['normal_tidak_ada_gangguan'], 
+                                'kompilasi_ketika_melahirkan'                                => $datasiswa_uploads['ada_kompilasi_ketika_melahirkan'], 
+                                'tidak_ada_cacat'                                            => $datasiswa_uploads['normal_tidak_ada_cacat_bawaan'], 
+                                'cacat_bawaan'                                               => $datasiswa_uploads['ada_cacat_bawaan'], 
+                                'normal_1'                                                   => $datasiswa_uploads['normal_1'], 
+                                'terlambat_1'                                                => $datasiswa_uploads['terlambat_1'], 
+                                'normal_2'                                                   => $datasiswa_uploads['normal_2'], 
+                                'terlambat_2'                                                => $datasiswa_uploads['terlambat_2'], 
+                                'normal_3'                                                   => $datasiswa_uploads['normal_3'], 
+                                'terlambat_3'                                                => $datasiswa_uploads['terlambat_3'], 
+                                'normal_4'                                                   => $datasiswa_uploads['normal_4'], 
+                                'terlambat_4'                                                => $datasiswa_uploads['terlambat_4'],
+                                'normal_5'                                                   => $datasiswa_uploads['normal_5'], 
+                                'terlambat_5'                                                => $datasiswa_uploads['terlambat_5'], 
+                                'ada'                                                        => $datasiswa_uploads['ada'], 
+                                'tidak_ada'                                                  => $datasiswa_uploads['tidak_ada'], 
+                                'ya_pernah'                                                  => $datasiswa_uploads['ya_pernah'], 
+                                'tidak_pernah'                                               => $datasiswa_uploads['tidak_pernah'], 
+                                'ya_riwayat_kejang'                                          => $datasiswa_uploads['ya_riwayat_kejang_demam'], 
+                                'tidak_riwayat_kejang'                                       => $datasiswa_uploads['tidak_riwayat_kejang_demam'], 
+                                'riwayat_penyakit_diderita'                                  => $datasiswa_uploads['memiliki_riwayat_penyakit_diderita'], 
+                                'rawat_rumah_sakit'                                          => $datasiswa_uploads['pernah_rawat_rumah_sakit'], 
+                                'catatan_lain'                                               => $datasiswa_uploads['catatan_lain'], 
+                                'sekolah_asal'                                               => $datasiswa_uploads['sekolah_asal'], 
+                                'brand'                                                      => $datasiswa_uploads['brand'], 
+                                'kegiatan_sekolah'                                           => $datasiswa_uploads['kegiatan_sekolah'], 
+                                'media_cetak'                                                => $datasiswa_uploads['media_cetak'], 
+                                'media_elektronik'                                           => $datasiswa_uploads['media_elektronik'], 
+                                'media_sosial'                                               => $datasiswa_uploads['media_sosial']     
                             ]);
                         }
                 }
-    
-                debug($data_siswa3_insert);
-                Data_siswa3::insert($data_siswa3_insert);
-
+                
                 //USERS
-                $users_systems = [];
-                $users_systems = Excel::toArray(new UserImport, $request->file('file_pricing'));
                 $users_system_insert = [];
-                foreach ($users_systems[6] as $users_system) {
-                    $existing_users_system = Users_system::where('user_id', $users_system['user_id'])->first();
+                foreach ($datasiswa_upload[6] as $datasiswa_uploads) {
+                    $existing_users_system = Users_system::where('user_id', $datasiswa_uploads['user_id'])->first();
                     if ( ! $existing_users_system) {
                             array_push($users_system_insert, [
-                                'user_id'                             => $users_system['user_id'],
-                                'uuid'                                => $users_system['uuid'],
-                                'first_name'                          => $users_system['first_name'],
-                                'last_name'                           => $users_system['last_name'],
-                                'email'                               => $users_system['email'],
-                                'phone'                               => $users_system['phone'],  
-                                'avatar_type'                         => $users_system['avatar_type'],
-                                'avatar_location'                     => $users_system['avatar_location'],
-                                'password'                            => $users_system['password'],
-                                'password_changed_at'                 => $users_system['password_changed_at'],
-                                'active'                              => $users_system['active'],
-                                'confirmation_code'                   => $users_system['confirmation_code'],
-                                'confirmed'                           => $users_system['confirmed'],
-                                'timezone'                            => $users_system['timezone'],
-                                'last_login_at'                       => $users_system['last_login_at'],
-                                'last_login_ip'                       => $users_system['last_login_ip'],
-                                'to_be_logged_out'                    => $users_system['to_be_logged_out'],
-                                'status'                              => $users_system['status'],
-                                'created_by'                          => $users_system['created_by'],
-                                'updated_by'                          => $users_system['updated_by'],
-                                'is_term_accept'                      => $users_system['is_term_accept'],
-                                'remember_token'                      => $users_system['remember_token'],
-                                'created_at'                          => $users_system['created_at'],
-                                'updated_at'                          => $users_system['updated_at'],
-                                'deleted_at'                          => $users_system['deleted_at']                      
+                                'user_id'                             => $datasiswa_uploads['user_id'],
+                                'uuid'                                => $datasiswa_uploads['uuid'],
+                                'first_name'                          => $datasiswa_uploads['first_name'],
+                                'last_name'                           => $datasiswa_uploads['last_name'],
+                                'email'                               => $datasiswa_uploads['email'],
+                                'phone'                               => $datasiswa_uploads['phone'],  
+                                'avatar_type'                         => $datasiswa_uploads['avatar_type'],
+                                'avatar_location'                     => $datasiswa_uploads['avatar_location'],
+                                'password'                            => $datasiswa_uploads['password'],
+                                'password_changed_at'                 => $datasiswa_uploads['password_changed_at'],
+                                'active'                              => $datasiswa_uploads['active'],
+                                'confirmation_code'                   => $datasiswa_uploads['confirmation_code'],
+                                'confirmed'                           => $datasiswa_uploads['confirmed'],
+                                'timezone'                            => $datasiswa_uploads['timezone'],
+                                'last_login_at'                       => $datasiswa_uploads['last_login_at'],
+                                'last_login_ip'                       => $datasiswa_uploads['last_login_ip'],
+                                'to_be_logged_out'                    => $datasiswa_uploads['to_be_logged_out'],
+                                'status'                              => $datasiswa_uploads['status'],
+                                'created_by'                          => $datasiswa_uploads['created_by'],
+                                'updated_by'                          => $datasiswa_uploads['updated_by'],
+                                'is_term_accept'                      => $datasiswa_uploads['is_term_accept'],
+                                'remember_token'                      => $datasiswa_uploads['remember_token'],
+                                'created_at'                          => $datasiswa_uploads['created_at'],
+                                'updated_at'                          => $datasiswa_uploads['updated_at'],
+                                'deleted_at'                          => $datasiswa_uploads['deleted_at']                      
                             ]);
                         }
                 }
-                debug($users_system_insert);
-                Users_system::insert($users_system_insert);
-
+            
                 //DATASISWA_4
-                $data_siswa4 = [];         
-                $data_siswa4 = Excel::toArray(new DataImport4, $request->file('file_pricing'));
                 $data_siswa4_insert = [];
-    
-                foreach ($data_siswa4[2] as $data_siswas4) {
-                    $existing_data_siswa4 = Data_siswa4::where('ppdb_id', $data_siswas4['ppdb_id'])->first();
+                foreach ($datasiswa_upload[2] as $datasiswa_uploads) {
+                    $existing_data_siswa4 = Data_siswa4::where('ppdb_id', $datasiswa_uploads['ppdb_id'])->first();
                     if ( ! $existing_data_siswa4) {
                             array_push($data_siswa4_insert, [
-                                'media_sosial_2'                                             => $data_siswas4['media_sosial'], 
-                                'program_sekolah'                                            => $data_siswas4['program_sekolah'], 
-                                'fasilitas_pelayanan'                                        => $data_siswas4['fasilitas_pelayanan'], 
-                                'jarak'                                                      => $data_siswas4['jarak'], 
-                                'uang_sekolah_terjangkau'                                    => $data_siswas4['uang_sekolah_terjangkau'], 
-                                'fasilitas_lengkap'                                          => $data_siswas4['fasilitas_sekolah_lengkap'], 
-                                'kebersihan'                                                 => $data_siswas4['kebersihan_gedung_sekolah'], 
-                                'pelayanan_informasi'                                        => $data_siswas4['pelayanan_informasi'], 
-                                'tenaga_pendidik_kompeten'                                   => $data_siswas4['tenaga_pendidik_kompeten'], 
-                                'tidak_pilih_fasilitas_pelayanan'                            => $data_siswas4['tidak_pilih_fasilitas_pelayanan'], 
-                                '1km_jarak'                                                  => $data_siswas4['1km_jarak'], 
-                                '1_sampai_5km'                                               => $data_siswas4['1_sampai_5km'], 
-                                '6_sampai_10km'                                              => $data_siswas4['6_sampai_10km'], 
-                                '11_sampai_20km'                                             => $data_siswas4['11_sampai_20km'], 
-                                '21_sampai_30km'                                             => $data_siswas4['21_sampai_30km'], 
-                                'tidak_pilih_jarak'                                          => $data_siswas4['tidak_pilih_jarak'], 
-                                'uang_pangkal'                                               => $data_siswas4['uang_pangkal'], 
-                                'spp'                                                        => $data_siswas4['spp'], 
-                                'tanda_biaya_tambahan'                                       => $data_siswas4['tanda_biaya_tambahan'], 
-                                'tidak_terjangkau'                                           => $data_siswas4['tidak_terjangkau_uang_sekolah'], 
-                                'sederhana_dan_mudah'                                        => $data_siswas4['sederhana_dan_mudah'], 
-                                'standar_sama'                                               => $data_siswas4['standar_sama_sekolah_lain'], 
-                                'berbelit_belit'                                             => $data_siswas4['berbelit_belit'], 
-                                'tidak_murah'                                                => $data_siswas4['uang_sekolah_tidak_murah'], 
-                                'merepotkan'                                                 => $data_siswas4['merepotkan'], 
-                                'pendapat_saya'                                              => $data_siswas4['pendapat_saya'], 
-                                'program_7_habits'                                           => $data_siswas4['program_7_habits'], 
-                                'prestasi_sekolah'                                           => $data_siswas4['prestasi_sekolah'], 
-                                'ekstrakulikuler'                                            => $data_siswas4['ekstrakulikuler'], 
-                                'booster_1'                                                  => $data_siswas4['booster_1'], 
-                                'booster_2'                                                  => $data_siswas4['booster_2'], 
-                                'booster_3'                                                  => $data_siswas4['booster_3'], 
-                                'belum_vaksin'                                               => $data_siswas4['belum_vaksin'], 
-                                'ppdb_id'                                                    => $data_siswas4['ppdb_id']                    
+                                'media_sosial_2'                                             => $datasiswa_uploads['media_sosial'], 
+                                'program_sekolah'                                            => $datasiswa_uploads['program_sekolah'], 
+                                'fasilitas_pelayanan'                                        => $datasiswa_uploads['fasilitas_pelayanan'], 
+                                'jarak'                                                      => $datasiswa_uploads['jarak'], 
+                                'uang_sekolah_terjangkau'                                    => $datasiswa_uploads['uang_sekolah_terjangkau'], 
+                                'fasilitas_lengkap'                                          => $datasiswa_uploads['fasilitas_sekolah_lengkap'], 
+                                'kebersihan'                                                 => $datasiswa_uploads['kebersihan_gedung_sekolah'], 
+                                'pelayanan_informasi'                                        => $datasiswa_uploads['pelayanan_informasi'], 
+                                'tenaga_pendidik_kompeten'                                   => $datasiswa_uploads['tenaga_pendidik_kompeten'], 
+                                'tidak_pilih_fasilitas_pelayanan'                            => $datasiswa_uploads['tidak_pilih_fasilitas_pelayanan'], 
+                                '1km_jarak'                                                  => $datasiswa_uploads['1km_jarak'], 
+                                '1_sampai_5km'                                               => $datasiswa_uploads['1_sampai_5km'], 
+                                '6_sampai_10km'                                              => $datasiswa_uploads['6_sampai_10km'], 
+                                '11_sampai_20km'                                             => $datasiswa_uploads['11_sampai_20km'], 
+                                '21_sampai_30km'                                             => $datasiswa_uploads['21_sampai_30km'], 
+                                'tidak_pilih_jarak'                                          => $datasiswa_uploads['tidak_pilih_jarak'], 
+                                'uang_pangkal'                                               => $datasiswa_uploads['uang_pangkal'], 
+                                'spp'                                                        => $datasiswa_uploads['spp'], 
+                                'tanda_biaya_tambahan'                                       => $datasiswa_uploads['tanda_biaya_tambahan'], 
+                                'tidak_terjangkau'                                           => $datasiswa_uploads['tidak_terjangkau_uang_sekolah'], 
+                                'sederhana_dan_mudah'                                        => $datasiswa_uploads['sederhana_dan_mudah'], 
+                                'standar_sama'                                               => $datasiswa_uploads['standar_sama_sekolah_lain'], 
+                                'berbelit_belit'                                             => $datasiswa_uploads['berbelit_belit'], 
+                                'tidak_murah'                                                => $datasiswa_uploads['uang_sekolah_tidak_murah'], 
+                                'merepotkan'                                                 => $datasiswa_uploads['merepotkan'], 
+                                'pendapat_saya'                                              => $datasiswa_uploads['pendapat_saya'], 
+                                'program_7_habits'                                           => $datasiswa_uploads['program_7_habits'], 
+                                'prestasi_sekolah'                                           => $datasiswa_uploads['prestasi_sekolah'], 
+                                'ekstrakulikuler'                                            => $datasiswa_uploads['ekstrakulikuler'], 
+                                'booster_1'                                                  => $datasiswa_uploads['booster_1'], 
+                                'booster_2'                                                  => $datasiswa_uploads['booster_2'], 
+                                'booster_3'                                                  => $datasiswa_uploads['booster_3'], 
+                                'belum_vaksin'                                               => $datasiswa_uploads['belum_vaksin'], 
+                                'ppdb_id'                                                    => $datasiswa_uploads['ppdb_id']                    
                             ]);
                         }
                 }
-                debug($data_siswa4_insert);
+                register::insert($reregister_insert);
+                PPDBInterview::insert($interview_insert);
+                Payment::insert($payment_insert);
+                PPDB::insert($ppdb_insert);
+                Data_siswa::insert($data_siswa_insert);
+                Data_siswa1::insert($data_siswa1_insert);
+                Data_siswa2::insert($data_siswa2_insert);
+                Data_siswa3::insert($data_siswa3_insert);
+                Users_system::insert($users_system_insert);
                 Data_siswa4::insert($data_siswa4_insert);
 
-               return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data PPDB']);       
+               return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data PPDB']);         
+            } catch (\Throwable $th) {
+                throw $th;
+            }
     }
 
     public function uploadDapodik(PricingPermissionRequest $request) {
             //PPDB DAFTAR ULANG
             $dapodik_siswa = [];   
-            date_default_timezone_set('Asia/Jakarta');
-            
+            date_default_timezone_set('Asia/Jakarta');    
             $dapodik_siswa = Excel::toArray(new DapodikImport, $request->file('file_dapodik'));
-            $dapodik_insert = [];   
-            $users_insert   = [];
             
             $stag = "";
             if (str_contains($dapodik_siswa[0][1][0], 'SD')) {
@@ -671,7 +652,8 @@ class PricingController extends Controller
                 $unit = "kosong";
             }
 
-            foreach(  array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) {            
+            foreach(  array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) { 
+
                 $users_system_check = Users_system::where('status_data', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                     if ( ! $users_system_check) {
                             $users_system = new Users_system();
@@ -753,8 +735,7 @@ class PricingController extends Controller
                     $gender_check = 'Laki-Laki';
                 } else {
                     $gender_check = 'Perempuan';
-                }
-              
+                }           
                 $ppdb_check = Dapodik::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $ppdb_check) {
                     $ppdb = new Dapodik();
@@ -776,14 +757,12 @@ class PricingController extends Controller
                     $ppdb->created_at               = date("Y-m-d H:i:s");
                     $ppdb->save();
                 }
-
                 $ppdbinterview_check = PPDBInterview::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $ppdbinterview_check) {
                     $ppdb_interviews = new PPDBInterview();
                     $ppdb_interviews->dapodik_id = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
                     $ppdb_interviews->save();
                 }
-
                 $data_siswa_check = Data_siswa::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $data_siswa_check) {
                     $data_siswa = new Data_siswa();
@@ -838,17 +817,22 @@ class PricingController extends Controller
                     $data_siswa->berkebutuhan_khusus        = $dapodik_siswas[55];
                     $data_siswa->asal_sekolah               = $dapodik_siswas[56];
                     $data_siswa->anak_keberapa              = $dapodik_siswas[57];      
-                    $data_siswa->berat_badan                = $dapodik_siswas[61];
-                    $data_siswa->tinggi_badan               = $dapodik_siswas[62];
-                    $data_siswa->saudara_kandung            = $dapodik_siswas[64];
-                    $data_siswa->jarak_tempat               = $dapodik_siswas[65];
-                    $data_siswa->nis                        = $dapodik_siswas[2];
                     $data_siswa->nik_siswa                  = $dapodik_siswas[7];
-                    $data_siswa->penerima_kps_pkh           = $dapodik_siswas[22];
                     $data_siswa->nomor_kps                  = $dapodik_siswas[23];
                     $data_siswa->save();
                 }
-
+                $data_siswa1_check = Data_siswa1::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
+                if ( ! $data_siswa1_check) {
+                    $data_siswa_1 =  new Data_siswa1();
+                    $data_siswa_1->dapodik_id                 = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
+                    $data_siswa_1->berat_badan                = $dapodik_siswas[61];
+                    $data_siswa_1->tinggi_badan               = $dapodik_siswas[62];
+                    $data_siswa_1->saudara_kandung            = $dapodik_siswas[64];
+                    $data_siswa_1->jarak_tempat               = $dapodik_siswas[65];
+                    $data_siswa_1->nis                        = $dapodik_siswas[2];
+                    $data_siswa_1->penerima_kps_pkh           = $dapodik_siswas[22];
+                    $data_siswa_1->save();
+                }
                 $data_siswa2_check = Data_siswa2::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $data_siswa2_check) {
                     $data_siswa_2 =  new Data_siswa2();
@@ -861,28 +845,24 @@ class PricingController extends Controller
                     $data_siswa_2->layak_pip_usulan_sekolah = $dapodik_siswas[53];           
                     $data_siswa_2->save();
                 }
-
                 $data_siswa3_check = Data_siswa3::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $data_siswa3_check) {
                     $data_siswa_3 = new Data_siswa3();
                     $data_siswa_3->dapodik_id = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
                     $data_siswa_3->save();
                 }
-
                 $data_siswa4_check = Data_siswa4::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $data_siswa4_check) {
                     $data_siswa_4 = new Data_siswa4();
                     $data_siswa_4->dapodik_id = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
                     $data_siswa_4->save();
                 }
-
                 $payment_check = Payment::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $payment_check) {
                     $payment = new Payment();
                     $payment->dapodik_id = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
                     $payment->save();
                 }
-
                 $reregistration_check = ReRegistration::where('dapodik_id', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                 if ( ! $reregistration_check) {
                     $reregister = new ReRegistration();
@@ -890,7 +870,7 @@ class PricingController extends Controller
                     $reregister->save();
                 }
             }         
-            return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data PPDB']);         
+            return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data Dapodik']);         
     }
 
 

@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Data_siswa_system extends Model
+class Data_siswa_system_1 extends Model
 {
 
     public $incrementing = false;
 
-    protected $table = 'data_siswa_system';
+    protected $table = 'data_siswa_system_1';
 
     protected $primaryKey = 'id';
 

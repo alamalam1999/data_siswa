@@ -46,6 +46,9 @@ use App\Http\Responses\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Repositories\Backend\PPDBRepository;
 use App\Http\Requests\Backend\PPDB\PPDBPermissionRequest;
+use App\Models\Data_siswa1;
+use App\Models\Data_siswa_system_1;
+use Symfony\Component\Mime\Part\DataPart;
 
 class PPDBController extends Controller
 {
@@ -1083,6 +1086,7 @@ class PPDBController extends Controller
                 //data siswa
                 $data_siswa->nisn                           = $request->nisn;
                 $data_siswa->save();
+
                 $data_siswa_system = Data_siswa_system::where('ppdb_id', $request->ppdb_id)->first();
                 if ($data_siswa_system == null && $data_siswa_system == "" && empty($data_siswa_system)) {
                     $no_seri_ijazah = '';
@@ -1141,70 +1145,84 @@ class PPDBController extends Controller
                     $datasiswa_system->berkebutuhan_khusus       = $data_siswa->berkebutuhan_khusus;
                     $datasiswa_system->asal_sekolah              = $data_siswa->asal_sekolah;
                     $datasiswa_system->anak_keberapa             = $data_siswa->anak_keberapa;
-                    $datasiswa_system->berat_badan               = $data_siswa->berat_badan;
-                    $datasiswa_system->tinggi_badan              = $data_siswa->tinggi_badan;
-                    $datasiswa_system->saudara_kandung           = $data_siswa->saudara_kandung;
-                    $datasiswa_system->jarak_tempat              = $data_siswa->jarak_tempat;
-                    $datasiswa_system->penerima_kps_pkh          = $data_siswa->penerima_kps_pkh;
-                    $datasiswa_system->tahun_ajaran              = $data_siswa->tahun_ajaran;
-                    $datasiswa_system->tanggal_pendaftaran       = $data_siswa->tanggal_pendaftaran;
-                    $datasiswa_system->status_siswa              = $data_siswa->status_siswa;
-                    $datasiswa_system->no_formulir               = $data_siswa->no_formulir;
-                    $datasiswa_system->kitas                     = $data_siswa->kitas;
-                    $datasiswa_system->kewarganegaraan           = $data_siswa->kewarganegaraan;
-                    $datasiswa_system->nama_negara               = $data_siswa->nama_negara;
-                    $datasiswa_system->no_kph_pkh                = $data_siswa->no_kph_pkh;
-                    $datasiswa_system->usulan_dari_sekolah       = $data_siswa->usulan_dari_sekolah;
-                    $datasiswa_system->kartu_KIP                 = $data_siswa->kartu_KIP;
-                    $datasiswa_system->berkebutuhan_khusus_ayah  = $data_siswa->berkebutuhan_khusus_ayah;
-                    $datasiswa_system->berkebutuhan_khusus_ibu   = $data_siswa->berkebutuhan_khusus_ibu;
-                    $datasiswa_system->jenis_ekstrakulikuler     = $data_siswa->jenis_ekstrakulikuler;
-                    $datasiswa_system->waktu_tempuh              = $data_siswa->waktu_tempuh;
-                    $datasiswa_system->berkebutuhan_khusus_2     = $data_siswa->berkebutuhan_khusus_2;
-                    $datasiswa_system->nama_kelurahan_2          = $data_siswa->nama_kelurahan_2;
-                    $datasiswa_system->jurusan                   = $data_siswa->jurusan;
-                    $datasiswa_system->jenis_pendaftaran         = $data_siswa->jenis_pendaftaran;
-                    $datasiswa_system->nis                       = $data_siswa->nis;
-                    $datasiswa_system->tanggal_masuk_sekolah     = $data_siswa->tanggal_masuk_sekolah;
-                    $datasiswa_system->nomor_peserta_ujian       = $data_siswa->nomor_peserta_ujian;
-                    $datasiswa_system->keluar_karena             = $data_siswa->keluar_karena;
-                    $datasiswa_system->tanggal_keluar            = $data_siswa->tanggal_keluar;
-                    $datasiswa_system->alasan                    = $data_siswa->alasan;
-                    $datasiswa_system->persetujuan               = $data_siswa->persetujuan;
-                    $datasiswa_system->jenis_1                   = $data_siswa->jenis_1;
-                    $datasiswa_system->tingkat_1                 = $data_siswa->tingkat_1;
-                    $datasiswa_system->nama_prestasi_1           = $data_siswa->nama_prestasi_1;
-                    $datasiswa_system->tahun_1                   = $data_siswa->tahun_1;
-                    $datasiswa_system->penyelenggara_1           = $data_siswa->penyelenggara_1;
-                    $datasiswa_system->jenis_2                   = $data_siswa->jenis_2;
-                    $datasiswa_system->tingkat_2                 = $data_siswa->tingkat_2;
-                    $datasiswa_system->nama_prestasi_2           = $data_siswa->nama_prestasi_2;
-                    $datasiswa_system->tahun_2                   = $data_siswa->tahun_2;
-                    $datasiswa_system->penyelenggara_2           = $data_siswa->penyelenggara_2;
-                    $datasiswa_system->jenis_3                   = $data_siswa->jenis_3;
-                    $datasiswa_system-> tingkat_3                = $data_siswa->tingkat_3;
-                    $datasiswa_system->nama_prestasi_3           = $data_siswa->nama_prestasi_3;
-                    $datasiswa_system->tahun_3                   = $data_siswa->tahun_3;
-                    $datasiswa_system->penyelenggara_3           = $data_siswa->penyelenggara_3;
-                    $datasiswa_system->jenis_1_0                 = $data_siswa->jenis_1_0;
-                    $datasiswa_system->keterangan_1              = $data_siswa->keterangan_1;
-                    $datasiswa_system->tahun_mulai_1             = $data_siswa->tahun_mulai_1;
-                    $datasiswa_system->tahun_selesai_1           = $data_siswa->tahun_selesai_1;
-                    $datasiswa_system->jenis_2_0                 = $data_siswa->jenis_2_0;
-                    $datasiswa_system->keterangan_2              = $data_siswa->keterangan_2;
-                    $datasiswa_system->tahun_mulai_2             = $data_siswa->tahun_mulai_2;
-                    $datasiswa_system->tahun_selesai_2           = $data_siswa->tahun_selesai_2;
-                    $datasiswa_system->jenis_3_0                 = $data_siswa->jenis_3_0;
-                    $datasiswa_system->keterangan_3              = $data_siswa->keterangan_3;
-                    $datasiswa_system->tahun_mulai_3             = $data_siswa->tahun_mulai_3;
-                    $datasiswa_system->tahun_selesai_3           = $data_siswa->tahun_selesai_3;
-                    $datasiswa_system->sekolah                   = $data_siswa->sekolah;
-                    $datasiswa_system->unit                      = $data_siswa->unit;
-                    $datasiswa_system->input_by                  = $data_siswa->input_by;
-                    $datasiswa_system->created_at                = $data_siswa->created_at;
-                    $datasiswa_system->updated_at                = $data_siswa->updated_at;
                     $datasiswa_system->save();
                     }
+
+                    $data_siswa1 = Data_siswa1::where('ppdb_id', $ppdb->ppdb_id)->first();
+
+                    $data_siswa1_check = Data_siswa_system_1::where('ppdb_id', $ppdb->ppdb_id)->first();
+                if ($data_siswa1_check == null && $data_siswa1_check == "" && empty($data_siswa1_check)) {
+                    $datasiswa_system_1 = new Data_siswa_system_1;
+                    $datasiswa_system_1->dapodik_id                = $data_siswa1->dapodik_id;
+                    $datasiswa_system_1->berat_badan               = $data_siswa1->berat_badan;
+                    $datasiswa_system_1->tinggi_badan              = $data_siswa1->tinggi_badan;
+                    $datasiswa_system_1->saudara_kandung           = $data_siswa1->saudara_kandung;
+                    $datasiswa_system_1->jarak_tempat              = $data_siswa1->jarak_tempat;
+                    $datasiswa_system_1->penerima_kps_pkh          = $data_siswa1->penerima_kps_pkh;
+                    $datasiswa_system_1->tahun_ajaran              = $data_siswa1->tahun_ajaran;
+                    $datasiswa_system_1->tanggal_pendaftaran       = $data_siswa1->tanggal_pendaftaran;
+                    $datasiswa_system_1->status_siswa              = $data_siswa1->status_siswa;
+                    $datasiswa_system_1->no_formulir               = $data_siswa1->no_formulir;
+                    $datasiswa_system_1->kitas                     = $data_siswa1->kitas;
+                    $datasiswa_system_1->kewarganegaraan           = $data_siswa1->kewarganegaraan;
+                    $datasiswa_system_1->nama_negara               = $data_siswa1->nama_negara;
+                    $datasiswa_system_1->no_kph_pkh                = $data_siswa1->no_kph_pkh;
+                    $datasiswa_system_1->usulan_dari_sekolah       = $data_siswa1->usulan_dari_sekolah;
+                    $datasiswa_system_1->kartu_KIP                 = $data_siswa1->kartu_KIP;
+                    $datasiswa_system_1->berkebutuhan_khusus_ayah  = $data_siswa1->berkebutuhan_khusus_ayah;
+                    $datasiswa_system_1->berkebutuhan_khusus_ibu   = $data_siswa1->berkebutuhan_khusus_ibu;
+                    $datasiswa_system_1->jenis_ekstrakulikuler     = $data_siswa1->jenis_ekstrakulikuler;
+                    $datasiswa_system_1->waktu_tempuh              = $data_siswa1->waktu_tempuh;
+                    $datasiswa_system_1->berkebutuhan_khusus_2     = $data_siswa1->berkebutuhan_khusus_2;
+                    $datasiswa_system_1->nama_kelurahan_2          = $data_siswa1->nama_kelurahan_2;
+                    $datasiswa_system_1->jurusan                   = $data_siswa1->jurusan;
+                    $datasiswa_system_1->jenis_pendaftaran         = $data_siswa1->jenis_pendaftaran;
+                    $datasiswa_system_1->nis                       = $data_siswa1->nis;
+                    $datasiswa_system_1->tanggal_masuk_sekolah     = $data_siswa1->tanggal_masuk_sekolah;
+                    $datasiswa_system_1->nomor_peserta_ujian       = $data_siswa1->nomor_peserta_ujian;
+                    $datasiswa_system_1->keluar_karena             = $data_siswa1->keluar_karena;
+                    $datasiswa_system_1->tanggal_keluar            = $data_siswa1->tanggal_keluar;
+                    $datasiswa_system_1->alasan                    = $data_siswa1->alasan;
+                    $datasiswa_system_1->persetujuan               = $data_siswa1->persetujuan;
+                    $datasiswa_system_1->jenis_1                   = $data_siswa1->jenis_1;
+                    $datasiswa_system_1->tingkat_1                 = $data_siswa1->tingkat_1;
+                    $datasiswa_system_1->nama_prestasi_1           = $data_siswa1->nama_prestasi_1;
+                    $datasiswa_system_1->tahun_1                   = $data_siswa1->tahun_1;
+                    $datasiswa_system_1->penyelenggara_1           = $data_siswa1->penyelenggara_1;
+                    $datasiswa_system_1->jenis_2                   = $data_siswa1->jenis_2;
+                    $datasiswa_system_1->tingkat_2                 = $data_siswa1->tingkat_2;
+                    $datasiswa_system_1->nama_prestasi_2           = $data_siswa1->nama_prestasi_2;
+                    $datasiswa_system_1->tahun_2                   = $data_siswa1->tahun_2;
+                    $datasiswa_system_1->penyelenggara_2           = $data_siswa1->penyelenggara_2;
+                    $datasiswa_system_1->jenis_3                   = $data_siswa1->jenis_3;
+                    $datasiswa_system_1-> tingkat_3                = $data_siswa1->tingkat_3;
+                    $datasiswa_system_1->nama_prestasi_3           = $data_siswa1->nama_prestasi_3;
+                    $datasiswa_system_1->tahun_3                   = $data_siswa1->tahun_3;
+                    $datasiswa_system_1->penyelenggara_3           = $data_siswa1->penyelenggara_3;
+                    $datasiswa_system_1->jenis_1_0                 = $data_siswa1->jenis_1_0;
+                    $datasiswa_system_1->keterangan_1              = $data_siswa1->keterangan_1;
+                    $datasiswa_system_1->tahun_mulai_1             = $data_siswa1->tahun_mulai_1;
+                    $datasiswa_system_1->tahun_selesai_1           = $data_siswa1->tahun_selesai_1;
+                    $datasiswa_system_1->jenis_2_0                 = $data_siswa1->jenis_2_0;
+                    $datasiswa_system_1->keterangan_2              = $data_siswa1->keterangan_2;
+                    $datasiswa_system_1->tahun_mulai_2             = $data_siswa1->tahun_mulai_2;
+                    $datasiswa_system_1->tahun_selesai_2           = $data_siswa1->tahun_selesai_2;
+                    $datasiswa_system_1->jenis_3_0                 = $data_siswa1->jenis_3_0;
+                    $datasiswa_system_1->keterangan_3              = $data_siswa1->keterangan_3;
+                    $datasiswa_system_1->tahun_mulai_3             = $data_siswa1->tahun_mulai_3;
+                    $datasiswa_system_1->tahun_selesai_3           = $data_siswa1->tahun_selesai_3;
+                    $datasiswa_system_1->sekolah                   = $data_siswa1->sekolah;
+                    $datasiswa_system_1->unit                      = $data_siswa1->unit;
+                    $datasiswa_system_1->input_by                  = $data_siswa1->input_by;
+                    $datasiswa_system_1->created_at                = $data_siswa1->created_at;
+                    $datasiswa_system_1->updated_at                = $data_siswa1->updated_at;
+                    $datasiswa_system_1->save();
+                    $data_siswa->save();
+                } else {
+                    $data_siswa_1 =  new Data_siswa1();
+                    $data_siswa_1->dapodik_id                 = $data_siswa1_check->dapodik_id;
+                    $data_siswa->save();
+                }
                     
                 $data_siswa2 = Data_siswa2::where('ppdb_id', $ppdb->ppdb_id)->first(); 
                         //data siswa 2         
@@ -1639,72 +1657,74 @@ class PPDBController extends Controller
                 $datasiswa_system->alasan_layak_pip          = $data_siswa->alasan_layak_pip;
                 $datasiswa_system->berkebutuhan_khusus       = $data_siswa->berkebutuhan_khusus;
                 $datasiswa_system->asal_sekolah              = $data_siswa->asal_sekolah;
-                $datasiswa_system->anak_keberapa             = $data_siswa->anak_keberapa;
-                $datasiswa_system->berat_badan               = $data_siswa->berat_badan;
-                $datasiswa_system->tinggi_badan              = $data_siswa->tinggi_badan;
-                $datasiswa_system->saudara_kandung           = $data_siswa->saudara_kandung;
-                $datasiswa_system->jarak_tempat              = $data_siswa->jarak_tempat;
-                $datasiswa_system->penerima_kps_pkh          = $data_siswa->penerima_kps_pkh;
-                $datasiswa_system->tahun_ajaran              = $data_siswa->tahun_ajaran;
-                $datasiswa_system->tanggal_pendaftaran       = $data_siswa->tanggal_pendaftaran;
-                $datasiswa_system->status_siswa              = $data_siswa->status_siswa;
-                $datasiswa_system->no_formulir               = $data_siswa->no_formulir;
-                $datasiswa_system->kitas                     = $data_siswa->kitas;
-                $datasiswa_system->kewarganegaraan           = $data_siswa->kewarganegaraan;
-                $datasiswa_system->nama_negara               = $data_siswa->nama_negara;
-                $datasiswa_system->no_kph_pkh                = $data_siswa->no_kph_pkh;
-                $datasiswa_system->usulan_dari_sekolah       = $data_siswa->usulan_dari_sekolah;
-                $datasiswa_system->kartu_KIP                 = $data_siswa->kartu_KIP;
-                $datasiswa_system->berkebutuhan_khusus_ayah  = $data_siswa->berkebutuhan_khusus_ayah;
-                $datasiswa_system->berkebutuhan_khusus_ibu   = $data_siswa->berkebutuhan_khusus_ibu;
-                $datasiswa_system->jenis_ekstrakulikuler     = $data_siswa->jenis_ekstrakulikuler;
-                $datasiswa_system->waktu_tempuh              = $data_siswa->waktu_tempuh;
-                $datasiswa_system->berkebutuhan_khusus_2     = $data_siswa->berkebutuhan_khusus_2;
-                $datasiswa_system->nama_kelurahan_2          = $data_siswa->nama_kelurahan_2;
-                $datasiswa_system->jurusan                   = $data_siswa->jurusan;
-                $datasiswa_system->jenis_pendaftaran         = $data_siswa->jenis_pendaftaran;
-                $datasiswa_system->nis                       = $data_siswa->nis;
-                $datasiswa_system->tanggal_masuk_sekolah     = $data_siswa->tanggal_masuk_sekolah;
-                $datasiswa_system->nomor_peserta_ujian       = $data_siswa->nomor_peserta_ujian;
-                $datasiswa_system->keluar_karena             = $data_siswa->keluar_karena;
-                $datasiswa_system->tanggal_keluar            = $data_siswa->tanggal_keluar;
-                $datasiswa_system->alasan                    = $data_siswa->alasan;
-                $datasiswa_system->persetujuan               = $data_siswa->persetujuan;
-                $datasiswa_system->jenis_1                   = $data_siswa->jenis_1;
-                $datasiswa_system->tingkat_1                 = $data_siswa->tingkat_1;
-                $datasiswa_system->nama_prestasi_1           = $data_siswa->nama_prestasi_1;
-                $datasiswa_system->tahun_1                   = $data_siswa->tahun_1;
-                $datasiswa_system->penyelenggara_1           = $data_siswa->penyelenggara_1;
-                $datasiswa_system->jenis_2                   = $data_siswa->jenis_2;
-                $datasiswa_system->tingkat_2                 = $data_siswa->tingkat_2;
-                $datasiswa_system->nama_prestasi_2           = $data_siswa->nama_prestasi_2;
-                $datasiswa_system->tahun_2                   = $data_siswa->tahun_2;
-                $datasiswa_system->penyelenggara_2           = $data_siswa->penyelenggara_2;
-                $datasiswa_system->jenis_3                   = $data_siswa->jenis_3;
-                $datasiswa_system-> tingkat_3                = $data_siswa->tingkat_3;
-                $datasiswa_system->nama_prestasi_3           = $data_siswa->nama_prestasi_3;
-                $datasiswa_system->tahun_3                   = $data_siswa->tahun_3;
-                $datasiswa_system->penyelenggara_3           = $data_siswa->penyelenggara_3;
-                $datasiswa_system->jenis_1_0                 = $data_siswa->jenis_1_0;
-                $datasiswa_system->keterangan_1              = $data_siswa->keterangan_1;
-                $datasiswa_system->tahun_mulai_1             = $data_siswa->tahun_mulai_1;
-                $datasiswa_system->tahun_selesai_1           = $data_siswa->tahun_selesai_1;
-                $datasiswa_system->jenis_2_0                 = $data_siswa->jenis_2_0;
-                $datasiswa_system->keterangan_2              = $data_siswa->keterangan_2;
-                $datasiswa_system->tahun_mulai_2             = $data_siswa->tahun_mulai_2;
-                $datasiswa_system->tahun_selesai_2           = $data_siswa->tahun_selesai_2;
-                $datasiswa_system->jenis_3_0                 = $data_siswa->jenis_3_0;
-                $datasiswa_system->keterangan_3              = $data_siswa->keterangan_3;
-                $datasiswa_system->tahun_mulai_3             = $data_siswa->tahun_mulai_3;
-                $datasiswa_system->tahun_selesai_3           = $data_siswa->tahun_selesai_3;
-                $datasiswa_system->sekolah                   = $data_siswa->sekolah;
-                $datasiswa_system->unit                      = $data_siswa->unit;
-                $datasiswa_system->input_by                  = $data_siswa->input_by;
-                $datasiswa_system->created_at                = $data_siswa->created_at;
-                $datasiswa_system->updated_at                = $data_siswa->updated_at;
+                $datasiswa_system->anak_keberapa             = $data_siswa->anak_keberapa;    
                 $datasiswa_system->save();
                 }
-                
+
+                $data_siswa_1 = Data_siswa1::where('dapodik_id', $request->dapodik_id)->first();
+
+                $data_siswa_system_1 = Data_siswa_system_1::where('dapodik_id', $request->dapodik_id)->first();
+                if ($data_siswa_system_1 == null && $data_siswa_system_1 == "" && empty($data_siswa_system_1)) {
+                $data_siswa_system_1 = new Data_siswa_system_1;
+                $data_siswa_system_1->dapodik_id                = $data_siswa_1->dapodik_id;
+                $data_siswa_system_1->tahun_ajaran              = $data_siswa_1->tahun_ajaran;
+                $data_siswa_system_1->tanggal_pendaftaran       = $data_siswa_1->tanggal_pendaftaran;
+                $data_siswa_system_1->status_siswa              = $data_siswa_1->status_siswa;
+                $data_siswa_system_1->no_formulir               = $data_siswa_1->no_formulir;
+                $data_siswa_system_1->kitas                     = $data_siswa_1->kitas;
+                $data_siswa_system_1->kewarganegaraan           = $data_siswa_1->kewarganegaraan;
+                $data_siswa_system_1->nama_negara               = $data_siswa_1->nama_negara;
+                $data_siswa_system_1->no_kph_pkh                = $data_siswa_1->no_kph_pkh;
+                $data_siswa_system_1->usulan_dari_sekolah       = $data_siswa_1->usulan_dari_sekolah;
+                $data_siswa_system_1->kartu_KIP                 = $data_siswa_1->kartu_KIP;
+                $data_siswa_system_1->berkebutuhan_khusus_ayah  = $data_siswa_1->berkebutuhan_khusus_ayah;
+                $data_siswa_system_1->berkebutuhan_khusus_ibu   = $data_siswa_1->berkebutuhan_khusus_ibu;
+                $data_siswa_system_1->jenis_ekstrakulikuler     = $data_siswa_1->jenis_ekstrakulikuler;
+                $data_siswa_system_1->waktu_tempuh              = $data_siswa_1->waktu_tempuh;
+                $data_siswa_system_1->berkebutuhan_khusus_2     = $data_siswa_1->berkebutuhan_khusus_2;
+                $data_siswa_system_1->nama_kelurahan_2          = $data_siswa_1->nama_kelurahan_2;
+                $data_siswa_system_1->jurusan                   = $data_siswa_1->jurusan;
+                $data_siswa_system_1->jenis_pendaftaran         = $data_siswa_1->jenis_pendaftaran;
+                $data_siswa_system_1->tanggal_masuk_sekolah     = $data_siswa_1->tanggal_masuk_sekolah;
+                $data_siswa_system_1->nomor_peserta_ujian       = $data_siswa_1->nomor_peserta_ujian;
+                $data_siswa_system_1->keluar_karena             = $data_siswa_1->keluar_karena;
+                $data_siswa_system_1->tanggal_keluar            = $data_siswa_1->tanggal_keluar;
+                $data_siswa_system_1->alasan                    = $data_siswa_1->alasan;
+                $data_siswa_system_1->persetujuan               = $data_siswa_1->persetujuan;
+                $data_siswa_system_1->jenis_1                   = $data_siswa_1->jenis_1;
+                $data_siswa_system_1->tingkat_1                 = $data_siswa_1->tingkat_1;
+                $data_siswa_system_1->nama_prestasi_1           = $data_siswa_1->nama_prestasi_1;
+                $data_siswa_system_1->tahun_1                   = $data_siswa_1->tahun_1;
+                $data_siswa_system_1->penyelenggara_1           = $data_siswa_1->penyelenggara_1;
+                $data_siswa_system_1->jenis_2                   = $data_siswa_1->jenis_2;
+                $data_siswa_system_1->tingkat_2                 = $data_siswa_1->tingkat_2;
+                $data_siswa_system_1->nama_prestasi_2           = $data_siswa_1->nama_prestasi_2;
+                $data_siswa_system_1->tahun_2                   = $data_siswa_1->tahun_2;
+                $data_siswa_system_1->penyelenggara_2           = $data_siswa_1->penyelenggara_2;
+                $data_siswa_system_1->jenis_3                   = $data_siswa_1->jenis_3;
+                $data_siswa_system_1-> tingkat_3                = $data_siswa_1->tingkat_3;
+                $data_siswa_system_1->nama_prestasi_3           = $data_siswa_1->nama_prestasi_3;
+                $data_siswa_system_1->tahun_3                   = $data_siswa_1->tahun_3;
+                $data_siswa_system_1->penyelenggara_3           = $data_siswa_1->penyelenggara_3;
+                $data_siswa_system_1->jenis_1_0                 = $data_siswa_1->jenis_1_0;
+                $data_siswa_system_1->keterangan_1              = $data_siswa_1->keterangan_1;
+                $data_siswa_system_1->tahun_mulai_1             = $data_siswa_1->tahun_mulai_1;
+                $data_siswa_system_1->tahun_selesai_1           = $data_siswa_1->tahun_selesai_1;
+                $data_siswa_system_1->jenis_2_0                 = $data_siswa_1->jenis_2_0;
+                $data_siswa_system_1->keterangan_2              = $data_siswa_1->keterangan_2;
+                $data_siswa_system_1->tahun_mulai_2             = $data_siswa_1->tahun_mulai_2;
+                $data_siswa_system_1->tahun_selesai_2           = $data_siswa_1->tahun_selesai_2;
+                $data_siswa_system_1->jenis_3_0                 = $data_siswa_1->jenis_3_0;
+                $data_siswa_system_1->keterangan_3              = $data_siswa_1->keterangan_3;
+                $data_siswa_system_1->tahun_mulai_3             = $data_siswa_1->tahun_mulai_3;
+                $data_siswa_system_1->tahun_selesai_3           = $data_siswa_1->tahun_selesai_3;
+                $data_siswa_system_1->sekolah                   = $data_siswa_1->sekolah;
+                $data_siswa_system_1->unit                      = $data_siswa_1->unit;
+                $data_siswa_system_1->input_by                  = $data_siswa_1->input_by;
+                $data_siswa_system_1->created_at                = $data_siswa_1->created_at;
+                $data_siswa_system_1->updated_at                = $data_siswa_1->updated_at;
+                $data_siswa_system_1->save();
+                }
 
                 $data_siswa2 = Data_siswa2::where('dapodik_id', $ppdb->dapodik_id)->first(); 
                         //data siswa 2   
@@ -2605,7 +2625,7 @@ class PPDBController extends Controller
             $file_additional = json_decode($ppdb->file_additional);
         }
 
-        $user_account = Users::where('status_data', $ppdb->status_data)->first();
+        $user_account = Users::where('status_data', $ppdb->id_user)->first();
         $payment_formulir = Payment_system::where([
             ['dapodik_id', '=', $ppdb->dapodik_id],
             ['payment_type', '=', 'FEE_FORMULIR']
@@ -2920,7 +2940,7 @@ class PPDBController extends Controller
         $data_kelas->keterangan           = $request->keterangan;
         $data_kelas->save();
         } else {
-            $ppdb = PPDB::where('dapodik_id', $request->dapodik_id)->first();
+            $ppdb = PPDB_system::where('dapodik_id', $request->dapodik_id)->first();
             PPDB_system::where('dapodik_id', $ppdb->dapodik_id)->update(['nis' => $request->nis]);
             Data_siswa::where('dapodik_id', $ppdb->dapodik_id)->update(['nisn' => $request->nisn]);
             Data_siswa_system::where('dapodik_id', $ppdb->dapodik_id)->update(['no_seri_ijazah' => $request->no_seri_ijazah]);
