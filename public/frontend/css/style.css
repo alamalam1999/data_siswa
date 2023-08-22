@@ -902,7 +902,7 @@ nav.navbar.bootsnav.navbar-transparent.pad-top {
   content: "";
   height: 45px;
   width: 800px;
-  background: #faffcf;
+  background: #ffffff;
   left: 0;
   z-index: -1;
   transform: skew(25deg);
