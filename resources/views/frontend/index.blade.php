@@ -60,6 +60,22 @@
                                     <input name="nis" maxlength="50" id="nopes" class="form-control" tabindex="1" placeholder="Tuliskan NIS Siswa" type="text" value="" autocomplete="false" required>
                                 </div>
 
+                                <div class="row form-group">
+                                    <div class="{{ $errors->has('captcha') ? ' has-error' : '' }}">  
+                                                <div class="col-md-6 captcha thumbs-up">       
+                                                    <span class="spans-up">{!! captcha_img() !!}</span> 
+                                                    <button type="button" class="btn btn-success btn-refresh"><i class="fa fa-refresh"></i></button>           
+                                                </div>  
+                                                <div class="col-md-6">     
+                                                    <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">     
+                                                </div>            
+                                                @if ($errors->has('captcha'))        
+                                                    <span class="help-block">          
+                                                        <strong>{{ $errors->first('captcha') }}</strong>       
+                                                    </span>       
+                                                @endif               
+                                    </div>
+                                </div>
                                 <div class="form-group">      
                                     <input type="submit" class="center-block" value="Cari Siswa">                     
                                 </div>
@@ -81,7 +97,17 @@
 </div>
 <!-- End Banner -->
 
-
+    <script type="text/javascript">
+    $(".btn-refresh").click(function(){  
+      $.ajax({  
+         type:'GET',
+         url:'/refresh_captcha',
+         success:function(data){
+            $(".captcha span").html(data.captcha); 
+         }    
+      });     
+    });
+    </script>
 
 
 @endsection

@@ -3,7 +3,7 @@
         'name' => 'ftx/laravel-adminpanel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4a52b5303afed64bcbc253730fb156f3ba42ee23',
+        'reference' => 'c1da3c059d167e6833d1854081eb1a8649768eaf',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -529,7 +529,7 @@
         'ftx/laravel-adminpanel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4a52b5303afed64bcbc253730fb156f3ba42ee23',
+            'reference' => 'c1da3c059d167e6833d1854081eb1a8649768eaf',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -774,6 +774,15 @@
             'replaced' => array(
                 0 => 'v6.18.20',
             ),
+        ),
+        'intervention/image' => array(
+            'pretty_version' => '2.7.2',
+            'version' => '2.7.2.0',
+            'reference' => '04be355f8d6734c826045d02a1079ad658322dad',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../intervention/image',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'jakub-onderka/php-console-color' => array(
             'pretty_version' => 'v0.2',
@@ -1035,6 +1044,15 @@
             'install_path' => __DIR__ . '/../maximebf/debugbar',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'mews/captcha' => array(
+            'pretty_version' => '3.3.2',
+            'version' => '3.3.2.0',
+            'reference' => '7aee0e80bcf7eb17fc0d574244e384e56ae2af77',
+            'type' => 'package',
+            'install_path' => __DIR__ . '/../mews/captcha',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'mnapoli/front-yaml' => array(
             'pretty_version' => '1.7.0',

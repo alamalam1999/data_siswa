@@ -48,7 +48,7 @@ class ConfirmAccountController extends Controller
     public function sendConfirmationEmail($uuid)
     {
         $user = $this->user->findByUuid($uuid);
-        // $user->email = 'nuril.umam@gmail.com';
+        // $user->email = 'xxxxx@gmail.com';
 
         if ($user->isConfirmed()) {
             return redirect()->route('frontend.auth.login')->withFlashSuccess(__('exceptions.frontend.auth.confirmation.already_confirmed'));

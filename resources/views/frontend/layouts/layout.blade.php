@@ -13,7 +13,8 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <title>@yield('title', app_name())</title>
     <meta name="description" content="@yield('meta_description', 'Sekolah Avicenna - Penerimaan Peserta Didik Baru')">
-    <meta name="author" content="@yield('meta_author', '@nurilumam')">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @yield('meta')
 
 
@@ -40,6 +41,7 @@
     <link href="{{ asset('frontend/css/bootsnav.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet" />
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
     <!-- ========== End Stylesheet ========== -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

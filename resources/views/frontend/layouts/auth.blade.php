@@ -13,7 +13,6 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <title>@yield('title', app_name())</title>
     <meta name="description" content="@yield('meta_description', 'Sekolah Avicenna - Penerimaan Peserta Didik Baru')">
-    <meta name="author" content="@yield('meta_author', '@nurilumam')">
 
 
     @yield('meta')

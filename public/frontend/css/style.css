@@ -1384,6 +1384,29 @@ and (max-width : 768px)  {
   top: 5px;
 }
 
+@media only screen 
+and (min-width : 0px) 
+and (max-width : 768px)  { 
+
+  .banner-area form button {
+    background: #ffb606 none repeat scroll 0 0;
+    border: medium none;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    height: 32px;
+    margin: 0 !important;
+    padding: 0 30px;
+    position: absolute;
+    right: 232px;
+    text-transform: capitalize;
+    top: 5px;
+  }
+
+}
+
 .banner-area.auto-height .content {
   padding: 150px 0;
 }
@@ -1510,6 +1533,18 @@ and (max-width : 768px)  {
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 500;
+}
+
+.thumbs-up {
+  margin-bottom: 5px;
+}
+
+.spans-up {
+  display: block; 
+  margin-top: 12px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
 }
 
 .banner-area.standard .thumb::after {

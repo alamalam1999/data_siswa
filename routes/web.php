@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\ReportController;
 
 /*
@@ -37,3 +38,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
      */
     include_route_files(__DIR__.'/backend/');
 });
+
+Route::post('my-captcha', [LoginController::class,'myCaptchaPost'])->name('myCaptcha.post');
+Route::get('refresh_captcha', [LoginController::class, 'refreshCapthca'])->name('refresh_captcha');

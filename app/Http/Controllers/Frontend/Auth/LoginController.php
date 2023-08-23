@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use DB;
+use captcha;
 use App\Models\PPDB;
+use App\Models\Data_siswa;
+use App\Models\Foto_siswa;
+use App\Models\PPDB_system;
 use Illuminate\Http\Request;
+use App\Models\Data_siswa_system;
+use App\Models\Data_siswa_system_2;
 use Jenssegers\Agent\Facades\Agent;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
 use App\Events\Frontend\Auth\UserLoggedIn;
 use App\Events\Frontend\Auth\UserLoggedOut;
-use App\Models\Data_siswa;
-use App\Models\Data_siswa_system;
-use App\Models\Data_siswa_system_2;
-use App\Models\Foto_siswa;
-use App\Models\PPDB_system;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
@@ -41,6 +42,13 @@ class LoginController extends Controller
      */
     public function search(Request $request) {
 
+        request()->validate([
+            'captcha' => 'required|captcha'
+        ],
+
+        ['captcha.captcha'=>'Invalid captcha code.']);
+        // dd("You are here :) .");
+        
         $data_search = PPDB_system::where([['fullname','like', '%'.$request->nama.'%']])
          ->select('ppdb_system.ppdb_id', 'ppdb_system.classes','ppdb_system.stage', 'ppdb_system.fullname', 'ppdb_system.fhoto_siswa','ppdb_system.nis', 'ppdb_system.status_siswa as status')->first();
         $data_siswa  = Data_siswa_system::where([['ppdb_id',$data_search->ppdb_id],['nisn', $request->nisn]])->first();
@@ -298,4 +306,21 @@ class LoginController extends Controller
         session(['site_access' => json_encode($site_access)]);
         session(['school_access' => json_encode($school_access)]);
     }
+    
+    public function refreshCapthca()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
+
+    public function myCaptchaPost(Request $request)
+    {
+        request()->validate([
+            'captcha' => 'required|captcha'
+        ],
+
+        ['captcha.captcha'=>'Invalid captcha code.']);
+        dd("You are here :) .");
+    }
 }
+
+
