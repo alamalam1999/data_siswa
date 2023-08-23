@@ -15,10 +15,10 @@
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Title-->
-            <h1 class="text-dark fw-bolder mb-3">Sign In</h1>
+            <h1 class="text-dark fw-bolder mb-3">Log In</h1>
             <!--end::Title-->
             <!--begin::Subtitle-->
-            <div class="text-gray-500 fw-semibold fs-6">Your Account School</div>
+            <div class="text-gray-500 fw-semibold fs-6">Masukkan Akun</div>
             <!--end::Subtitle=-->
         </div>
         <!--begin::Heading-->
@@ -73,9 +73,9 @@
         </div>
         <!--end::Submit button-->
         <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet?
+        {{-- <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet?
             <a href="{{ route('frontend.ppdb') }}" class="link-primary">Sign up</a>
-        </div>
+        </div> --}}
         <!--end::Sign up-->
         {{ html()->form()->close() }}
         <!--end::Form-->

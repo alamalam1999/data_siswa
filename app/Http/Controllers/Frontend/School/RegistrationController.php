@@ -93,12 +93,8 @@ class RegistrationController extends Controller
        ];
 
        //debug($pernyataan_orang_tua_questions);
-
-       if(Agent::isMobile()) {
-            return view('frontend.registration.reregistrationphone',$data);
-        }else {
+       
             return view('frontend.registration.reregistration',$data);
-        }
     }
 
     /**

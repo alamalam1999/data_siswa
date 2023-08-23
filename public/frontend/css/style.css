@@ -1040,7 +1040,18 @@ nav.navbar.bootsnav.navbar-transparent.pad-top {
 body,
 .banner-area,
 .banner-area div {
-  height: 100%;
+  height:92%;
+}
+
+@media only screen 
+and (min-width : 0px) 
+and (max-width : 768px)  { 
+  body,
+  .banner-area,
+  .banner-area div {
+    height:fit-content;
+  }
+
 }
 
 .banner-area.auto-height,

@@ -63,12 +63,8 @@ class LoginController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showLoginForm()
-    {
-        if(Agent::isMobile()) {
-            return view('frontend.auth.loginphone');
-        }else {
+    {    
             return view('frontend.auth.login');
-        }
     }
 
     /**

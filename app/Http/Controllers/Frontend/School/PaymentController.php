@@ -83,11 +83,7 @@ class PaymentController extends Controller
         if (empty($ppdb)) throw new GeneralException('PPDB not found');
         debug(json_encode($ppdb)); 
 
-        if(Agent::isMobile()) {
-            return new ViewResponse('frontend.payment.formulirphone', ['user' => $user, 'banks' => $banks, 'ppdb' => $ppdb, 'school_location' => $school_location]);
-        }else {
             return new ViewResponse('frontend.payment.formulir', ['user' => $user, 'banks' => $banks, 'ppdb' => $ppdb, 'school_location' => $school_location]);
-        }
     }
 
 
@@ -370,28 +366,6 @@ class PaymentController extends Controller
 
         debug(json_encode($ppdb));
 
-        if(Agent::isMobile()) {
-            return new ViewResponse(
-                'frontend.payment.administrationphone',
-                [
-                    'user' => $user,
-                    'banks' => $banks,
-                    'items' => $items,
-                    'ppdb' => $ppdb,
-                    'fee_spp' => $fee_spp,
-                    'fee_spp_12' => $fee_spp_12,
-                    'fee_up' => $fee_up,
-                    'fee_up_lunas' => $fee_up_lunas,
-                    'school_location' => $school_location,
-                    'spp_normal_12bulan' => $spp_normal_12bulan,
-                    'spp_normal'  => $spp_normal,
-                    'up_normal_lunas' => $up_normal_lunas,
-                    'up_normal_cicilan' => $up_normal_cicilan,
-                    'check_medco' => $check_medco,
-                    'registration_wave' => $registration_wave
-                ]
-                 ); 
-        }else {
         return new ViewResponse(
                 'frontend.payment.administration',
                 [
@@ -410,9 +384,7 @@ class PaymentController extends Controller
                     'up_normal_cicilan' => $up_normal_cicilan,
                     'check_medco' => $check_medco,
                     'registration_wave' => $registration_wave
-                ]
-                 );
-        }
+                ]);
 
     }
 

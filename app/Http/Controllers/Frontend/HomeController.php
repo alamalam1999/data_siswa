@@ -32,11 +32,7 @@ class HomeController extends Controller
             ->whereDate('date_to', '>=', $carbon)
             ->first();
 
-            if(Agent::isMobile()) {
-                return view('frontend.indexphone', compact('registration_schedules', 'registration_schedule'));
-            }else {
                 return view('frontend.index', compact('registration_schedules', 'registration_schedule'));
-            }
         
     }
 }

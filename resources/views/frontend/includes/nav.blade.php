@@ -8,14 +8,14 @@
 
         <a href="##main" class="navbar-brand">
 
-            <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" alt="Avicenna" class="logo logo-sticky"> //
+            <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb-old2.png') }}" alt="Avicenna" class="logo logo-sticky">
 
         </a>
 
         <div class="collapse navbar-collapse" id="main-navbar">
             <div class="sidebar-brand">
                 <a href="#index.html">
-                    <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" alt="Avicenna Template" class="logo" width="226" height="50">
+                    <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb-old2.png') }}" alt="Avicenna Template" class="logo" width="226" height="50">
                 </a>
             </div>
 
@@ -32,35 +32,26 @@
 </nav>
 
 
-<div class="top-bar-area address-one-lines bg-dark text-light">
+<div class="top-bar-area address-one-lines bg-dark">
     <div class="container">
-        <div class="row align-center" style="padding-bottom: 5px">
-            <div class="col-md-10 address-info" style="right: 90px; top:3px">
+        <div class="row align-center">
+            <div class="col-md-7 address-info">
                 <div class="info box">
                     <ul>
-                        <img src="{{ asset('assets/media/logos/logo-avicenna-ppdb.png') }}" class="logo" alt="Logo" width="750" height="50" style="margin-bottom: 1px">
-                        
-                           
-    
-                        
-                            
-                           
-                        
+                        <li><img src="{{ asset('assets/media/logos/logo-avicenna-ppdb-old2.png') }}" class="logo" alt="Logo" width="180" height="50" style="margin-bottom: 1px"></li>
+                        <li><h4>PANGKALAN DATA SISWA SEKOLAH AVICENNA</h4></li>
                     </ul>
                 </div>
             </div>
             @guest
-                <div class="text-right col-md-2" style="padding-top: 14px;left: 100px;">
-                    
-                    <h5><b><a href="{{ route('frontend.auth.login') }}" style="padding-right: 30px;padding-bottom: 50px">
-                        <span style="color:rgb(152, 6, 123);bottom: 50px"><i class="fas fa-user"></span></i>
-                        <span style="color:rgb(152, 6, 123);bottom: 50pxs">Login Admin</span></b></a></h5>
+                <div class="simple-link text-right col-md-5">
+                    <a href="{{ route('frontend.auth.login') }}"><i class="fas fa-user"></i>Login Admin</a>
                 </div>
             @else
                 <div class="simple-link text-right col-md-5">
                     <a href="{{ route('frontend.user.account') }}"><i class="fas fa-user"></i>
                         {{ $logged_in_user->name }}</a>
-                    <a href="{{ route('admin.dashboard') }}"><i class="fas fa-edit"></i> Dashboard</a>
+                    <a href="{{ route('admin.dashboard') }}"><i class="fas fa-edit"></i>Dashboard</a>
                 </div>
             @endguest
         </div>

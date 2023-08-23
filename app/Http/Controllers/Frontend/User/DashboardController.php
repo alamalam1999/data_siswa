@@ -75,10 +75,6 @@ class DashboardController extends Controller
             ->whereDate('date_to', '>=', $carbon)
             ->first();
 
-            if(Agent::isMobile()) {
-                return view('frontend.user.dashboardphone', compact('ppdbs', 'registration_schedules', 'registration_schedule'));
-            }else {
                 return view('frontend.user.dashboard', compact('ppdbs', 'registration_schedules', 'registration_schedule'));
-            }
     }
 }
