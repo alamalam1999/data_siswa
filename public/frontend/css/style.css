@@ -1400,7 +1400,7 @@ and (max-width : 768px)  {
     margin: 0 !important;
     padding: 0 30px;
     position: absolute;
-    right: 232px;
+    right: 180px;
     text-transform: capitalize;
     top: 5px;
   }
