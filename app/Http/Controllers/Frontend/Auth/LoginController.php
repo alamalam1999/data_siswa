@@ -42,12 +42,7 @@ class LoginController extends Controller
      */
     public function search(Request $request) {
 
-        request()->validate([
-            'captcha' => 'required|captcha'
-        ],
 
-        ['captcha.captcha'=>'Invalid captcha code.']);
-        // dd("You are here :) .");
         
         $data_search = PPDB_system::where([['fullname','like', '%'.$request->nama.'%']])
          ->select('ppdb_system.ppdb_id', 'ppdb_system.classes','ppdb_system.stage', 'ppdb_system.fullname', 'ppdb_system.fhoto_siswa','ppdb_system.nis', 'ppdb_system.status_siswa as status')->first();
