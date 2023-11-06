@@ -8,7 +8,7 @@ use App\Http\Controllers\Backend\pricing\PricingTableController;
 
 // Faq Management
 Route::group(['namespace' => 'pricing'], function () {
-    Route::get('pricing', [PricingController::class, 'index'])->name('pricing.index');
+    Route::get('import', [PricingController::class, 'index'])->name('pricing.index');
 
     Route::get('master' , [PricingController::class, 'master'])->name('master.class');
     Route::get('master/update/{id}', [PricingController::class, 'masterUpdate'])->name('masterupdate.class');

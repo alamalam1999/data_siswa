@@ -46,20 +46,33 @@ class LoginController extends Controller
         
         $data_search = PPDB_system::where([['fullname','like', '%'.$request->nama.'%']])
          ->select('ppdb_system.ppdb_id', 'ppdb_system.classes','ppdb_system.stage', 'ppdb_system.fullname', 'ppdb_system.fhoto_siswa','ppdb_system.nis', 'ppdb_system.status_siswa as status')->first();
-        $data_siswa  = Data_siswa_system::where([['ppdb_id',$data_search->ppdb_id],['nisn', $request->nisn]])->first();
-        $data_siswa_system_2 = Data_siswa_system_2::where([['ppdb_id',$data_search->ppdb_id]])->first();
-        $foto_siswa = Foto_siswa::where('ppdb_id',$data_search->ppdb_id)->first();
-        $data = [
-            'nis'                   => $request->nis,
-            'nisn'                  => $request->nisn,
-            'nama'                  => $request->nama,
-            'kode_siswa'            => $request->kode_siswa,
-            'data_siswa'            => $data_siswa,
-            'data_search'           => $data_search,
-            'data_siswa_system_2'   => $data_siswa_system_2,
-            'foto_siswa'            => $foto_siswa
-        ];
-        return view('frontend.auth.carisiswa',$data);
+
+        if(!empty($data_search) && !empty($request->nis)) {
+            $data_siswa  = Data_siswa_system::where([['ppdb_id',$data_search->ppdb_id],['nisn', $request->nisn]])->first();
+
+            $data_siswa_system_2 = Data_siswa_system_2::where([['ppdb_id',$data_search->ppdb_id]])->first();
+            $foto_siswa = Foto_siswa::where('ppdb_id',$data_search->ppdb_id)->first();
+            $data = [
+                'nis'                   => $request->nis,
+                'nisn'                  => $request->nisn,
+                'nama'                  => $request->nama,
+                'kode_siswa'            => $request->kode_siswa,
+                'data_siswa'            => $data_siswa,
+                'data_search'           => $data_search,
+                'data_siswa_system_2'   => $data_siswa_system_2,
+                'foto_siswa'            => $foto_siswa
+            ];
+            return view('frontend.auth.carisiswa',$data);
+        } 
+        
+        
+            $data = [
+                'nis'                   => $request->nis,
+                'nisn'                  => $request->nisn,
+                'nama'                  => $request->nama
+            ];
+            return view('frontend.auth.notfound',$data);;
+        
     }
 
     /**

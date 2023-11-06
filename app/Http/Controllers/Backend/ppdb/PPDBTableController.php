@@ -174,18 +174,12 @@ class PPDBTableController extends Controller
         $dapodik = $dapodik->orderBy('created_at', 'desc')->get();
 
         $search_general        = $request->get('search_general');
-        $academic_year         = $request->get('academic_year');
         $registration_schedule = $request->get('registration_schedule');
         $school                = $request->get('school');
         $stage                 = $request->get('stage');
         $search_status         = $request->get('search_status');
         $diskon                = $request->get('diskon');
         $status_siswa          = $request->get('status_siswa');
-
-        debug($academic_year);
-        debug($registration_schedule);
-        debug($school);
-        debug($stage);
 
         $innerCondition = [];
         $whereCondition = [];
@@ -270,15 +264,11 @@ class PPDBTableController extends Controller
         '.implode(' AND ', $whereCondition).' 
         ORDER BY dapodik.created_at DESC';
 
-        debug($SQLQuery);
+        // debug($SQLQuery);
 
         $dapodiks = DB::select($SQLQuery);
 
         return Datatables::of($dapodiks)
-
-       // ->editColumn('schedule', function ($ppdbItem) {
-            //     return $ppdbItem->schedule->description;
-            // })
             ->editColumn('ppdb_status_label', function ($dapodikItem) {
                 return ppdb_status_label($dapodikItem->document_status);
             })
@@ -288,9 +278,6 @@ class PPDBTableController extends Controller
             ->editColumn('created_at', function ($dapodikItem) {
                 return Carbon::parse($dapodikItem->created_at)->toDateString();
             })
-            // ->addColumn('actions', function ($ppdbItem) {
-            //     return $ppdbItem->action_buttons;
-            // })
             ->make(true);
     }
 

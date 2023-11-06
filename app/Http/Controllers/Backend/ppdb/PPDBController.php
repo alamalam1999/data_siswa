@@ -138,17 +138,13 @@ class PPDBController extends Controller
         $academic_years = AcademicYear::all();
         $registration_schedules = RegistrationSchedule::all();
         $enum_datas = EnumData::where('enum_group', 'SCHOOL_INFO')->orderBy('enum_order')->get();
-        $ppdbs = '';
 
         $schools = schoolAccess();
         $site_access = siteAccess();
-
-        debug($schools);
-
+        // debug($schools);
         $data = [
             'academic_years' => $academic_years,
             'registration_schedules' => $registration_schedules,
-            'ppdbs' => $ppdbs,
             'enum_datas' => $enum_datas,
             'schools' => $schools,
             'site_access' => $site_access,

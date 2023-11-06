@@ -6,10 +6,8 @@ $('#academic-year').change(function(){
         const schedule = registration_schedules[index];
         if(schedule.academic_year_id == academicYear) schedules.push(`<option value="` + schedule.id +`">` + schedule.description +`</option>`);
     }
-
-    
+  
     $('#registration-schedule').html('');
-
     if(schedules.length > 1){
         $('#registration-schedule').append(`<option value="ALL">ALL</option>`); 
     }
@@ -21,7 +19,6 @@ $('#academic-year').change(function(){
 $('#school').change(function(){
 
     var school = $(this).val();
-
 
     $('#stage').html('');
     $('#stage').append(`<option value="ALL">ALL</option>`); 
@@ -55,8 +52,6 @@ var SetReset = function(){
 
     $('#academic-year').change();
     
-
-    
     if($('#school option').length > 0){
         $("#school").val($("#school option:first").val());
     }
@@ -70,10 +65,7 @@ $('#search-form-reset').click(function(){
     SetReset();
 })
 
-
 SetReset();
-
-
 
 var uri_edit = $('input[name="uri_edit"]').val();
 var ppdbTable = $('#ppdb-table');
@@ -82,11 +74,7 @@ $(document).on('click', '.btn-info-status', function() {
     $('#kt_modal_status').modal('show');
 });
 
-
-
-
 FTX.Utils.documentReady(function() {
-
 
     var dt = ppdbTable.dataTable({
 
@@ -147,40 +135,22 @@ FTX.Utils.documentReady(function() {
             orderable: false,
             render: function(data, type, row) {
                 $(row).addClass("bg-white");
-                return `
-                <div>
-                    <span class="text d-block fw-bolder fs-8">` + row.document_no + `</span>
-                </div>`;
+                return `<span class="text d-block fw-bolder fs-8">` + row.document_no + `</span>`;
             }
         }, {
             targets: 1,
             orderable: false,
             render: function(data, type, row) {
-                return `
-                <div>
-                    <span class="text-dark fw-bolder fs-8 text d-block">` + row.fullname + `</span>
-                </div>
-                   
-                `;
+                return `<span class="text-dark fw-bolder fs-8 text d-block">` + row.fullname + `</span>`;
             }
         }, {
             targets: 2,
         orderable: false,
         render: function(data, type, row) {
             if(row.nisn != null){
-                return `
-                <div>
-                    <span class="text-dark fw-bolder fs-8 text d-block">`+ row.nisn + `</span>
-                </div>
-        `;
+                return `<span class="text-dark fw-bolder fs-8 text d-block">`+ row.nisn + `</span>`;
             } else{
-
-            return `
-                    <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.nisn + `</span>
-                    </div>
-               
-            `;
+            return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.nisn + `</span>`;
         }
             }
         },  {
@@ -188,19 +158,10 @@ FTX.Utils.documentReady(function() {
             orderable: false,
             render: function(data, type, row) {
                 if(row.school_site !=null){
-                return `
-                    <div>
-                        <span class="text d-block fs-8">` + row.school_site + `</span>
-                    </div>
-            `;
+                return `<span class="text d-block fs-8">` + row.school_site + `</span>`;
         } else{
 
-            return `
-                    <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.school_site + `</span>
-                    </div>
-               
-            `;
+            return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.school_site + `</span>`;
         }
 
             }
@@ -209,18 +170,10 @@ FTX.Utils.documentReady(function() {
             orderable: false,
             render: function(data, type, row) {
                 if(row.stage !=null){
-                return `
-                <div>
-                <span class="text d-block fs-8">` + row.stage + `</span>
-            </div>
+                return `<span class="text d-block fs-8">` + row.stage + `</span>
                 `;
             } else{
-
-                return `
-                        <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.stage + `</span>
-                        </div>
-                   
+                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.stage + `</span>
                 `;
         }
             }
@@ -229,18 +182,9 @@ FTX.Utils.documentReady(function() {
             orderable: false,
             render: function(data, type, row) {
                 if(row.classes !=null){
-                return `
-                <div>
-                <span class="text d-block fs-8">`+row.classes+`</span>
-                </div>
-                `;
+                return `<span class="text d-block fs-8">`+row.classes+`</span>`;
             } else{
-
-                return `
-                        <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.classes + `</span>
-                        </div>
-                   
+                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.classes + `</span>
                 `;
         }
             }
@@ -250,19 +194,9 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 if(row.sub_kelas !=null){
                 console.log(row);
-                return `
-                     <div>
-                        <span class="text d-block fs-8s">`+row.sub_kelas+`</span>
-                    </div>
-                `;
+                return `<span class="text d-block fs-8s">`+row.sub_kelas+`</span>`;
             } else{
-
-                return `
-                        <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>
-                        </div>
-                   
-                `;
+                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>`;
         }
             }
         },  {
@@ -271,20 +205,12 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 if (row.status_siswa !=null){
                 console.log(row);               
-                return `
-                     <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-success">`+row.status_siswa+`</span>
-                    </div>
-                `;
+                return `<span class="btn btn-sm w-30 fs-9 btn-success">`+row.status_siswa+`</span>`;
             } else{
-
-                return `
-                        <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>
-                        </div>
+                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>
                    
                 `;
-        }
+                }
             }
         },  {
             targets: 8,
@@ -292,20 +218,10 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 if (row.keterangan !=null){
                 console.log(row);
-                return `
-                     <div>
-                        <span class="btn btn-sm w-30 fs-9 btn-success">`+row.keterangan+`</span>
-                    </div>
-                `;
+                return `<span class="btn btn-sm w-30 fs-9 btn-success">`+row.keterangan+`</span>`;
             } else{
-
-                return `
-                        <div>
-                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>
-                        </div>
-                   
-                `;
-        }
+                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>`;
+            }
 
             }
         },  {
@@ -314,8 +230,7 @@ FTX.Utils.documentReady(function() {
             render: function(data, type, row) {
                 var uri_target = uri_edit.replace("::target::", row.dapodik_id);
                 return `
-                <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-60 w-100">
-                
+                <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-60 w-100">         
                     <span class="svg-icon icon-size-2x ms-0 me-0">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="blue"></path>
