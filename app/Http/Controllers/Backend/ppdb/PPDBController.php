@@ -943,6 +943,19 @@ class PPDBController extends Controller
          $data_siswa_system = Data_siswa_system::where('ppdb_id',$ppdb->ppdb_id)->first();
  
          $foto_siswa = Foto_siswa::where('ppdb_id',$ppdb->ppdb_id)->first();
+
+         $unitvalue = "";
+         $unit = "";
+         if($ppdb->school_site == "PML") {
+            $unitvalue = "PAMULANG";
+            $unit = "Pamulang";
+         } else if($ppdb->school_site == "JGK") {
+            $unitvalue = "JAGAKARSA";
+            $unit = "Jagakarsa";
+         } else {
+            $unitvalue = "CINERE";
+            $unit = "Cinere";
+         }
  
          return new ViewResponse('backend.ppdb.edit', [
              'ppdb'              => $ppdb,
@@ -995,7 +1008,9 @@ class PPDBController extends Controller
              'data_siswa_system'         => $data_siswa_system,
              'foto_siswa'                => $foto_siswa,
              'fee_up_pengajuan'          => $fee_up_pengajuan,
-             'diskon_pengajuan'          => $diskon_pengajuan
+             'diskon_pengajuan'          => $diskon_pengajuan,
+             'unitvalue'                 => $unitvalue,
+             'unit'                      => $unit
          ]);
     }
 
@@ -3310,6 +3325,18 @@ class PPDBController extends Controller
     
             $foto_siswa = Foto_siswa::where('dapodik_id',$dapodik->dapodik_id)->first();
     
+                $unitvalue = "";
+                $unit = "";
+                if($dapodik->school_site == "PML") {
+                    $unitvalue = "PAMULANG";
+                    $unit = "Pamulang";
+                } else if($dapodik->school_site == "JGK") {
+                    $unitvalue = "JAGAKARSA";
+                    $unit = "Jagakarsa";
+                } else {
+                    $unitvalue = "CINERE";
+                    $unit = "Cinere";
+                }
 
 
             return new ViewResponse('backend.ppdb.editdapodik', [
@@ -3361,7 +3388,9 @@ class PPDBController extends Controller
                 'data_kelas'                => $data_kelas,
                 'ppdb_system'               => $ppdb_system,
                 'data_siswa_system'         => $data_siswa_system,
-                'foto_siswa'                => $foto_siswa
+                'foto_siswa'                => $foto_siswa,
+                'unitvalue'                 => $unitvalue,
+                'unit'                      => $unit
             ]);
 
             // return response()->json($ppdb);

@@ -20,10 +20,6 @@
 $(document).ready(function() {
 
       fetchstudent();
-
-      setInterval(function(){ 
-        fetchstudent();
-       }, 1000);
   
       function fetchstudent()
       {
@@ -32,76 +28,124 @@ $(document).ready(function() {
           url:  hostBaseUrl+"admin/fetch-students",
           dataType: "json",
           success: function (response) {
+                       
+              var dataunit = "";
 
-            $('#unit').change(function() {           
-
-              var dataunit = $(this).val();
-              if (dataunit != null) {             
+              var datasekolah = "";
+                          
                 var resultunit_sekolah = "";
-                if (dataunit == 'SD') {
-                  $('#kelas_utama').empty();
-                  $('#kelas_utama').append(                
-                    '<option value="">Pilih</option>'    
-                  ); 
-                  for(let i = 1; i <= 6; i++) {
-                    $('#kelas_utama').append(                
-                        '<option value="'+i+'">'+i+'</option>'    
-                    ); 
-                  }
-                } else if (dataunit == 'SMP') {
-                  $('#kelas_utama').empty();
-                  $('#kelas_utama').append(                
-                    '<option value="">Pilih</option>'    
-                  ); 
-                  for(let i = 7; i <= 9; i++) {
-                    $('#kelas_utama').append(                
-                        '<option value="'+i+'">'+i+'</option>'    
-                    ); 
-                  }
-                } else if (dataunit == 'SMA') {
-                  $('#kelas_utama').empty();
-                  $('#kelas_utama').append(                
-                    '<option value="">Pilih</option>'    
-                  ); 
-                  for(let i = 10; i <= 12; i++) {
-                    $('#kelas_utama').append(                
-                        '<option value="'+i+'">'+i+'</option>'    
-                    ); 
-                  }
-                }
-              
-                  $('#sekolah').change(function() {
-                    var datasekolah = $(this).val();
-                    $.each(response.masterkelas, function (key, item) {               
-          
-                      if (dataunit == item.unit.toUpperCase() && datasekolah == item.sekolah.toUpperCase()) {
-                        resultunit_sekolah = item.kepala_sekolah;
-                      }
-                   });
-                   document.getElementById('nama_kepala_sekolah').value=resultunit_sekolah ;
-                  })          
-              }
-            })
+                
+                var datasekolah = document.getElementById("sekolah").value;
 
-            
-                  $('#kelas_utama').change(function() {               
-                    var kelasutama = $(this).val();
-                    $('#nama_kelas').empty();
-                    
-                    $('#nama_kelas').append(                
-                      '<option value="">Pilih</option>'    
-                    );              
+                  var dataunit = document.getElementById("unit").value;
+
+                  $.each(response.masterkelas, function (key, item) {                 
+                    if (dataunit == item.unit.toUpperCase() && datasekolah == item.sekolah.toUpperCase()) {
+                      resultunit_sekolah = item.kepala_sekolah;
+                    }
+                 });
+                 document.getElementById('nama_kepala_sekolah').value=resultunit_sekolah ;
+
+                      var unitcheck = dataunit;
+
+                      if (unitcheck == 'SD') {
+                          for(let i = 1; i <= 6; i++) {
+                            $('#kelas_utama').append('<option value="'+i+'">'+i+'</option>'); 
+                          }
+                        } else if (unitcheck == 'SMP') {
+                          for(let i = 7; i <= 9; i++) {
+                            $('#kelas_utama').append('<option value="'+i+'">'+i+'</option>'); 
+                          }
+                        } else if (unitcheck == 'SMA') {
+                          for(let i = 10; i <= 12; i++) {
+                            $('#kelas_utama').append('<option value="'+i+'">'+i+'</option>'); 
+                          }
+                        } else if (unitcheck == "KB") {    
+                            $('#kelas_utama').append('<option value="KB-A">KB-A</option><option value="KB-B">KB-B</option>'); 
+                        } else if (unitcheck == "TK") {    
+                          $('#kelas_utama').append('<option value="TK-A">KB-A</option><option value="TK-B">KB-B</option>'); 
+                      }
+
+                  $('#unit').change(function()
+                  {
+                        var unitcheck = $(this).val();
+                        if (unitcheck == 'SD') {
+                          $('#kelas_utama').empty();
+                          for(let i = 1; i <= 6; i++) {
+                            $('#kelas_utama').append('<option value="'+i+'">'+i+'</option>'); 
+                          }
+                        } else if (unitcheck == 'SMP') {
+                          $('#kelas_utama').empty();
+                          for(let i = 7; i <= 9; i++) {
+                            $('#kelas_utama').append('<option value="'+i+'">'+i+'</option>'); 
+                          }
+                        } else if (unitcheck == 'SMA') {
+                          $('#kelas_utama').empty();
+                          for(let i = 10; i <= 12; i++) {
+                            $('#kelas_utama').append('<option value="'+i+'">'+i+'</option>'); 
+                          }
+                        } else if (unitcheck == "KB") {   
+                          $('#kelas_utama').empty();   
+                            $('#kelas_utama').append('<option value="KB-A">KB-A</option><option value="KB-B">KB-B</option>'); 
+                        } else if (unitcheck == "TK") {   
+                          $('#kelas_utama').empty();   
+                          $('#kelas_utama').append('<option value="TK-A">KB-A</option><option value="TK-B">KB-B</option>'); 
+                      }
+
+                        if (unitcheck != "") { dataunit = unitcheck; }        
+                        
+                        var sekolahcheck = document.getElementById("sekolah").value;
+
+                        if (sekolahcheck != "") { datasekolah = sekolahcheck; }         
+                        
+                        $.each(response.masterkelas, function (key, item) {                 
+                            if (dataunit == item.unit.toUpperCase() && datasekolah == item.sekolah.toUpperCase()) {
+                              resultunit_sekolah = item.kepala_sekolah;
+                            }
+                        });
+
+                        document.getElementById('nama_kepala_sekolah').value=resultunit_sekolah ;
+
+                  })
+                            
+              
+                                           
+                    var kelasutama = "";
+                           
+                    var kelasutamacheck = document.getElementById("kelas_utama").value;
+
+                    kelasutama = kelasutamacheck;
+
                     $.each(response.masterkelas, function(key, item) {  
                       var sekolahcheck = $('#sekolah').val();
-                      //console.log(test);
                           if(kelasutama == item.kategori && sekolahcheck == item.sekolah.toUpperCase()) {
                               $('#nama_kelas').append(
                                 '<option value="'+item.kelas+'">'+item.kelas+'</option>'
                               );            
                           }                  
-                    });
-                });
-            
+                    });  
+
+                    $('#kelas_utama').change(function(){
+                      var kelasutama = "";
+                           
+                      var kelasutamacheck = document.getElementById("kelas_utama").value;
+  
+                      kelasutama = kelasutamacheck;
+                      $('#nama_kelas').empty(); 
+                      $('#nama_kelas').append(                
+                        '<option value="">Pilih</option>'    
+                      ); 
+                      $.each(response.masterkelas, function(key, item) {  
+                        var sekolahcheck = $('#sekolah').val();
+                            if(kelasutama == item.kategori && sekolahcheck == item.sekolah.toUpperCase()) {
+                                $('#nama_kelas').append(
+                                  '<option value="'+item.kelas+'">'+item.kelas+'</option>'
+                                );            
+                            }                  
+                      });  
+                    })
+
+
 
            $('#nama_kelas').change(function(){
 

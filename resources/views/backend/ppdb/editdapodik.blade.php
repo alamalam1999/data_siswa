@@ -518,23 +518,15 @@
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Unit</label>
                                 <!--begin::Switch-->
-                          <div>
-                            
-                      
+                          <div>   
                             <input type="hidden" name="dapodik_id" value="{{ $ppdb->dapodik_id }}" />
                             <select id="unit" class="form-select form-select-solid" name="unit">
-                              <?php
-                                  $unit = "";
-                                    if($data_kelas != null && $data_kelas != "" && !empty($data_kelas)) {
-                                        $unit = $data_kelas->unit;
-                                    }
-                              ?>
-                            <option value="{{ !empty($unit) ? $unit : '' }}">{{ !empty($unit)  ? $unit : 'Pilih Unit' }}</option>
-                            <option value="KB">KB</option>
-                            <option value="TK">TK</option>
-                            <option value="SD">SD</option>
-                            <option value="SMP">SMP</option>
-                            <option value="SMA">SMA</option>
+                              <option value="{{ !empty($ppdb->stage) ? $ppdb->stage : '' }}" selected>{{ !empty($ppdb->stage)  ? $ppdb->stage : 'Pilih Unit' }}</option>
+                              <option value="KB">KB</option>
+                              <option value="TK">TK</option>
+                              <option value="SD">SD</option>
+                              <option value="SMP">SMP</option>
+                              <option value="SMA">SMA</option>
                             </select>
                           </div>
                           <!--end::Switch-->
@@ -546,7 +538,7 @@
                           <!--begin::Switch-->
                           <div>
                             <select id="sekolah" class="form-select form-select-solid" name="sekolah">
-                            <option value="{{ !empty($data_kelas->sekolah) ? $data_kelas->sekolah : '' }}">{{ !empty($data_kelas->sekolah) ? $data_kelas->sekolah : 'Pilih Wilayah' }}</option>
+                            <option value="{{ !empty($unitvalue) ? $unitvalue : '' }}">{{ !empty($unitvalue) ? $unitvalue : 'Pilih Wilayah' }}</option>
                             <option value="JAGAKARSA">Jagakarsa</option>
                             <option value="CINERE">Cinere</option>
                             <option value="PAMULANG">Pamulang</option>
@@ -563,7 +555,7 @@
                                <div class="col-xl-6">
                                    <label class="form-label fw-bolder text-dark fs-6">Kelas Utama</label>
                                    <select class="form-control form-control-lg form-control-solid" id="kelas_utama" name="kelas_utama">
-                                      <option value="{{ !empty($data_kelas->kelas_utama) ? $data_kelas->kelas_utama : '' }}">{{ !empty($data_kelas->kelas_utama) ? $data_kelas->kelas_utama : 'Pilih' }}</option>
+                                    <option value="{{ $ppdb->classes }}">{{ $ppdb->classes }}</option> 
                                    </select>
                                 </div>
                                 <!--end::Col-->
