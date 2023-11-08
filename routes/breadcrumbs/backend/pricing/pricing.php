@@ -1,7 +1,7 @@
 <?php
 
-Breadcrumbs::for('admin.pricing.index', function ($trail) {
-    $trail->push('Pricing Management', route('admin.pricing.index'));
+Breadcrumbs::for('admin.import.index', function ($trail) {
+    $trail->push('Pricing Management', route('admin.import.index'));
 });
 
 Breadcrumbs::for('admin.master.class', function ($trail) {
@@ -16,28 +16,28 @@ Breadcrumbs::for('admin.masterstore.class', function ($trail) {
     $trail->push('Master Kelas Tambah', route('admin.masterstore.class'));
 });
 
-Breadcrumbs::for('admin.pricing.upload', function ($trail) {
-    $trail->push('Pricing Management', route('admin.pricing.index'));
-    $trail->push('Pricing Management', route('admin.pricing.indexwave2'));
+Breadcrumbs::for('admin.import.upload', function ($trail) {
+    $trail->push('Pricing Management', route('admin.import.index'));
+    $trail->push('Pricing Management', route('admin.import.indexwave2'));
 });
 
-Breadcrumbs::for('admin.pricing.indexwave2', function ($trail) {
-    $trail->push('Pricing Management', route('admin.pricing.indexwave2'));
+Breadcrumbs::for('admin.import.indexwave2', function ($trail) {
+    $trail->push('Pricing Management', route('admin.import.indexwave2'));
 });
 
-Breadcrumbs::for('admin.pricing.check_excel', function ($trail) {
-    $trail->push('Data Check', route('admin.pricing.check_excel'));
+Breadcrumbs::for('admin.import.check_excel', function ($trail) {
+    $trail->push('Data Check', route('admin.import.check_excel'));
 });
 
-Breadcrumbs::for('admin.pricing.check_excel2', function ($trail) {
-    $trail->push('Data Check', route('admin.pricing.check_excel2'));
+Breadcrumbs::for('admin.import.check_excel2', function ($trail) {
+    $trail->push('Data Check', route('admin.import.check_excel2'));
 });
 
 
-Breadcrumbs::for('admin.pricing.export_excel', function ($trail) {
-    $trail->push('Data export_excel', route('admin.pricing.export_excel'));
+Breadcrumbs::for('admin.import.export_excel', function ($trail) {
+    $trail->push('Data export_excel', route('admin.import.export_excel'));
 });
 
-Breadcrumbs::for('admin.pricing.check_payment', function ($trail) {
-    $trail->push('Data check_payment', route('admin.pricing.check_payment'));
+Breadcrumbs::for('admin.import.check_payment', function ($trail) {
+    $trail->push('Data check_payment', route('admin.import.check_payment'));
 });

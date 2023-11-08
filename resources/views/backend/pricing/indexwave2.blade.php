@@ -15,7 +15,7 @@
 
         <div class="row">
             <div>
-                <a href="{{ route('admin.pricing.index') }}">
+                <a href="{{ route('admin.import.index') }}">
                 <button id="btn-search" type="submit" class="testing btn btn-flex btn-primary">Pricing Gelombang 1</button>
                 </a>
             </div>
@@ -30,7 +30,7 @@
     
     
     <div class="card">
-        <form action="{{ route('admin.pricing.upload') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.import.upload') }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="card-header pt-7">
                 <!--begin::Title-->

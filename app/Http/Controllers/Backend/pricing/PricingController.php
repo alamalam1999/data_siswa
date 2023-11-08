@@ -614,7 +614,7 @@ class PricingController extends Controller
                 Users_system::insert($users_system_insert);
                 Data_siswa4::insert($data_siswa4_insert);
 
-               return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data PPDB']);         
+               return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil di Import Data PPDB']);         
             } catch (\Throwable $th) {
                 throw $th;
             }
@@ -870,7 +870,7 @@ class PricingController extends Controller
                     $reregister->save();
                 }
             }         
-            return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data Dapodik']);         
+            return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil di Import Data Dapodik']);         
     }
 
 

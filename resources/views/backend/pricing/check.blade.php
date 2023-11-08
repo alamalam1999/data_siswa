@@ -12,7 +12,7 @@
     
             <div class="row">
                 <div>
-                    <a href="{{ route('admin.pricing.export_excel') }}">
+                    <a href="{{ route('admin.import.export_excel') }}">
                     <button id="btn-search" type="submit" class="testing2 btn btn-flex btn-primary">Pricing Gelombang 2</button>
                     </a>
                 </div>
