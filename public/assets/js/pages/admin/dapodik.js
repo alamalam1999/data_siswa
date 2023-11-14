@@ -228,7 +228,7 @@ FTX.Utils.documentReady(function() {
             targets: 9,
             orderable: false,
             render: function(data, type, row) {
-                var uri_target = uri_edit.replace("::target::", row.dapodik_id);
+                var uri_target = uri_edit.replace("::target::", row.id);
                 return `
                 <a href="` + uri_target + `" class="btn btn-sm btn-light-custom border w-lg-60 w-100">         
                     <span class="svg-icon icon-size-2x ms-0 me-0">

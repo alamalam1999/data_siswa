@@ -170,9 +170,7 @@ class PPDBTableController extends Controller
 
     public function __Invoke_dapodik(Request $request) {
         $dapodik = Dapodik::where('dapodik_id', '>=', 0);
-
         $dapodik = $dapodik->orderBy('created_at', 'desc')->get();
-
         $search_general        = $request->get('search_general');
         $registration_schedule = $request->get('registration_schedule');
         $school                = $request->get('school');
@@ -185,7 +183,6 @@ class PPDBTableController extends Controller
         $whereCondition = [];
 
         // BUILD CRITERIA
-
         if ($registration_schedule != 'ALL') {
             array_push($whereCondition, 'registration_schedules.id = '.$registration_schedule);
         }
@@ -255,16 +252,14 @@ class PPDBTableController extends Controller
             data_siswa_2.keterangan
         FROM dapodik
         INNER JOIN schools ON dapodik.school_site = schools.school_code
-        INNER JOIN data_siswa ON data_siswa.dapodik_id = dapodik.dapodik_id
-        INNER JOIN data_siswa_2 ON data_siswa_2.dapodik_id = dapodik.dapodik_id
+        INNER JOIN data_siswa ON data_siswa.dapodik_id = dapodik.id
+        INNER JOIN data_siswa_2 ON data_siswa_2.dapodik_id = dapodik.id
         '.implode(' ', $innerCondition).'
         WHERE
         data_siswa_2.status_siswa is null
         AND      
         '.implode(' AND ', $whereCondition).' 
         ORDER BY dapodik.created_at DESC';
-
-        // debug($SQLQuery);
 
         $dapodiks = DB::select($SQLQuery);
 

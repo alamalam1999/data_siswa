@@ -9,11 +9,10 @@ class Dapodik extends Model
 {
     protected $table = 'dapodik';
 
-    public $incrementing = false;
-
-    protected $primaryKey = 'dapodik_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
+        'id',
         'registration_schedule_id',
         'document_no',
         'document_status',
