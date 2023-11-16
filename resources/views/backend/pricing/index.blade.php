@@ -23,6 +23,9 @@
                     <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa PPDB<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
                     </button>
                 </div>
+                <div>
+                    Pastikan data import DATA SISWA sesuai Format
+                </div>
                 <!--end::Toolbar-->
             </div>
         </form>
@@ -40,11 +43,17 @@
                     <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa DAPODIK<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
                     </button>
                 </div>
+                <div>
+                    <p>Pastikan data import Dapodik NIS dan NISN Lengkap dan Terisi</p>
+                </div>
                 <!--end::Toolbar-->
             </div>
         </form>
         <!--card-body-->
     </div>  
+    <div>
+        <a href="{{ route('admin.import.deletedapodik') }}"> Delete Dapodik</a>
+    </div>
 </div>
 
 @endsection

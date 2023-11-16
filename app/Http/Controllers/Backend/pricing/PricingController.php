@@ -654,6 +654,13 @@ class PricingController extends Controller
 
             foreach(  array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) { 
 
+                $dapodik_check = Dapodik::where([
+                ['place_of_birth', $dapodik_siswas[5]],
+                ['date_of_birth',$dapodik_siswas[6]],
+                ['fullname',$dapodik_siswas[1]]
+                ])->first();
+                if (! $dapodik_check) {
+                if ($dapodik_siswas[2] && $dapodik_siswas[4]) {
                 $users_system_check = Users_system::where('status_data', $dapodik_siswas[2].'-'.$dapodik_siswas[4])->first();
                     if ( ! $users_system_check) {
                             $users_system = new Users_system();
@@ -869,6 +876,8 @@ class PricingController extends Controller
                     $reregister->dapodik_id = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
                     $reregister->save();
                 }
+            }
+        }
             }         
             return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil di Import Data Dapodik']);         
     }
@@ -953,6 +962,23 @@ class PricingController extends Controller
         ];
 
         return new ViewResponse('backend.pricing.check_payment', $data);
+    }
+
+    public function deleteDapodik(){
+        Users_system::where('id','!=','')->delete();
+        PPDB::where('id','!=','')->delete();
+        PPDBInterview::where('id','!=','')->delete();
+        Payment::where('id','!=','')->delete();
+        Register::where('id','!=','')->delete();
+        Data_siswa::where('id','!=','')->delete();
+        Data_siswa1::where('id','!=','')->delete();
+        Data_siswa2::where('id','!=','')->delete();
+        Data_siswa3::where('id','!=','')->delete();
+        Data_siswa4::where('id','!=','')->delete();  
+        Dapodik::where('id','!=','')->delete();  
+
+        return redirect()->route('admin.pricing.index')->with(['flash_success' => 'Berhasil Menghapus semua data']);         
+
     }
 
 

@@ -21,6 +21,7 @@ Route::group(['namespace' => 'pricing'], function () {
 
     Route::post('datasiswa', [PricingController::class, 'uploadDatasiswa'])->name('pricing.upload');
     Route::post('dapodik',   [PricingController::class, 'uploadDapodik'])->name('pricing.dapodik');
+    Route::get('delete-dapodik' ,[PricingController::class, 'deleteDapodik'])->name('import.deletedapodik');
     Route::get('checktable', [PricingController::class, 'check_excel'])->name('pricing.check_excel');
     Route::get('export_excel', [PricingController::class, 'export_excel'])->name('pricing.export_excel');
 

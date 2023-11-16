@@ -3395,6 +3395,12 @@ class PPDBController extends Controller
 
             // return response()->json($ppdb);
         }
+
+        public function deleteAll(Request $request) {
+            $ids = $request->ids; 
+            Dapodik::whereIn('dapodik_id',$ids)->delete(); 
+            return response()->json(["success"=> "Employee have been deleted!"]);
+        }
 }
 
 

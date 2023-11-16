@@ -197,6 +197,10 @@
             <!--end::Toolbar-->
         </div>
         <div class="card-body">
+            <div>
+                <a href="#" class="btn btn-flex btn-danger ms-5" id="deleteAllSelectedRecord">Delete</a>
+                <button class="btn btn-flex btn-primary ms-5">Tambah Siswa</button>
+            </div>
             <div class="row mt-4">
                 <div class="col">
                     <div class="table-responsive">
@@ -206,7 +210,7 @@
                             <thead>
                                 <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-9 text-uppercase gs-0">
-                                <th class="min-w-80px w-100px sorting"  >Kode Siswa</th>
+                                <th><input id="select_all_ids" name="" type="checkbox"></th>
                                 <th class="min-w-80px w-100px sorting" >Nama Siswa</th>
                                 <th class="min-w-80px w-100px sorting" >NISN</th>
                                 <th class="min-w-80px w-100px sorting" >Sekolah</th>
@@ -307,8 +311,41 @@
         console.log(site_access);
 
         // FTX.PPDB.list.init();
+
+        
+
     </script>
 
     <script src="{{ asset('assets/js/pages/admin/dapodik.js') }}"></script>
+
+    <script>
+        $(function(e){
+                $("#select_all_ids").click(function() {
+                    $('.checkbox_ids').prop('checked',$(this).prop('checked'));
+                });
+
+                $('#deleteAllSelectedRecord').click(function(e) {
+                    e.preventDefault();
+
+                    var all_ids = [];
+                    $('input:checkbox[name=ids]:checked').each(function() {
+                        all_ids.push($(this).val());
+                    });
+
+                    $.ajax({
+                        url: "{{ route('admin.ppdb.deleted') }}",
+                        method: "GET",
+                        data:{
+                            'ids' : all_ids
+                        },
+                        success:function(response) {
+                            $.each(all_ids, function(key,val) {
+                                $('#employee_ids'+val).parents('tr').remove();
+                            })
+                        }
+                    });
+            });
+        });
+    </script>
 
 @stop

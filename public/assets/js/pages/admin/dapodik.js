@@ -97,8 +97,9 @@ FTX.Utils.documentReady(function() {
                 d.status_siswa          = $('#status_siswa').val()
             }
         },
-        columns: [{
-                data: 'no_formulir'
+        columns: [
+            {
+                data: null
             },
             {
                 data: 'fullname'
@@ -134,8 +135,9 @@ FTX.Utils.documentReady(function() {
             targets: 0,
             orderable: false,
             render: function(data, type, row) {
-                $(row).addClass("bg-white");
-                return `<span class="text d-block fw-bolder fs-8">` + row.document_no + `</span>`;
+                var i = 1;
+                $('tr').addClass("label-warning "+i++);
+                return `<input name="ids" type="checkbox" class="checkbox_ids" value="`+row.dapodik_id+`" id="employee_ids`+row.dapodik_id+`">`;
             }
         }, {
             targets: 1,
@@ -254,4 +256,9 @@ FTX.Utils.documentReady(function() {
     $('#btn-search').click(function(){
         dt.fnDraw();
     })
+
+
+    
+
 });
+
