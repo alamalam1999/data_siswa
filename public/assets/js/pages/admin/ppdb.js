@@ -88,7 +88,6 @@ $(document).on('click', '.btn-info-status', function() {
 
 FTX.Utils.documentReady(function() {
 
-
     var dt = ppdbTable.dataTable({
 
         processing: false,
@@ -111,6 +110,9 @@ FTX.Utils.documentReady(function() {
             }
         },
         columns: [{
+                data: null
+            },
+            {
                 data: 'no_formulir'
             },
             {
@@ -143,8 +145,15 @@ FTX.Utils.documentReady(function() {
 
             
         ],
-        columnDefs: [{
+        columnDefs: [
+        {
             targets: 0,
+            orderable: false,
+            render: function(data, type, row) {
+                return `<input name="ids" type="checkbox" class="checkbox_ids" value="`+row.ppdb_id+`" id="employee_ids`+row.ppdb_id+`">`;
+            }
+        },{
+            targets: 1,
             orderable: false,
             render: function(data, type, row) {
                 $(row).addClass("bg-white");
@@ -154,7 +163,7 @@ FTX.Utils.documentReady(function() {
                 </div>`;
             }
         }, {
-            targets: 1,
+            targets: 2,
             orderable: false,
             render: function(data, type, row) {
                 return `
@@ -165,7 +174,7 @@ FTX.Utils.documentReady(function() {
                 `;
             }
         }, {
-            targets: 2,
+            targets: 3,
         orderable: false,
         render: function(data, type, row) {
             if(row.nisn != null){
@@ -185,7 +194,7 @@ FTX.Utils.documentReady(function() {
         }
             }
         },  {
-            targets: 3,
+            targets: 4,
             orderable: false,
             render: function(data, type, row) {
                 if(row.school_site !=null){
@@ -206,7 +215,7 @@ FTX.Utils.documentReady(function() {
 
             }
         }, {
-            targets: 4,
+            targets: 5,
             orderable: false,
             render: function(data, type, row) {
                 if(row.stage !=null){
@@ -226,7 +235,7 @@ FTX.Utils.documentReady(function() {
         }
             }
         }, {
-            targets: 5,
+            targets: 6,
             orderable: false,
             render: function(data, type, row) {
                 if(row.kelas_utama !=null){
@@ -246,7 +255,7 @@ FTX.Utils.documentReady(function() {
         }
             }
         },  {
-            targets: 6,
+            targets: 7,
             orderable: false,
             render: function(data, type, row) {
                 if(row.sub_kelas !=null){
@@ -267,7 +276,7 @@ FTX.Utils.documentReady(function() {
         }
             }
         },  {
-            targets: 7,
+            targets: 8,
             orderable: false,
             render: function(data, type, row) {
                 if (row.status_siswa !=null){
@@ -288,7 +297,7 @@ FTX.Utils.documentReady(function() {
         }
             }
         },  {
-            targets: 8,
+            targets: 9,
             orderable: false,
             render: function(data, type, row) {
                 if (row.keterangan !=null){
@@ -310,7 +319,7 @@ FTX.Utils.documentReady(function() {
 
             }
         },  {
-            targets: 9, 
+            targets: 10, 
             orderable: false,
             render: function(data, type, row) {        
                     var uri_target = uri_edit_ppdb.replace("::target::", row.ppdb_id);

@@ -59,8 +59,8 @@
                                   
                                       <!--begin::Card body-->
                                       <div class="card-body text-center pt-0">
-                                        <form action="<?php echo e(route('admin.upload_fhoto.get')); ?>" method="POST" enctype="multipart/form-data">
-                                          <?php echo e(csrf_field()); ?>
+                                        <form action="{{ route('admin.upload_fhoto.get') }}" method="POST" enctype="multipart/form-data">
+                                          {{ csrf_field() }}
                                           <!--begin::Image input-->
 
                                            <!--begin::Card title-->
@@ -107,10 +107,10 @@
                                           <?php
                                           $ppdb_id = "";
                                               if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
-                                                  $ppdb_id = $ppdb->ppdb_id;
+                                                  $ppdb_id = $ppdb->dapodik_id;
                                               }
                                           ?>
-                                        <button class="btn btn-primary btn-sm fs-9" value="{{ $ppdb_id }}" name="id_ppdb" >Submit</button>                                    
+                                        <button class="btn btn-primary btn-sm fs-9" value="{{ $ppdb_id }}" name="dapodik_id" >Update Foto</button>                                    
                                         </form>
                                       </div>
                                       <!--end::Card body-->
@@ -125,71 +125,65 @@
                             </div>
                         </div>
 
-                        <div class="card mb-4 bg-white border">
-
-                            <div class="card-body">
+                        <div class="card bg-white border">
+                          <form action="{{ route('admin.ppdb.updatekontakdapodik') }}" method="POST">
+                            {{  csrf_field() }}
+                            <div class="card-body text-center">
+                              <input type="hidden" name="dapodik_id" value="{{ $ppdb->dapodik_id }}">
+                              <h5><strong>Kontak</strong></h5>
                                 <h4 class="card-title">
-                                  <?php
-                                      $name = "";
+                                  <?php $first_name = ""; $last_name = "";
                                       if($user_account != null && $user_account != "" && !empty($user_account)) {
-                                          $name = $user_account->name;
-                                      }
-                                  ?>
-                                    <?php echo e($name); ?><br />
+                                          $first_name = $user_account->first_name;
+                                          $last_name  = $user_account->last_name;
+                                      } ?>
+                                      <div class="row">
+                                        <div class="col"><input name="first_name" class="form-control form-control-transparent border-bottom" type="text" value="{{ $first_name }}" style="text-align:center;"></div>
+                                        <div class="col"><input name="last_name" class="form-control form-control-transparent border-bottom" type="text" value="{{ $last_name }}" style="text-align:center;"></div>
+                                      </div>
                                 </h4>
-
                                 <p class="card-text">
                                     <small>
-                                      <?php
-                                            $email = "";
+                                      <?php $email = "";
                                             if($user_account != null && $user_account != "" && !empty($user_account)) {
                                                 $email = $user_account->email;
-                                            }
-                                        ?>
-                                        <i class="fas fa-envelope"></i> <?php echo e($email); ?><br />
+                                            } ?>
+                                        <i class="fas fa-envelope"></i>
+                                        <input name="email" class="form-control form-control-transparent border-bottom" type="text" value="{{ $email }}" style="text-align:center;">
                                         <i class="fas fa-calendar-check"></i> <?php echo app('translator')->get('strings.frontend.general.joined'); ?>
-                                        <?php
-                                            $created_at = "2022-10-21 21:26:24";
+                                        <?php $created_at = "";
                                             if($user_account != null && $user_account != "" && !empty($user_account)) {
                                                 $created_at = $user_account->created_at;
-                                            }
-                                        ?>
-                                        <?php //echo e(timezone()->convertToLocal($created_at, 'F jS, Y')); ?>
-
+                                            } ?>
+                                        <input class="form-control form-control-transparent border-bottom" type="text" value="{{ timezone()->convertToLocal($user_account->created_at, 'F jS, Y') }}" style="text-align:center;" readonly>
                                     </small>
                                 </p>
-                                <?php
-
-                                  $phone = "";
+                                <?php $phone = "";
                                   if($user_account != null && $user_account != "" && !empty($user_account)) {
                                       $phone = $user_account->phone;
                                   }
-
                                   $wa_number = $phone;
                                   if (substr($wa_number, 0, 1) == '0') {
                                       $wa_number = '62' . substr($wa_number, 1);
-                                }
-                                ?>
-                                <a href="https://wa.me/<?php echo e($wa_number); ?>" target="_blank" class="btn btn-light-primary d-flex align-items-center me-5 me-xl-13">
+                                } ?>
+                                <a href="https://wa.me/{{ $wa_number }}" target="_blank" class="btn btn-light-primary d-flex align-items-center">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px symbol-circle me-3">
                                         <i class="bi bi-whatsapp text-success fs-1"></i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Info-->
-                                    <div class="m-0">
-                                        <span class="fw-semibold d-block fs-8"> Whatsapp / Call</span>
-                                        <?php
-                                        $phone = "";
+                                    <div class="">
+                                        <span class="fw-semibold d-block">Kontak Orang Tua</span>
+                                        <?php $phone = "";
                                           if($user_account != null && $user_account != "" && !empty($user_account)) {
                                               $phone = $user_account->phone;
-                                          }
-                                        ?>
-                                        <span class="fw-bold text-gray-800 text-hover-success fs-7"><?php echo e($phone); ?></span>
+                                          } ?>
+                                        <input name="phone" class="form-control form-control-transparent border-bottom" type="text" value="{{ $phone }}" style="text-align:center;">
                                     </div>
                                     <!--end::Info-->
                                 </a>
-
+                                <button class="btn btn-primary btn-sm fs-9 mt-4" >Update Kontak</button>  
                             </div>
                         </div>
                     </div>
@@ -293,24 +287,25 @@
                                         <div class="w-100">
 
                                       <!-- BEGIN :: BIODATA SISWA -->
+                                      <div class="card-body rounded border mb-3">
+                                      <form action="{{ route('admin.ppdb.updatebiodatadapodik') }}" method="POST">
+                                        {{  csrf_field() }}
                                       <div class="row mb-10">
+                                        <input type="hidden" name="dapodik_id" value="{{ $ppdb->dapodik_id }}">
                                         <!--begin::Col-->
                                         <div class="col-md-8 fv-row">
                                             <!--begin::Label-->
-                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Nama
-                                                Siswa</label>
+                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Nama Siswa</label>
                                             <!--end::Label-->
                                             <!--begin::Row-->
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                  <?php
-                                                    $fullname = "";
+                                                  <?php $fullname = "";
                                                     if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                         $fullname = $ppdb->fullname;
-                                                    }
-                                                  ?>
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="fullname" value="<?php echo e($fullname); ?>" readonly>
+                                                    } ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="fullname" value="{{ $fullname }}" >
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -321,20 +316,17 @@
                                         <!--begin::Col-->
                                         <div class="col-md-4 fv-row">
                                             <!--begin::Label-->
-                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Jenis
-                                                Kelamin</label>
+                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Jenis Kelamin</label>
                                             <!--end::Label-->
                                             <!--begin::Row-->
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                  <?php
-                                                      $gender = "";
+                                                  <?php $gender = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $gender = $ppdb->gender;
-                                                      }
-                                                  ?>
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="gender" value="<?php echo e($gender); ?>" readonly>
+                                                      } ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="gender" value="{{ $gender }}" >
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -348,20 +340,17 @@
                                         <!--begin::Col-->
                                         <div class="col-md-3 fv-row">
                                             <!--begin::Label-->
-                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Tempat
-                                                Lahir</label>
+                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Tempat Lahir</label>
                                             <!--end::Label-->
                                             <!--begin::Row-->
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                  <?php
-                                                      $place_of_birth = "";
+                                                  <?php $place_of_birth = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $place_of_birth = $ppdb->place_of_birth;
-                                                      }
-                                                  ?>
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="place_of_birth" value="<?php echo e($place_of_birth); ?>" readonly />
+                                                      } ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="place_of_birth" value="{{ $place_of_birth }}"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -372,20 +361,17 @@
                                         <!--begin::Col-->
                                         <div class="col-md-3 fv-row">
                                             <!--begin::Label-->
-                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Tanggal
-                                                Lahir</label>
+                                            <label class="text-muted fs-6 fw-bold form-label mb-2">Tanggal Lahir</label>
                                             <!--end::Label-->
                                             <!--begin::Row-->
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                  <?php
-                                                      $date_of_birth = "";
+                                                  <?php $date_of_birth = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $date_of_birth = $ppdb->date_of_birth;
-                                                      }
-                                                  ?>
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="date_of_birth" value="<?php echo e($date_of_birth); ?>" readonly />
+                                                      } ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="date_of_birth" value="{{ $date_of_birth }}"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -402,13 +388,11 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                  <?php
-                                                      $religion = "";
+                                                  <?php $religion = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $religion = $ppdb->religion;
-                                                      }
-                                                  ?>
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="religion" value="<?php echo e($religion); ?>" readonly />
+                                                      } ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="religion" value="{{ $religion }}"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -425,13 +409,11 @@
                                             <div class="row fv-row fv-plugins-icon-container">
                                                 <!--begin::Col-->
                                                 <div class="col-12">
-                                                  <?php
-                                                      $nationality = "";
+                                                  <?php $nationality = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $nationality = $ppdb->nationality;
-                                                      }
-                                                  ?>
-                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="nationality" value="<?php echo e($nationality); ?>" readonly />
+                                                      } ?>
+                                                    <input type="text" class="form-control form-control-transparent border-bottom" name="nationality" value="{{ $nationality }}"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -450,13 +432,11 @@
                                           <div class="row fv-row fv-plugins-icon-container">
                                               <!--begin::Col-->
                                               <div class="col-12">
-                                                <?php
-                                                      $address = "";
+                                                <?php $address = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $address = $ppdb->address;
-                                                      }
-                                                  ?>
-                                                  <textarea name="address" class="form-control form-control-transparent border-bottom" rows="5" required="required" readonly><?php echo e($address); ?></textarea>
+                                                      } ?>
+                                                  <textarea name="address" class="form-control form-control-transparent border-bottom" rows="2" required="required" >{{ $address }}</textarea>
                                               </div>
                                               <!--end::Col-->
                                           </div>
@@ -475,13 +455,11 @@
                                         <div class="row fv-row">
                                             <!--begin::Col-->
                                             <div class="col-12">
-                                              <?php
-                                                      $home_phone = "";
+                                              <?php $home_phone = "";
                                                       if($ppdb != null && $ppdb != "" && !empty($ppdb)) {
                                                           $home_phone = $ppdb->home_phone;
-                                                      }
-                                                  ?>
-                                                <input type="text" class="form-control form-control-transparent border-bottom" name="home_phone" value="<?php echo e($home_phone); ?>" readonly />
+                                                      } ?>
+                                                <input type="text" class="form-control form-control-transparent border-bottom" name="home_phone" value="{{ $home_phone }}"  />
                                             </div>
                                             <!--end::Col-->
                                         </div>
@@ -489,7 +467,10 @@
                                     </div>
                                     <!--end::Col-->
                                 </div>
-                              
+                                <button class="btn btn-primary btn-sm fs-9" >Update</button>  
+                              </form>
+                            </div>
+                                
                             <div class=" shadow-sm">
                               <div class="card-header bg-light">
                                <!--begin::Title-->

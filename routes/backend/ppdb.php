@@ -15,7 +15,8 @@ Route::group(['namespace' => 'ppdb'], function () {
     Route::get('admin/ppdb/{ppdb}/editaktif', [PPDBController::class, 'editaktif'])->name('ppdb.editaktif');
     Route::get('admin/ppdb/{ppdb}/editaktifdapodik', [PPDBController::class, 'editaktifdapodik'])->name('ppdb.editaktifdapodik');
     Route::get('admin/ppdb/{dapodik}/editdapodik', [PPDBController::class, 'editdapodik'])->name('ppdb.editdapodik');
-    Route::get('/selected-employee',[PPDBController::class, 'deleteAll'])->name('ppdb.deleted');
+    Route::get('/selected-dapodik',[PPDBController::class, 'deleteDapodikAll'])->name('ppdb.deleteddapodik');
+    Route::get('/selected-ppdb',[PPDBController::class, 'deletePPDBAll'])->name('ppdb.deletedppdb');
     Route::resource('ppdb', 'PPDBController', ['except' => ['show']]);
     Route::post('ppdb/discount', [PPDBController::class, 'updateDiscountCode'])->name('ppdb.discount'); 
 
@@ -25,6 +26,10 @@ Route::group(['namespace' => 'ppdb'], function () {
 
     Route::get('ppdb/cekHistory/{id}', [PPDBController::class, 'cekHistory'])->name('ppdb.cekhistory');
     Route::post('ppdb/addclasses', [PPDBController::class, 'addClasses'])->name('ppdb.addclasses');
+    Route::post('ppdb/updatebiodata', [PPDBController::class, 'updateBiodata'])->name('ppdb.updatebiodata');
+    Route::post('ppdb/updatebiodatadapodik', [PPDBController::class, 'updateBiodataDapodik'])->name('ppdb.updatebiodatadapodik');
+    Route::post('ppdb/updatekontak', [PPDBController::class, 'updateKontak'])->name('ppdb.updatekontak');
+    Route::post('ppdb/updatekontakdapodik',[PPDBController::class, 'updateKontakDapodik'])->name('ppdb.updatekontakdapodik');
     Route::post('ppdb/addclass', [PPDBController::class, 'addClass'])->name('ppdb.addclass');
 
     Route::post('ppdb/showclasses', [PPDBController::class, 'showClasses'])->name('ppdb.showclasses');

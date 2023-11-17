@@ -63,7 +63,7 @@
                         <!--begin::Form-->
                         <div class="px-7 py-5">
                             <!--begin::Input group-->
-                            <div class="mb-10">
+                            <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Tahun Ajaran:</label>
                                 <!--end::Label-->
@@ -79,7 +79,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="mb-10">
+                            <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Jadwal Pendaftaran:</label>
                                 <!--end::Label-->
@@ -91,7 +91,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="mb-10">
+                            <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Sekolah:</label>
                                 <!--end::Label-->
@@ -110,7 +110,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="mb-10">
+                            <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Kelas:</label>
                                 <!--end::Label-->
@@ -123,7 +123,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="mb-10">
+                            <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Status:</label>
                                 <!--end::Label-->
@@ -145,7 +145,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                             <div class="mb-10">
+                             <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Status Siswa:</label>
                                 <!--end::Label-->
@@ -161,7 +161,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                               <div class="mb-10">
+                               <div class="mb-3">
                                 <!--begin::Label-->
                                 <label class="form-label fw-semibold">Diskon:</label>
                                 <!--end::Label-->
@@ -199,7 +199,7 @@
         <div class="card-body">
             <div>
                 <a href="#" class="btn btn-flex btn-danger ms-5" id="deleteAllSelectedRecord">Delete</a>
-                <button class="btn btn-flex btn-primary ms-5">Tambah Siswa</button>
+                {{-- <button class="btn btn-flex btn-primary ms-5">Tambah Siswa</button> --}}
             </div>
             <div class="row mt-4">
                 <div class="col">
@@ -217,7 +217,7 @@
                                 <th class="min-w-80px w-100px sorting" >Unit</th>
                                 <th class="min-w-80px w-100px sorting" >Kelas Utama</th>
                                 <th class="min-w-80px w-100px sorting" >Sub Kelas</th>
-                                <th class="min-w-80px mw-100px sorting" >Status Siswa</th>
+                                <th class="min-w-80px mw-100px sorting">Status Siswa</th>
                                 <th class="min-w-80px mw-100px sorting">Keterangan</th>
                                 <th class="text-end min-w-80px sorting_disabled w-100px" rowspan="1" colspan="1" aria-label="Actions" style="width: 141.766px;"></th>
                             </tr>
@@ -324,26 +324,29 @@
                     $('.checkbox_ids').prop('checked',$(this).prop('checked'));
                 });
 
+
                 $('#deleteAllSelectedRecord').click(function(e) {
-                    e.preventDefault();
-
-                    var all_ids = [];
-                    $('input:checkbox[name=ids]:checked').each(function() {
-                        all_ids.push($(this).val());
-                    });
-
-                    $.ajax({
-                        url: "{{ route('admin.ppdb.deleted') }}",
-                        method: "GET",
-                        data:{
-                            'ids' : all_ids
-                        },
-                        success:function(response) {
-                            $.each(all_ids, function(key,val) {
-                                $('#employee_ids'+val).parents('tr').remove();
-                            })
-                        }
-                    });
+                 var x;
+                 if (confirm("Are you sure?") == true) { x = 1; } else { x = 0; }                   
+                    if (x == 1) {
+                        e.preventDefault();
+                        var all_ids = [];
+                            $('input:checkbox[name=ids]:checked').each(function() {
+                                all_ids.push($(this).val());
+                            });
+                            $.ajax({
+                                url: "{{ route('admin.ppdb.deleteddapodik') }}",
+                                method: "GET",
+                                data:{
+                                    'ids' : all_ids
+                                },
+                                success:function(response) {
+                                    $.each(all_ids, function(key,val) {
+                                        $('#employee_ids'+val).parents('tr').remove();
+                                    })
+                                }
+                            });
+                    }
             });
         });
     </script>

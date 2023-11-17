@@ -18,13 +18,10 @@
                 <div class="card-toolbar">
                     <a href="#" class="btn btn-light-success"><i class="bi bi-file-earmark-spreadsheet fs-4 me-2"></i> Download Template</a>
                     <div class="d-flex align-items-center position-relative my-1 ms-15">
-                        <input name="file_pricing" class="form-control" type="file" id="formFile">
+                        <input name="file_pricing" class="form-control" type="file" id="formFile" required>
                     </div>
                     <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa PPDB<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
                     </button>
-                </div>
-                <div>
-                    Pastikan data import DATA SISWA sesuai Format
                 </div>
                 <!--end::Toolbar-->
             </div>
@@ -34,25 +31,25 @@
             {{ csrf_field() }}
             <div class="card-header">
                 <!--begin::Toolbar-->
-
                 <div class="card-toolbar">
                     <a href="#" class="btn btn-light-success"><i class="bi bi-file-earmark-spreadsheet fs-4 me-2"></i> Download Template</a>
                     <div class="d-flex align-items-center position-relative my-1 ms-15">
-                        <input name="file_dapodik" class="form-control" type="file" id="formFile">
+                        <input name="file_dapodik" class="form-control" type="file" id="formFile" required>
                     </div>
-                    <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa DAPODIK<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i>
-                    </button>
-                </div>
-                <div>
-                    <p>Pastikan data import Dapodik NIS dan NISN Lengkap dan Terisi</p>
+                    <button id="btn-search" type="submit" class="btn btn-flex btn-primary ms-5">Upload Data Siswa DAPODIK<i class="bi bi-cloud-arrow-up fs-4 ms-4"></i></button>
                 </div>
                 <!--end::Toolbar-->
             </div>
         </form>
         <!--card-body-->
     </div>  
+    <div class="card">
+        <p><strong>* Pastikan data import DATA SISWA sesuai Format</strong></p>
+
+        <p><strong>* Pastikan data import Dapodik NIS dan NISN Lengkap dan Terisi</strong></p>
+    </div>
     <div>
-        <a href="{{ route('admin.import.deletedapodik') }}"> Delete Dapodik</a>
+       <strong><a href="{{ route('admin.import.deletedapodik') }}"> Delete Dapodik & PPDB</a></strong> 
     </div>
 </div>
 

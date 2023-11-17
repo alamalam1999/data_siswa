@@ -135,8 +135,6 @@ FTX.Utils.documentReady(function() {
             targets: 0,
             orderable: false,
             render: function(data, type, row) {
-                var i = 1;
-                $('tr').addClass("label-warning "+i++);
                 return `<input name="ids" type="checkbox" class="checkbox_ids" value="`+row.dapodik_id+`" id="employee_ids`+row.dapodik_id+`">`;
             }
         }, {
