@@ -11,7 +11,10 @@ class Users_system extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-    
+        'email',
+        'first_name',
+        'last_name',
+        'phone'
     ];
 
 }

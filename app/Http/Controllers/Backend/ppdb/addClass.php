@@ -255,6 +255,7 @@ class addClass extends Controller {
                 $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
                 $data_kelas->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
                 $data_kelas->nisn                 = $request->nisn;
+                $data_kelas->nis                  = $request->nis;
                 $data_kelas->nik_siswa            = $request->nik_siswa;
                 $data_kelas->status_siswa         = $request->status_siswa;
                 $data_kelas->keterangan           = $request->keterangan;
@@ -604,6 +605,7 @@ class addClass extends Controller {
                 $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
                 $data_kelas->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
                 $data_kelas->nisn                 = $request->nisn;
+                $data_kelas->nis                  = $request->nis;
                 $data_kelas->nik_siswa            = $request->nik_siswa;
                 $data_kelas->status_siswa         = $request->status_siswa;
                 $data_kelas->keterangan           = $request->keterangan;

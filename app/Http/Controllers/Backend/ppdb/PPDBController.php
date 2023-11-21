@@ -295,10 +295,12 @@ class PPDBController extends Controller
         $image = base64_encode(file_get_contents($request->file('fhoto_siswa')));        
             $foto_siswa = new Foto_siswa();
             $foto_siswa->fhoto_siswa = $image;
-            $foto_siswa->ppdb_id = $request->id_ppdb;
+            $foto_siswa->ppdb_id = ($request->id_ppdb) ? $request->id_ppdb :'';
+            $foto_siswa->dapodik_id = ($request->dapodik_id) ? $request->dapodik_id : '';
             $foto_siswa->updated_by = auth()->user()->id;
             $foto_siswa->save();
             return redirect()->back()->with(['flash_success' => 'Sudah Berhasil di Upload']);
+    
     }
 
     /**
@@ -2061,7 +2063,7 @@ class PPDBController extends Controller
                 $file_additional = json_decode($dapodik->file_additional);
             }
     
-            $user_account = Users_system::where('status_data', $dapodik->id_user)->first();
+            $user_account = Users_system::where('id', $dapodik->id_user)->first();
             debug($user_account);
             $payment_formulir = Payment::where([
                 ['dapodik_id', '=', $dapodik->id],
@@ -2348,6 +2350,73 @@ class PPDBController extends Controller
             ]);
 
             // return response()->json($ppdb);
+        }
+
+        public function deleteDapodikAll(Request $request) {
+            $ids = $request->ids; 
+            Dapodik::whereIn('dapodik_id',$ids)->delete(); 
+            return response()->json(["success"=> "Siswa have been deleted!"]);
+        }
+
+        public function deletePPDBAll(Request $request) {
+            $ids = $request->ids;
+            PPDB::whereIn('ppdb_id',$ids)->delete();
+            return response()->json(["success"=> "Siswa have been deleted!"]);
+        }
+
+        public function updateBiodata(Request $request) {
+            $result = PPDB::where('ppdb_id',$request->ppdb_id)->first();
+            $result->update([
+                'fullname'=>$request->fullname,
+                'gender'=>$request->gender,
+                'place_of_birth'=>$request->place_of_birth,
+                'date_of_birth'=>$request->date_of_birth,
+                'religion'=>$request->religion,
+                'nationality'=>$request->nationality,
+                'address'=>$request->address,
+                'home_phone'=>$request->home_phone
+            ]);
+            return redirect()->back()->with(['flash_success' => 'Biodata Berhasil di Upload']);
+        }
+        
+        public function updateKontak(Request $request) {
+            $result = PPDB::where('ppdb_id',$request->ppdb_id)->first();
+            $users  = Users_system::where('user_id',$result->id_user)->first();
+            $users->update([
+                'first_name'=>$request->first_name,
+                'last_name'=>$request->last_name,
+                'email'=>$request->email,
+                'phone'=>$request->phone
+            ]);   
+            return redirect()->back()->with(['flash_success' => 'Kontak Berhasil di Upload']);
+        }
+
+        public function updateBiodataDapodik(Request $request) {
+            $result = Dapodik::where('dapodik_id', $request->dapodik_id)->first();
+            $result->update([
+                'fullname'=>$request->fullname,
+                'gender'=>$request->gender,
+                'place_of_birth'=>$request->place_of_birth,
+                'date_of_birth'=>$request->date_of_birth,
+                'religion'=>$request->religion,
+                'nationality'=>$request->nationality,
+                'address'=>$request->address,
+                'home_phone'=>$request->home_phone
+            ]);
+
+            return redirect()->back()->with(['flash_success' => 'Biodata Berhasil di Upload']);
+        }
+
+        public function updateKontakDapodik(Request $request) {
+            $result = Dapodik::where('id',$request->dapodik_id)->first();
+            $users  = Users_system::where('id',$result->id_user)->first();
+            $users->update([
+                'first_name'=>$request->first_name,
+                'last_name'=>$request->last_name,
+                'email'=>$request->email,
+                'phone'=>$request->phone
+            ]);   
+            return redirect()->back()->with(['flash_success' => 'Kontak Berhasil di Upload']);
         }
 }
 

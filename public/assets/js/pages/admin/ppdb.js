@@ -88,7 +88,6 @@ $(document).on('click', '.btn-info-status', function() {
 
 FTX.Utils.documentReady(function() {
 
-
     var dt = ppdbTable.dataTable({
 
         processing: false,
@@ -111,6 +110,9 @@ FTX.Utils.documentReady(function() {
             }
         },
         columns: [{
+                data: null
+            },
+            {
                 data: 'no_formulir'
             },
             {
@@ -126,7 +128,7 @@ FTX.Utils.documentReady(function() {
                 data: 'unit'
             },
             {
-                data: 'classes'
+                data: null
             },
             {
                 data: null
@@ -143,97 +145,181 @@ FTX.Utils.documentReady(function() {
 
             
         ],
-        columnDefs: [{
+        columnDefs: [
+        {
             targets: 0,
             orderable: false,
             render: function(data, type, row) {
-                $(row).addClass("bg-white");
-                return `<span class="text d-block fw-bolder fs-8">` + row.document_no + `</span>`;
+                return `<input name="ids" type="checkbox" class="checkbox_ids" value="`+row.ppdb_id+`" id="employee_ids`+row.ppdb_id+`">`;
             }
-        }, {
+        },{
             targets: 1,
             orderable: false,
             render: function(data, type, row) {
-                return `<span class="text-dark fw-bolder fs-8 text d-block">` + row.fullname + `</span>`;
+                $(row).addClass("bg-white");
+                return `
+                <div>
+                    <span class="text d-block fw-bolder fs-8">` + row.document_no + `</span>
+                </div>`;
             }
         }, {
             targets: 2,
+            orderable: false,
+            render: function(data, type, row) {
+                return `
+                <div>
+                    <span class="text-dark fw-bolder fs-8 text d-block">` + row.fullname + `</span>
+                </div>
+                   
+                `;
+            }
+        }, {
+            targets: 3,
         orderable: false,
         render: function(data, type, row) {
             if(row.nisn != null){
-                return `<span class="text-dark fw-bolder fs-8 text d-block">`+ row.nisn + `</span>`;
+                return `
+                <div>
+                    <span class="text-dark fw-bolder fs-8 text d-block">`+ row.nisn + `</span>
+                </div>
+        `;
             } else{
-                return ` <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.nisn + `</span>`;
-            }
+
+            return `
+                    <div>
+                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.nisn + `</span>
+                    </div>
+               
+            `;
+        }
             }
         },  {
-            targets: 3,
-            orderable: false,
-            render: function(data, type, row) {
-                if(row.school_site !=null){
-                    return `<span class="text d-block fs-8">` + row.school_site + `</span>`;
-                } else{
-                    return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sekolah + `</span>`;
-                }
-
-            }
-        }, {
             targets: 4,
             orderable: false,
             render: function(data, type, row) {
-                if(row.stage !=null){
-                return `<span class="text d-block fs-8">` + row.stage + `</span>`;
-            } else{
-                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.unit + `</span>`;
+                if(row.school_site !=null){
+                return `
+                    <div>
+                        <span class="text d-block fs-8">` + row.school_site + `</span>
+                    </div>
+            `;
+        } else{
+
+            return `
+                    <div>
+                        <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sekolah + `</span>
+                    </div>
+               
+            `;
         }
+
             }
         }, {
             targets: 5,
             orderable: false,
             render: function(data, type, row) {
-                // alert(JSON.stringify(row));
-                if (row.classes !=null) {
-                    return `<span class="text d-block fs-8">`+row.classes+`</span>`;
+                if(row.stage !=null){
+                return `
+                <div>
+                <span class="text d-block fs-8">` + row.stage + `</span>
+            </div>
+                `;
             } else{
-                    return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.classes + `</span>`;
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.unit + `</span>
+                        </div>
+                   
+                `;
+        }
             }
-            }
-        },  {
+        }, {
             targets: 6,
             orderable: false,
             render: function(data, type, row) {
-                if(row.sub_kelas !=null){
-                console.log(row);
-                return `<span class="text d-block fs-8s">`+row.sub_kelas+`</span>`;
+                if(row.kelas_utama !=null){
+                return `
+                <div>
+                <span class="text d-block fs-8">`+row.kelas_utama+`</span>
+                </div>
+                `;
             } else{
-                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>`;
-            }
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.kelas_utama + `</span>
+                        </div>
+                   
+                `;
+        }
             }
         },  {
             targets: 7,
             orderable: false,
             render: function(data, type, row) {
-                if (row.status_siswa !=null){
-                console.log(row);               
-                return `<span class="btn btn-sm w-30 fs-9 btn-success">`+row.status_siswa+`</span>`;
+                if(row.sub_kelas !=null){
+                console.log(row);
+                return `
+                     <div>
+                        <span class="text d-block fs-8s">`+row.sub_kelas+`</span>
+                    </div>
+                `;
             } else{
-                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>`;
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.sub_kelas + `</span>
+                        </div>
+                   
+                `;
         }
             }
         },  {
             targets: 8,
             orderable: false,
             render: function(data, type, row) {
+                if (row.status_siswa !=null){
+                console.log(row);               
+                return `
+                     <div>
+                        <span class="btn btn-sm w-30 fs-9 btn-success">`+row.status_siswa+`</span>
+                    </div>
+                `;
+            } else{
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.status_siswa + `</span>
+                        </div>
+                   
+                `;
+        }
+            }
+        },  {
+            targets: 9,
+            orderable: false,
+            render: function(data, type, row) {
                 if (row.keterangan !=null){
                 console.log(row);
-                return `<span class="btn btn-sm w-30 fs-9 btn-success">`+row.keterangan+`</span>`;
+                return `
+                     <div>
+                        <span class="btn btn-sm w-30 fs-9 btn-success">`+row.keterangan+`</span>
+                    </div>
+                `;
             } else{
-                return `<span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>`;
+
+                return `
+                        <div>
+                            <span class="btn btn-sm w-30 fs-9 btn-dark ppdb-bg-status-not-have-class">`+ row.keterangan + `</span>
+                        </div>
+                   
+                `;
         }
 
             }
         },  {
-            targets: 9, 
+            targets: 10, 
             orderable: false,
             render: function(data, type, row) {        
                     var uri_target = uri_edit_ppdb.replace("::target::", row.ppdb_id);
