@@ -44,6 +44,12 @@
             </div>
         <!--card-body-->
     </div>  
+    <div>
+        <a href="{{ route('admin.import.deletedapodik') }}"> Delete Dapodik</a>
+    </div>
+    <div>
+        <a href="{{ route('admin.import.deleteallsystem') }}">Delete All Siswa</a>
+    </div>
 </div>
 
 @endsection

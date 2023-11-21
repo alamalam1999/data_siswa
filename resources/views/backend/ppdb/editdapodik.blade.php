@@ -623,14 +623,14 @@
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">Nomor Induk Sekolah Nasional</label>
-                                      <input value="{{ !empty($data_siswa->nisn) ? $data_siswa->nisn : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nisn" autocomplete="off">
+                                      <input value="{{ !empty($data_siswa->nisn) ? $data_siswa->nisn : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nisn" autocomplete="off" required>
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                   <div class="col-xl-6">
                                         <label class="form-label fw-bolder text-dark fs-6">Nomor Induk Sekolah</label>
-                                        <input value="{{ !empty($data_kelas->nis) ? $data_kelas->nis : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nis" autocomplete="off" />
+                                        <input value="{{ !empty($data_kelas->nis) ? $data_kelas->nis : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nis" autocomplete="off" required/>
                                   </div>
                                   <!--end::Col-->
                               </div>
@@ -640,14 +640,14 @@
                                 <!--begin::Col-->
                                   <div class="col-xl-6">
                                       <label class="form-label fw-bolder text-dark fs-6">No. Ijazah</label>
-                                      <input value="{{ !empty($data_siswa_system->no_seri_ijazah) ? $data_siswa_system->no_seri_ijazah : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="no_seri_ijazah" autocomplete="off">
+                                      <input value="{{ !empty($data_siswa_system->no_seri_ijazah) ? $data_siswa_system->no_seri_ijazah : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="no_seri_ijazah" autocomplete="off" required>
                                       <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                   <div class="col-xl-6">
                                         <label class="form-label fw-bolder text-dark fs-6">NIK Siswa</label>
-                                        <input value="{{ !empty($data_kelas->nik_siswa) ? $data_kelas->nik_siswa : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nik_siswa" autocomplete="off" />
+                                        <input value="{{ !empty($data_kelas->nik_siswa) ? $data_kelas->nik_siswa : '' }}" class="form-control form-control-lg form-control-solid" type="text"  name="nik_siswa" autocomplete="off" required/>
                                   </div>
                                   <!--end::Col-->
                               </div>

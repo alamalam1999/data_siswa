@@ -39,7 +39,17 @@ use App\Imports\UserImport;
 use App\Models\Dapodik;
 use App\Models\Dapodik_system;
 use App\Models\Data_siswa1;
+use App\Models\Data_siswa_system;
+use App\Models\Data_siswa_system_1;
+use App\Models\Data_siswa_system_2;
+use App\Models\Data_siswa_system_3;
+use App\Models\Data_siswa_system_4;
+use App\Models\Payment_system;
+use App\Models\Ppdb_interviews_system;
+use App\Models\PPDB_system;
+use App\Models\Reregistrasi_system;
 use App\Models\ReRegistration;
+use App\Models\Users;
 use App\Models\Users_system;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
@@ -622,12 +632,10 @@ class PricingController extends Controller
 
     public function uploadDapodik(PricingPermissionRequest $request) {
             //PPDB DAFTAR ULANG
-
-            $dapodik_siswa = [];   
-            date_default_timezone_set('Asia/Jakarta');    
-            $dapodik_siswa = Excel::toArray(new DapodikImport, $request->file('file_dapodik'));
-
-            if ($dapodik_siswa[0][1][0] != '') {
+        $dapodik_siswa = [];   
+        date_default_timezone_set('Asia/Jakarta');    
+        $dapodik_siswa = Excel::toArray(new DapodikImport, $request->file('file_dapodik'));
+        if ($dapodik_siswa[0][1][0] != '') {
             $stag = "";
             if (str_contains($dapodik_siswa[0][1][0], 'SD')) {
                 $stag = "SD";
@@ -654,29 +662,26 @@ class PricingController extends Controller
                 $unit = "kosong";
             }
 
-            foreach(  array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) { 
-                $users_system_check = Users_system::where([['first_name', '=', $dapodik_siswas[24]],['phone', '=', $dapodik_siswas[19]],['status_data', '=', $dapodik_siswas[2].'-'.$dapodik_siswas[4]]])->first();
-                            $users_system = new Users_system();
+            foreach(array_slice($dapodik_siswa[0], 6, null, true) as $dapodik_siswas) {
+                    $users_system_check = Users_system::where([['first_name', '=', ($dapodik_siswas[24]) ? $dapodik_siswas[24]: $dapodik_siswas[30] ],['phone', '=', $dapodik_siswas[19]],['status_data', '=', $dapodik_siswas[2].'-'.$dapodik_siswas[4]],['email','=', $dapodik_siswas[20]]])->first();
+                    $users_system = new Users_system();
                     if ( ! $users_system_check) {                
-                            $users_system->first_name   = $dapodik_siswas[24];
+                            $users_system->first_name   = ($dapodik_siswas[24]) ? $dapodik_siswas[24] : $dapodik_siswas[30];
                             $users_system->phone        = $dapodik_siswas[19];
-                            $users_system->password     = '$2a$12$6OxTbMRjrx7lEOj6tmNlbeaUGKuZdQJXpOke4QCiQbyWtACrH3ZpK';
+                            $users_system->email        = $dapodik_siswas[20];
+                            $users_system->password     = '$2a$12$12ZRIH0QqGq.BERNvCn79uRiBNtBt/u6TZkV16bSpc6X/LX/ARS4a';
                             $users_system->confirmed    = '1';
                             $users_system->status_data  = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
                             $users_system->save();
-                    }
+                        }
                 $data_parent = [];     
-                    array_push($data_parent, [
-                        'name_father'      => $dapodik_siswas[24],
-                        'name_mother'      => $dapodik_siswas[30],
-                        'wali'             => $dapodik_siswas[36]
-                    ]);
+                array_push($data_parent, ['name_father' => $dapodik_siswas[24],'name_mother' => $dapodik_siswas[30],'wali' => $dapodik_siswas[36]]);
                 $class = "";
                 if ($dapodik_siswas[42] == null || str_contains(strtolower($dapodik_siswa[0][2][0]), 'pamulang') || !$dapodik_siswas[42]) {
                     $class = 'KB';
-                }else if(str_contains($dapodik_siswas[42], 'A') && strlen($dapodik_siswas[42]) <= 2 && str_contains(strtolower($dapodik_siswa[0][2][0]), 'jagakarsa') && str_contains($dapodik_siswa[0][1][0], 'TK')) {
+                }else if (str_contains($dapodik_siswas[42], 'A') && strlen($dapodik_siswas[42]) <= 2 && str_contains(strtolower($dapodik_siswa[0][2][0]), 'jagakarsa') && str_contains($dapodik_siswa[0][1][0], 'TK')) {
                     $class = "TK - A";
-                }else if(str_contains($dapodik_siswas[42], 'B') && strlen($dapodik_siswas[42]) == 2 && str_contains(strtolower($dapodik_siswa[0][2][0]), 'jagakarsa') && str_contains($dapodik_siswa[0][1][0], 'TK')) {
+                }else if (str_contains($dapodik_siswas[42], 'B') && strlen($dapodik_siswas[42]) == 2 && str_contains(strtolower($dapodik_siswa[0][2][0]), 'jagakarsa') && str_contains($dapodik_siswa[0][1][0], 'TK')) {
                     $class = "TK - B";
                 }else if (str_contains($dapodik_siswas[42], '1') && strlen($dapodik_siswas[42]) == 2 ) {
                     $class = '1';
@@ -703,33 +708,28 @@ class PricingController extends Controller
                 } else if (str_contains($dapodik_siswas[42], '12')) {
                     $class = '12';
                 } 
-
-                    $gender_check = '';
-                if ($dapodik_siswas[3] == 'L') {
-                    $gender_check = 'Laki-Laki';
-                } else {
-                    $gender_check = 'Perempuan';
-                }           
-      
-                $ppdb = new Dapodik();
-                if ( $users_system->id ) {        
-                    $ppdb->id_user                  = $users_system->id;
-                    $ppdb->dapodik_id               = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
-                     $ppdb->fullname                 = $dapodik_siswas[1];
-                    $ppdb->school_site              = $unit;                                             
-                     $ppdb->nis                      = $dapodik_siswas[2];
-                    $ppdb->gender                   = $gender_check;
-                     $ppdb->place_of_birth           = $dapodik_siswas[5]; 
-                     $ppdb->date_of_birth            = $dapodik_siswas[6];
-                    $ppdb->religion                 = $dapodik_siswas[8];   
-                    $ppdb->address                  = $dapodik_siswas[9];
-                    $ppdb->home_phone               = $dapodik_siswas[18];
-                    $ppdb->hand_phone               = $dapodik_siswas[19];
-                    $ppdb->stage                    = $stag;
-                    $ppdb->classes                  = $class;
-                    $ppdb->file_additional_satu     = json_encode($data_parent);
-                    $ppdb->created_at               = date("Y-m-d H:i:s");
-                    $ppdb->save();
+                $gender_check = '';
+                if ($dapodik_siswas[3] == 'L') { $gender_check = 'Laki-Laki'; } else { $gender_check = 'Perempuan'; }           
+                $ppdb = new Dapodik(); 
+                if ( $users_system->id ) {         
+                        $ppdb->id_user        = $users_system->id;
+                        $ppdb->dapodik_id     = $dapodik_siswas[2].'-'.$dapodik_siswas[4];
+                        $ppdb->fullname       = $dapodik_siswas[1];
+                        $ppdb->school_site    = $unit;                                             
+                        $ppdb->nis            = $dapodik_siswas[2];
+                        $ppdb->gender         = $gender_check;
+                        $ppdb->place_of_birth = $dapodik_siswas[5]; 
+                        $ppdb->date_of_birth  = $dapodik_siswas[6];
+                        $ppdb->religion       = $dapodik_siswas[8];   
+                        $ppdb->address        = $dapodik_siswas[9];
+                        $ppdb->home_phone     = $dapodik_siswas[18];
+                        $ppdb->hand_phone     = $dapodik_siswas[19];
+                        $ppdb->stage          = $stag;
+                        $ppdb->classes        = $class;
+                        $ppdb->school_origin  = $dapodik_siswas[56];
+                        $ppdb->file_additional_satu     = json_encode($data_parent);
+                        $ppdb->created_at     = date("Y-m-d H:i:s");
+                        $ppdb->save();
                 }
 
                 $ppdb_interviews = new PPDBInterview();
@@ -739,7 +739,7 @@ class PricingController extends Controller
                 }
 
                 $data_siswa = new Data_siswa();
-                if ( $ppdb->id) {           
+                if ( $ppdb->id ) {           
                     $data_siswa->dapodik_id                 = $ppdb->id;
                     $data_siswa->nisn                       = $dapodik_siswas[4];
                     $data_siswa->nama_lengkap               = $dapodik_siswas[1];
@@ -795,9 +795,8 @@ class PricingController extends Controller
                     $data_siswa->nomor_kps                  = $dapodik_siswas[23];
                     $data_siswa->save();
                 }
-
                 $data_siswa_1 =  new Data_siswa1();
-                if ( $ppdb->id) {     
+                if ( $ppdb->id ) {     
                     $data_siswa_1->dapodik_id                 = $ppdb->id;
                     $data_siswa_1->berat_badan                = $dapodik_siswas[61];
                     $data_siswa_1->tinggi_badan               = $dapodik_siswas[62];
@@ -807,9 +806,8 @@ class PricingController extends Controller
                     $data_siswa_1->penerima_kps_pkh           = $dapodik_siswas[22];
                     $data_siswa_1->save();
                 }
-
                 $data_siswa_2 =  new Data_siswa2();
-                if ( $ppdb->id) {        
+                if ( $ppdb->id ) {        
                     $data_siswa_2->dapodik_id               = $ppdb->id;
                     $data_siswa_2->rombel_saat_ini          = $dapodik_siswas[42];
                     $data_siswa_2->no_peserta_un            = $dapodik_siswas[43];
@@ -819,34 +817,30 @@ class PricingController extends Controller
                     $data_siswa_2->layak_pip_usulan_sekolah = $dapodik_siswas[53];           
                     $data_siswa_2->save();
                 }
-
                 $data_siswa_3 = new Data_siswa3();
-                if ( $ppdb->id) {       
+                if ( $ppdb->id ) {       
                     $data_siswa_3->dapodik_id = $ppdb->id;
                     $data_siswa_3->save();
                 }
-
                 $data_siswa_4 = new Data_siswa4();
-                if ( $ppdb->id) {       
+                if ( $ppdb->id ) {       
                     $data_siswa_4->dapodik_id = $ppdb->id;
                     $data_siswa_4->save();
                 }
-
                 $payment = new Payment();
-                if (  $ppdb->id) {     
+                if ( $ppdb->id ) {     
                     $payment->dapodik_id = $ppdb->id;
                     $payment->save();
                 }
-
                 $reregister = new ReRegistration();
-                if ( $ppdb->id) {     
+                if ( $ppdb->id ) {     
                     $reregister->dapodik_id = $ppdb->id;
                     $reregister->save();
                 }
             }         
             return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil di Import Data Dapodik']);         
         } else {
-            return redirect()->route('admin.import.index')->with(['flash_success' => 'Data di Import Tidak Sesuai']);         
+            return redirect()->route('admin.import.index')->with(['flash_info' => 'Data di Import Tidak Sesuai']);         
         }
     }
 
@@ -930,6 +924,39 @@ class PricingController extends Controller
         ];
 
         return new ViewResponse('backend.pricing.check_payment', $data);
+    }
+
+    public function deleteDapodik(){
+        Users_system::where('id','!=','')->delete();
+        PPDB::where('id','!=','')->delete();
+        PPDBInterview::where('id','!=','')->delete();
+        Payment::where('id','!=','')->delete();
+        Register::where('id','!=','')->delete();
+        Data_siswa::where('id','!=','')->delete();
+        Data_siswa1::where('id','!=','')->delete();
+        Data_siswa2::where('id','!=','')->delete();
+        Data_siswa3::where('id','!=','')->delete();
+        Data_siswa4::where('id','!=','')->delete();  
+        Dapodik::where('id','!=','')->delete();  
+
+        return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil Menghapus semua data']);         
+
+    }
+
+    public function deleteSystem(){
+        Users::where('id','!=','')->delete();
+        PPDB_system::where('id','!=','')->delete();
+        Ppdb_interviews_system::where('id','!=','')->delete();
+        Payment_system::where('id','!=','')->delete();
+        Reregistrasi_system::where('id','!=','')->delete();
+        Data_siswa_system::where('id','!=','')->delete();
+        Data_siswa_system_1::where('id','!=','')->delete();
+        Data_siswa_system_2::where('id','!=','')->delete();
+        Data_siswa_system_3::where('id','!=','')->delete();
+        Data_siswa_system_4::where('id','!=','')->delete();  
+
+        return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil Menghapus semua data Aktif']);         
+
     }
 
 

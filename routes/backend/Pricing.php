@@ -31,4 +31,6 @@ Route::group(['namespace' => 'import'], function () {
     Route::get('check_interview', [PricingController::class, 'check_interview'])->name('import.check_interview');
 
     Route::get('pricingwave2', [PricingController::class, 'indexwave2'])->name('import.indexwave2');
+    Route::get('delete-dapodik' ,[PricingController::class, 'deleteDapodik'])->name('import.deletedapodik');
+    Route::get('delete-data-siswa-aktif', [PricingController::class, 'deleteSystem'])->name('import.deleteallsystem');
 });

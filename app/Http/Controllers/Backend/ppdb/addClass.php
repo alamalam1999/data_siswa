@@ -244,7 +244,7 @@ class addClass extends Controller {
                 $data_siswa2->status_siswa         = $request->status_siswa;
                 $data_siswa2->keterangan           = $request->keterangan;
                 $data_siswa2->save();  
-                $data_kelas = new Data_kelas();
+                $data_kelas = new Data_kelas(); //DATA KELAS DOING START
                 $data_kelas->ppdb_id              = $ppdb->ppdb_id;
                 $data_kelas->kode_registrasi      = $ppdb->document_no;
                 $data_kelas->unit                 = $request->unit;
@@ -258,7 +258,7 @@ class addClass extends Controller {
                 $data_kelas->nik_siswa            = $request->nik_siswa;
                 $data_kelas->status_siswa         = $request->status_siswa;
                 $data_kelas->keterangan           = $request->keterangan;
-                $data_kelas->save();
+                $data_kelas->save(); //DATA KELAS DOING END
 
                 $data_siswa_system_2 = Data_siswa_system_2::where('ppdb_id', $request->ppdb_id)->first();
                 if ($data_siswa_system_2 == '' && $data_siswa_system_2 == null && empty($data_siswa_system_2) ) {
@@ -592,7 +592,23 @@ class addClass extends Controller {
                      $ppdb_system->dapodik_id = $dapodik->id;
                      $ppdb_system->save();
                  }
- 
+
+                $data_kelas = new Data_kelas(); //DATA KELAS DOING START
+                $data_kelas->dapodik_id           = $dapodik->id;
+                $data_kelas->kode_registrasi      = 'dapodik-'.$request->nik_siswa;
+                $data_kelas->unit                 = $request->unit;
+                $data_kelas->sekolah              = $request->sekolah;
+                $data_kelas->kelas_utama          = $request->kelas_utama;
+                $data_kelas->sub_kelas            = $request->sub_kelas;
+                $data_kelas->nama_kepala_sekolah  = $request->nama_kepala_sekolah;
+                $data_kelas->nama_wali_kelas      = $request->nama_wali_kelas;
+                $data_kelas->nama_wali_kelas_2    = $request->nama_wali_kelas_2;
+                $data_kelas->nisn                 = $request->nisn;
+                $data_kelas->nik_siswa            = $request->nik_siswa;
+                $data_kelas->status_siswa         = $request->status_siswa;
+                $data_kelas->keterangan           = $request->keterangan;
+                $data_kelas->save(); //DATA KELAS DOING END
+
                  $data_siswa = Data_siswa::where('dapodik_id', $dapodik->id)->first();
                  $data_siswa->nisn                           = $request->nisn;
                  $data_siswa->save();

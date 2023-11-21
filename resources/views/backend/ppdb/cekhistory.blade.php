@@ -37,7 +37,7 @@
                                             </thead>
                                             <tbody>
                                             <?php $no = 1 ?>
-                                                @foreach($data_kelas_for as $item) 
+                                                @foreach( $data_kelas_valid as $item) 
                                             <tr>
                                                 <form action="{{ route('admin.ppdb.showclasses') }}" method="POST">
                                                     <?php echo e(csrf_field()); ?>

@@ -1037,13 +1037,15 @@ class PPDBController extends Controller
      */
     public function addClasses(PPDBPermissionRequest $request) { // DAPODIK
         $addingClass = new  addClass();
-        if(!empty($request->ppdb_id) && $request->ppdb_id != "" && $request->ppdb_id != null) {    
-            return $addingClass->addingClassPPDB($request);
-        }else {
-            return $addingClass->addingClassDAPODIK($request);
-        }
-
-        
+        if ((!empty($request->status_siswa) && $request->status_siswa != null) && (!empty($request->keterangan) && $request->keterangan != null)) {
+            if(!empty($request->ppdb_id) && $request->ppdb_id != "" && $request->ppdb_id != null) {    
+                return $addingClass->addingClassPPDB($request);
+            }else {
+                return $addingClass->addingClassDAPODIK($request);
+            } 
+        } else {
+            return redirect()->back()->with(['flash_info' => 'Pastikan Field Terisi Dengan Benar di Master']);
+        }   
     }
 
     /**
@@ -1092,27 +1094,19 @@ class PPDBController extends Controller
      *
      * @return \App\Http\Responses\RedirectResponse
      */
-    public function cekHistory($id) {
-
-        $check_id = "ppdb_id";
-
-        if (str_contains($id, '-')) { 
-            $check_id = "dapodik_id";
+    public function cekHistory($id) { 
+        $data_kelas_dapodik = Data_kelas::where('dapodik_id', $id)->get();
+        $data_kelas_ppdb    = Data_kelas::where('ppdb_id', $id)->get();
+        $data_kelas_valid = '';
+        if($data_kelas_dapodik->isEmpty()) {
+            $data_kelas_valid = $data_kelas_ppdb;
+        } else {
+            $data_kelas_valid = $data_kelas_dapodik;
         }
-        $ppdb = '';
-        if (str_contains($id, '-')) {
-            $ppdb           = Dapodik::where($check_id, $id)->first();
-        }else {
-            $ppdb           = PPDB::where($check_id, $id)->first();
-        }
-        $data_kelas     = Data_kelas::where($check_id, $id)->first();
-        $data_kelas_for = Data_kelas::where($check_id, $id)->get();
-
         return new ViewResponse('backend.ppdb.cekhistory', 
-        [
-            'data_kelas'            => $data_kelas,
-            'ppdb'                  => $ppdb,
-            'data_kelas_for'        => $data_kelas_for
+        [   'data_kelas_dapodik'     => $data_kelas_dapodik,
+            'data_kelas_ppdb'        => $data_kelas_ppdb,
+            'data_kelas_valid'       => $data_kelas_valid
         ]);
     }
 
