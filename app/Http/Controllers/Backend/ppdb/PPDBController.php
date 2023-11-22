@@ -1948,31 +1948,75 @@ class PPDBController extends Controller
 
         public function indextest() {
             $ppdb = PPDB_system::all();
-            $SQLQuery =  "SELECT
-            schools.school_name AS school,
-            ppdb_system.*,
-            data_siswa_system.nisn,
-            data_siswa_system_2.sekolah,
-            data_siswa_system_2.unit,
-            data_siswa_system_2.kelas_utama,
-            data_siswa_system_2.sub_kelas,
-            data_siswa_system_2.status_siswa,
-            data_siswa_system_2.keterangan,
-            data_siswa_system.nama_ayah,
-            data_siswa_system.pekerjaan_ayah,
-            data_siswa_system.nama_ibu,
-            data_siswa_system.pekerjaan_ibu,
-            data_siswa_system.nama_wali,
-            data_siswa_system.pekerjaan_wali
-            FROM ppdb_system
-            INNER JOIN schools ON ppdb_system.school_site = schools.school_code
-            INNER JOIN data_siswa_system ON (data_siswa_system.dapodik_id = ppdb_system.dapodik_id or data_siswa_system.ppdb_id = ppdb_system.ppdb_id)
-            INNER JOIN data_siswa_system_2 ON (data_siswa_system_2.dapodik_id = ppdb_system.dapodik_id or data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id)
-            WHERE
-            data_siswa_system_2.status_siswa = 'aktif'
-            AND
-            schools.school_code IN ('JGK','CNR','PML') AND ppdb_system.stage IN ('TK','TK','TK','TK','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','SD','SD','SD','SD','SMP','SMP','SMP','SMP','SMA','SMA','SMA','SMA','KB','KB','KB','KB')
-            ORDER BY ppdb_system.created_at DESC";
+            $SQLQuery =  "SELECT 
+            schools.school_name AS school, 
+            ppdb_system.id,
+            ppdb_system.ppdb_id,
+            users_saved.email,
+            users_saved.password,
+            users_saved.phone,
+            users_saved.first_name,
+            users_saved.last_name,
+            ppdb_system.dapodik_id,
+            ppdb_system.registration_schedule_id,
+            ppdb_system.document_no,
+            ppdb_system.document_status,
+            ppdb_system.school_site,
+            ppdb_system.stage,
+            ppdb_system.classes,
+            ppdb_system.student_status,
+            ppdb_system.fullname,
+            ppdb_system.gender,
+            ppdb_system.place_of_birth,
+            ppdb_system.date_of_birth,
+            ppdb_system.religion,
+            ppdb_system.nationality,
+            ppdb_system.address,
+            ppdb_system.home_phone,
+            ppdb_system.hand_phone,
+            ppdb_system.school_origin,
+            ppdb_system.nis,
+            data_siswa_system.nisn, 
+            data_siswa_system_2.sekolah, 
+            data_siswa_system_2.unit, 
+            data_siswa_system_2.kelas_utama, 
+            data_siswa_system_2.sub_kelas, 
+            data_siswa_system_2.status_siswa, 
+            data_siswa_system_2.keterangan, 
+            data_siswa_system.nama_ayah, 
+            data_siswa_system.pekerjaan_ayah, 
+            data_siswa_system.nama_ibu, 
+            data_siswa_system.pekerjaan_ibu, 
+            data_siswa_system.nama_wali, 
+            data_siswa_system.pekerjaan_wali 
+          FROM 
+            ppdb_system 
+            INNER JOIN schools ON ppdb_system.school_site = schools.school_code 
+            INNER JOIN data_siswa_system ON (
+              data_siswa_system.dapodik_id = ppdb_system.dapodik_id 
+              or data_siswa_system.ppdb_id = ppdb_system.ppdb_id
+            ) 
+            INNER JOIN data_siswa_system_2 ON (
+              data_siswa_system_2.dapodik_id = ppdb_system.dapodik_id 
+              or data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id
+            ) 
+            INNER JOIN users_saved ON (
+              users_saved.user_id = ppdb_system.id_user
+              or users_saved.id = ppdb_system.id_user
+            ) 
+          WHERE 
+            data_siswa_system_2.status_siswa = 'aktif' 
+            AND schools.school_code IN ('JGK', 'CNR', 'PML') 
+            AND ppdb_system.stage IN (
+              'TK', 'TK', 'TK', 'TK', 'SD', 'SD', 'SD', 
+              'SD', 'SMP', 'SMP', 'SMP', 'SMP', 'SMA', 
+              'SMA', 'SMA', 'SMA', 'SD', 'SD', 'SD', 
+              'SD', 'SMP', 'SMP', 'SMP', 'SMP', 'SMA', 
+              'SMA', 'SMA', 'SMA', 'KB', 'KB', 'KB', 
+              'KB'
+            ) 
+          ORDER BY 
+            ppdb_system.created_at DESC;";
 
             $ppdb = DB::select($SQLQuery);
 
