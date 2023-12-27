@@ -63,7 +63,7 @@ $(document).ready(function() {
                         } else if (unitcheck == "KB") {    
                             $('#kelas_utama').append('<option value="KB-A">KB-A</option><option value="KB-B">KB-B</option>'); 
                         } else if (unitcheck == "TK") {    
-                          $('#kelas_utama').append('<option value="TK-A">KB-A</option><option value="TK-B">KB-B</option>'); 
+                          $('#kelas_utama').append('<option value="TK-A">TK-A</option><option value="TK-B">TK-B</option>'); 
                       }
 
                   $('#unit').change(function()

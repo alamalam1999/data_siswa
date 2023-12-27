@@ -39,7 +39,7 @@ Breadcrumbs::for('admin.ppdb.editaktifdapodik', function ($trail, $id) {
 });
 
 Breadcrumbs::for('admin.ppdb.cekhistory', function ($trail, $id) {
-    
+
     $trail->parent('admin.ppdb.index');
     $trail->push(__('labels.backend.access.ppdb.management'), route('admin.ppdb.cekhistory', $id));
 });
@@ -49,11 +49,15 @@ Breadcrumbs::for('admin.ppdb.data_siswa', function ($trail) {
     $trail->push('Data Siswa Aktif | ', route('admin.ppdb.data_siswa'));
 });
 
+Breadcrumbs::for('admin.ppdb.data_siswa_alazhar', function ($trail) {
+    $trail->push('Data Siswa Alazhar | ', route('admin.ppdb.data_siswa_alazhar'));
+});
+
 
 Breadcrumbs::for('admin.ppdb.siswa_tidak_aktif', function ($trail) {
     $trail->push('Data Siswa Tidak Aktif | ', route('admin.ppdb.siswa_tidak_aktif'));
 });
 
-Breadcrumbs::for('admin.ppdb.siswa_alumni' , function ($trail) {
+Breadcrumbs::for('admin.ppdb.siswa_alumni', function ($trail) {
     $trail->push('Data Siswa Alumni | ', route('admin.ppdb.siswa_alumni'));
 });

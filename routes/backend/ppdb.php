@@ -14,13 +14,18 @@ Route::group(['namespace' => 'ppdb'], function () {
     Route::get('dapodik', [PPDBController::class, 'dapodik'])->name('ppdb.dapodik');
     Route::get('admin/ppdb/{ppdb}/editaktif', [PPDBController::class, 'editaktif'])->name('ppdb.editaktif');
     Route::get('admin/ppdb/{ppdb}/editaktifdapodik', [PPDBController::class, 'editaktifdapodik'])->name('ppdb.editaktifdapodik');
+
+    Route::get('admin/ppdb/{ppdb}/editaktifalazhar', [PPDBController::class, 'editaktifalazhar'])->name('ppdb.editaktifalazhar');
+    Route::get('admin/ppdb/{ppdb}/editaktialazhar_dapodik', [PPDBController::class, 'editaktifalazhar_dapodik'])->name('ppdb.aditaktifalazhar_dapodik');
+
     Route::get('admin/ppdb/{dapodik}/editdapodik', [PPDBController::class, 'editdapodik'])->name('ppdb.editdapodik');
-    Route::get('/selected-dapodik',[PPDBController::class, 'deleteDapodikAll'])->name('ppdb.deleteddapodik');
-    Route::get('/selected-ppdb',[PPDBController::class, 'deletePPDBAll'])->name('ppdb.deletedppdb');
+    Route::get('/selected-dapodik', [PPDBController::class, 'deleteDapodikAll'])->name('ppdb.deleteddapodik');
+    Route::get('/selected-ppdb', [PPDBController::class, 'deletePPDBAll'])->name('ppdb.deletedppdb');
     Route::resource('ppdb', 'PPDBController', ['except' => ['show']]);
-    Route::post('ppdb/discount', [PPDBController::class, 'updateDiscountCode'])->name('ppdb.discount'); 
+    Route::post('ppdb/discount', [PPDBController::class, 'updateDiscountCode'])->name('ppdb.discount');
 
     Route::get('aktif', [PPDBController::class, 'data_siswa'])->name('ppdb.data_siswa');
+    Route::get('alazhar_aktif', [PPDBController::class, 'data_siswa_alazhar'])->name('ppdb.data_siswa_alazhar');
     Route::get('tidak_aktif', [PPDBController::class, 'siswa_tidak_aktif'])->name('ppdb.siswa_tidak_aktif');
     Route::get('alumni', [PPDBController::class, 'siswa_alumni'])->name('ppdb.siswa_alumni');
 
@@ -29,7 +34,7 @@ Route::group(['namespace' => 'ppdb'], function () {
     Route::post('ppdb/updatebiodata', [PPDBController::class, 'updateBiodata'])->name('ppdb.updatebiodata');
     Route::post('ppdb/updatebiodatadapodik', [PPDBController::class, 'updateBiodataDapodik'])->name('ppdb.updatebiodatadapodik');
     Route::post('ppdb/updatekontak', [PPDBController::class, 'updateKontak'])->name('ppdb.updatekontak');
-    Route::post('ppdb/updatekontakdapodik',[PPDBController::class, 'updateKontakDapodik'])->name('ppdb.updatekontakdapodik');
+    Route::post('ppdb/updatekontakdapodik', [PPDBController::class, 'updateKontakDapodik'])->name('ppdb.updatekontakdapodik');
     Route::post('ppdb/addclass', [PPDBController::class, 'addClass'])->name('ppdb.addclass');
 
     Route::post('ppdb/showclasses', [PPDBController::class, 'showClasses'])->name('ppdb.showclasses');
@@ -41,14 +46,14 @@ Route::group(['namespace' => 'ppdb'], function () {
     Route::post('ppdb/get',  [PPDBTableController::class, '__invoke'])->name('ppdb.get');
     Route::post('ppdb/get_dapodik', [PPDBTableController::class, '__Invoke_dapodik'])->name('ppdb.getdapodik');
     Route::post('ppdb/aktif',  [PPDBTableAktifController::class, '__invoke_aktif'])->name('ppdb.aktif');
+    Route::post('ppdb/aktif_alazhar', [PPDBTableAktifController::class, '__invoke_aktif_alazhar'])->name('ppdb.aktif_alazhar');
     Route::post('ppdb/tidak_aktif', [PPDBTableTidakAktifController::class, '__Invoke_tidak_aktif'])->name('ppdb.tidak_aktif');
     Route::post('ppdb/alumni', [PPDBTableAlumniController::class, '__Invoke_alumni'])->name('ppdb.alumni');
-    
+
     Route::get('ppdb/datakelas', [PPDBTableController::class, '__invoke_datakelas'])->name('ppdb.datakelas');
     Route::get('fetch-students', [PPDBController::class, 'fetchstudents']);
     Route::get('fetch-datakelas', [PPDBController::class, 'fetchdatakelas']);
 
 
     Route::post('upload_fhoto', [PPDBController::class, 'upload_fhoto'])->name('upload_fhoto.get');
-    
 });

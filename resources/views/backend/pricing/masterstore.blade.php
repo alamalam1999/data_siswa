@@ -68,6 +68,7 @@
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
+                        <option value="TK">TKIA</option>
                     </select>
                 <!--end::Input-->
                 </div>
@@ -97,12 +98,13 @@
 
                      <!--begin::Select-->
                         <select id="" class="form-select form-select mb-4" name="unit">
-                        <option value="">Pilih Unit</option>
-                        <option value="KB">KB</option>
-                        <option value="TK">TK</option>
-                        <option value="SD">SD</option>
-                        <option value="SMP">SMP</option>
-                        <option value="SMA">SMA</option>
+                            <option value="">Pilih Unit</option>
+                            <option value="KB">KB</option>
+                            <option value="TK">TK</option>
+                            <option value="SD">SD</option>
+                            <option value="SMP">SMP</option>
+                            <option value="SMA">SMA</option>
+                            <option value="TKIA">TKIA</option>
                         </select>
                     <!--end::Select-->   
 
