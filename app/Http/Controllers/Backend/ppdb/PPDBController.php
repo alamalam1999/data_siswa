@@ -69,10 +69,19 @@ class PPDBController extends Controller
 
     public function fetchstudents()
     {
-
         $masterkelas = MasterKelas::all();
         return response()->json([
             'masterkelas' => $masterkelas
+        ]);
+    }
+
+    public function fetchkelas(Request $request)
+    {
+
+        $teble = $request->query('object');
+        $kelas = DB::table($teble)->get();
+        return response()->json([
+            'kelas' => $kelas
         ]);
     }
 
@@ -1105,7 +1114,7 @@ class PPDBController extends Controller
             $check_pk = "dapodik_id";
         }
 
-        Data_kelas::where($check_pk, $request->id_check)->update(['show_table' => 0]);
+        Data_kelas::where($check_pk, trim($request->id_check, "-"))->update(['show_table' => 0]);
         $data_kelas_update = Data_kelas::where('id', $request->id_classes)->first();
         $data_kelas_update->show_table = 1;
         if ($request->aktivasi == false) {

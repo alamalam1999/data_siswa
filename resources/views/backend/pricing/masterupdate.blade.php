@@ -33,7 +33,40 @@
             </div>
         </div>
         <!--end::Card header-->
-
+        <!--begin::Card body-->
+        <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+            <div class="d-flex flex-wrap gap-5">       
+                <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                    <label class="form-label fw-bolder text-dark">Unit</label>
+                    <select id="school_site" name="unit" class="form-control form-control-lg form-control-solid" name="" id="">
+                        <option value="PML">PML</option>
+                        <option value="JGK">JGK</option>
+                        <option value="CNR">CNR</option>
+                    </select>
+                </div>
+                <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                    <label class="form-label fw-bolder text-dark">Jenjang</label>
+                    <select id="stage" name="jenjang" class="form-control form-control-lg form-control-solid" name="" id="">
+                        <option value="TK">TK</option>
+                        <option value="KB">KB</option>
+                        <option value="SD">SD</option>
+                        <option value="SMP">SMP</option>
+                        <option value="SMA">SMA</option>
+                    </select>
+                </div>
+                <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                    <label class="form-label fw-bolder text-dark">Type</label>
+                    <select id="checktable" name="type" class="form-control form-control-lg form-control-solid" name="" id="">
+                        <option value="ppdb">PPDB</option>
+                        <option value="dapodik">DAPODIK</option>
+                    </select>
+                </div>          
+            </div>
+        </form>
+        </div>
+        <!--end::Card body-->
         <!--begin::Card body-->
         <div class="card-body">
             <!--begin::Input group-->
@@ -48,24 +81,8 @@
                    <!--begin::Label-->
                    <label class="form-label fw-bolder text-dark">Kelas Utama</label>
                    <!--end::Label-->
-                    <select class="form-control mb-4" name="kategori_kelas" required>
-                        <option value="{{ $masterupdate->kategori }}">{{ $masterupdate->kategori }}</option>
-                        <option value="TK-A">TK-A</option>
-                        <option value="TK-B">TK-B</option>
-                        <option value="KB-A">KB-A</option>
-                        <option value="KB-B">KB-B</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
+                    <select id="kelas_utama" class="form-control mb-4" name="kategori_kelas" required>
+
                     </select>
                 <!--end::Input-->
                    <!--end::Input-->
@@ -177,11 +194,51 @@
 
 
 @section('pagescript')
-    <script>
-        
+<script>
+    $(document).ready(function() {   
+        var school_site = document.getElementById("school_site").value;
+        var stage  = document.getElementById("stage").value;
+        var checkppdb = document.getElementById("checktable").value;
 
+        $('#checktable').change(function() {
+            var checkppdb = $(this).val();
+            location.reload();
+        })
 
-    </script>
+        $('#stage').change(function() {
+            var stage  = $(this).val();
+            location.reload();          
+        });
+
+        $('#school_site').change(function() {
+            var school_site  = $(this).val();
+            location.reload();          
+        });
+                $.ajax({
+                    type: "GET",
+                    url:  hostBaseUrl+"admin/fetch-kelas?object="+checkppdb,
+                    dataType: "json",
+                    success: function (response) {   
+                        var lookup = {};
+                        var items = response.kelas;
+                        var result = [];
+                        for (var item, i = 0; item = items[i++];) {
+                            if (school_site == item.school_site && stage == item.stage) {
+                                var classes = item.classes;
+                                    if (!(classes in lookup)) {
+                                        lookup[classes] = 1;
+                                        result.push(classes);
+                                        // alert(result);
+                                        $('#kelas_utama').append(
+                                            '<option value="'+classes+'">'+classes+'</option>'
+                                        ); 
+                                    }
+                            }
+                        }
+                    }
+                });  
+    });
+</script>
 
 
 @stop

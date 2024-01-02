@@ -52,8 +52,10 @@ Route::group(['namespace' => 'ppdb'], function () {
 
     Route::get('ppdb/datakelas', [PPDBTableController::class, '__invoke_datakelas'])->name('ppdb.datakelas');
     Route::get('fetch-students', [PPDBController::class, 'fetchstudents']);
+    Route::get('fetch-kelas',    [PPDBController::class, 'fetchkelas']);
     Route::get('fetch-datakelas', [PPDBController::class, 'fetchdatakelas']);
 
+    Route::get('fetch-kelas/dapodik',    [PPDBController::class, 'fetchkelasdapodik']);
 
     Route::post('upload_fhoto', [PPDBController::class, 'upload_fhoto'])->name('upload_fhoto.get');
 });

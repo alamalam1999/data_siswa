@@ -684,7 +684,9 @@ class PricingController extends Controller
                 array_push($data_parent, ['name_father' => $dapodik_siswas[24], 'name_mother' => $dapodik_siswas[30], 'wali' => $dapodik_siswas[36]]);
                 $class = "";
                 if (str_contains(strtolower($dapodik_siswa[0][2][0]), 'pamulang') && str_contains($dapodik_siswa[0][1][0], 'TK')) {
-                    $class = 'TKIA';
+                    $class = $dapodik_siswas[42];
+                } else if (str_contains(strtolower($dapodik_siswa[0][2][0]), 'pamulang') && str_contains($dapodik_siswa[0][1][0], 'SD')) {
+                    $class = $dapodik_siswas[42];
                 } else if ($dapodik_siswas[42] == null || str_contains(strtolower($dapodik_siswa[0][2][0]), 'pamulang') || !$dapodik_siswas[42]) {
                     $class = 'KB';
                 } else if (str_contains($dapodik_siswas[42], 'A') && strlen($dapodik_siswas[42]) <= 2 && str_contains(strtolower($dapodik_siswa[0][2][0]), 'jagakarsa') && str_contains($dapodik_siswa[0][1][0], 'TK')) {
