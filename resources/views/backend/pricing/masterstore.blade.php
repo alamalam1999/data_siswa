@@ -37,8 +37,6 @@
 
         <!--begin::Card body-->
         <div class="card-body">
-            <form action="" method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}
             <div class="d-flex flex-wrap gap-5">       
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
                     <label class="form-label fw-bolder text-dark">Unit</label>
@@ -66,7 +64,6 @@
                     </select>
                 </div>          
             </div>
-        </form>
         </div>
         <!--end::Card body-->
 

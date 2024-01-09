@@ -132,7 +132,7 @@ class PPDBTableAktifController extends Controller
         INNER JOIN data_siswa_system_2 ON (data_siswa_system_2.dapodik_id = ppdb_system.dapodik_id or data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id)
         ' . implode(' ', $innerCondition) . '
         WHERE
-        (ppdb_system.stage != "TK" && ppdb_system.school_site != "PML") AND
+        (ppdb_system.stage NOT IN ("SD","TK") && ppdb_system.school_site != "PML") AND
         data_siswa_system_2.status_siswa = "aktif"
         AND      
         ' . implode(' AND ', $whereCondition) . ' 
@@ -189,9 +189,6 @@ class PPDBTableAktifController extends Controller
         $whereCondition = [];
 
         // BUILD CRITERIA
-
-
-
         if ($school != 'ALL') {
             array_push($whereCondition, "schools.school_code = '" . $school . "'");
         } else {
@@ -262,7 +259,7 @@ class PPDBTableAktifController extends Controller
         INNER JOIN data_siswa_system_2 ON (data_siswa_system_2.dapodik_id = ppdb_system.dapodik_id or data_siswa_system_2.ppdb_id = ppdb_system.ppdb_id)
         ' . implode(' ', $innerCondition) . '
         WHERE
-        (ppdb_system.stage = "TK" && ppdb_system.school_site = "PML") AND
+        (ppdb_system.stage IN ("SD","TK") && ppdb_system.school_site = "PML") AND
         data_siswa_system_2.status_siswa = "aktif"
         AND      
         ' . implode(' AND ', $whereCondition) . ' 

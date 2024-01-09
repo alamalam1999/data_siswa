@@ -703,7 +703,7 @@
                       <div class="row fv-row">
                         <!--begin::Col-->
                         <div class="col-12">
-                          <select name="status_siswa" class="form-select">
+                          <select name="status_siswa" class="form-select" required>
                             <option value="">Pilih</option>
                             <option value="Siswa Luar">Siswa Luar Avicenna</option>
                             <option value="Siswa Dalam">Siswa Dalam Avicenna</option>

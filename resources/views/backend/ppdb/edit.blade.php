@@ -484,7 +484,7 @@
                           <!--begin::Col-->
                           <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Nama Kepala Sekolah</label>
-                                <input value="{{ !empty($data_kelas->nama_kepala_sekolah) ? $data_kelas->nama_kepala_sekolah : '' }}" id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nama_kepala_sekolah" autocomplete="off" />
+                                <input value="{{ !empty($data_kelas->nama_kepala_sekolah) ? $data_kelas->nama_kepala_sekolah : '' }}" id="nama_kepala_sekolah" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nama_kepala_sekolah" autocomplete="off" required/>
                           </div>
                          <!--end::Col-->
 
@@ -496,7 +496,7 @@
                                       <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
                                       <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
                                 </div>
-                                      <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nama_wali_kelas" autocomplete="off" />
+                                      <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nama_wali_kelas" autocomplete="off" required/>
                                       <div class="informasiinfo">
                                         <div class="mt-3 mb-3" id='input-cont1'>
                                         </div>
@@ -513,8 +513,8 @@
                                   <label class="form-label fw-bolder text-dark fs-6">Nama Wali Kelas</label>
                                   <label class="form-label text-danger fw-bolder fs-7" style="padding-left: 143px">(+) wali kelas</label>
                             </div>
-                                  <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid mb-4" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" />
-                                  <input value="{{ !empty($data_kelas->nama_wali_kelas_2) ? $data_kelas->nama_wali_kelas_2 : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas_2" autocomplete="off" />
+                                  <input value="{{ !empty($data_kelas->nama_wali_kelas) ? $data_kelas->nama_wali_kelas : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid mb-4" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas" autocomplete="off" required/>
+                                  <input value="{{ !empty($data_kelas->nama_wali_kelas_2) ? $data_kelas->nama_wali_kelas_2 : '' }}" id="nama_wali_kelas" class="form-control form-control-lg form-control-solid" type="text" placeholder="Otomatis muncul jika memilih Nama Kelas" name="nama_wali_kelas_2" autocomplete="off" required/>
                                   <div class="informasiinfo">
                                     <div class="mt-3 mb-3" id='input-cont1'>
                                     </div>
@@ -568,7 +568,7 @@
                                               <label class="form-label fw-bolder text-dark fs-6">Status Siswa</label>
                                               <!--begin::Switch-->
                                         <div>
-                                          <select id="" class="form-select form-select-solid" name="status_siswa">
+                                          <select id="" class="form-select form-select-solid" name="status_siswa" required>
                                           <option value="{{ !empty($data_kelas->status_siswa) ? $data_kelas->status_siswa : '' }}">{{ !empty($data_kelas->status_siswa) ? $data_kelas->status_siswa : 'Pilih Status' }}</option>
                                           <option value="Aktif">Aktif</option>
                                           <option value="Tidak aktif">Tidak Aktif</option>
@@ -583,7 +583,7 @@
                                               <label class="form-label fw-bolder text-dark fs-6">Keterangan</label>
                                         <!--begin::Switch-->
                                         <div>
-                                          <select id="" class="form-select form-select-solid" name="keterangan">
+                                          <select id="" class="form-select form-select-solid" name="keterangan" required>
                                           <option value="{{ !empty($data_kelas->keterangan) ? $data_kelas->keterangan : '' }}">{{ !empty($data_kelas->keterangan) ? $data_kelas->keterangan : 'Pilih Keterangan' }}</option>
                                           <option value="Aktif">Aktif</option>
                                           <option value="Lulus">Lulus</option>
