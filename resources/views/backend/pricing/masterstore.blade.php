@@ -197,30 +197,32 @@
 
 @section('pagescript')
 <script>
-    $(document).ready(function() {   
+   $(document).ready(function() {
         var school_site = document.getElementById("school_site").value;
         var stage  = document.getElementById("stage").value;
         var checkppdb = document.getElementById("checktable").value;
 
         $('#checktable').change(function() {
-            var checkppdb = $(this).val();
-            location.reload();
+            var checkppdb = $(this).val();            
+            fetchstudent(checkppdb, stage, school_site);
         })
 
         $('#stage').change(function() {
-            var stage  = $(this).val();
-            location.reload();          
+            var stage  = $(this).val();                 
+            fetchstudent(checkppdb, stage, school_site);
         });
 
         $('#school_site').change(function() {
-            var school_site  = $(this).val();
-            location.reload();          
+            var school_site  = $(this).val();                 
+            fetchstudent(checkppdb, stage, school_site);
         });
-                $.ajax({
+
+        function fetchstudent(checkppdb, stage, school_site) {
+            $.ajax({
                     type: "GET",
                     url:  hostBaseUrl+"admin/fetch-kelas?object="+checkppdb,
                     dataType: "json",
-                    success: function (response) {   
+                    success: function (response) {    
                         var lookup = {};
                         var items = response.kelas;
                         var result = [];
@@ -236,9 +238,11 @@
                                         ); 
                                     }
                             }
-                        }
+                        }     
                     }
-                });  
+                });
+            }
+                
     });
 </script>
 
