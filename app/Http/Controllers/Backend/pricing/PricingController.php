@@ -123,7 +123,7 @@ class PricingController extends Controller
     public function masterstore()
     {
         $master = "storedush";
-        $master = DB::table('PPDB')->where([
+        $master = DB::table('ppdb')->where([
             ['school_site', '=', 'PML'],
             ['stage', '=', 'TK']
         ])->get()->unique('classes');
