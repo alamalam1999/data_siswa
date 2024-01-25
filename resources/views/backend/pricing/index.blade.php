@@ -48,12 +48,12 @@
 
         <p><strong>* Pastikan data import Dapodik NIS dan NISN Lengkap dan Terisi</strong></p>
     </div>
-    <div style="opacity: 0.1;">
+    {{-- <div style="opacity: 0.1;">
        <strong><a href="{{ route('admin.import.deletedapodik') }}"> Delete Dapodik & PPDB</a></strong> 
     </div>
     <div style="opacity: 0.1;">
         <strong><a href="{{ route('admin.import.deleteallsystem') }}">Delete All Siswa</a></strong> 
-    </div>
+    </div> --}}
 </div>
 
 @endsection
