@@ -37,6 +37,7 @@
 
         <!--begin::Card body-->
         <div class="card-body">
+            <form id="foo" name="foo">
             <div class="d-flex flex-wrap gap-5">       
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
                     <label class="form-label fw-bolder text-dark">Unit</label>
@@ -62,8 +63,20 @@
                         <option value="ppdb">PPDB</option>
                         <option value="dapodik">DAPODIK</option>
                     </select>
+                </div>  
+                <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                    <label class="form-label fw-bolder text-dark">Action</label>
+                    <button type="submit" data-kt-contacts-type="submit" class="btn btn-primary form-control form-control-lg ">
+                        <span class="indicator-label">
+                            Save
+                        </span>
+                        <span class="indicator-progress">
+                            Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
                 </div>          
             </div>
+        </form>
         </div>
         <!--end::Card body-->
 
@@ -82,7 +95,7 @@
                 <label class="form-label fw-bolder text-dark">Kelas Utama</label>
                 <!--end::Label-->
                     <select id="kelas_utama" class="form-control mb-4" name="kategori_kelas" required>
-
+                     
                     </select>
                 <!--end::Input-->
                 </div>
@@ -198,36 +211,42 @@
 @section('pagescript')
 <script>
    $(document).ready(function() {
+
+    $("#foo").submit(function(event) {
+        event.preventDefault();
+        var form = $(this);
+
         var school_site = document.getElementById("school_site").value;
         var stage  = document.getElementById("stage").value;
         var checkppdb = document.getElementById("checktable").value;
 
         $('#checktable').change(function() {
             var checkppdb = $(this).val();            
-            fetchstudent(checkppdb, stage, school_site);
         })
 
         $('#stage').change(function() {
-            var stage  = $(this).val();                 
-            fetchstudent(checkppdb, stage, school_site);
+            var stage  = $(this).val();
         });
 
         $('#school_site').change(function() {
-            var school_site  = $(this).val();                 
-            fetchstudent(checkppdb, stage, school_site);
+            var school_site  = $(this).val();  
         });
 
-        function fetchstudent(checkppdb, stage, school_site) {
-            $.ajax({
-                    type: "GET",
-                    url:  hostBaseUrl+"admin/fetch-kelas?object="+checkppdb,
-                    dataType: "json",
-                    success: function (response) {    
+
+        alert("sedang proses");
+
+        $.ajax({ 
+            url: hostBaseUrl+"admin/fetch-kelas?object="+checkppdb+"&unit="+school_site+"&jenjang="+stage, // this is a Google Sheet
+            type: 'POST',
+            dataType: 'json',
+                    success: function (response) {  
+                        // alert('masuk');
                         var lookup = {};
-                        var items = response.kelas;
+                        var items = response.kelas;                    
                         var result = [];
+                        $('#kelas_utama').empty();
                         for (var item, i = 0; item = items[i++];) {
-                            if (school_site == item.school_site && stage == item.stage) {
+                            console.log(item.classes);                         
                                 var classes = item.classes;
                                     if (!(classes in lookup)) {
                                         lookup[classes] = 1;
@@ -237,13 +256,15 @@
                                             '<option value="'+classes+'">'+classes+'</option>'
                                         ); 
                                     }
-                            }
-                        }     
+                       
+                        }   
+
                     }
-                });
-            }
-                
+         });
     });
+               
+});
+
 </script>
 
 

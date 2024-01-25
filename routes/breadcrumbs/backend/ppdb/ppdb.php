@@ -61,3 +61,7 @@ Breadcrumbs::for('admin.ppdb.siswa_tidak_aktif', function ($trail) {
 Breadcrumbs::for('admin.ppdb.siswa_alumni', function ($trail) {
     $trail->push('Data Siswa Alumni | ', route('admin.ppdb.siswa_alumni'));
 });
+
+// Breadcrumbs::for('admin.ppdb.fetch-kelas', function ($trail) {
+//     $trail->push('Data Siswa | ', route('admin.ppdb.fetch-kelas'));
+// });

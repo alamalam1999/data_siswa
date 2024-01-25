@@ -4,55 +4,56 @@ namespace App\Http\Controllers\Backend\Pricing;
 
 use Carbon\Carbon;
 use App\Models\PPDB;
+use App\Models\Users;
+use App\Models\Dapodik;
 use App\Models\Payment;
 use App\Models\Pricing;
 use App\Models\Register;
 use App\Models\Data_siswa;
 use App\Imports\DataImport;
 use App\Imports\PPDBImport;
+use App\Imports\UserImport;
+use App\Models\Data_siswa1;
 use App\Models\Data_siswa2;
 use App\Models\Data_siswa3;
 use App\Models\Data_siswa4;
 use App\Models\MasterKelas;
+use App\Models\PPDB_system;
 use App\Exports\SiswaExport;
 use App\Imports\DataImport2;
 use App\Imports\DataImport3;
 use App\Imports\DataImport4;
+use App\Models\Users_system;
 use Illuminate\Http\Request;
 use App\Models\PPDBInterview;
+use App\Imports\DapodikImport;
 use App\Imports\PaymentImport;
 use App\Imports\PricingImport;
+use App\Models\Dapodik_system;
+use App\Models\Payment_system;
+use App\Models\ReRegistration;
 use App\Imports\InterviewImport;
 use App\Imports\ReregisterImport;
+use App\Models\Data_siswa_system;
+use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\DB;
+use App\Models\Data_siswa_system_1;
+use App\Models\Data_siswa_system_2;
+use App\Models\Data_siswa_system_3;
+use App\Models\Data_siswa_system_4;
+use App\Models\Reregistrasi_system;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\ViewResponse;
 use App\Models\RegistrationSchedule;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Ppdb_interviews_system;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Responses\RedirectResponse;
 use App\Repositories\Backend\PPDBRepository;
 use Symfony\Component\VarDumper\Cloner\Data;
 use App\Http\Requests\Backend\Pricing\PricingPermissionRequest;
-use App\Imports\DapodikImport;
-use App\Imports\UserImport;
-use App\Models\Dapodik;
-use App\Models\Dapodik_system;
-use App\Models\Data_siswa1;
-use App\Models\Data_siswa_system;
-use App\Models\Data_siswa_system_1;
-use App\Models\Data_siswa_system_2;
-use App\Models\Data_siswa_system_3;
-use App\Models\Data_siswa_system_4;
-use App\Models\Payment_system;
-use App\Models\Ppdb_interviews_system;
-use App\Models\PPDB_system;
-use App\Models\Reregistrasi_system;
-use App\Models\ReRegistration;
-use App\Models\Users;
-use App\Models\Users_system;
-use Illuminate\Support\Facades\Date;
-use PhpParser\Node\Stmt\TryCatch;
 
 class PricingController extends Controller
 {
@@ -121,8 +122,11 @@ class PricingController extends Controller
 
     public function masterstore()
     {
-
         $master = "storedush";
+        $master = DB::table('PPDB')->where([
+            ['school_site', '=', 'PML'],
+            ['stage', '=', 'TK']
+        ])->get()->unique('classes');
         $data = [
             'master' => $master
         ];

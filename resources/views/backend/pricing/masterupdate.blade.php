@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', app_name() . ' | Pricing Management')
+@section('title', app_name() . ' | Master Management')
 
 @section('breadcrumb-links')
 
@@ -23,9 +23,9 @@
             
         </div>       
     </div>
-    
+</div>  
 
-    <div class="card">
+<div class="card">
         <!--begin::Card header-->
         <div class="card-header bg-light">
             <div class="card-title">
@@ -35,8 +35,7 @@
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body">
-            <form action="" method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}
+            <form id="foo" name="foo">
             <div class="d-flex flex-wrap gap-5">       
                 <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
                     <label class="form-label fw-bolder text-dark">Unit</label>
@@ -62,7 +61,18 @@
                         <option value="ppdb">PPDB</option>
                         <option value="dapodik">DAPODIK</option>
                     </select>
-                </div>          
+                </div>   
+                <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                    <label class="form-label fw-bolder text-dark">Action</label>
+                    <button type="submit" data-kt-contacts-type="submit" class="btn btn-primary form-control form-control-lg ">
+                        <span class="indicator-label">
+                            Save
+                        </span>
+                        <span class="indicator-progress">
+                            Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                </div>        
             </div>
         </form>
         </div>
@@ -176,69 +186,69 @@
             </div>
 
         </form>
-        </div>
-       
-        
-      
+        </div>   
         <!--end::Card header-->
-    </div>  
-</div>
-
-
-
-
-
-
-
+</div>  
 @endsection
-
 
 @section('pagescript')
 <script>
-    $(document).ready(function() {   
-        var school_site = document.getElementById("school_site").value;
-        var stage  = document.getElementById("stage").value;
-        var checkppdb = document.getElementById("checktable").value;
-
-        $('#checktable').change(function() {
-            var checkppdb = $(this).val();
-            location.reload();
-        })
-
-        $('#stage').change(function() {
-            var stage  = $(this).val();
-            location.reload();          
-        });
-
-        $('#school_site').change(function() {
-            var school_site  = $(this).val();
-            location.reload();          
-        });
-                $.ajax({
-                    type: "GET",
-                    url:  hostBaseUrl+"admin/fetch-kelas?object="+checkppdb,
-                    dataType: "json",
-                    success: function (response) {   
-                        var lookup = {};
-                        var items = response.kelas;
-                        var result = [];
-                        for (var item, i = 0; item = items[i++];) {
-                            if (school_site == item.school_site && stage == item.stage) {
-                                var classes = item.classes;
-                                    if (!(classes in lookup)) {
-                                        lookup[classes] = 1;
-                                        result.push(classes);
-                                        // alert(result);
-                                        $('#kelas_utama').append(
-                                            '<option value="'+classes+'">'+classes+'</option>'
-                                        ); 
-                                    }
-                            }
-                        }
-                    }
-                });  
-    });
-</script>
+    $(document).ready(function() {
+ 
+     $("#foo").submit(function(event) {
+         event.preventDefault();
+         var form = $(this);
+ 
+         var school_site = document.getElementById("school_site").value;
+         var stage  = document.getElementById("stage").value;
+         var checkppdb = document.getElementById("checktable").value;
+ 
+         $('#checktable').change(function() {
+             var checkppdb = $(this).val();            
+         })
+ 
+         $('#stage').change(function() {
+             var stage  = $(this).val();
+         });
+ 
+         $('#school_site').change(function() {
+             var school_site  = $(this).val();  
+         });
+ 
+ 
+         alert("sedang proses");
+ 
+         $.ajax({ 
+             url: hostBaseUrl+"admin/fetch-kelas?object="+checkppdb+"&unit="+school_site+"&jenjang="+stage, // this is a Google Sheet
+             type: 'POST',
+             dataType: 'json',
+                     success: function (response) {  
+                         // alert('masuk');
+                         var lookup = {};
+                         var items = response.kelas;                    
+                         var result = [];
+                         $('#kelas_utama').empty();
+                         for (var item, i = 0; item = items[i++];) {
+                             console.log(item.classes);                         
+                                 var classes = item.classes;
+                                     if (!(classes in lookup)) {
+                                         lookup[classes] = 1;
+                                         result.push(classes);
+                                         // alert(result);
+                                         $('#kelas_utama').append(
+                                             '<option value="'+classes+'">'+classes+'</option>'
+                                         ); 
+                                     }
+                        
+                         }   
+ 
+                     }
+          });
+     });
+                
+ });
+ 
+ </script>
 
 
 @stop

@@ -77,9 +77,15 @@ class PPDBController extends Controller
 
     public function fetchkelas(Request $request)
     {
-
         $teble = $request->query('object');
-        $kelas = DB::table($teble)->get();
+        $unit = $request->query('unit');
+        $jenjang = $request->query('jenjang');
+
+        $kelas = DB::table($teble)->where([
+            ['school_site', '=', $unit],
+            ['stage',       '=', $jenjang]
+        ])->get();
+
         return response()->json([
             'kelas' => $kelas
         ]);
@@ -2043,6 +2049,8 @@ class PPDBController extends Controller
             ppdb_system.hand_phone,
             ppdb_system.school_origin,
             ppdb_system.nis,
+            concat(ppdb_system.school_site,'-',
+            ppdb_system.stage) as unit_lms,
             data_siswa_system.nisn, 
             data_siswa_system_2.sekolah, 
             data_siswa_system_2.unit, 
