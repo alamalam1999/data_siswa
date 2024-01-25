@@ -66,7 +66,7 @@
                     <label class="form-label fw-bolder text-dark">Action</label>
                     <button type="submit" data-kt-contacts-type="submit" class="btn btn-primary form-control form-control-lg ">
                         <span class="indicator-label">
-                            Save
+                            Cari
                         </span>
                         <span class="indicator-progress">
                             Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>

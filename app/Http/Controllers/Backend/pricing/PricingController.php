@@ -65,55 +65,37 @@ class PricingController extends Controller
      */
     public function index(Request $request)
     {
-        // $pricings = Pricing::all();
-        // debug($pricings);
-
-
         $pricings = Pricing::where([
             ['price_group',      '=', 'gelombang 1'],
         ])->get();
-
         $pricings_wave2 = Pricing::where([
             ['price_group',      '=', 'gelombang 2'],
         ])->get();
-
         debug($pricings);
-
-
         $data_siswa = Data_siswa::all();
-
         $data = [
             'data_siswa' => $data_siswa,
             'pricings' => $pricings,
             'pricings_wave2' => $pricings_wave2
         ];
-
         return new ViewResponse('backend.pricing.index', $data);
     }
 
     public function indexwave2(Request $request)
     {
-        // $pricings = Pricing::all();
-        // debug($pricings);
-
-
         $pricings_wave2 = Pricing::where([
             ['price_group',      '=', 'gelombang 2'],
         ])->get();
-
         $data = [
             'pricings_wave2' => $pricings_wave2
         ];
-
         return new ViewResponse('backend.pricing.indexwave2', $data);
     }
 
 
     public function master()
     {
-
         $master = MasterKelas::orderBy('sekolah', 'ASC')->get();
-
         $data = [
             'master' => $master
         ];
@@ -135,54 +117,41 @@ class PricingController extends Controller
 
     public function masterinsert(Request $request)
     {
-
         $masterinsert = new MasterKelas;
-
         $masterinsert->kategori = $request->kategori_kelas;
         $masterinsert->kelas = $request->nama_kelas;
         $masterinsert->unit = $request->unit;
         $masterinsert->sekolah = $request->sekolah;
         $masterinsert->kepala_sekolah = $request->kepala_sekolah;
         $masterinsert->wali_kelas = $request->wali_kelas;
-
         $masterinsert->save();
-
         return redirect()->back()->withFlashSuccess(__('alerts.backend.access.users.session_insert'));
     }
 
     public function masterDelete(Request $request)
     {
         $masterdelete = MasterKelas::where('id', $request->item_value)->first();
-
         $masterdelete->delete();
-
         return redirect()->back()->withFlashSuccess(__('alerts.backend.access.users.session_deleted'));
     }
 
     public function masterdone(Request $request)
     {
-
         $masterupdate = MasterKelas::where('id', $request->id_item)->first();
-
         $masterupdate->kategori = $request->kategori_kelas;
         $masterupdate->kelas = $request->nama_kelas;
         $masterupdate->unit = $request->unit;
         $masterupdate->sekolah = $request->sekolah;
         $masterupdate->kepala_sekolah = $request->kepala_sekolah;
         $masterupdate->wali_kelas = $request->wali_kelas;
-
         $masterupdate->save();
-
         return redirect()->back()->withFlashSuccess(__('alerts.backend.access.users.session_updated'));
     }
 
     public function masterUpdate($id)
     {
         $masterupdate = MasterKelas::where('id', $id)->first();
-
-        $data = [
-            'masterupdate' => $masterupdate
-        ];
+        $data = ['masterupdate' => $masterupdate];
         return new ViewResponse('backend.pricing.masterupdate', $data);
     }
 
@@ -898,26 +867,19 @@ class PricingController extends Controller
     {
 
         // FILE ADDITIONAL 2
-
         $pricings = 'ada';
-
         $pricings_wave2 = 12;
-
         //$reregistration = Register::all();
-
         $reregistration = Register::where('ppdb.document_status', 7)
             ->join('ppdb', 'ppdb.id', '=', 'reregister.ppdb_id')
             ->select('reregister.*')
             ->get();
-
         debug($reregistration);
-
         $data = [
             'pricings' => $pricings,
             'pricings_wave2' => $pricings_wave2,
             'reregistration' => $reregistration
         ];
-
         return new ViewResponse('backend.pricing.check_excel2', $data);
     }
 
@@ -926,24 +888,20 @@ class PricingController extends Controller
         // FILE PAYMENT
         $pricings = 'ada';
         $pricings_wave2 = 12;
-
         $reregistration = Register::where('ppdb.document_status', 7)
             ->join('ppdb', 'ppdb.id', '=', 'reregister.ppdb_id')
             ->select('reregister.*')
             ->get();
-
         $payment_reregistration = Payment::where('ppdb.document_status', 7)
             ->join('ppdb', 'ppdb.id', '=', 'payment.ppdb_id')
             ->select('payment.*')
             ->get();
-
         debug($payment_reregistration);
         $data = [
             'pricings' => $pricings,
             'pricings_wave2' => $pricings_wave2,
             'payment_reregistration' => $payment_reregistration
         ];
-
         return new ViewResponse('backend.pricing.check_payment', $data);
     }
 
@@ -960,7 +918,6 @@ class PricingController extends Controller
         Data_siswa3::where('id', '!=', '')->delete();
         Data_siswa4::where('id', '!=', '')->delete();
         Dapodik::where('id', '!=', '')->delete();
-
         return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil Menghapus semua data']);
     }
 
@@ -976,7 +933,6 @@ class PricingController extends Controller
         Data_siswa_system_2::where('id', '!=', '')->delete();
         Data_siswa_system_3::where('id', '!=', '')->delete();
         Data_siswa_system_4::where('id', '!=', '')->delete();
-
         return redirect()->route('admin.import.index')->with(['flash_success' => 'Berhasil Menghapus semua data Aktif']);
     }
 }
