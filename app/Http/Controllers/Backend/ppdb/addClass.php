@@ -909,7 +909,7 @@ class addClass extends Controller
 
             if ($ppdb_interviews_system == '' && $ppdb_interviews_system == null && empty($ppdb_interviews_system)) {
                 $ppdb_interviews_system                                 = new Ppdb_interviews_system();
-                $ppdb_interviews_system->dapodik_id                     = $users_check->dapodik_id;
+                $ppdb_interviews_system->dapodik_id                     = $users_check->id;
                 $ppdb_interviews_system->school_recomendation_result    = $ppdb_interviews_check->school_recomendation_result;
                 $ppdb_interviews_system->school_recomendation_file      = $ppdb_interviews_check->school_recomendation_file;
                 $ppdb_interviews_system->school_recomendation_note      = $ppdb_interviews_check->school_recomendation_note;
@@ -947,11 +947,70 @@ class addClass extends Controller
 
             $payment_system = Payment_system::where('dapodik_id', $request->id)->first(); //check
             $payment = Payment::where('dapodik_id', $dapodik->id)->get(); //take value
+
+            //FEE_TOTAL
             if ($payment_system == '' && $payment_system == null && empty($payment_system)) {
                 foreach ($payment as $object) {
                     $payment_system                         = new Payment_system();
                     $payment_system->dapodik_id             = $users_check->id;
-                    $payment_system->payment_type           = $object->payment_type;
+                    $payment_system->payment_type           = 'FEE_TOTAL';
+                    $payment_system->payment_code           = $object->payment_code;
+                    $payment_system->confirmation_status    = $object->confirmation_status;
+                    $payment_system->date_send              = $object->date_send;
+                    $payment_system->bank_owner_name        = $object->bank_owner_name;
+                    $payment_system->bank_code              = $object->bank_code;
+                    $payment_system->account_number         = $object->account_number;
+                    $payment_system->cost                   = $object->cost;
+                    $payment_system->image_confirmation     = $object->image_confirmation;
+                    $payment_system->created_at             = $object->created_at;
+                    $payment_system->updated_at             = $object->updated_at;
+                    $payment_system->updated_by             = $object->updated_by;
+                    $payment_system->save();
+                }
+
+                //FEE_UP
+                foreach ($payment as $object) {
+                    $payment_system                         = new Payment_system();
+                    $payment_system->dapodik_id             = $users_check->id;
+                    $payment_system->payment_type           = 'FEE_UP';
+                    $payment_system->payment_code           = 'FEE_UP_LUNAS';
+                    $payment_system->confirmation_status    = $object->confirmation_status;
+                    $payment_system->date_send              = $object->date_send;
+                    $payment_system->bank_owner_name        = $object->bank_owner_name;
+                    $payment_system->bank_code              = $object->bank_code;
+                    $payment_system->account_number         = $object->account_number;
+                    $payment_system->cost                   = $object->cost;
+                    $payment_system->image_confirmation     = $object->image_confirmation;
+                    $payment_system->created_at             = $object->created_at;
+                    $payment_system->updated_at             = $object->updated_at;
+                    $payment_system->updated_by             = $object->updated_by;
+                    $payment_system->save();
+                }
+
+                //FEE_SPP
+                foreach ($payment as $object) {
+                    $payment_system                         = new Payment_system();
+                    $payment_system->dapodik_id             = $users_check->id;
+                    $payment_system->payment_type           = 'FEE_SPP';
+                    $payment_system->payment_code           = 'FEE_SPP';
+                    $payment_system->confirmation_status    = $object->confirmation_status;
+                    $payment_system->date_send              = $object->date_send;
+                    $payment_system->bank_owner_name        = $object->bank_owner_name;
+                    $payment_system->bank_code              = $object->bank_code;
+                    $payment_system->account_number         = $object->account_number;
+                    $payment_system->cost                   = $object->cost;
+                    $payment_system->image_confirmation     = $object->image_confirmation;
+                    $payment_system->created_at             = $object->created_at;
+                    $payment_system->updated_at             = $object->updated_at;
+                    $payment_system->updated_by             = $object->updated_by;
+                    $payment_system->save();
+                }
+
+                //FEE_FORMULIR
+                foreach ($payment as $object) {
+                    $payment_system                         = new Payment_system();
+                    $payment_system->dapodik_id             = $users_check->id;
+                    $payment_system->payment_type           = 'FEE_FORMULIR';
                     $payment_system->payment_code           = $object->payment_code;
                     $payment_system->confirmation_status    = $object->confirmation_status;
                     $payment_system->date_send              = $object->date_send;
@@ -966,6 +1025,7 @@ class addClass extends Controller
                     $payment_system->save();
                 }
             }
+
             if ($users == null && $users == "" && empty($users)) {
                 $users = Users_system::where('id', $dapodik->id_user)->first();
                 $user                               = new Users();

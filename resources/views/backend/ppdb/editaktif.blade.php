@@ -98,7 +98,7 @@
                                           <!--begin::Description-->
                                           <div class="text-muted fs-7">Set the phot thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                                           <!--end::Description-->                                   
-                                        <button class="btn btn-primary btn-sm fs-9" value="{{ ($ppdb->ppdb_id == null) ? $ppdb->dapodik_id : $ppdb->ppdb_id }}" name="id_ppdb" >Submit</button>                                    
+                                        <button class="btn btn-primary btn-sm fs-9" value="{{ ($ppdb->ppdb_id == null) ? $ppdb->dapodik_id : $ppdb->ppdb_id }}" name="{{ ($ppdb->ppdb_id == null) ? 'dapodik_id' : 'id_ppdb' }}" >Submit</button>                                    
                                         </form>
                                       </div>
                                       <!--end::Card body-->

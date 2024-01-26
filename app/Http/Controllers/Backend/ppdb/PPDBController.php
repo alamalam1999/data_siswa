@@ -646,7 +646,7 @@ class PPDBController extends Controller
 
         $data_siswa_system = Data_siswa_system::where('ppdb_id', $ppdb->ppdb_id)->first();
 
-        $foto_siswa = Foto_siswa::where('ppdb_id', $ppdb->ppdb_id)->first();
+        $foto_siswa = Foto_siswa::where('ppdb_id', $ppdb->ppdb_id)->orderBy('created_at', 'desc')->first();
 
         return new ViewResponse('backend.ppdb.edit', [
             'ppdb'              => $ppdb,
@@ -999,7 +999,7 @@ class PPDBController extends Controller
 
         $data_siswa_system = Data_siswa_system::where('ppdb_id', $ppdb->ppdb_id)->first();
 
-        $foto_siswa = Foto_siswa::where('ppdb_id', $ppdb->ppdb_id)->first();
+        $foto_siswa = Foto_siswa::where('ppdb_id', $ppdb->ppdb_id)->orderBy('created_at', 'desc')->first();
 
         $unitvalue = "";
         $unit = "";
@@ -1513,7 +1513,7 @@ class PPDBController extends Controller
 
         debug($user_account);
 
-        $foto_siswa = Foto_siswa::where('ppdb_id', $ppdb->ppdb_id)->first();
+        $foto_siswa = Foto_siswa::where('ppdb_id', $ppdb->ppdb_id)->orderBy('created_at', 'desc')->first();
 
         return new ViewResponse('backend.ppdb.editaktif', [
             'ppdb'                      => $ppdb,
@@ -1877,7 +1877,7 @@ class PPDBController extends Controller
 
         debug($user_account);
 
-        $foto_siswa = Foto_siswa::where('dapodik_id', $ppdb->dapodik_id)->first();
+        $foto_siswa = Foto_siswa::where('dapodik_id', $ppdb->dapodik_id)->orderBy('created_at', 'desc')->first();
 
         return new ViewResponse('backend.ppdb.editaktif', [
             'ppdb'                      => $ppdb,
@@ -2401,7 +2401,7 @@ class PPDBController extends Controller
 
         debug($user_account);
 
-        $foto_siswa = Foto_siswa::where('dapodik_id', $dapodik->id)->first();
+        $foto_siswa = Foto_siswa::where('dapodik_id', $dapodik->id)->orderBy('created_at', 'desc')->first();
 
         $unitvalue = "";
         $unit = "";
