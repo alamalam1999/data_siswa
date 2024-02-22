@@ -70,6 +70,7 @@
                                 <!--begin::Input-->
                                 <div>
                                     <select id="academic-year" class="form-select form-select-solid">
+                                        <option value="ALL">ALL</option>
                                         @foreach ($academic_years as $item)
                                             <option value="{{ $item->id }}">{{ $item->academic_label }}</option>
                                         @endforeach

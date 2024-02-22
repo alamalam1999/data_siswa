@@ -223,6 +223,7 @@ class addClass extends Controller
                 $datasiswa_system_1->input_by                  = $data_siswa1->input_by;
                 $datasiswa_system_1->created_at                = $data_siswa1->created_at;
                 $datasiswa_system_1->updated_at                = $data_siswa1->updated_at;
+                $datasiswa_system_1->ppdb_id                   = $data_siswa1->ppdb_id;
                 $datasiswa_system_1->save();
                 $data_siswa->save();
             } else {

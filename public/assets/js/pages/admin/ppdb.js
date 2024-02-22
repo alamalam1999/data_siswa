@@ -10,9 +10,7 @@ $('#academic-year').change(function(){
     
     $('#registration-schedule').html('');
 
-    if(schedules.length > 1){
-        $('#registration-schedule').append(`<option value="ALL">ALL</option>`); 
-    }
+    $('#registration-schedule').append(`<option value="ALL">ALL</option>`); 
     
     $('#registration-schedule').append(schedules.join(''));  
 })
